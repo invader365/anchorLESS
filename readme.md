@@ -19,4 +19,4 @@ Common mixins
 09. .size (width, height, query);
 10. .square (size, query);
 
-to see the full list **[click here](https://github.com/anchor/fulllist.md)**
+to see the full list **[click here](https://github.com/invader365/anchor/blob/master/fulllist.md)**
