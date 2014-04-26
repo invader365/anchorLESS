@@ -1,0 +1,33 @@
+//
+// Arrows
+// ----------------------------------------------------------------------- //
+
+    .arrow {
+        .tip (@width) {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border: @width inset transparent;
+        }
+        .top (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-top-color: @color;
+            border-top-style: solid;
+        }
+        .bottom (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-bottom-color: @color;
+            border-bottom-style: solid;
+        }
+        .right (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-right-color: @color;
+            border-right-style: solid;
+        }
+        .left (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-left-color: @color;
+            border-left-style: solid;
+        }
+    }

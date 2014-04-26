@@ -1,0 +1,39 @@
+//
+// Tables
+// ----------------------------------------------------------------------- //
+
+    .table {
+        .backcolor (@count: even, @color: none) when not (@count = null) {
+            & tbody tr:nth-child(@{count}) td,
+            & tbody tr.@{count} td { .back.color(@color); }
+        }
+        .border (@width: 0, @style: none, @color: none) when not (@width = null) {
+            &                   { border-width: @width; border-style: @style; border-color: @color; }
+        }
+        .cell-border (@width: 0, @style: none, @color: none) when not (@width = null) {
+            & tr th,
+            & tr td             { border-width: @width; border-style: @style; border-color: @color; }
+        }
+        .padding (@padding: 0) when not (@padding = null) {
+            & thead th,
+            & tbody td,
+            & tfoot td          { padding: @padding; }
+        }
+        .rounded (@radius: none) when not (@radius = null) {  
+            &                                       { .rename-rounded(@radius); }
+            & thead tr:first-child th:first-child   { .rounded.left-top(@radius); }
+            & thead tr:first-child th:last-child    { .rounded.right-top(@radius); }
+            & tbody tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
+            & tbody tr:last-child  td:last-child    { .rounded.right-bottom(@radius); }
+        }
+    }
+
+    .rename-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack
+
+    .table {
+        .backcolor   (@var) when (@var = null) {}
+        .border      (@var) when (@var = null) {}
+        .cell-border (@var) when (@var = null) {}
+        .padding     (@var) when (@var = null) {}
+        .rounded     (@var) when (@var = null) {}
+    }

@@ -1,0 +1,17 @@
+//
+// Lists
+// ----------------------------------------------------------------------- //
+    
+    .list-style (@type: none, @image: none) when not (@type = null) and (@type = inherit), (@image = inherit) {
+            &       { list-style: inherit; }
+    }
+
+    .list-style (@type: none, @image: none) when not (@type = null) and not (@type = inherit) and (@image = none) {
+            &       { list-style: @type inside; }
+    }
+
+    .list-style (@type: none, @image: none) when not (@type = null) and not (@image = none) and not (@image = inherit) {
+            &       { list-style: none inside url('@{image}'); }
+    }
+
+    .list-style (@var) when (@var = null) {}

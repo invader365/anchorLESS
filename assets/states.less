@@ -1,0 +1,39 @@
+// --------------------------------------------------------------- States */
+
+    .state                      {
+        .link (@color, @back: none, @border: transparent) {
+            &,
+            &:link              { .color(@color, @back, @border);  }
+        }
+
+        .hover (@color, @back: none, @border: transparent) {
+            &.hover,
+            &:hover             { .color(@color, @back, @border); }
+        }
+
+        .active (@color, @back: none, @border: transparent) {
+            &:active            { .color(@color, @back, @border); }
+        }
+
+        .focus (@color, @back: none, @border: transparent) {
+            &.focus,
+            &:focus             { .color(@color, @back, @border); }
+        }
+
+        .visited (@color, @back: none, @border: transparent) {
+            &:visited           { .color(@color, @back, @border); }
+        }
+
+        .hover-focus (@color, @back: none, @border: transparent) {
+            &.hover,
+            &:hover,
+            &.focus,
+            &:focus             { .color(@color, @back, @border); }
+        }
+
+        .link-active (@color, @back: none, @border: transparent) {
+            &,
+            &:link,
+            &:active            { .color(@color, @back, @border); }
+        }
+    }

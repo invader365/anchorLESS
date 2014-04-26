@@ -1,0 +1,19 @@
+//
+// Pseudo
+// ----------------------------------------------------------------------- //
+
+    .pseudo-container (@display: inline-block) {
+        display: @display;
+        position: relative; 
+        overflow: visible; // overflow ie8/9
+    }
+
+    .pseudo-element (@content: '', @width: auto, @height: auto) {
+        display: inline-block;
+        content: @content;
+        text-indent: 0;
+        text-align: center;
+        width: @width;
+        height: @height;
+        vertical-align: middle;
+    }

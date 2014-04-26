@@ -1,0 +1,207 @@
+//
+// Mixins
+// ----------------------------------------------------------------------- //
+
+    .align (@top: auto, @left: auto, @bottom: auto, @right: auto, @query: 0) when not (@top = null) and (@query = 0) {
+        top: @top; 
+        left: @left;
+        bottom: @bottom;
+        right: @right;
+    }
+
+    .align {
+        .left-top (@left: auto, @top: auto) when not (@left = null) {
+            left: @left;
+            top: @top; 
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = null) {
+            left: @left;
+            bottom: @bottom; 
+        }
+        .right-top (@right: auto, @top: auto) when not (@right = null) {
+            right: @right;
+            top: @top; 
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = null) {
+            right: @right; 
+            bottom: @bottom;
+        }
+    }
+
+    .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = null) and (@image = none) and (@query = 0) {
+        background: @color none @repeat @position;
+    }
+
+    .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = null) and not (@image = none) and (@query = 0) {
+        background: @color url('@{image}') @repeat @position; 
+    }
+
+    .back {
+        .attachment (@attachment: scroll) when not (@attachment = null)  { 
+            background-attachment: @attachment; 
+        }
+        .color (@color: transparent) when not (@color = null) {
+            background-color: @color; 
+        }
+        .clip (@clip: border) when not (@color = null) {
+            .background-clip(@clip); 
+        }
+        .position (@position: 0 0) when not (@position = null) { 
+            background-position: @position; 
+        }
+        .repeat (@repeat: repeat) when not (@repeat = null) { 
+            background-repeat: @repeat; 
+        }
+        .size (@size: auto) when not (@repeat = null) { 
+           .background-size(@size);
+        }
+    }
+
+    .border (@width: 0, @style: none, @color: none) when not (@width = null) and (@color = none) {
+        border-width: @width;
+        border-style: @style;
+    }
+
+    .border (@width: 0, @style: none, @color: none) when not (@width = null) and not (@color = none) {
+        border-width: @width;
+        border-style: @style;
+        border-color: @color;
+    }
+
+    .color (@color: none, @back: none, @border: none) when not (@color = null) and not (@color = none) and not (@back = none) and not (@border = none) {
+        color: @color; 
+        background-color: @back;
+        border-color: @border;
+    }
+
+    .color (@color: none, @back: none, @border: none) when not (@color = null) and not (@color = none) and not (@back = none) and (@border = none) {
+        color: @color; 
+        background-color: @back;
+    }
+
+    .color (@color: none, @back: none, @border: none) when not (@color = null) and not (@color = none) and (@back = none) and (@border = none) {
+        color: @color;
+    }
+
+    .color (@color: none, @back: none, @border: none) when not (@color = null) and (@color = none) and (@back = none) and (@border = none) {
+        color: inherit; 
+        background-color: transparent;
+        border-color: inherit;
+    }
+
+    .display (@display: none, @query: 0) when not (@display = null) and (@query = 0) {
+        display: @display;
+    }
+
+    .float (@float: none, @query: 0) when not (@float = null) and (@query = 0) {
+        float: @float;
+    }
+    
+    .font (@font: normal 1em, @family: inherit) when not (@font = null) and (@family = inherit) {
+        font: @font a;
+        font-family: inherit; // font shortcut dont allow inherit
+    }
+
+    .font (@font: normal 1em, @family: inherit) when not (@font = null) and not (@family = inherit) {
+        font: @font @family;
+    }
+
+    .font-face (@name: a, @path: '..') when not (@name = null) {
+        @font-face {
+            font-family: @name;
+            src: url("@{path}.woff") format("woff"),
+                 url("@{path}.ttf") format("truetype");
+        }
+    }
+
+    .font-size (@size: 1em, @query: 0) when not (@size = null) and (@query = 0) {
+        font-size: @size;
+    }
+
+    .height (@height: auto, @query: 0) when not (@height = null) and (@query = 0) {
+        height: @height;
+    }
+
+    .image (@url: none) when not (@url = null) and (@url = none) { 
+        background-image: none; 
+    }
+
+    .image (@url: none) when not (@url = null) and not (@url = none) { 
+        background-image: url('@{url}'); 
+    }
+
+    .index (@index: 0, @query: 0) when not (@index = null) and (@query = 0) {
+        z-index: @index;
+    }
+
+    .margin (@margin: none, @query: 0) when not (@margin = null) and (@query = 0) {
+        margin: @margin;
+    }
+
+    .max-width (@width: 0, @query: 0) when not (@width = null) and (@query = 0) {
+        max-width: @width;
+    }
+
+    .min-size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {
+        min-width: @width;
+        min-height: @height;
+    }
+
+    .min-width (@width: 0, @query: 0) when not (@width = null) and (@query = 0) {
+        min-width: @width;
+    }
+
+    .opacity (@opacity: 0, @query: 0) when not (@opacity = null) and (@query = 0) {
+        @filter: @opacity * 100;
+        opacity: @opacity;
+        filter: ~"alpha(opacity=@{filter})";
+    }
+
+    .padding (@padding: 0, @query: 0) when not (@padding = null) and (@query = 0) {
+        padding: @padding;
+    }
+
+    .position (@position: absolute, @query: 0) when not (@position = null) and (@query = 0) {
+        position: @position;
+    }
+
+    .resize (@direction: none) when not (@direction = null) {
+        resize: @direction;
+        overflow: auto; // Safari fix
+    }
+
+    .rgba (@color: #fff, @alpha: 0.5) when not (@color = null) { 
+        background-color: @color;
+        background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
+    }
+
+    .size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {
+        width: @width;
+        height: @height;
+    }
+
+    .spacing (@margin: 0, @padding: 0, @query: 0) when not (@margin = null) and (@query = 0) {
+        margin: @margin;
+        padding: @padding;
+    }
+
+    .square (@size: auto, @query: 0) when not (@size = null) and (@query = 0) {
+        width: @size;
+        height: @size;
+    }
+
+    .text-align (@align: center, @query: 0) when not (@align = null) and (@query = 0) {
+        text-align: @align;
+    }
+
+    .text-indent (@indent: 0, @query: 0) when not (@indent = null) and (@query = 0) {
+        text-indent: @indent;
+    }
+
+    .text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) when not (@spread = null) and (@query = 0) { 
+        text-shadow: @spread hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
+    }
+
+    .width (@width: 0, @query: 0) when not (@width = null) and (@query = 0) {
+        width: @width;
+    }
