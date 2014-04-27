@@ -119,6 +119,7 @@
 ## List of helpers:
 
 00. .block();
+00. .clearfix();
 00. .ellipsis();
 00. .hidetext();
 00. .hyphens();

@@ -7,7 +7,15 @@
         position: relative;
         float: left;
     }
-    
+
+    .clearfix () {
+        &:after             { 
+            content: ''; 
+            display: table; 
+            clear: both; 
+        }
+    }
+
     .ellipsis () { 
         text-overflow: ellipsis; // ie8 rendering issue
           white-space: nowrap; 
