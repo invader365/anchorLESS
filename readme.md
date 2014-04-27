@@ -4,7 +4,32 @@
 
 Anchor LESS is the most extensive mixins library made to speed up your code.
 
-## List of mixins:
+## Sintax
+
+    .back (color, image, repeat, position, query);
+    
+**Default**
+
+    background: transparent none repeat 0 0;
+
+  
+### Usage
+```css
+.foo {
+  .back(#222, '../images/logo.png', no-repeat, center, 800px);
+}
+```
+    
+**Ouput:**
+```css
+@media all and (min-width: 800px) {
+   .foo {
+     background: #222 url('../images/logo.png') no-repeat center;
+   }
+}
+```
+
+## Mixins:
 
 Common mixins:
 

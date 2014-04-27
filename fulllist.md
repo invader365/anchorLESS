@@ -1,6 +1,6 @@
 # Anchor LESS
 
-## List of mixins:
+## Mixins:
 
 00. .align (top, left, bottom, right, query);
 00. .align.left.top (left, top);
@@ -22,8 +22,6 @@
 00. .back.repeat (repeat);
 00. .back.size (size);
 00. .backface (visibility);
-00. .background-clip (clip);
-00. .background-size (size);
 00. .border (width, style, color);
 00. .box-sizing(box-model);
 00. .color (color, back, border);
@@ -94,7 +92,7 @@
 00. .user-select (select);
 00. .width (width, query);
 
-## List of assets:
+## Assets:
 
 00. .arrow.top (width, color);
 00. .arrow.bottom (width, color);
@@ -116,7 +114,7 @@
 00. .table.padding (padding);
 00. .table.rounded (radius);
 
-## List of helpers:
+## Helpers:
 
 00. .block();
 00. .clearfix();
