@@ -15,7 +15,7 @@ Common mixins:
 00. .gradient.horizontal(start, end, image);
 00. .image (url);
 00. .opacity (opacity, query);
-00. .pseudo-element (content, width, height)
+00. .pseudo (content, width, height)
 00. .rounded (radius);
 00. .shadow (spread, color, alpha, offset);
 00. .size (width, height, query);

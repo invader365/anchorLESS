@@ -52,7 +52,7 @@
 00. .placeholder (color);
 00. .position (position, query);
 00. .pseudo-container (display)
-00. .pseudo-element (content, width, height)
+00. .pseudo (content, width, height)
 00. .resize (direction);
 00. .rotate (degrees);
 00. .rounded (radius);
