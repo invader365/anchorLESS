@@ -4,7 +4,7 @@
 
 Anchor LESS is the most extensive mixins library made to speed up your code. Intended to be equivalent to Compass. 
 
-## Usage
+## Install
 ```css
 @import "anchor/anchor.less";
     
@@ -37,7 +37,7 @@ Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
 See the **[full list](anchor/fulllist.md)**
 
   
-## Example
+## Usage
     
 from this:
 
