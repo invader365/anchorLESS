@@ -7,7 +7,6 @@
 00. .align.left.bottom (left, bottom);
 00. .align.right.top (right, top);
 00. .align.right.bottom (right, bottom);
-00. .animation (name, duration, ease, delay, iteration);
 00. .appearance (appearance);
 00. .arrow.tip (width);
 00. .arrow.top (width, color);
@@ -47,6 +46,7 @@
 00. .opacity (opacity, query);
 00. .overflow (x, y);
 00. .padding (padding, query);
+00. .perspective(@perspective) {
 00. .placeholder (color);
 00. .position (position, query);
 00. .pseudo-container (display)

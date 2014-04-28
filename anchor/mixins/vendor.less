@@ -2,13 +2,6 @@
 // Vendor mixins
 // ----------------------------------------------------------------------- //
 
-    .animation (@name: none, @duration: 0, @ease: ease, @delay: 0, @iteration: 1) when not (@name = null) {
-        -webkit-animation: @name @duration @ease @delay @iteration;    // Safari, Chrome
-           -moz-animation: @name @duration @ease @delay @iteration;
-            -ms-animation: @name @duration @ease @delay @iteration;
-                animation: @name @duration @ease @delay @iteration;
-    }
-
     .appearance (@appearance: normal) when not (@appearance = null) {
         -webkit-appearance: @appearance;
            -moz-appearance: @appearance;
@@ -90,6 +83,12 @@
         &::-moz-placeholder           { color: @color; } // Firefox 19+
         &:-ms-input-placeholder       { color: @color; } // IE 10+
         &::-webkit-input-placeholder  { color: @color; } // Chrome, Safari
+    }
+
+    .perspective(@perspective) {
+        -webkit-perspective: @perspective;
+           -moz-perspective: @perspective;
+                perspective: @perspective;
     }
 
     .rotate (@degrees: 0) when not (@degrees = null) {

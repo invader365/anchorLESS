@@ -2,36 +2,20 @@
 
 > A harder, better, faster, stronger **LESS library**!
 
-Anchor LESS is the most extensive mixins library made to speed up your code.
+Anchor LESS is the most extensive mixins library made to speed up your code. Intended to be an equivalent to Compass. 
 
-## Sintax
+## Usage
 
-    .back (color, image, repeat, position, query);
+    @import "anchor/anchor";
     
-**Default**
-
-    background: transparent none repeat 0 0;
-
-  
-### Usage
-```css
-.foo {
-  .back(#222, '../images/logo.png', no-repeat, center, 800px);
-}
-```
-    
-**Ouput:**
-```css
-@media all and (min-width: 800px) {
-   .foo {
-     background: #222 url('../images/logo.png') no-repeat center;
-   }
-}
-```
+    #foo {
+       .shadow(0 0, black, 0.5);
+       .rounded(5px);
+    }
 
 ## Mixins:
 
-Common mixins:
+Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
 
 00. .align (top, left, bottom, right, query);
 00. .back (color, image, repeat, position, query);
@@ -49,7 +33,33 @@ Common mixins:
 00. .width (width, query);
 00. ..
 
-to see the full list **[click here](fulllist.md)**
+See the **[full list](anchor/fulllist.md)**
+
+  
+## Example
+
+Syntax:
+
+    .back (color, image, repeat, position, query);
+    
+example:
+
+    #foo {
+        .back();
+        .back(#222, '../images/logo.png', no-repeat, center, 800px);
+    }
+    
+result:
+
+    #foo {
+        background: transparent none repeat 0 0;
+    }
+
+    @media all and (min-width: 800px) {
+        #foo {
+            background: #222 url('../images/logo.png') no-repeat center;
+        }
+    }
 
 ## License
 
