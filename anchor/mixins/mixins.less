@@ -2,11 +2,11 @@
 // Mixins
 // ----------------------------------------------------------------------- //
 
-    .align (@top: auto, @left: auto, @bottom: auto, @right: auto, @query: 0) when not (@top = null) and (@query = 0) {
-        top: @top; 
-        left: @left;
-        bottom: @bottom;
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = null) and (@query = 0) {
+        top: @top;
         right: @right;
+        bottom: @bottom;
+        left: @left;
     }
 
     .align {

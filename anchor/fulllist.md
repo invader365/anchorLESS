@@ -2,7 +2,7 @@
 
 ## Mixins:
 
-00. .align (top, left, bottom, right, query);
+00. .align (top, right, bottom, left, query);
 00. .align.left.top (left, top);
 00. .align.left.bottom (left, bottom);
 00. .align.right.top (right, top);

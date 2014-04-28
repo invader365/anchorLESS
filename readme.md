@@ -2,22 +2,23 @@
 
 > A harder, better, faster, stronger **LESS library**!
 
-Anchor LESS is the most extensive mixins library made to speed up your code. Intended to be an equivalent to Compass. 
+Anchor LESS is the most extensive mixins library made to speed up your code. Intended to be equivalent to Compass. 
 
 ## Usage
-
-    @import "anchor/anchor";
+```css
+@import "anchor/anchor.less";
     
-    #foo {
-       .shadow(0 0, black, 0.5);
-       .rounded(5px);
-    }
+#foo {
+   .border(1px 1px 3px, solid, gray);
+   .rounded(5px);
+}
+```
 
 ## Mixins:
 
 Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
 
-00. .align (top, left, bottom, right, query);
+00. .align (top, right, bottom, left, query);
 00. .back (color, image, repeat, position, query);
 00. .color (color, back, border);
 00. .font (font, family);
@@ -45,19 +46,19 @@ Syntax:
 example:
 
     #foo {
-        .back();
-        .back(#222, '../images/logo.png', no-repeat, center, 800px);
+        .back(#222, '../images/logo.png');
+        .width(70%, 800px);
     }
     
 result:
 
     #foo {
-        background: transparent none repeat 0 0;
+        background: #222 url('../images/logo.png') repeat 0 0;
     }
 
     @media all and (min-width: 800px) {
         #foo {
-            background: #222 url('../images/logo.png') no-repeat center;
+            width: 70%;
         }
     }
 
