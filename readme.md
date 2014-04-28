@@ -2,7 +2,7 @@
 
 > A harder, better, faster, stronger **LESS library**!
 
-Anchor LESS is the most extensive mixins library made to speed up your code. Intended to be equivalent to Compass. 
+Anchor LESS is the most extensive mixins library made to speed up your code. Designed to be counterpart of Compass. 
 
 ## Install
 ```css
@@ -39,7 +39,7 @@ See the **[full list](anchor/fulllist.md)**
   
 ## Usage
     
-from this:
+From this:
 
     #foo {
         .back(#222, '../images/logo.png', no-repeat, left top);
