@@ -38,24 +38,23 @@ See the **[full list](anchor/fulllist.md)**
 
   
 ## Example
-
-Syntax:
-
-    .back (color, image, repeat, position, query);
     
-example:
+from this:
 
     #foo {
-        .back(#222, '../images/logo.png');
+        .back(#222, '../images/logo.png', no-repeat, left top);
         .width(70%, 800px);
+        .rounded(5px);
     }
     
-result:
+to this:
 
     #foo {
-        background: #222 url('../images/logo.png') repeat 0 0;
+        background: #222 url('../images/logo.png') no-repeat left top;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
     }
-
     @media all and (min-width: 800px) {
         #foo {
             width: 70%;
