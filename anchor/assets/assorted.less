@@ -1,0 +1,16 @@
+//
+// Assorted
+// ----------------------------------------------------------------------- //
+
+    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query = 0) {
+        & > strong              { width: @width; display: block; float: left; }
+        & > div                 { width: @divWidth; }
+    }
+
+    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query > 0) {
+        @media print, screen and (min-width: @query) {
+            .strong-div (@width, @divWidth);
+        }
+    }
+
+    .strong-div (@var) when (@var = null) {}

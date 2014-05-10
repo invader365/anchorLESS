@@ -1,7 +1,9 @@
-// --------------------------------------------------------------- States */
+//
+// States
+// ----------------------------------------------------------------------- //
 
     .state                      {
-        .link (@color, @back: none, @border: transparent) {
+        .normal (@color, @back: none, @border: transparent) {
             &,
             &:link              { .color(@color, @back, @border);  }
         }
@@ -31,7 +33,7 @@
             &:focus             { .color(@color, @back, @border); }
         }
 
-        .link-active (@color, @back: none, @border: transparent) {
+        .normal-active (@color, @back: none, @border: transparent) {
             &,
             &:link,
             &:active            { .color(@color, @back, @border); }

@@ -32,29 +32,41 @@
                 box-sizing: @box-model;    // IE 8+
     }
 
+    .columns (@count: auto, @gap: normal, @width: auto) when not (@count = null) {
+        -webkit-column-count: @count;
+           -moz-column-count: @count;
+                column-count: @count;
+        -webkit-column-gap: @gap;
+           -moz-column-gap: @gap;
+                column-gap: @gap;
+        -webkit-column-width: @width;
+           -moz-column-width: @width;
+                column-width: @width;
+    }
+
     .gradient {
-        .horizontal(@start: white, @end: gray, @image: none) when not (@start = null) {
-            .back(@end, @image, repeat-x, top left);
-             background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@start), to(@end));      // Safari 4+, Chrome 2+
-             background-image: -webkit-linear-gradient(left, @start, @end);                        // Safari 5.1+, Chrome 10+
-             background-image:    -moz-linear-gradient(left, @start, @end);                        // Firefox 3.6+
-             background-image:      -o-linear-gradient(left, @start, @end);                        // Opera 11.10
-             background-image:         linear-gradient(to right, @start, @end);                    // IE10
+        .horizontal(@left: white, @right: gray, @image: none) when not (@left = null) {
+            .back(@right, @image, repeat-x, top left);
+             background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@left), to(@right));      // Safari 4+, Chrome 2+
+             background-image: -webkit-linear-gradient(left, @left, @right);                        // Safari 5.1+, Chrome 10+
+             background-image:    -moz-linear-gradient(left, @left, @right);                        // Firefox 3.6+
+             background-image:      -o-linear-gradient(left, @left, @right);                        // Opera 11.10
+             background-image:         linear-gradient(to right, @left, @right);                    // IE10
         }
-        .vertical(@start: white, @end: gray, @image: none) when not (@start = null) {
-            .back(@end, @image, repeat-x, top left);
-             background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@end));      // Safari 4+, Chrome 2+
-             background-image: -webkit-linear-gradient(top, @start, @end);                         // Safari 5.1+, Chrome 10+
-             background-image:    -moz-linear-gradient(top, @start, @end);                         // Firefox 3.6+
-             background-image:      -o-linear-gradient(top, @start, @end);                         // Opera 11.10
-             background-image:         linear-gradient(to bottom, @start, @end);                   // IE10
+        .vertical(@top: white, @bottom: gray, @image: none) when not (@top = null) {
+            .back(@bottom, @image, repeat-x, top left);
+             background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@top), to(@bottom));      // Safari 4+, Chrome 2+
+             background-image: -webkit-linear-gradient(top, @top, @bottom);                         // Safari 5.1+, Chrome 10+
+             background-image:    -moz-linear-gradient(top, @top, @bottom);                         // Firefox 3.6+
+             background-image:      -o-linear-gradient(top, @top, @bottom);                         // Opera 11.10
+             background-image:         linear-gradient(to bottom, @top, @bottom);                   // IE10
         }
-        .directional(@start: white, @end: gray, @degrees: 0, @image: none) when not (@start = null) {
-            .back(@end, @image, repeat-x, top left);
-             background-image: -webkit-linear-gradient(@degrees, @start, @end);                     // Safari 5.1+, Chrome 10+
-             background-image:    -moz-linear-gradient(@degrees, @start, @end);                     // Firefox 3.6+
-             background-image:      -o-linear-gradient(@degrees, @start, @end);                     // Opera 11.10
-             background-image:         linear-gradient(@degrees, @start, @end);                     // IE10
+        .directional(@start: white, @stop: gray, @degrees: 0, @image: none) when not (@start = null) {
+            .back(@stop, @image, repeat-x, top left);
+             background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
+             background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
+             background-image:      -o-linear-gradient(@degrees, @start, @stop);                     // Opera 11.10
+             background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
         }
         .radial(@inner: white, @outer: gray, @image: none) when not (@inner = null) {
             .back(@outer, @image, repeat-x, center);

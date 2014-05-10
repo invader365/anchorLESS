@@ -1,0 +1,1061 @@
+// ----------------------------------------------------------------------- //
+// AnchorLESS A LESS/CSS library
+// https://github.com/invader365/anchorLESS
+// Licensed under the Apache License.
+// ----------------------------------------------------------------------- //
+
+//
+// Shortcodes 
+// ----------------------------------------------------------------------- //
+
+    @tt                     :   transparent;
+    @d                      :   e('/');
+
+// hexadecimal grayscale
+// ----------------------------------------- */
+
+    @hex0                   :     #000;
+    @hex2                   :     #222;
+    @hex4                   :     #444;
+    @hex6                   :     #666;
+    @hex8                   :     #888;
+    @hexa                   :     #aaa;
+    @hexb                   :     #bbb;
+    @hexc                   :     #ccc;
+    @hexd                   :     #ddd;
+    @hexe                   :     #eee;
+    @hexef                  :     #f6f6f7;
+    @hexf                   :     #fff;
+
+
+// websafe fonts
+// ----------------------------------------- */
+
+    @font-mono              :   'Menlo, Monaco, Consolas, "Courier New", monospace';
+    @font-sans              :   'Helvetica Neue, Helvetica, Arial, sans-serif';
+    @font-script            :   'Brush Script MT, cursive';
+    @font-serif             :   'Georgia, Times New Roman, Times, Serif';\
+
+//
+// Arrows
+// ----------------------------------------------------------------------- //
+
+    .arrow {
+        .tip (@width) {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border: @width inset transparent;
+        }
+        .top (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-top-color: @color;
+            border-top-style: solid;
+        }
+        .bottom (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-bottom-color: @color;
+            border-bottom-style: solid;
+        }
+        .right (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-right-color: @color;
+            border-right-style: solid;
+        }
+        .left (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-left-color: @color;
+            border-left-style: solid;
+        }
+    }
+
+//
+// Assorted
+// ----------------------------------------------------------------------- //
+
+    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query = 0) {
+        & > strong              { width: @width; display: block; float: left; }
+        & > div                 { width: @divWidth; }
+    }
+
+    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query > 0) {
+        @media print, screen and (min-width: @query) {
+            .strong-div (@width, @divWidth);
+        }
+    }
+
+    .strong-div (@var) when (@var = null) {}
+
+//
+// Blocks
+// ----------------------------------------------------------------------- //
+
+    .center-block (@width: 0, @query: 0) when (@query = 0) {
+        left: (@width / 2) * -1;
+        margin-left: 50%;
+    }
+
+    .center-inline (@display: inline-block, @query: 0) when (@display = 0) {
+        display: @display;
+        margin: 0 auto;
+        float: none;
+    }
+
+    .center-vertical (@height: 0) {
+        margin-top: (@height / 2) * -1;
+        top: 50%;
+    }
+
+    .offset (@padding: 0, @query: 0) when (@query = 0) {
+        margin-left: -@padding;
+        padding-left: @padding;
+        padding-right: @padding;
+       .box-sizing;
+    }
+
+    .reset-center (@margin-left: 0, @query: 0) when (@query = 0) {
+        margin-left: @margin-left;
+        left: 0;
+    }
+
+    .reset-vertical (@margin-top: 0, @query: 0) when (@query = 0) {
+        margin-top: @margin-top;
+        top: auto;
+    }
+
+//
+// Lists
+// ----------------------------------------------------------------------- //
+    
+    .list-style (@type: none, @image: none) when not (@type = null) and (@type = inherit), (@image = inherit) {
+            &       { list-style: inherit; }
+    }
+
+    .list-style (@type: none, @image: none) when not (@type = null) and not (@type = inherit) and (@image = none) {
+            &       { list-style: @type inside; }
+    }
+
+    .list-style (@type: none, @image: none) when not (@type = null) and not (@image = none) and not (@image = inherit) {
+            &       { list-style: none inside url('@{image}'); }
+    }
+
+    .list-style (@var) when (@var = null) {}
+
+//
+// Pseudo
+// ----------------------------------------------------------------------- //
+
+    .pseudo-container (@display: inline-block) {
+        display: @display;
+        position: relative; 
+        overflow: visible; // overflow ie8/9
+    }
+
+    .pseudo (@content: '', @width: auto, @height: auto) {
+        display: inline-block;
+        position: relative;
+        content: @content;
+        width: @width;
+        height: @height;
+        vertical-align: middle;
+    }
+
+//
+// States
+// ----------------------------------------------------------------------- //
+
+    .state                      {
+        .normal (@color, @back: none, @border: transparent) {
+            &,
+            &:link              { .color(@color, @back, @border);  }
+        }
+
+        .hover (@color, @back: none, @border: transparent) {
+            &.hover,
+            &:hover             { .color(@color, @back, @border); }
+        }
+
+        .active (@color, @back: none, @border: transparent) {
+            &:active            { .color(@color, @back, @border); }
+        }
+
+        .focus (@color, @back: none, @border: transparent) {
+            &.focus,
+            &:focus             { .color(@color, @back, @border); }
+        }
+
+        .visited (@color, @back: none, @border: transparent) {
+            &:visited           { .color(@color, @back, @border); }
+        }
+
+        .hover-focus (@color, @back: none, @border: transparent) {
+            &.hover,
+            &:hover,
+            &.focus,
+            &:focus             { .color(@color, @back, @border); }
+        }
+
+        .normal-active (@color, @back: none, @border: transparent) {
+            &,
+            &:link,
+            &:active            { .color(@color, @back, @border); }
+        }
+    }
+
+//
+// Tables
+// ----------------------------------------------------------------------- //
+
+    .table {
+        .backcolor (@count: even, @color: none) when not (@count = null) {
+            & tbody tr:nth-child(@{count}) td,
+            & tbody tr.@{count} td { .back.color(@color); }
+        }
+        .border (@width: 0, @style: none, @color: none) when not (@width = null) {
+            &                   { border-width: @width; border-style: @style; border-color: @color; }
+        }
+        .cell-border (@width: 0, @style: none, @color: none) when not (@width = null) {
+            & tr th,
+            & tr td             { border-width: @width; border-style: @style; border-color: @color; }
+        }
+        .padding (@padding: 0) when not (@padding = null) {
+            & thead th,
+            & tbody td,
+            & tfoot td          { padding: @padding; }
+        }
+        .rounded (@radius: none) when not (@radius = null) {  
+            &                                       { .rename-rounded(@radius); }
+            & thead tr:first-child th:first-child   { .rounded.left-top(@radius); }
+            & thead tr:first-child th:last-child    { .rounded.right-top(@radius); }
+            & tbody tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
+            & tbody tr:last-child  td:last-child    { .rounded.right-bottom(@radius); }
+        }
+    }
+
+    .rename-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack
+
+    .table {
+        .backcolor   (@var) when (@var = null) {}
+        .border      (@var) when (@var = null) {}
+        .cell-border (@var) when (@var = null) {}
+        .padding     (@var) when (@var = null) {}
+        .rounded     (@var) when (@var = null) {}
+    }
+
+//
+// Helpers
+// ----------------------------------------------------------------------- //
+
+    .block () {
+        display: block;
+        position: relative;
+        float: left;
+    }
+
+    .clearfix () {
+        &:after { 
+            content: ''; 
+            display: table; 
+            clear: both; 
+        }
+    }
+
+    .ellipsis () { 
+        text-overflow: ellipsis; // ie8 rendering issue
+          white-space: nowrap; 
+             overflow: hidden; 
+    }
+
+    .hidetext () { 
+          text-indent: -9999px; 
+           text-align: left; 
+             overflow: hidden; 
+    }
+
+    .hyphens () {
+       -ms-word-break: break-all;
+           word-break: break-all;
+           word-break: break-word;
+      -webkit-hyphens: auto;
+         -moz-hyphens: auto;
+              hyphens: auto;
+    }
+
+    .inline () {
+        display: inline;
+        float: none;
+    }
+
+    .inline-block () {
+        display: inline-block;
+        position: relative;
+        float: none;
+    }
+
+    .linebreak () {  
+          margin-left: 0; 
+                clear: left; 
+    }
+
+//
+// Mixins
+// ----------------------------------------------------------------------- //
+
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = null) and (@query = 0) {
+        top: @top;
+        right: @right;
+        bottom: @bottom;
+        left: @left;
+    }
+
+    .align {
+        .left-top (@left: auto, @top: auto) when not (@left = null) {
+            left: @left;
+            top: @top; 
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = null) {
+            left: @left;
+            bottom: @bottom; 
+        }
+        .right-top (@right: auto, @top: auto) when not (@right = null) {
+            right: @right;
+            top: @top; 
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = null) {
+            right: @right; 
+            bottom: @bottom;
+        }
+    }
+
+    .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = null) and (@image = none) and (@query = 0) {
+        background: @color none @repeat @position;
+    }
+
+    .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = null) and not (@image = none) and (@query = 0) {
+        background: @color url('@{image}') @repeat @position; 
+    }
+
+    .back {
+        .attachment (@attachment: scroll) when not (@attachment = null)  { 
+            background-attachment: @attachment; 
+        }
+        .color (@color: transparent) when not (@color = null) {
+            background-color: @color; 
+        }
+        .clip (@clip: border) when not (@color = null) {
+            .background-clip(@clip); 
+        }
+        .position (@position: 0 0) when not (@position = null) { 
+            background-position: @position; 
+        }
+        .repeat (@repeat: repeat) when not (@repeat = null) { 
+            background-repeat: @repeat; 
+        }
+        .size (@size: auto) when not (@repeat = null) { 
+           .background-size(@size);
+        }
+    }
+
+    .border (@width: 0, @style: none, @color: none) when not (@width = null) and (@color = none) {
+        border-width: @width;
+        border-style: @style;
+    }
+
+    .border (@width: 0, @style: none, @color: none) when not (@width = null) and not (@color = none) {
+        border-width: @width;
+        border-style: @style;
+        border-color: @color;
+    }
+
+    .color (@color: none, @back: none, @border: none) when not (@color = null) and not (@color = none) and not (@back = none) and not (@border = none) {
+        color: @color; 
+        background-color: @back;
+        border-color: @border;
+    }
+
+    .color (@color: none, @back: none, @border: none) when not (@color = null) and not (@color = none) and not (@back = none) and (@border = none) {
+        color: @color; 
+        background-color: @back;
+    }
+
+    .color (@color: none, @back: none, @border: none) when not (@color = null) and not (@color = none) and (@back = none) and (@border = none) {
+        color: @color;
+    }
+
+    .color (@color: none, @back: none, @border: none) when not (@color = null) and (@color = none) and (@back = none) and (@border = none) {
+        color: inherit; 
+        background-color: transparent;
+        border-color: inherit;
+    }
+
+    .display (@display: none, @query: 0) when not (@display = null) and (@query = 0) {
+        display: @display;
+    }
+
+    .float (@float: none, @query: 0) when not (@float = null) and (@query = 0) {
+        float: @float;
+    }
+    
+    .font (@font: normal 1em, @family: inherit) when not (@font = null) and (@family = inherit) {
+        font: @font a;
+        font-family: inherit; // font shortcut dont allow inherit
+    }
+
+    .font (@font: normal 1em, @family: inherit) when not (@font = null) and not (@family = inherit) {
+        font: @font @family;
+    }
+
+    .font-face (@name: a, @path: '..') when not (@name = null) {
+        @font-face {
+            font-family: @name;
+            src: url("@{path}.woff") format("woff"),
+                 url("@{path}.ttf") format("truetype");
+        }
+    }
+
+    .font-size (@size: 1em, @query: 0) when not (@size = null) and (@query = 0) {
+        font-size: @size;
+    }
+
+    .height (@height: auto, @query: 0) when not (@height = null) and (@query = 0) {
+        height: @height;
+    }
+
+    .image (@url: none) when not (@url = null) and (@url = none) { 
+        background-image: none; 
+    }
+
+    .image (@url: none) when not (@url = null) and not (@url = none) { 
+        background-image: url('@{url}'); 
+    }
+
+    .index (@index: 0, @query: 0) when not (@index = null) and (@query = 0) {
+        z-index: @index;
+    }
+
+    .margin (@margin: none, @query: 0) when not (@margin = null) and (@query = 0) {
+        margin: @margin;
+    }
+
+    .max-width (@width: 0, @query: 0) when not (@width = null) and (@query = 0) {
+        max-width: @width;
+    }
+
+    .min-size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {
+        min-width: @width;
+        min-height: @height;
+    }
+
+    .min-width (@width: 0, @query: 0) when not (@width = null) and (@query = 0) {
+        min-width: @width;
+    }
+
+    .opacity (@opacity: 0, @query: 0) when not (@opacity = null) and (@query = 0) {
+        @filter: @opacity * 100;
+        opacity: @opacity;
+        filter: ~"alpha(opacity=@{filter})";
+    }
+
+    .padding (@padding: 0, @query: 0) when not (@padding = null) and (@query = 0) {
+        padding: @padding;
+    }
+
+    .position (@position: absolute, @query: 0) when not (@position = null) and (@query = 0) {
+        position: @position;
+    }
+
+    .resize (@direction: none) when not (@direction = null) {
+        resize: @direction;
+        overflow: auto; // Safari fix
+    }
+
+    .rgba (@color: #fff, @alpha: 0.5) when not (@color = null) { 
+        background-color: @color;
+        background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
+    }
+
+    .size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {
+        width: @width;
+        height: @height;
+    }
+
+    .spacing (@margin: 0, @padding: 0, @query: 0) when not (@margin = null) and (@query = 0) {
+        margin: @margin;
+        padding: @padding;
+    }
+
+    .square (@size: auto, @query: 0) when not (@size = null) and (@query = 0) {
+        width: @size;
+        height: @size;
+    }
+
+    .text-align (@align: center, @query: 0) when not (@align = null) and (@query = 0) {
+        text-align: @align;
+    }
+
+    .text-indent (@indent: 0, @query: 0) when not (@indent = null) and (@query = 0) {
+        text-indent: @indent;
+    }
+
+    .text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) when not (@spread = null) and (@query = 0) { 
+        text-shadow: @spread hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
+    }
+
+    .width (@width: 0, @query: 0) when not (@width = null) and (@query = 0) {
+        width: @width;
+    }
+
+//
+// Null
+// ----------------------------------------------------------------------- //
+
+    .align (@var) when (@var = null) {}
+
+    .align {
+        .left-top     (@var) when (@var = null) {}
+        .left-bottom  (@var) when (@var = null) {}
+        .right-top    (@var) when (@var = null) {}
+        .right-bottom (@var) when (@var = null) {}
+    }
+
+    .animation (@var) when (@var = null) {}
+
+    .appearance (@var) when (@var = null) {}
+
+    .back (@var) when (@var = null) {}
+
+    .back {
+        .attachment (@var) when (@var = null)  {}
+        .color      (@var) when (@var = null)  {}
+        .position   (@var) when (@var = null)  {}
+        .repeat     (@var) when (@var = null)  {}
+        .size       (@var) when (@var = null)  {}
+    }
+
+    .backface (@var) when (@var = null) {}
+
+    .border (@var) when (@var = null) {}
+
+    .box-sizing(@var) when (@var = null) {}
+
+    .color (@var) when (@var = null) {}
+
+    .columns (@var) when (@var = null) {}
+
+    .display (@var) when (@var = null) {}
+
+    .float (@var) when (@var = null) {}
+
+    .font (@var) when (@var = null) {}
+
+    .font-face (@var) when (@var = null) {}
+
+    .font-size (@var) when (@var = null) {}
+
+    .gradient {
+        .horizontal  (@var) when (@var = null) {}
+        .vertical    (@var) when (@var = null) {}
+        .directional (@var) when (@var = null) {}
+        .radial      (@var) when (@var = null) {}
+    }
+
+    .image (@var) when (@var = null) {}
+
+    .height (@var) when (@var = null) {}
+
+    .highlight (@var) when (@var = null) {}
+
+    .index (@var) when (@var = null) {}
+
+    .margin (@var) when (@var = null) {}
+
+    .max-width (@var) when (@var = null) {}
+
+    .min-size (@var) when (@var = null) {}
+
+    .min-width (@var) when (@var = null) {}
+
+    .opacity (@var) when (@var = null) {}
+
+    .overflow (@var) when (@var = null) {}
+
+    .padding (@var) when (@var = null) {}
+
+    .placeholder (@var) when (@var = null) {}
+
+    .position (@var) when (@var = null) {}
+
+    .resize (@var) when (@var = null) {}
+
+    .rgba (@var) when (@var = null) {}
+
+    .rotate (@var) when (@var = null) {}
+
+    .rounded (@var) when (@var = null) {}
+
+    .rounded {
+        .top    (@var) when (@var = null)  {}
+        .right  (@var) when (@var = null)  {}
+        .bottom (@var) when (@var = null)  {}
+        .left   (@var) when (@var = null)  {}
+        .left-top     (@var) when (@var = null) {}
+        .left-bottom  (@var) when (@var = null) {}
+        .right-top    (@var) when (@var = null) {}
+        .right-bottom (@var) when (@var = null) {}
+    }
+    
+    .scale (@var) when (@var = null) {}
+
+    .shadow (@var) when (@var = null) {}
+
+    .size (@var) when (@var = null) {}
+
+    .skew (@var) when (@var = null) {}
+
+    .spacing (@var) when (@var = null) {}
+
+    .square (@var) when (@var = null) {}
+
+    .text-align (@var) when (@var = null) {}
+
+    .text-indent (@var) when (@var = null) {}
+
+    .text-shadow (@var) when (@var = null) {}
+
+    .transform (@var) when (@var = null) {}
+
+    .transition (@var) when (@var = null) {}
+
+    .transitions (@var) when (@var = null) {}
+
+    .translate (@var) when (@var = null) {}
+
+    .translate3d (@var) when (@var = null) {}
+
+    .user-select (@var) when (@var = null) {}
+
+    .width (@var) when (@var = null) {}
+
+//
+// Queries
+// ----------------------------------------------------------------------- //
+
+    .align (@top: auto, @left: auto, @bottom: auto, @right: auto, @position: absolute, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .align (@top, @left, @bottom, @right, @position);
+        } 
+    }
+
+    .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when (@query > 0) { 
+        @media all and (min-width: @query) {
+            .back (@color, @image, @repeat, @position);
+        }
+    }
+
+    .center-block (@width: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .center-block (@width);
+        } 
+    }
+
+    .center-inline (@display: inline-block, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .center-inline (@display);
+        } 
+    }
+
+    .center-vertical (@height: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .center-vertical (@height);
+        } 
+    }
+
+    .display (@display: none, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .display (@display);
+        } 
+    }
+
+    .float (@float: none, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .float (@float);
+        } 
+    }
+
+    .font-size (@font: none, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .font-size (@font);
+        } 
+    }
+
+    .image (@url: none, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .image (@url);
+        } 
+    }
+
+    .height (@height: auto, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .height (@height);
+        } 
+    }
+
+    .index (@index: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .index (@index);
+        }
+    }
+
+    .margin (@margin: none, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .margin (@margin);
+        } 
+    }
+
+    .max-width (@width: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .max-width (@width);
+        }
+    }
+
+    .min-size (@width: 0, @height: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .min-size (@width, @height);
+        }
+    }
+
+    .min-width (@width: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .min-width (@width);
+        }
+    }
+
+    .offset (@offset: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .offset (@offset);
+        }
+    }
+
+    .opacity (@opacity: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .opacity (@opacity);
+        }
+    }
+
+    .padding (@padding: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .padding (@padding);
+        }
+    }
+
+    .position (@position: absolute, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .position (@position);
+        }
+    }
+
+    .reset-center (@margin-left: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .reset-center (@margin-left);
+        } 
+    }
+
+    .reset-vertical (@margin-top: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .reset-vertical (@margin-top);
+        } 
+    }
+
+    .size (@width: auto, @height: auto, @display: nodisplay, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .size (@width, @height, @display);
+        }
+    }
+
+    .spacing (@margin: 0, @padding: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .spacing (@margin, @padding);
+        }
+    }
+
+    .square (@size: auto, @display: nodisplay, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .square (@square, @display);
+        }
+    }
+
+    .text-align (@align: center, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .text-align (@align);
+        }
+    }
+
+    .text-indent (@indent: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .text-indent (@indent);
+        }
+    }
+
+    .text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .text-shadow (@shadow, @color, @alpha);
+        }
+    }
+
+    .width (@width: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .width (@width);
+        }
+    }
+
+//
+// Vendor mixins
+// ----------------------------------------------------------------------- //
+
+    .appearance (@appearance: normal) when not (@appearance = null) {
+        -webkit-appearance: @appearance;
+           -moz-appearance: @appearance;
+                appearance: @appearance;
+    }
+
+    .backface (@visibility: hidden) when not (@visibility = null) {
+        -webkit-backface-visibility: @visibility;
+           -moz-backface-visibility: @visibility;
+                backface-visibility: @visibility;
+    }
+
+    .background-clip (@clip: border) when not (@clip = null) {
+        -webkit-background-clip: @clip;             // Safari 4? Chrome 6?
+           -moz-background-clip: @clip;             // Firefox 3.6
+                background-clip: ~'@{clip}-box';    // Firefox 4, Safari 5, Opera 10, IE9
+    }
+
+    .background-size (@size: auto) when not (@size = null) {
+        -webkit-background-size: @size;     // Safari 3.0+, Chrome 1.0+
+           -moz-background-size: @size;     // Firefox 3.6
+                background-size: @size;     // IE 9+
+    }
+
+    .box-sizing(@box-model: content-box) when not (@box-model = null) {
+        -webkit-box-sizing: @box-model;    // Safari 5
+           -moz-box-sizing: @box-model;    // Firefox 19
+                box-sizing: @box-model;    // IE 8+
+    }
+
+    .columns (@count: auto, @gap: normal, @width: auto) when not (@count = null) {
+        -webkit-column-count: @count;
+           -moz-column-count: @count;
+                column-count: @count;
+        -webkit-column-gap: @gap;
+           -moz-column-gap: @gap;
+                column-gap: @gap;
+        -webkit-column-width: @width;
+           -moz-column-width: @width;
+                column-width: @width;
+    }
+
+    .gradient {
+        .horizontal(@left: white, @right: gray, @image: none) when not (@left = null) {
+            .back(@right, @image, repeat-x, top left);
+             background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@left), to(@right));      // Safari 4+, Chrome 2+
+             background-image: -webkit-linear-gradient(left, @left, @right);                        // Safari 5.1+, Chrome 10+
+             background-image:    -moz-linear-gradient(left, @left, @right);                        // Firefox 3.6+
+             background-image:      -o-linear-gradient(left, @left, @right);                        // Opera 11.10
+             background-image:         linear-gradient(to right, @left, @right);                    // IE10
+        }
+        .vertical(@top: white, @bottom: gray, @image: none) when not (@top = null) {
+            .back(@bottom, @image, repeat-x, top left);
+             background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@top), to(@bottom));      // Safari 4+, Chrome 2+
+             background-image: -webkit-linear-gradient(top, @top, @bottom);                         // Safari 5.1+, Chrome 10+
+             background-image:    -moz-linear-gradient(top, @top, @bottom);                         // Firefox 3.6+
+             background-image:      -o-linear-gradient(top, @top, @bottom);                         // Opera 11.10
+             background-image:         linear-gradient(to bottom, @top, @bottom);                   // IE10
+        }
+        .directional(@start: white, @stop: gray, @degrees: 0, @image: none) when not (@start = null) {
+            .back(@stop, @image, repeat-x, top left);
+             background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
+             background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
+             background-image:      -o-linear-gradient(@degrees, @start, @stop);                     // Opera 11.10
+             background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
+        }
+        .radial(@inner: white, @outer: gray, @image: none) when not (@inner = null) {
+            .back(@outer, @image, repeat-x, center);
+             background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer));// Chrome, Safari 4+
+             background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Safari 5.1+, Chrome 10+
+             background-image:    -moz-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Firefox 3.6+
+             background-image:      -o-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Opera 11.10
+             background-image:         radial-gradient(ellipse at center, @inner 0%, @outer 100%); // W3C
+        }
+    }
+
+    .highlight (@highlight: gray) when not (@highlight = null) {
+        -webkit-tap-highlight-color: @highlight;
+           -moz-tap-highlight-color: @highlight;
+                tap-highlight-color: @highlight;
+    }
+
+    .overflow (@x: hidden, @y: hidden) when not (@x = null) {
+        overflow-x: @x;
+        overflow-y: @y;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .placeholder (@color: gray) when not (@color = null) {
+        &:-moz-placeholder            { color: @color; } // Firefox 4-18
+        &::-moz-placeholder           { color: @color; } // Firefox 19+
+        &:-ms-input-placeholder       { color: @color; } // IE 10+
+        &::-webkit-input-placeholder  { color: @color; } // Chrome, Safari
+    }
+
+    .perspective(@perspective) {
+        -webkit-perspective: @perspective;
+           -moz-perspective: @perspective;
+                perspective: @perspective;
+    }
+
+    .rotate (@degrees: 0) when not (@degrees = null) {
+        -webkit-transform: rotate(@degrees);
+            -ms-transform: rotate(@degrees);
+                transform: rotate(@degrees);
+    }
+
+    .rounded (@radius: 0) when not (@radius = null) {
+        & {
+            -webkit-border-radius: @radius;
+               -moz-border-radius: @radius;
+                    border-radius: @radius;
+        }
+    }
+
+    .rounded {
+        .top (@radius: 0) when not (@radius = null) {
+            .rounded.left-top     (@radius);
+            .rounded.right-top    (@radius);
+        }
+        .right (@radius: 0) when not (@radius = null) {
+            .rounded.right-top    (@radius);
+            .rounded.right-bottom (@radius);
+        }
+        .bottom (@radius: 0) when not (@radius = null) {
+            .rounded.left-bottom (@radius);
+            .rounded.right-bottom (@radius);
+        }
+        .left (@radius: 0) when not (@radius = null) {
+            .rounded.left-top     (@radius);
+            .rounded.left-bottom  (@radius);
+        }
+        .left-top (@radius: 0) when not (@radius = null) {
+            -webkit-border-top-left-radius: @radius;
+                -moz-border-radius-topleft: @radius;
+                    border-top-left-radius: @radius;
+        }
+        .left-bottom (@radius: 0) when not (@radius = null) {
+            -webkit-border-bottom-left-radius: @radius;
+                -moz-border-radius-bottomleft: @radius;
+                    border-bottom-left-radius: @radius;
+        }
+        .right-top (@radius: 0) when not (@radius = null) {
+            -webkit-border-top-right-radius: @radius;
+                -moz-border-radius-topright: @radius;
+                    border-top-right-radius: @radius;
+        }
+        .right-bottom (@radius: 0) when not (@radius = null) {
+            -webkit-border-bottom-right-radius: @radius;
+                -moz-border-radius-bottomright: @radius;
+                    border-bottom-right-radius: @radius;
+        }
+    }
+
+    .scale (@factor: 0) when not (@factor = null) {
+        -webkit-transform: scale(@factor);
+            -ms-transform: scale(@factor);
+                transform: scale(@factor);
+    }
+
+    .shadow (@spread: 0 0, @color: gray, @alpha: 0.5, @offset: '') when not (@spread = null) {
+        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+        -webkit-box-shadow: @spread @hsla ~"@{offset}";     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla ~"@{offset}";     // Chrome 6+, Firefox 4+, IE 9
+    }
+
+    .skew (@x: 0, @y: 0) when not (@x = null) {
+        -webkit-transform: skew(@x, @y);
+           -moz-transform: skew(@x, @y);
+            -ms-transform: skewX(@x) skewY(@y);
+             -o-transform: skew(@x, @y);
+                transform: skew(@x, @y);
+    }
+
+    .transform (@transform: none) when not (@transform = null) {
+        -webkit-transform: @transform;
+           -moz-transform: @transform;
+            -ms-transform: @transform;
+             -o-transform: @transform;
+                transform: @transform;
+    }
+
+    .transition (@property: all, @duration: 0s, @function: ease, @delay: 0s) when not (@property = null) {
+         -webkit-transition: @property @duration @function @delay;
+                 transition: @property @duration @function @delay;
+    }
+
+    .transitions (@first: none, @second: none) when not (@first = null) and not (@first = none) and not (@second = none) {
+         -webkit-transition: @first, @second;
+                 transition: @first, @second;
+    }
+
+    .transitions (@first: none, @second: none) when not (@first = null) and not (@first = none) and (@second = none) {
+         -webkit-transition: @first;
+                 transition: @first;
+    }
+
+    .transitions (@first: none, @second: none) when not (@first = null) and (@first = none) and (@second = none) {
+         -webkit-transition: all 0s ease 0s;
+                 transition: all 0s ease 0s;
+    }
+
+    .translate (@x: 0, @y: 0) when not (@x = null) {
+        -webkit-transform: translate(@x, @y);
+           -moz-transform: translate(@x, @y);
+            -ms-transform: translate(@x, @y);
+             -o-transform: translate(@x, @y);
+                transform: translate(@x, @y);
+    }
+
+    .translate3d (@x: 0, @y: 0, @z: 0) when not (@x = null) {
+        -webkit-transform: translate3d(@x, @y, @z);
+           -moz-transform: translate3d(@x, @y, @z);
+             -o-transform: translate3d(@x, @y, @z);
+                transform: translate3d(@x, @y, @z);
+    }
+
+    .user-select (@select: none) when not (@select = null) {
+        -webkit-user-select: @select;
+           -moz-user-select: @select;
+            -ms-user-select: @select;
+    }
+
+//
+// Filters
+// ----------------------------------------------------------------------- //
+
+@grayscale      : "data:image/svg+xml;utf8,<svg%20xmlns='http://www.w3.org/2000/svg'><filter%20id='grayscale'><feColorMatrix%20type='matrix'%20values='0.3333%200.3333%200.3333%200%200%200.3333%200.3333%200.3333%200%200%200.3333%200.3333%200.3333%200%200%200%200%200%201%200'/></filter></svg>#grayscale";
+
+// @ie10grayscale    : "data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale"
+
+//
+// Gradients
+// ----------------------------------------------------------------------- //
+
+@linear-hard 	: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAySURBVHjaYvj//z8DEwMDw2AmGBgYGJiYGBgYmJlgLBY4lwUXwUoKwYKLi2YoMxoBGAAp+wP4zdYk7QAAAABJRU5ErkJggg==";
+
+@linear 		: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAvSURBVHjaYvj//z8DEwMDw2AmGBgYGBiZGBgYmLAQzIQJFiJZ2LjMqBahsZgAAwAevQPSEU++BQAAAABJRU5ErkJggg==";
+
+@linear-soft 	: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
+
+//
+// Images
+// ----------------------------------------------------------------------- //
+
+@close-icon      : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
