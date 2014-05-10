@@ -2,7 +2,7 @@
 
 > A harder, better, faster, stronger **LESS library**!
 
-Anchor LESS is the most extensive mixins library made to speed up your code. Higlights:
+Anchor LESS is the most extensive mixins library made to speed up your code. Highlights:
 
 - Better: Feel free to use it with your favourite html framework.
 - Faster: Anchor uses less.js build-in functions for a faster compilation.
