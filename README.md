@@ -2,16 +2,11 @@
 
 > A harder, better, faster, stronger **LESS library**!
 
-<<<<<<< HEAD
 Anchor LESS is the most extensive mixins library made to speed up your code. Higlights:
 
 - Better: Feel free to use it with your favourite html framework.
 - Faster: Anchor uses less.js build-in functions for a faster compilation.
 
-=======
-Anchor LESS is the most extensive mixins library made to speed up your code. Designed to be counterpart of Compass. 
-
->>>>>>> f75f8668cac78da0262d6bcbd62971f05cd35b00
 ## Install
 ```css
 @import "anchor/anchor.less";
