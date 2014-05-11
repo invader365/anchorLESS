@@ -409,8 +409,11 @@
     .font-face (@name: a, @path: '..') when not (@name = null) {
         @font-face {
             font-family: @name;
-            src: url("@{path}.woff") format("woff"),
-                 url("@{path}.ttf") format("truetype");
+            src: url('@{path}.eot');                                        // ie9
+            src: url('@{path}.eot?#iefix') format('embedded-opentype'),     
+                 url("@{path}.woff") format("woff"),
+                 url("@{path}.ttf") format("truetype"),
+                 url('@{path}.svg#@{name}') format('svg');
         }
     }
 
