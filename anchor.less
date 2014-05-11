@@ -294,8 +294,8 @@
     }
 
     .linebreak () {  
-          margin-left: 0; 
-                clear: left; 
+        margin-left: 0; 
+        clear: left; 
     }
 
 //
@@ -921,11 +921,9 @@
     }
 
     .rounded (@radius: 0) when not (@radius = null) {
-        & {
-            -webkit-border-radius: @radius;
-               -moz-border-radius: @radius;
-                    border-radius: @radius;
-        }
+        -webkit-border-radius: @radius;
+           -moz-border-radius: @radius;
+                border-radius: @radius;
     }
 
     .rounded {
@@ -1040,9 +1038,9 @@
 // Filters
 // ----------------------------------------------------------------------- //
 
-@grayscale      : "data:image/svg+xml;utf8,<svg%20xmlns='http://www.w3.org/2000/svg'><filter%20id='grayscale'><feColorMatrix%20type='matrix'%20values='0.3333%200.3333%200.3333%200%200%200.3333%200.3333%200.3333%200%200%200.3333%200.3333%200.3333%200%200%200%200%200%201%200'/></filter></svg>#grayscale";
+@grayscale      : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale";
 
-// @ie10grayscale    : "data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale"
+@grayscaleie10  : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale";
 
 //
 // Gradients
