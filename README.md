@@ -2,7 +2,7 @@
 
 > A harder, better, faster, stronger **LESS library**!
 
-Anchor LESS is a LESS/CSS library build to save time. Higlights:
+Anchor LESS is a LESS/CSS library build to save time. Highlights:
 
 - Harder. Responsive mixins with a mobile-first approach.
 - Better. The best complement to your prefered html framework.
@@ -44,7 +44,7 @@ See the **[full list](source/GIST.md)**
   
 ## Usage
     
-From this:
+Anchor LESS example:
 
     #foo {
         .back(#222, '../images/logo.png', no-repeat, left top);
@@ -52,7 +52,7 @@ From this:
         .rounded(5px);
     }
     
-to this:
+CSS output:
 
     #foo {
         background: #222 url('../images/logo.png') no-repeat left top;
