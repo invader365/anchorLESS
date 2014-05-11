@@ -9,7 +9,7 @@ Anchor LESS is the most extensive mixins library made to speed up your code. Hig
 
 ## Install
 ```css
-@import "anchor/anchor.less";
+@import "anchor.less";
     
 #foo {
    .border(1px 1px 3px, solid, gray);
