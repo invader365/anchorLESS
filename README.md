@@ -28,9 +28,9 @@ Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
 00. .color (color, back, border);
 00. .font (font, family);
 00. .gradient.horizontal(start, end, image);
-00. .image (url);
+00. .image (image);
 00. .opacity (opacity, query);
-00. .pseudo (content, width, height)
+00. .pseudo (content, width, height, position)
 00. .rounded (radius);
 00. .shadow (spread, color, alpha, offset);
 00. .size (width, height, query);
@@ -40,10 +40,9 @@ Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
 00. ..
 
 See the **[full list](source/GIST.md)**
-
   
 ## Usage
-    
+
 Anchor LESS example:
 
     #foo {
@@ -51,7 +50,7 @@ Anchor LESS example:
         .width(70%, 800px);
         .rounded(5px);
     }
-    
+
 CSS output:
 
     #foo {
@@ -68,4 +67,4 @@ CSS output:
 
 ## License
 
-Copyright © 2014 Licensed under the [Apache License](LICENSE).
+Copyright © 2014 Licensed under the [Apache 2.0 License](LICENSE).
