@@ -1,4 +1,4 @@
-//
+
 // Mixins
 // ----------------------------------------------------------------------- //
 
@@ -106,7 +106,7 @@
         font: @font @family;
     }
 
-    .font-face (@name: a, @path: '..') when not (@name = null) {
+    .font-face (@name: a, @path: 'foo') when not (@name = null) {
         @font-face {
             font-family: @name;
             src: url('@{path}.eot');                                        // ie9
@@ -125,12 +125,12 @@
         height: @height;
     }
 
-    .image (@url: none) when not (@url = null) and (@url = none) { 
+    .image (@image: none) when not (@image = null) and (@image = none) { 
         background-image: none; 
     }
 
-    .image (@url: none) when not (@url = null) and not (@url = none) { 
-        background-image: url('@{url}'); 
+    .image (@image: none) when not (@image = null) and not (@image = none) { 
+        background-image: url('@{image}'); 
     }
 
     .index (@index: 0, @query: 0) when not (@index = null) and (@query = 0) {

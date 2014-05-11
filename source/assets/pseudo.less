@@ -1,16 +1,16 @@
-//
+
 // Pseudo
 // ----------------------------------------------------------------------- //
 
     .pseudo-container (@display: inline-block) {
         display: @display;
         position: relative; 
-        overflow: visible; // overflow ie8/9
+        overflow: visible;  // overflow ie8/9
     }
 
-    .pseudo (@content: '', @width: auto, @height: auto) {
+    .pseudo (@content: '', @width: auto, @height: auto, @position: absolute) {
         display: inline-block;
-        position: relative;
+        position: @position;
         content: @content;
         width: @width;
         height: @height;

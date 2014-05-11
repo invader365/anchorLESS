@@ -31,7 +31,7 @@
 00. .gradient.radial(inner, outer, image);
 00. .height (height, query);
 00. .highlight (highlight);
-00. .image (url);
+00. .image (image);
 00. .index (index, query);
 00. .margin (margin, query);
 00. .max-width (width, query);
@@ -86,7 +86,7 @@
 00. .reset-vertical (margin-top, query)
 00. .list-style (type, image);
 00. .pseudo-container (display);
-00. .pseudo (content, width, height);
+00. .pseudo (content, width, height, position);
 00. .state.normal (color, bgcolor, bcolor);
 00. .state.hover (color, bgcolor, bcolor);
 00. .state.active (color, bgcolor, bcolor);

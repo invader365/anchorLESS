@@ -1,10 +1,10 @@
-//
+
 // Queries
 // ----------------------------------------------------------------------- //
 
-    .align (@top: auto, @left: auto, @bottom: auto, @right: auto, @position: absolute, @query: 0) when (@query > 0) {
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .align (@top, @left, @bottom, @right, @position);
+            .align (@top, @right, @bottom, @left);
         } 
     }
 

@@ -1,305 +1,14 @@
 // ----------------------------------------------------------------------- //
-// AnchorLESS A LESS/CSS library
+//
+// Anchor LESS - A LESS mixins library
 // https://github.com/invader365/anchorLESS
-// Licensed under the Apache License.
+// 
+// Licensed under the Apache 2.0 License.
+//
 // ----------------------------------------------------------------------- //
 
 //
-// Shortcodes 
-// ----------------------------------------------------------------------- //
-
-    @t                      :   transparent;
-    @d                      :   e('/');
-
-// hexadecimal grayscale
-// ----------------------------------------- */
-
-    @hex0                   :     #000;
-    @hex2                   :     #222;
-    @hex4                   :     #444;
-    @hex6                   :     #666;
-    @hex8                   :     #888;
-    @hexa                   :     #aaa;
-    @hexb                   :     #bbb;
-    @hexc                   :     #ccc;
-    @hexd                   :     #ddd;
-    @hexe                   :     #eee;
-    @hexef                  :     #f6f6f7;
-    @hexf                   :     #fff;
-
-
-// websafe fonts
-// ----------------------------------------- */
-
-    @font-mono              :   'Menlo, Monaco, Consolas, "Courier New", monospace';
-    @font-sans              :   'Helvetica Neue, Helvetica, Arial, sans-serif';
-    @font-script            :   'Brush Script MT, cursive';
-    @font-serif             :   'Georgia, Times New Roman, Times, Serif';\
-
-//
-// Arrows
-// ----------------------------------------------------------------------- //
-
-    .arrow {
-        .tip (@width) {
-            content: '';
-            display: block;
-            width: 0;
-            height: 0;
-            border: @width inset transparent;
-        }
-        .top (@width: 0, @color: transparent) {
-           .arrow.tip(@width);
-            border-top-color: @color;
-            border-top-style: solid;
-        }
-        .bottom (@width: 0, @color: transparent) {
-           .arrow.tip(@width);
-            border-bottom-color: @color;
-            border-bottom-style: solid;
-        }
-        .right (@width: 0, @color: transparent) {
-           .arrow.tip(@width);
-            border-right-color: @color;
-            border-right-style: solid;
-        }
-        .left (@width: 0, @color: transparent) {
-           .arrow.tip(@width);
-            border-left-color: @color;
-            border-left-style: solid;
-        }
-    }
-
-//
-// Assorted
-// ----------------------------------------------------------------------- //
-
-    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query = 0) {
-        & > strong              { width: @width; display: block; float: left; }
-        & > div                 { width: @divWidth; }
-    }
-
-    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query > 0) {
-        @media print, screen and (min-width: @query) {
-            .strong-div (@width, @divWidth);
-        }
-    }
-
-    .strong-div (@var) when (@var = null) {}
-
-//
-// Blocks
-// ----------------------------------------------------------------------- //
-
-    .center-block (@width: 0, @query: 0) when (@query = 0) {
-        left: (@width / 2) * -1;
-        margin-left: 50%;
-    }
-
-    .center-inline (@display: inline-block, @query: 0) when (@display = 0) {
-        display: @display;
-        margin: 0 auto;
-        float: none;
-    }
-
-    .center-vertical (@height: 0) {
-        margin-top: (@height / 2) * -1;
-        top: 50%;
-    }
-
-    .offset (@padding: 0, @query: 0) when (@query = 0) {
-        margin-left: -@padding;
-        padding-left: @padding;
-        padding-right: @padding;
-       .box-sizing;
-    }
-
-    .reset-center (@margin-left: 0, @query: 0) when (@query = 0) {
-        margin-left: @margin-left;
-        left: 0;
-    }
-
-    .reset-vertical (@margin-top: 0, @query: 0) when (@query = 0) {
-        margin-top: @margin-top;
-        top: auto;
-    }
-
-//
-// Lists
-// ----------------------------------------------------------------------- //
-    
-    .list-style (@type: none, @image: none) when not (@type = null) and (@type = inherit), (@image = inherit) {
-            &       { list-style: inherit; }
-    }
-
-    .list-style (@type: none, @image: none) when not (@type = null) and not (@type = inherit) and (@image = none) {
-            &       { list-style: @type inside; }
-    }
-
-    .list-style (@type: none, @image: none) when not (@type = null) and not (@image = none) and not (@image = inherit) {
-            &       { list-style: none inside url('@{image}'); }
-    }
-
-    .list-style (@var) when (@var = null) {}
-
-//
-// Pseudo
-// ----------------------------------------------------------------------- //
-
-    .pseudo-container (@display: inline-block) {
-        display: @display;
-        position: relative; 
-        overflow: visible; // overflow ie8/9
-    }
-
-    .pseudo (@content: '', @width: auto, @height: auto) {
-        display: inline-block;
-        position: relative;
-        content: @content;
-        width: @width;
-        height: @height;
-        vertical-align: middle;
-    }
-
-//
-// States
-// ----------------------------------------------------------------------- //
-
-    .state                      {
-        .normal (@color, @back: none, @border: transparent) {
-            &,
-            &:link              { .color(@color, @back, @border);  }
-        }
-
-        .hover (@color, @back: none, @border: transparent) {
-            &.hover,
-            &:hover             { .color(@color, @back, @border); }
-        }
-
-        .active (@color, @back: none, @border: transparent) {
-            &:active            { .color(@color, @back, @border); }
-        }
-
-        .focus (@color, @back: none, @border: transparent) {
-            &.focus,
-            &:focus             { .color(@color, @back, @border); }
-        }
-
-        .visited (@color, @back: none, @border: transparent) {
-            &:visited           { .color(@color, @back, @border); }
-        }
-
-        .hover-focus (@color, @back: none, @border: transparent) {
-            &.hover,
-            &:hover,
-            &.focus,
-            &:focus             { .color(@color, @back, @border); }
-        }
-
-        .normal-active (@color, @back: none, @border: transparent) {
-            &,
-            &:link,
-            &:active            { .color(@color, @back, @border); }
-        }
-    }
-
-//
-// Tables
-// ----------------------------------------------------------------------- //
-
-    .table {
-        .backcolor (@count: even, @color: none) when not (@count = null) {
-            & tbody tr:nth-child(@{count}) td,
-            & tbody tr.@{count} td { .back.color(@color); }
-        }
-        .border (@width: 0, @style: none, @color: none) when not (@width = null) {
-            &                   { border-width: @width; border-style: @style; border-color: @color; }
-        }
-        .cell-border (@width: 0, @style: none, @color: none) when not (@width = null) {
-            & tr th,
-            & tr td             { border-width: @width; border-style: @style; border-color: @color; }
-        }
-        .padding (@padding: 0) when not (@padding = null) {
-            & thead th,
-            & tbody td,
-            & tfoot td          { padding: @padding; }
-        }
-        .rounded (@radius: none) when not (@radius = null) {  
-            &                                       { .rename-rounded(@radius); }
-            & thead tr:first-child th:first-child   { .rounded.left-top(@radius); }
-            & thead tr:first-child th:last-child    { .rounded.right-top(@radius); }
-            & tbody tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
-            & tbody tr:last-child  td:last-child    { .rounded.right-bottom(@radius); }
-        }
-    }
-
-    .rename-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack
-
-    .table {
-        .backcolor   (@var) when (@var = null) {}
-        .border      (@var) when (@var = null) {}
-        .cell-border (@var) when (@var = null) {}
-        .padding     (@var) when (@var = null) {}
-        .rounded     (@var) when (@var = null) {}
-    }
-
-//
-// Helpers
-// ----------------------------------------------------------------------- //
-
-    .block () {
-        display: block;
-        position: relative;
-        float: left;
-    }
-
-    .clearfix () {
-        &:after { 
-            content: ''; 
-            display: table; 
-            clear: both; 
-        }
-    }
-
-    .ellipsis () { 
-        text-overflow: ellipsis; // ie8 rendering issue
-        white-space: nowrap; 
-        overflow: hidden; 
-    }
-
-    .hidetext () { 
-        text-indent: -9999px; 
-        text-align: left; 
-        overflow: hidden; 
-    }
-
-    .hyphens () {
-        -ms-word-break: break-all;
-            word-break: break-all;
-            word-break: break-word;
-        -webkit-hyphens: auto;
-           -moz-hyphens: auto;
-                hyphens: auto;
-    }
-
-    .inline () {
-        display: inline;
-        float: none;
-    }
-
-    .inline-block () {
-        display: inline-block;
-        position: relative;
-        float: none;
-    }
-
-    .linebreak () {  
-        margin-left: 0; 
-        clear: left; 
-    }
-
-//
-// Mixins
+// i. Mixins
 // ----------------------------------------------------------------------- //
 
     .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = null) and (@query = 0) {
@@ -406,7 +115,7 @@
         font: @font @family;
     }
 
-    .font-face (@name: a, @path: '..') when not (@name = null) {
+    .font-face (@name: a, @path: 'foo') when not (@name = null) {
         @font-face {
             font-family: @name;
             src: url('@{path}.eot');                                        // ie9
@@ -425,12 +134,12 @@
         height: @height;
     }
 
-    .image (@url: none) when not (@url = null) and (@url = none) { 
+    .image (@image: none) when not (@image = null) and (@image = none) { 
         background-image: none; 
     }
 
-    .image (@url: none) when not (@url = null) and not (@url = none) { 
-        background-image: url('@{url}'); 
+    .image (@image: none) when not (@image = null) and not (@image = none) { 
+        background-image: url('@{image}'); 
     }
 
     .index (@index: 0, @query: 0) when not (@index = null) and (@query = 0) {
@@ -509,8 +218,7 @@
         width: @width;
     }
 
-//
-// Null
+// Nulls
 // ----------------------------------------------------------------------- //
 
     .align (@var) when (@var = null) {}
@@ -571,6 +279,8 @@
 
     .index (@var) when (@var = null) {}
 
+    .list-style (@var) when (@var = null) {}
+
     .margin (@var) when (@var = null) {}
 
     .max-width (@var) when (@var = null) {}
@@ -620,6 +330,16 @@
 
     .square (@var) when (@var = null) {}
 
+    .strong-div (@var) when (@var = null) {}
+
+    .table {
+        .backcolor   (@var) when (@var = null) {}
+        .border      (@var) when (@var = null) {}
+        .cell-border (@var) when (@var = null) {}
+        .padding     (@var) when (@var = null) {}
+        .rounded     (@var) when (@var = null) {}
+    }
+
     .text-align (@var) when (@var = null) {}
 
     .text-indent (@var) when (@var = null) {}
@@ -640,7 +360,6 @@
 
     .width (@var) when (@var = null) {}
 
-//
 // Queries
 // ----------------------------------------------------------------------- //
 
@@ -812,8 +531,7 @@
         }
     }
 
-//
-// Vendor mixins
+// Vendor Mixins
 // ----------------------------------------------------------------------- //
 
     .appearance (@appearance: normal) when not (@appearance = null) {
@@ -1038,25 +756,295 @@
     }
 
 //
+// ii. Helpers 
+// ----------------------------------------------------------------------- //
+
+    @t                      :   transparent;
+    @d                      :   e('/');
+
+// Hexadecimal Grayscale
+
+    @hex0                   :     #000;
+    @hex2                   :     #222;
+    @hex4                   :     #444;
+    @hex6                   :     #666;
+    @hex8                   :     #888;
+    @hexa                   :     #aaa;
+    @hexb                   :     #bbb;
+    @hexc                   :     #ccc;
+    @hexd                   :     #ddd;
+    @hexe                   :     #eee;
+    @hexef                  :     #f6f6f7;
+    @hexf                   :     #fff;
+
+// Websafe Fonts
+
+    @font-mono              :   'Menlo, Monaco, Consolas, monospace';
+    @font-sans              :   'Helvetica Neue, Helvetica, Arial, sans-serif';
+    @font-script            :   'Brush Script MT, cursive';
+    @font-serif             :   'Georgia, Times New Roman, Times, serif';
+
+// Helpers
+// ----------------------------------------------------------------------- //
+
+    .block () {
+        display: block;
+        position: relative;
+        float: left;
+    }
+
+    .clearfix () {
+        &:after { 
+            content: ''; 
+            display: table; 
+            clear: both; 
+        }
+    }
+
+    .ellipsis () { 
+        text-overflow: ellipsis;    // ie8 rendering issue
+        white-space: nowrap; 
+        overflow: hidden; 
+    }
+
+    .hidetext () { 
+        text-indent: 100%; 
+        white-space: nowrap; 
+        overflow: hidden; 
+    }
+
+    .hyphens () {
+        -ms-word-break: break-all;
+            word-break: break-all;
+            word-break: break-word;
+        -webkit-hyphens: auto;
+           -moz-hyphens: auto;
+                hyphens: auto;
+    }
+
+    .inline () {
+        display: inline;
+        float: none;
+    }
+
+    .inline-block () {
+        display: inline-block;
+        position: relative;
+        float: none;
+    }
+
+    .linebreak () {  
+        margin-left: 0; 
+        clear: left; 
+    }
+
 // Filters
 // ----------------------------------------------------------------------- //
 
-@grayscale      : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale";
+    @grayscale      : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale";
 
-@grayscaleie10  : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale";
+    @grayscale-ie10 : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale";
 
-//
-// Gradients
+// Inline Images
 // ----------------------------------------------------------------------- //
 
-@linear-hard 	: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAySURBVHjaYvj//z8DEwMDw2AmGBgYGJiYGBgYmJlgLBY4lwUXwUoKwYKLi2YoMxoBGAAp+wP4zdYk7QAAAABJRU5ErkJggg==";
+    @linear-hard    : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAySURBVHjaYvj//z8DEwMDw2AmGBgYGJiYGBgYmJlgLBY4lwUXwUoKwYKLi2YoMxoBGAAp+wP4zdYk7QAAAABJRU5ErkJggg==";
 
-@linear 		: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAvSURBVHjaYvj//z8DEwMDw2AmGBgYGBiZGBgYmLAQzIQJFiJZ2LjMqBahsZgAAwAevQPSEU++BQAAAABJRU5ErkJggg==";
+    @linear         : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAvSURBVHjaYvj//z8DEwMDw2AmGBgYGBiZGBgYmLAQzIQJFiJZ2LjMqBahsZgAAwAevQPSEU++BQAAAABJRU5ErkJggg==";
 
-@linear-soft 	: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
+    @linear-soft    : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
+
+    @close-icon      : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
 
 //
-// Images
+// iii. Assets 
+//
+
+// Arrows
 // ----------------------------------------------------------------------- //
 
-@close-icon      : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
+    .arrow {
+        .tip (@width) {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border: @width inset transparent;
+        }
+        .top (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-top-color: @color;
+            border-top-style: solid;
+        }
+        .bottom (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-bottom-color: @color;
+            border-bottom-style: solid;
+        }
+        .right (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-right-color: @color;
+            border-right-style: solid;
+        }
+        .left (@width: 0, @color: transparent) {
+           .arrow.tip(@width);
+            border-left-color: @color;
+            border-left-style: solid;
+        }
+    }
+
+// Assorted
+// ----------------------------------------------------------------------- //
+
+    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query = 0) {
+        & > strong              { width: @width; display: block; float: left; }
+        & > div                 { width: @divWidth; }
+    }
+
+    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query > 0) {
+        @media print, screen and (min-width: @query) {
+            .strong-div (@width, @divWidth);
+        }
+    }
+
+// Blocks
+// ----------------------------------------------------------------------- //
+
+    .center-block (@width: 0, @query: 0) when (@query = 0) {
+        left: (@width / 2) * -1;
+        margin-left: 50%;
+    }
+
+    .center-inline (@display: inline-block, @query: 0) when (@display = 0) {
+        display: @display;
+        margin: 0 auto;
+        float: none;
+    }
+
+    .center-vertical (@height: 0) {
+        margin-top: (@height / 2) * -1;
+        top: 50%;
+    }
+
+    .offset (@padding: 0, @query: 0) when (@query = 0) {
+        @offset: 100% * @padding / (100% - @padding);
+        margin-left: round(-@offset, 2);
+        padding-left: round(@offset, 2);
+        padding-right: round(@offset, 2);
+       .box-sizing;
+    }
+
+    .reset-center (@margin-left: 0, @query: 0) when (@query = 0) {
+        margin-left: @margin-left;
+        left: 0;
+    }
+
+    .reset-vertical (@margin-top: 0, @query: 0) when (@query = 0) {
+        margin-top: @margin-top;
+        top: auto;
+    }
+
+// Lists
+// ----------------------------------------------------------------------- //
+    
+    .list-style (@type: none, @image: none) when not (@type = null) and (@type = inherit), (@image = inherit) {
+        list-style: inherit;
+    }
+
+    .list-style (@type: none, @image: none) when not (@type = null) and not (@type = inherit) and (@image = none) {
+        list-style: @type inside;
+    }
+
+    .list-style (@type: none, @image: none) when not (@type = null) and not (@image = none) and not (@image = inherit) {
+        list-style: none inside url('@{image}');
+    }
+
+// Pseudo
+// ----------------------------------------------------------------------- //
+
+    .pseudo-container (@display: inline-block) {
+        display: @display;
+        position: relative; 
+        overflow: visible;          // overflow ie8/9
+    }
+
+    .pseudo (@content: '', @width: auto, @height: auto, @position: absolute) {
+        display: inline-block;
+        position: @position;
+        content: @content;
+        width: @width;
+        height: @height;
+        vertical-align: middle;
+    }
+
+// States
+// ----------------------------------------------------------------------- //
+
+    .state                      {
+        .normal (@color, @back: none, @border: transparent) {
+            &,
+            &:link              { .color(@color, @back, @border);  }
+        }
+
+        .hover (@color, @back: none, @border: transparent) {
+            &.hover,
+            &:hover             { .color(@color, @back, @border); }
+        }
+
+        .active (@color, @back: none, @border: transparent) {
+            &:active            { .color(@color, @back, @border); }
+        }
+
+        .focus (@color, @back: none, @border: transparent) {
+            &.focus,
+            &:focus             { .color(@color, @back, @border); }
+        }
+
+        .visited (@color, @back: none, @border: transparent) {
+            &:visited           { .color(@color, @back, @border); }
+        }
+
+        .hover-focus (@color, @back: none, @border: transparent) {
+            &.hover,
+            &:hover,
+            &.focus,
+            &:focus             { .color(@color, @back, @border); }
+        }
+
+        .normal-active (@color, @back: none, @border: transparent) {
+            &,
+            &:link,
+            &:active            { .color(@color, @back, @border); }
+        }
+    }
+
+// Tables
+// ----------------------------------------------------------------------- //
+
+    .table {
+        .backcolor (@count: even, @color: none) when not (@count = null) {
+            & tbody tr:nth-child(@{count}) td,
+            & tbody tr.@{count} td { .back.color(@color); }
+        }
+        .border (@width: 0, @style: none, @color: none) when not (@width = null) {
+            &                   { border-width: @width; border-style: @style; border-color: @color; }
+        }
+        .cell-border (@width: 0, @style: none, @color: none) when not (@width = null) {
+            & tr th,
+            & tr td             { border-width: @width; border-style: @style; border-color: @color; }
+        }
+        .padding (@padding: 0) when not (@padding = null) {
+            & thead th,
+            & tbody td,
+            & tfoot td          { padding: @padding; }
+        }
+        .rounded (@radius: none) when not (@radius = null) {  
+            &                                       { .rename-rounded(@radius); }
+            & thead tr:first-child th:first-child   { .rounded.left-top(@radius); }
+            & thead tr:first-child th:last-child    { .rounded.right-top(@radius); }
+            & tbody tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
+            & tbody tr:last-child  td:last-child    { .rounded.right-bottom(@radius); }
+        }
+    }
+
+    .rename-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack

@@ -1,5 +1,5 @@
-//
-// Null
+
+// Nulls
 // ----------------------------------------------------------------------- //
 
     .align (@var) when (@var = null) {}
@@ -60,6 +60,8 @@
 
     .index (@var) when (@var = null) {}
 
+    .list-style (@var) when (@var = null) {}
+
     .margin (@var) when (@var = null) {}
 
     .max-width (@var) when (@var = null) {}
@@ -109,6 +111,16 @@
 
     .square (@var) when (@var = null) {}
 
+    .strong-div (@var) when (@var = null) {}
+
+    .table {
+        .backcolor   (@var) when (@var = null) {}
+        .border      (@var) when (@var = null) {}
+        .cell-border (@var) when (@var = null) {}
+        .padding     (@var) when (@var = null) {}
+        .rounded     (@var) when (@var = null) {}
+    }
+
     .text-align (@var) when (@var = null) {}
 
     .text-indent (@var) when (@var = null) {}
@@ -128,3 +140,4 @@
     .user-select (@var) when (@var = null) {}
 
     .width (@var) when (@var = null) {}
+    
