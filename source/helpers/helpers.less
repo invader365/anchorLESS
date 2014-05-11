@@ -18,23 +18,23 @@
 
     .ellipsis () { 
         text-overflow: ellipsis; // ie8 rendering issue
-          white-space: nowrap; 
-             overflow: hidden; 
+        white-space: nowrap; 
+        overflow: hidden; 
     }
 
     .hidetext () { 
-          text-indent: -9999px; 
-           text-align: left; 
-             overflow: hidden; 
+        text-indent: 100%; 
+        white-space: nowrap; 
+        overflow: hidden; 
     }
 
     .hyphens () {
-       -ms-word-break: break-all;
-           word-break: break-all;
-           word-break: break-word;
-      -webkit-hyphens: auto;
-         -moz-hyphens: auto;
-              hyphens: auto;
+        -ms-word-break: break-all;
+            word-break: break-all;
+            word-break: break-word;
+        -webkit-hyphens: auto;
+           -moz-hyphens: auto;
+                hyphens: auto;
     }
 
     .inline () {
@@ -49,6 +49,6 @@
     }
 
     .linebreak () {  
-          margin-left: 0; 
-                clear: left; 
+        margin-left: 0; 
+        clear: left; 
     }
