@@ -27,7 +27,7 @@ Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
 00. .back (color, image, repeat, position, query);
 00. .color (color, back, border);
 00. .font (font, family);
-00. .gradient.horizontal(start, end, image);
+00. .gradient.horizontal(left, right, image);
 00. .image (image);
 00. .opacity (opacity, query);
 00. .pseudo (content, width, height, position)
@@ -43,7 +43,7 @@ See the **[full list](source/GIST.md)**
   
 ## Usage
 
-Anchor LESS example:
+Example:
 
     #foo {
         .back(#222, '../images/logo.png', no-repeat, left top);
