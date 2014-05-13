@@ -2,19 +2,19 @@
 // Assorted
 // ----------------------------------------------------------------------- //
 
-    .a-color (@color: inherit, @hover: inherit) when not (@width = null) {
+    .link-color (@color: inherit, @hover: inherit) when not (@color = null) {
         & > a                   { color: @color; }
         & > a:hover             { color: @hover; }
     }
 
-    .strong-div-width (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query = 0) {
-        & > strong              { width: @width; }
-        & > div                 { width: @divWidth; }
+    .strong-div-width (@strong: 100%, @div: 100%, @query: 0) when not (@strong = null) and (@query = 0) {
+        & > strong              { width: @strong; }
+        & > div                 { width: @div; }
     }
 
-    .strong-div-width (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query > 0) {
+    .strong-div-width (@strong: 100%, @div: 100%, @query: 0) when not (@strong = null) and (@query > 0) {
         @media print, screen and (min-width: @query) {
-            .strong-div-width (@width, @divWidth);
+            .strong-div-width (@strong, @div);
         }
     }
     
