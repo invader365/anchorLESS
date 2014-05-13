@@ -54,7 +54,7 @@
 00. .rounded.left.bottom (radius);
 00. .rounded.right.top (radius);
 00. .rounded.right.bottom (radius);
-00. .rgba (color, alpha);
+00. .rgba (hex-color, alpha);
 00. .size (width, height, query);
 00. .scale (factor);
 00. .shadow (spread, color, alpha, offset);
@@ -86,7 +86,7 @@
 00. .reset-vertical (margin-top, query)
 00. .list-style (type, image);
 00. .pseudo-container (display);
-00. .pseudo (content, width, height, position);
+00. .pseudo (content, width, height);
 00. .state.normal (color, bgcolor, bcolor);
 00. .state.hover (color, bgcolor, bcolor);
 00. .state.active (color, bgcolor, bcolor);

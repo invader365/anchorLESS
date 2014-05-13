@@ -30,7 +30,7 @@ Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
 00. .gradient.horizontal(left, right, image);
 00. .image (image);
 00. .opacity (opacity, query);
-00. .pseudo (content, width, height, position)
+00. .pseudo (content, width, height)
 00. .rounded (radius);
 00. .shadow (spread, color, alpha, offset);
 00. .size (width, height, query);

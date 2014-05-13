@@ -164,7 +164,7 @@
         padding: @padding;
     }
 
-    .position (@position: absolute, @query: 0) when not (@position = null) and (@query = 0) {
+    .position (@position: static, @query: 0) when not (@position = null) and (@query = 0) {
         position: @position;
     }
 
@@ -173,9 +173,9 @@
         overflow: auto; // Safari fix
     }
 
-    .rgba (@color: #fff, @alpha: 0.5) when not (@color = null) { 
-        background-color: @color;
-        background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
+    .rgba (@hex-color: #fff, @alpha: 0.5) when not (@hex-color = null) { 
+        background-color: @hex-color;
+        background-color: hsla(hue(@hex-color), saturation(@hex-color), lightness(@hex-color), @alpha); 
     }
 
     .size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {

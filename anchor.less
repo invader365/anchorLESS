@@ -173,7 +173,7 @@
         padding: @padding;
     }
 
-    .position (@position: absolute, @query: 0) when not (@position = null) and (@query = 0) {
+    .position (@position: static, @query: 0) when not (@position = null) and (@query = 0) {
         position: @position;
     }
 
@@ -182,9 +182,9 @@
         overflow: auto; // Safari fix
     }
 
-    .rgba (@color: #fff, @alpha: 0.5) when not (@color = null) { 
-        background-color: @color;
-        background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
+    .rgba (@hex-color: #fff, @alpha: 0.5) when not (@hex-color = null) { 
+        background-color: @hex-color;
+        background-color: hsla(hue(@hex-color), saturation(@hex-color), lightness(@hex-color), @alpha); 
     }
 
     .size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {
@@ -220,6 +220,8 @@
 
 // Nulls
 // ----------------------------------------------------------------------- //
+
+    .a-color (@var) when (@var = null) {}
 
     .align (@var) when (@var = null) {}
 
@@ -328,7 +330,7 @@
 
     .square (@var) when (@var = null) {}
 
-    .strong-div (@var) when (@var = null) {}
+    .strong-div-width (@var) when (@var = null) {}
 
     .table {
         .backcolor   (@var) when (@var = null) {}
@@ -894,14 +896,19 @@
 // Assorted
 // ----------------------------------------------------------------------- //
 
-    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query = 0) {
-        & > strong              { width: @width; display: block; float: left; }
+    .a-color (@color: inherit, @hover: inherit) when not (@width = null) {
+        & > a                   { color: @color; }
+        & > a:hover             { color: @hover; }
+    }
+
+    .strong-div-width (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query = 0) {
+        & > strong              { width: @width; }
         & > div                 { width: @divWidth; }
     }
 
-    .strong-div (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query > 0) {
+    .strong-div-width (@width: 100%, @divWidth: 100%, @query: 0) when not (@width = null) and (@query > 0) {
         @media print, screen and (min-width: @query) {
-            .strong-div (@width, @divWidth);
+            .strong-div-div (@width, @divWidth);
         }
     }
 
@@ -921,24 +928,26 @@
 
     .center-vertical (@height: 0) {
         margin-top: (@height / 2) * -1;
+        position: absolute;
         top: 50%;
     }
 
     .offset (@padding: 0, @query: 0) when (@query = 0) {
         @offset: 100% * @padding / (100% - @padding);
-        margin-left: round(-@offset, 1);
-        padding-left: round(@offset, 1);
-        padding-right: round(@offset, 1);
+        margin-left: round(-@offset, 2);
+        padding-left: round(@offset, 2);
+        padding-right: round(@offset, 2);
        .box-sizing;
     }
 
     .reset-center (@margin-left: 0, @query: 0) when (@query = 0) {
         margin-left: @margin-left;
-        left: 0;
+        left: auto;
     }
 
     .reset-vertical (@margin-top: 0, @query: 0) when (@query = 0) {
         margin-top: @margin-top;
+        position: static;
         top: auto;
     }
 
@@ -966,9 +975,8 @@
         overflow: visible;          // overflow ie8/9
     }
 
-    .pseudo (@content: '', @width: auto, @height: auto, @position: absolute) {
+    .pseudo (@content: '', @width: auto, @height: auto) {
         display: inline-block;
-        position: @position;
         content: @content;
         width: @width;
         height: @height;
