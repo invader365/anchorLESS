@@ -275,8 +275,6 @@
 
     .image (@var) when (@var = null) {}
 
-    .link-color (@var) when (@var = null) {}
-
     .index (@var) when (@var = null) {}
 
     .list-style (@var) when (@var = null) {}
@@ -808,8 +806,8 @@
     }
 
     .hidetext () { 
-        text-indent: 100%; 
-        white-space: nowrap; 
+        text-indent: -9999px; 
+        text-align: left;
         overflow: hidden; 
     }
 
@@ -896,11 +894,6 @@
 // Assorted
 // ----------------------------------------------------------------------- //
 
-    .link-color (@color: inherit, @hover: inherit) when not (@color = null) {
-        & > a                   { color: @color; }
-        & > a:hover             { color: @hover; }
-    }
-
     .strong-div-width (@strong: 100%, @div: 100%, @query: 0) when not (@strong = null) and (@query = 0) {
         & > strong              { width: @strong; }
         & > div                 { width: @div; }
@@ -920,7 +913,7 @@
         margin-left: 50%;
     }
 
-    .center-inline (@display: inline-block, @query: 0) when (@display = 0) {
+    .center-inline (@display: inline-block, @query: 0) when (@query = 0) {
         display: @display;
         margin: 0 auto;
         float: none;
