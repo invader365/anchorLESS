@@ -4,10 +4,10 @@
 
 Anchor LESS is a LESS/CSS library build to save time. Highlights:
 
-- Harder. Responsive mixins with a mobile-first approach.
+- Harder. The most extensive LESS mixins library!
 - Better. The best complement to your prefered html framework.
 - Faster. Less.js build-in functions for faster performance.
-- Stronger. The most extensive LESS mixins library!
+- Stronger. Responsive mixins (mobile-first approach), assets and helpers.
 
 ## Install
 ```css
@@ -27,7 +27,7 @@ Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
 00. .back (color, image, repeat, position, query);
 00. .color (color, back, border);
 00. .font (font, family);
-00. .gradient(degrees, start, stop, image);
+00. .gradient (degrees, start, stop, image);
 00. .image (image);
 00. .opacity (opacity, query);
 00. .pseudo (content, width, height)
@@ -47,7 +47,9 @@ Example:
 
     #foo {
         .back(#222, '../images/logo.png', no-repeat, left top);
-        .width(70%, 800px);
+        .width(100%);
+        .width(50%, 640px);
+        .width(20%, 960px);
         .rounded(5px);
     }
 
@@ -56,12 +58,18 @@ CSS output:
     #foo {
         background: #222 url('../images/logo.png') no-repeat left top;
         -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        width: 100%;
     }
-    @media all and (min-width: 800px) {
+    @media all and (min-width: 640px) {
         #foo {
-            width: 70%;
+            width: 50%;
+        }
+    }
+    @media all and (min-width: 960px) {
+        #foo {
+            width: 20%;
         }
     }
 

@@ -564,7 +564,7 @@
 
     .gradient {
         .directional(@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@start = null) {
-            .back(@stop, @image, repeat-x, center left);
+            .back(@stop, @image, repeat-x, center);
              background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
              background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
              background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
@@ -971,35 +971,33 @@
 // States
 // ----------------------------------------------------------------------- //
 
+// Color
+
     .color                      { 
-        .hover (@color, @back: none) {
-            &.hover,
-            &:hover             { .color(@color, @back); }
+        .hover (@color: inherit, @back-color: null) {
+            &:hover             { .color(@color, @back-color); }
         }
 
-        .active (@color, @back: none) {
-            &:active            { .color(@color, @back); }
+        .active (@color: inherit, @back-color: null) {
+            &:active            { .color(@color, @back-color); }
         }
 
-        .focus (@color, @back: none) {
-            &.focus,
-            &:focus             { .color(@color, @back); }
+        .focus (@color: inherit, @back-color: null) {
+            &:focus             { .color(@color, @back-color); }
         }
 
-        .visited (@color, @back: none) {
-            &:visited           { .color(@color, @back); }
+        .visited (@color: inherit, @back-color: null) {
+            &:visited           { .color(@color, @back-color); }
         }
 
-        .hover-focus (@color, @back: none) {
-            &.hover,
+        .hover-focus (@color: inherit, @back-color: null) {
             &:hover,
-            &.focus,
-            &:focus             { .color(@color, @back); }
+            &:focus             { .color(@color, @back-color); }
         }
 
-        .normal-active (@color, @back: none) {
+        .normal-active (@color: inherit, @back-color: null) {
             &,
-            &:active            { .color(@color, @back); }
+            &:active            { .color(@color, @back-color); }
         }
     }
 
@@ -1007,31 +1005,27 @@
 
     .gradient                   { 
         .hover (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
-            &.hover,
             &:hover             { .gradient(@degrees, @start, @stop, @image); }
         }
 
-        .active (@color, @back: none) {
+        .active (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
             &:active            { .gradient(@degrees, @start, @stop, @image); }
         }
 
-        .focus (@color, @back: none) {
-            &.focus,
+        .focus (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
             &:focus             { .gradient(@degrees, @start, @stop, @image); }
         }
 
-        .visited (@color, @back: none) {
+        .visited (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
             &:visited           { .gradient(@degrees, @start, @stop, @image); }
         }
 
-        .hover-focus (@color, @back: none) {
-            &.hover,
-            &.focus,
+        .hover-focus (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
             &:hover,
             &:focus             { .gradient(@degrees, @start, @stop, @image); }
         }
 
-        .normal-active (@color, @back: none) {
+        .normal-active (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
             &,
             &:active            { .gradient(@degrees, @start, @stop, @image); }
         }

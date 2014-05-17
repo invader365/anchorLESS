@@ -3,10 +3,10 @@
 ## Mixins:
 
 00. .align (top, right, bottom, left, query);
-00. .align.left.top (left, top);
-00. .align.left.bottom (left, bottom);
-00. .align.right.top (right, top);
-00. .align.right.bottom (right, bottom);
+00. .align.left-top (left, top);
+00. .align.left-bottom (left, bottom);
+00. .align.right-top (right, top);
+00. .align.right-bottom (right, bottom);
 00. .appearance (appearance);
 00. .back (color, image, repeat, position, query);
 00. .back.attachment (attachment);
@@ -53,10 +53,10 @@
 00. .rounded.right (radius);
 00. .rounded.bottom (radius);
 00. .rounded.left (radius);
-00. .rounded.left.top (radius);
-00. .rounded.left.bottom (radius);
-00. .rounded.right.top (radius);
-00. .rounded.right.bottom (radius);
+00. .rounded.left-top (radius);
+00. .rounded.left-bottom (radius);
+00. .rounded.right-top (radius);
+00. .rounded.right-bottom (radius);
 00. .rgba (hex-color, alpha);
 00. .size (width, height, query);
 00. .scale (factor);
@@ -90,13 +90,13 @@
 00. .list-style (type, image);
 00. .pseudo-container (display);
 00. .pseudo (content, width, height);
-00. .color.normal (color, bgcolor);
-00. .color.hover (color, bgcolor);
-00. .color.active (color, bgcolor);
-00. .color.focus (color, bgcolor);
-00. .color.visited (color, bgcolor);
-00. .color.hover-focus (color, bgcolor);
-00. .color.normal-active (color, bgcolor);
+00. .color.normal (color, back-color);
+00. .color.hover (color, back-color);
+00. .color.active (color, back-color);
+00. .color.focus (color, back-color);
+00. .color.visited (color, back-color);
+00. .color.hover-focus (color, back-color);
+00. .color.normal-active (color, back-color);
 00. .gradient.normal (degrees, start, stop, image);
 00. .gradient.hover (degrees, start, stop, image);
 00. .gradient.active (degrees, start, stop, image);

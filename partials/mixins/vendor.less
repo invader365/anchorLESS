@@ -50,7 +50,7 @@
 
     .gradient {
         .directional(@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@start = null) {
-            .back(@stop, @image, repeat-x, center left);
+            .back(@stop, @image, repeat-x, center);
              background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
              background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
              background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
