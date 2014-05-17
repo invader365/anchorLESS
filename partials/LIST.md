@@ -25,9 +25,11 @@
 00. .font (font, family);
 00. .font-face (name, path);
 00. .font-size (size, query);
-00. .gradient.horizontal(left, right, image);
-00. .gradient.vertical(top, bottom, image);
-00. .gradient.directional(degrees, start, stop, image);
+00. .gradient(degrees, start, stop, image);
+00. .gradient.to-bottom(start, stop, image);
+00. .gradient.to-left(start, stop, image);
+00. .gradient.to-right(start, stop, image);
+00. .gradient.to-top(start, stop, image);
 00. .gradient.radial(inner, outer, image);
 00. .height (height, query);
 00. .highlight (highlight);
@@ -88,13 +90,20 @@
 00. .list-style (type, image);
 00. .pseudo-container (display);
 00. .pseudo (content, width, height);
-00. .state.normal (color, bgcolor, bcolor);
-00. .state.hover (color, bgcolor, bcolor);
-00. .state.active (color, bgcolor, bcolor);
-00. .state.focus (color, bgcolor, bcolor);
-00. .state.visited (color, bgcolor, bcolor);
-00. .state.hover-focus (color, bgcolor, bcolor);
-00. .state.normal-active (color, bgcolor, bcolor);
+00. .color.normal (color, bgcolor);
+00. .color.hover (color, bgcolor);
+00. .color.active (color, bgcolor);
+00. .color.focus (color, bgcolor);
+00. .color.visited (color, bgcolor);
+00. .color.hover-focus (color, bgcolor);
+00. .color.normal-active (color, bgcolor);
+00. .gradient.normal (degrees, start, stop, image);
+00. .gradient.hover (degrees, start, stop, image);
+00. .gradient.active (degrees, start, stop, image);
+00. .gradient.focus (degrees, start, stop, image);
+00. .gradient.visited (degrees, start, stop, image);
+00. .gradient.hover-focus (degrees, start, stop, image);
+00. .gradient.normal-active (degrees, start, stop, image);
 00. .table.backcolor (count, color);
 00. .table.border (width, style, color);
 00. .table.cell-border (width, style, color);
@@ -103,6 +112,7 @@
 
 ## Helpers:
 
+00. .absolute();
 00. .block();
 00. .clearfix();
 00. .ellipsis();
@@ -111,3 +121,4 @@
 00. .inline();
 00. .inline-block();
 00. .linebreak();
+00. .relative();

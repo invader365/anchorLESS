@@ -44,6 +44,10 @@
                 column-width: @width;
     }
 
+    .gradient (@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@color = null) {
+        .gradient.directional(@degrees, @start, @stop, @image);
+    }
+
     .gradient {
         .directional(@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@start = null) {
             .back(@stop, @image, repeat-x, center left);
@@ -51,11 +55,17 @@
              background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
              background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
         }
-        .horizontal(@left: white, @right: gray, @image: none) when not (@left = null) {
-            .gradient.directional(90deg, @left, @right, @image);
+        .to-bottom(@start: white, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(0deg, @start, @stop, @image);
         }
-        .vertical(@top: white, @bottom: gray, @image: none) when not (@top = null) {
-            .gradient.directional(0deg, @top, @bottom, @image);
+        .to-right(@start: white, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(90deg, @start, @stop, @image);
+        }
+        .to-top(@start: white, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(180deg, @start, @stop, @image);
+        }
+        .to-left(@start: white, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(270deg, @start, @stop, @image);
         }
         .radial(@inner: white, @outer: gray, @image: none) when not (@inner = null) {
             .back(@outer, @image, repeat-x, center);

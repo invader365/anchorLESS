@@ -68,6 +68,11 @@
         border-color: @color;
     }
 
+    .color (@color: inherit, @back: null) when not (@color = null) {
+        color: @color; 
+       .back.color(@back);
+    }
+
     .display (@display: none, @query: 0) when not (@display = null) and (@query = 0) {
         display: @display;
     }
