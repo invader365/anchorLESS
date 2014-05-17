@@ -27,12 +27,13 @@
 00. .font-size (size, query);
 00. .gradient.horizontal(left, right, image);
 00. .gradient.vertical(top, bottom, image);
-00. .gradient.directional(start, stop, degrees, image);
+00. .gradient.directional(degrees, start, stop, image);
 00. .gradient.radial(inner, outer, image);
 00. .height (height, query);
 00. .highlight (highlight);
 00. .image (image);
 00. .index (index, query);
+00. .inner-shadow (spread, color, alpha);
 00. .margin (margin, query);
 00. .max-width (width, query);
 00. .min-size (width, height, query);
@@ -57,7 +58,7 @@
 00. .rgba (hex-color, alpha);
 00. .size (width, height, query);
 00. .scale (factor);
-00. .shadow (spread, color, alpha, offset);
+00. .shadow (spread, color, alpha);
 00. .skew (x, y);
 00. .spacing (margin, padding, query);
 00. .square (size, query);

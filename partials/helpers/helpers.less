@@ -2,6 +2,10 @@
 // Helpers
 // ----------------------------------------------------------------------- //
 
+    .absolute () {
+        position: absolute;
+    }
+
     .block () {
         display: block;
         position: relative;
@@ -17,7 +21,7 @@
     }
 
     .ellipsis () { 
-        text-overflow: ellipsis;    // ie8 rendering issue
+        text-overflow: ellipsis;    // IE8 rendering issue
         white-space: nowrap; 
         overflow: hidden; 
     }
@@ -51,4 +55,8 @@
     .linebreak () {  
         margin-left: 0; 
         clear: left; 
+    }
+
+    .relative () {
+        position: relative;
     }

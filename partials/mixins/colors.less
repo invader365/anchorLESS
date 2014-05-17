@@ -1,0 +1,40 @@
+
+// Colors
+// ----------------------------------------------------------------------- //
+
+    .color (@color: inherit, @back: null) when not (@color = null) {
+        color: @color; 
+       .back.color(@back);
+    }
+
+    .color                      { 
+        .hover (@color, @back: none) {
+            &.hover,
+            &:hover             { .color(@color, @back); }
+        }
+
+        .active (@color, @back: none) {
+            &:active            { .color(@color, @back); }
+        }
+
+        .focus (@color, @back: none) {
+            &.focus,
+            &:focus             { .color(@color, @back); }
+        }
+
+        .visited (@color, @back: none) {
+            &:visited           { .color(@color, @back); }
+        }
+
+        .hover-focus (@color, @back: none) {
+            &.hover,
+            &:hover,
+            &.focus,
+            &:focus             { .color(@color, @back); }
+        }
+
+        .normal-active (@color, @back: none) {
+            &,
+            &:active            { .color(@color, @back); }
+        }
+    }

@@ -1,0 +1,39 @@
+
+// Gradients
+// ----------------------------------------------------------------------- //
+
+    .gradient (@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@color = null) {
+        .gradient.directional(@degrees, @start, @stop, @image);
+    }
+
+    .gradient                   { 
+        .hover (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
+            &.hover,
+            &:hover             { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .active (@color, @back: none) {
+            &:active            { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .focus (@color, @back: none) {
+            &.focus,
+            &:focus             { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .visited (@color, @back: none) {
+            &:visited           { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .hover-focus (@color, @back: none) {
+            &.hover,
+            &.focus,
+            &:hover,
+            &:focus             { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .normal-active (@color, @back: none) {
+            &,
+            &:active            { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+    }

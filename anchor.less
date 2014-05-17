@@ -77,27 +77,6 @@
         border-color: @color;
     }
 
-    .color (@color: none, @back: none, @border: none) when not (@color = null) and not (@color = none) and not (@back = none) and not (@border = none) {
-        color: @color; 
-        background-color: @back;
-        border-color: @border;
-    }
-
-    .color (@color: none, @back: none, @border: none) when not (@color = null) and not (@color = none) and not (@back = none) and (@border = none) {
-        color: @color; 
-        background-color: @back;
-    }
-
-    .color (@color: none, @back: none, @border: none) when not (@color = null) and not (@color = none) and (@back = none) and (@border = none) {
-        color: @color;
-    }
-
-    .color (@color: none, @back: none, @border: none) when not (@color = null) and (@color = none) and (@back = none) and (@border = none) {
-        color: inherit; 
-        background-color: transparent;
-        border-color: inherit;
-    }
-
     .display (@display: none, @query: 0) when not (@display = null) and (@query = 0) {
         display: @display;
     }
@@ -575,35 +554,23 @@
     }
 
     .gradient {
-        .horizontal(@left: white, @right: gray, @image: none) when not (@left = null) {
-            .back(@right, @image, repeat-x, top left);
-             background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@left), to(@right));      // Safari 4+, Chrome 2+
-             background-image: -webkit-linear-gradient(left, @left, @right);                        // Safari 5.1+, Chrome 10+
-             background-image:    -moz-linear-gradient(left, @left, @right);                        // Firefox 3.6+
-             background-image:      -o-linear-gradient(left, @left, @right);                        // Opera 11.10
-             background-image:         linear-gradient(to right, @left, @right);                    // IE10
-        }
-        .vertical(@top: white, @bottom: gray, @image: none) when not (@top = null) {
-            .back(@bottom, @image, repeat-x, top left);
-             background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@top), to(@bottom));      // Safari 4+, Chrome 2+
-             background-image: -webkit-linear-gradient(top, @top, @bottom);                         // Safari 5.1+, Chrome 10+
-             background-image:    -moz-linear-gradient(top, @top, @bottom);                         // Firefox 3.6+
-             background-image:      -o-linear-gradient(top, @top, @bottom);                         // Opera 11.10
-             background-image:         linear-gradient(to bottom, @top, @bottom);                   // IE10
-        }
-        .directional(@start: white, @stop: gray, @degrees: 0, @image: none) when not (@start = null) {
-            .back(@stop, @image, repeat-x, top left);
+        .directional(@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@start = null) {
+            .back(@stop, @image, repeat-x, center left);
              background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
              background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
-             background-image:      -o-linear-gradient(@degrees, @start, @stop);                     // Opera 11.10
              background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
+        }
+        .horizontal(@left: white, @right: gray, @image: none) when not (@left = null) {
+            .gradient.directional(90deg, @left, @right, @image);
+        }
+        .vertical(@top: white, @bottom: gray, @image: none) when not (@top = null) {
+            .gradient.directional(0deg, @top, @bottom, @image);
         }
         .radial(@inner: white, @outer: gray, @image: none) when not (@inner = null) {
             .back(@outer, @image, repeat-x, center);
              background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer));// Chrome, Safari 4+
              background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Safari 5.1+, Chrome 10+
              background-image:    -moz-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Firefox 3.6+
-             background-image:      -o-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Opera 11.10
              background-image:         radial-gradient(ellipse at center, @inner 0%, @outer 100%); // W3C
         }
     }
@@ -614,7 +581,13 @@
                 tap-highlight-color: @highlight;
     }
 
-    .overflow (@x: hidden, @y: hidden) when not (@x = null) {
+    .inner-shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = null) {
+        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+        -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+    }
+
+    .overflow (@x: visible, @y: visible) when not (@x = null) {
         overflow-x: @x;
         overflow-y: @y;
         -webkit-overflow-scrolling: touch;
@@ -690,17 +663,16 @@
                 transform: scale(@factor);
     }
 
-    .shadow (@spread: 0 0, @color: gray, @alpha: 0.5, @offset: '') when not (@spread = null) {
+    .shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = null) {
         @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
-        -webkit-box-shadow: @spread @hsla ~"@{offset}";     // Android 2.3+, iOS 4.0.2-4.2
-                box-shadow: @spread @hsla ~"@{offset}";     // Chrome 6+, Firefox 4+, IE 9
+        -webkit-box-shadow: @spread @hsla;     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
     }
 
     .skew (@x: 0, @y: 0) when not (@x = null) {
         -webkit-transform: skew(@x, @y);
            -moz-transform: skew(@x, @y);
             -ms-transform: skewX(@x) skewY(@y);
-             -o-transform: skew(@x, @y);
                 transform: skew(@x, @y);
     }
 
@@ -708,7 +680,6 @@
         -webkit-transform: @transform;
            -moz-transform: @transform;
             -ms-transform: @transform;
-             -o-transform: @transform;
                 transform: @transform;
     }
 
@@ -736,14 +707,12 @@
         -webkit-transform: translate(@x, @y);
            -moz-transform: translate(@x, @y);
             -ms-transform: translate(@x, @y);
-             -o-transform: translate(@x, @y);
                 transform: translate(@x, @y);
     }
 
     .translate3d (@x: 0, @y: 0, @z: 0) when not (@x = null) {
         -webkit-transform: translate3d(@x, @y, @z);
            -moz-transform: translate3d(@x, @y, @z);
-             -o-transform: translate3d(@x, @y, @z);
                 transform: translate3d(@x, @y, @z);
     }
 
@@ -752,7 +721,7 @@
            -moz-user-select: @select;
             -ms-user-select: @select;
     }
-
+    
 //
 // ii. Helpers 
 // ----------------------------------------------------------------------- //
@@ -784,6 +753,10 @@
 
 // Helpers
 // ----------------------------------------------------------------------- //
+
+    .absolute () {
+        position: absolute;
+    }
 
     .block () {
         display: block;
@@ -834,6 +807,10 @@
     .linebreak () {  
         margin-left: 0; 
         clear: left; 
+    }
+
+    .relative () {
+        position: relative;
     }
 
 // Filters
@@ -976,47 +953,85 @@
         vertical-align: middle;
     }
 
-// States
+// Color
 // ----------------------------------------------------------------------- //
 
-    .state                      {
-        .normal (@color, @back: none, @border: transparent) {
-            &,
-            &:link              { .color(@color, @back, @border);  }
-        }
+    .color (@color: inherit, @back: null) when not (@color = null) {
+        color: @color; 
+       .back.color(@back);
+    }
 
-        .hover (@color, @back: none, @border: transparent) {
+    .color                      { 
+        .hover (@color, @back: none) {
             &.hover,
-            &:hover             { .color(@color, @back, @border); }
+            &:hover             { .color(@color, @back); }
         }
 
-        .active (@color, @back: none, @border: transparent) {
-            &:active            { .color(@color, @back, @border); }
+        .active (@color, @back: none) {
+            &:active            { .color(@color, @back); }
         }
 
-        .focus (@color, @back: none, @border: transparent) {
+        .focus (@color, @back: none) {
             &.focus,
-            &:focus             { .color(@color, @back, @border); }
+            &:focus             { .color(@color, @back); }
         }
 
-        .visited (@color, @back: none, @border: transparent) {
-            &:visited           { .color(@color, @back, @border); }
+        .visited (@color, @back: none) {
+            &:visited           { .color(@color, @back); }
         }
 
-        .hover-focus (@color, @back: none, @border: transparent) {
+        .hover-focus (@color, @back: none) {
             &.hover,
             &:hover,
             &.focus,
-            &:focus             { .color(@color, @back, @border); }
+            &:focus             { .color(@color, @back); }
         }
 
-        .normal-active (@color, @back: none, @border: transparent) {
+        .normal-active (@color, @back: none) {
             &,
-            &:link,
-            &:active            { .color(@color, @back, @border); }
+            &:active            { .color(@color, @back); }
         }
     }
 
+// Gradients
+// ----------------------------------------------------------------------- //
+
+    .gradient (@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@color = null) {
+        .gradient.directional(@degrees, @start, @stop, @image);
+    }
+
+    .gradient                   { 
+        .hover (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
+            &.hover,
+            &:hover             { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .active (@color, @back: none) {
+            &:active            { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .focus (@color, @back: none) {
+            &.focus,
+            &:focus             { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .visited (@color, @back: none) {
+            &:visited           { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .hover-focus (@color, @back: none) {
+            &.hover,
+            &.focus,
+            &:hover,
+            &:focus             { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+
+        .normal-active (@color, @back: none) {
+            &,
+            &:active            { .gradient.directional(@degrees, @start, @stop, @image); }
+        }
+    }
+    
 // Tables
 // ----------------------------------------------------------------------- //
 

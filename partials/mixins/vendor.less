@@ -45,35 +45,23 @@
     }
 
     .gradient {
-        .horizontal(@left: white, @right: gray, @image: none) when not (@left = null) {
-            .back(@right, @image, repeat-x, top left);
-             background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@left), to(@right));      // Safari 4+, Chrome 2+
-             background-image: -webkit-linear-gradient(left, @left, @right);                        // Safari 5.1+, Chrome 10+
-             background-image:    -moz-linear-gradient(left, @left, @right);                        // Firefox 3.6+
-             background-image:      -o-linear-gradient(left, @left, @right);                        // Opera 11.10
-             background-image:         linear-gradient(to right, @left, @right);                    // IE10
-        }
-        .vertical(@top: white, @bottom: gray, @image: none) when not (@top = null) {
-            .back(@bottom, @image, repeat-x, top left);
-             background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@top), to(@bottom));      // Safari 4+, Chrome 2+
-             background-image: -webkit-linear-gradient(top, @top, @bottom);                         // Safari 5.1+, Chrome 10+
-             background-image:    -moz-linear-gradient(top, @top, @bottom);                         // Firefox 3.6+
-             background-image:      -o-linear-gradient(top, @top, @bottom);                         // Opera 11.10
-             background-image:         linear-gradient(to bottom, @top, @bottom);                   // IE10
-        }
-        .directional(@start: white, @stop: gray, @degrees: 0, @image: none) when not (@start = null) {
-            .back(@stop, @image, repeat-x, top left);
+        .directional(@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@start = null) {
+            .back(@stop, @image, repeat-x, center left);
              background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
              background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
-             background-image:      -o-linear-gradient(@degrees, @start, @stop);                     // Opera 11.10
              background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
+        }
+        .horizontal(@left: white, @right: gray, @image: none) when not (@left = null) {
+            .gradient.directional(90deg, @left, @right, @image);
+        }
+        .vertical(@top: white, @bottom: gray, @image: none) when not (@top = null) {
+            .gradient.directional(0deg, @top, @bottom, @image);
         }
         .radial(@inner: white, @outer: gray, @image: none) when not (@inner = null) {
             .back(@outer, @image, repeat-x, center);
              background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer));// Chrome, Safari 4+
              background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Safari 5.1+, Chrome 10+
              background-image:    -moz-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Firefox 3.6+
-             background-image:      -o-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Opera 11.10
              background-image:         radial-gradient(ellipse at center, @inner 0%, @outer 100%); // W3C
         }
     }
@@ -84,7 +72,13 @@
                 tap-highlight-color: @highlight;
     }
 
-    .overflow (@x: hidden, @y: hidden) when not (@x = null) {
+    .inner-shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = null) {
+        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+        -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+    }
+
+    .overflow (@x: visible, @y: visible) when not (@x = null) {
         overflow-x: @x;
         overflow-y: @y;
         -webkit-overflow-scrolling: touch;
@@ -160,17 +154,16 @@
                 transform: scale(@factor);
     }
 
-    .shadow (@spread: 0 0, @color: gray, @alpha: 0.5, @offset: '') when not (@spread = null) {
+    .shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = null) {
         @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
-        -webkit-box-shadow: @spread @hsla ~"@{offset}";     // Android 2.3+, iOS 4.0.2-4.2
-                box-shadow: @spread @hsla ~"@{offset}";     // Chrome 6+, Firefox 4+, IE 9
+        -webkit-box-shadow: @spread @hsla;     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
     }
 
     .skew (@x: 0, @y: 0) when not (@x = null) {
         -webkit-transform: skew(@x, @y);
            -moz-transform: skew(@x, @y);
             -ms-transform: skewX(@x) skewY(@y);
-             -o-transform: skew(@x, @y);
                 transform: skew(@x, @y);
     }
 
@@ -178,7 +171,6 @@
         -webkit-transform: @transform;
            -moz-transform: @transform;
             -ms-transform: @transform;
-             -o-transform: @transform;
                 transform: @transform;
     }
 
@@ -206,14 +198,12 @@
         -webkit-transform: translate(@x, @y);
            -moz-transform: translate(@x, @y);
             -ms-transform: translate(@x, @y);
-             -o-transform: translate(@x, @y);
                 transform: translate(@x, @y);
     }
 
     .translate3d (@x: 0, @y: 0, @z: 0) when not (@x = null) {
         -webkit-transform: translate3d(@x, @y, @z);
            -moz-transform: translate3d(@x, @y, @z);
-             -o-transform: translate3d(@x, @y, @z);
                 transform: translate3d(@x, @y, @z);
     }
 

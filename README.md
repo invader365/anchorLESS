@@ -39,7 +39,7 @@ Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
 00. .width (width, query);
 00. ..
 
-See the **[full list](source/GIST.md)**
+See the **[full list](partials/LIST.md)**
   
 ## Usage
 
