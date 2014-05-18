@@ -42,7 +42,7 @@
 00. .perspective(perspective) {
 00. .placeholder (color);
 00. .position (position, query);
-00. .position.full (position, top, right, bottom, left);
+00. .position.all (position, top, right, bottom, left);
 00. .position.left-top (position, left, top);
 00. .position.left-bottom (position, left, bottom);
 00. .position.right-top (position, right, top);

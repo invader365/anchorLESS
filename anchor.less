@@ -162,29 +162,29 @@
     }
 
     .position {
-        .full (@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto) when not (@position = null) {
+        .all (@position: static, @top: auto, @right: auto, @bottom: auto, @left: auto) when not (@position = null) {
             position: @position;
             top: @top; 
             right: @right;
             bottom: @bottom;
             left: @left;
         }
-        .left-top (@position: relative, @left: auto, @top: auto) when not (@position = null) {
+        .left-top (@position: static, @left: auto, @top: auto) when not (@position = null) {
             position: @position;
             left: @left;
             top: @top; 
         }
-        .left-bottom (@position: relative, @left: auto, @bottom: auto) when not (@position = null) {
+        .left-bottom (@position: static, @left: auto, @bottom: auto) when not (@position = null) {
             position: @position;
             left: @left;
             bottom: @bottom; 
         }
-        .right-top (@position: relative, @right: auto, @top: auto) when not (@position = null) {
+        .right-top (@position: static, @right: auto, @top: auto) when not (@position = null) {
             position: @position;
             right: @right;
             top: @top; 
         }
-        .right-bottom (@position: relative, @right: auto, @bottom: auto) when not (@position = null) {
+        .right-bottom (@position: static, @right: auto, @bottom: auto) when not (@position = null) {
             position: @position;
             right: @right; 
             bottom: @bottom;
@@ -307,6 +307,7 @@
     .position (@var) when (@var = null) {}
 
     .position {
+        .all          (@var) when (@var = null) {}
         .left-top     (@var) when (@var = null) {}
         .left-bottom  (@var) when (@var = null) {}
         .right-top    (@var) when (@var = null) {}
@@ -1016,7 +1017,7 @@
     .pseudo-container (@display: inline-block) {
         display: @display;
         position: relative; 
-        overflow: visible;          // overflow ie8/9
+        overflow: visible;          // overflow IE8/9
     }
 
     .pseudo (@content: '', @width: auto, @height: auto) {
