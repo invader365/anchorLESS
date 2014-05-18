@@ -162,6 +162,13 @@
     }
 
     .position {
+        .full (@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto) when not (@position = null) {
+            position: @position;
+            top: @top; 
+            right: @right;
+            bottom: @bottom;
+            left: @left;
+        }
         .left-top (@position: relative, @left: auto, @top: auto) when not (@position = null) {
             position: @position;
             left: @left;
