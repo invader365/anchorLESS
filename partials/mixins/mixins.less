@@ -9,25 +9,6 @@
         left: @left;
     }
 
-    .align {
-        .left-top (@left: auto, @top: auto) when not (@left = null) {
-            left: @left;
-            top: @top; 
-        }
-        .left-bottom (@left: auto, @bottom: auto) when not (@left = null) {
-            left: @left;
-            bottom: @bottom; 
-        }
-        .right-top (@right: auto, @top: auto) when not (@right = null) {
-            right: @right;
-            top: @top; 
-        }
-        .right-bottom (@right: auto, @bottom: auto) when not (@right = null) {
-            right: @right; 
-            bottom: @bottom;
-        }
-    }
-
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = null) and (@image = none) and (@query = 0) {
         background: @color none @repeat @position;
     }
@@ -150,6 +131,29 @@
 
     .position (@position: static, @query: 0) when not (@position = null) and (@query = 0) {
         position: @position;
+    }
+
+    .position {
+        .left-top (@position: relative, @left: auto, @top: auto) when not (@position = null) {
+            position: @position;
+            left: @left;
+            top: @top; 
+        }
+        .left-bottom (@position: relative, @left: auto, @bottom: auto) when not (@position = null) {
+            position: @position;
+            left: @left;
+            bottom: @bottom; 
+        }
+        .right-top (@position: relative, @right: auto, @top: auto) when not (@position = null) {
+            position: @position;
+            right: @right;
+            top: @top; 
+        }
+        .right-bottom (@position: relative, @right: auto, @bottom: auto) when not (@position = null) {
+            position: @position;
+            right: @right; 
+            bottom: @bottom;
+        }
     }
 
     .resize (@direction: none) when not (@direction = null) {

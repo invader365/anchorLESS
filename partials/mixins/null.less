@@ -4,13 +4,6 @@
 
     .align (@var) when (@var = null) {}
 
-    .align {
-        .left-top     (@var) when (@var = null) {}
-        .left-bottom  (@var) when (@var = null) {}
-        .right-top    (@var) when (@var = null) {}
-        .right-bottom (@var) when (@var = null) {}
-    }
-
     .appearance (@var) when (@var = null) {}
 
     .back (@var) when (@var = null) {}
@@ -81,6 +74,13 @@
     .placeholder (@var) when (@var = null) {}
 
     .position (@var) when (@var = null) {}
+
+    .position {
+        .left-top     (@var) when (@var = null) {}
+        .left-bottom  (@var) when (@var = null) {}
+        .right-top    (@var) when (@var = null) {}
+        .right-bottom (@var) when (@var = null) {}
+    }
 
     .resize (@var) when (@var = null) {}
 

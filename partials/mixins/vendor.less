@@ -185,29 +185,29 @@
     }
 
     .transition (@property: all, @duration: 0s, @function: ease, @delay: 0s) when not (@property = null) {
-         -webkit-transition: @property @duration @function @delay;
-                 transition: @property @duration @function @delay;
+        -webkit-transition: @property @duration @function @delay;
+                transition: @property @duration @function @delay;
     }
 
     .transitions (@first: none, @second: none) when not (@first = null) and not (@first = none) and not (@second = none) {
-         -webkit-transition: @first, @second;
-                 transition: @first, @second;
+        -webkit-transition: @first, @second;
+                transition: @first, @second;
     }
 
     .transitions (@first: none, @second: none) when not (@first = null) and not (@first = none) and (@second = none) {
-         -webkit-transition: @first;
-                 transition: @first;
+        -webkit-transition: @first;
+                transition: @first;
     }
 
     .transitions (@first: none, @second: none) when not (@first = null) and (@first = none) and (@second = none) {
-         -webkit-transition: all 0s ease 0s;
-                 transition: all 0s ease 0s;
+        -webkit-transition: all 0s ease 0s;
+                transition: all 0s ease 0s;
     }
 
     .translate (@x: 0, @y: 0) when not (@x = null) {
         -webkit-transform: translate(@x, @y);
            -moz-transform: translate(@x, @y);
-            -ms-transform: translate(@x, @y);
+            -ms-transform: translate(@x, @y);   
                 transform: translate(@x, @y);
     }
 
