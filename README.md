@@ -7,7 +7,7 @@ Anchor LESS is a LESS/CSS library build to save time. Highlights:
 - Harder. The most extensive LESS mixins library!
 - Better. The best complement to your prefered html framework.
 - Faster. Less.js build-in functions for faster performance.
-- Stronger. Responsive mixins (mobile-first approach), assets and helpers.
+- Stronger. Responsive mixins (mobile-first approach), assets and utilities.
 
 ## Install
 ```css
@@ -21,13 +21,12 @@ Anchor LESS is a LESS/CSS library build to save time. Highlights:
 
 ## Mixins:
 
-Anchor LESS comes with a set of mixins, assets and helpers. Common mixins:
+Anchor LESS comes with a set of mixins, assets and utilities. Common mixins:
 
-00. .align (top, right, bottom, left, query);
 00. .back (color, image, repeat, position, query);
 00. .color (color, back, border);
 00. .font (font, family);
-00. .gradient (degrees, start, stop, image);
+00. .gradient (start, stop, degrees, image);
 00. .image (image);
 00. .opacity (opacity, query);
 00. .pseudo (content, width, height)

@@ -2,7 +2,6 @@
 
 ## Mixins:
 
-00. .align (top, right, bottom, left, query);
 00. .appearance (appearance);
 00. .back (color, image, repeat, position, query);
 00. .back.attachment (attachment);
@@ -21,7 +20,7 @@
 00. .font (font, family);
 00. .font-face (name, path);
 00. .font-size (size, query);
-00. .gradient(degrees, start, stop, image);
+00. .gradient(start, stop, degrees, image);
 00. .gradient.to-bottom(start, stop, image);
 00. .gradient.to-left(start, stop, image);
 00. .gradient.to-right(start, stop, image);
@@ -76,7 +75,7 @@
 00. .user-select (select);
 00. .width (width, query);
 
-## Assets:
+## Utilities:
 
 00. .arrow.top (width, color);
 00. .arrow.bottom (width, color);
@@ -85,7 +84,7 @@
 00. .center-block (width, query)
 00. .center-inline (display, query)
 00. .center-vertical (height)
-00. .offset (padding, query)
+00. .offset-block (padding, query)
 00. .reset-center (margin-left, query)
 00. .reset-vertical (margin-top, query)
 00. .list-style (type, image);
@@ -98,13 +97,13 @@
 00. .color.visited (color, back-color);
 00. .color.hover-focus (color, back-color);
 00. .color.normal-active (color, back-color);
-00. .gradient.normal (degrees, start, stop, image);
-00. .gradient.hover (degrees, start, stop, image);
-00. .gradient.active (degrees, start, stop, image);
-00. .gradient.focus (degrees, start, stop, image);
-00. .gradient.visited (degrees, start, stop, image);
-00. .gradient.hover-focus (degrees, start, stop, image);
-00. .gradient.normal-active (degrees, start, stop, image);
+00. .gradient.normal (start, stop, degrees, image);
+00. .gradient.hover (start, stop, degrees, image);
+00. .gradient.active (start, stop, degrees, image);
+00. .gradient.focus (start, stop, degrees, image);
+00. .gradient.visited (start, stop, degrees, image);
+00. .gradient.hover-focus (start, stop, degrees, image);
+00. .gradient.normal-active (start, stop, degrees, image);
 00. .table.backcolor (count, color);
 00. .table.border (width, style, color);
 00. .table.cell-border (width, style, color);
@@ -113,13 +112,11 @@
 
 ## Helpers:
 
-00. .absolute();
 00. .block();
 00. .clearfix();
 00. .ellipsis();
-00. .hidetext();
+00. .hide-text();
 00. .hyphens();
 00. .inline();
 00. .inline-block();
 00. .linebreak();
-00. .relative();

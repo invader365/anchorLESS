@@ -35,29 +35,29 @@
 // Gradient
 
     .gradient                   { 
-        .hover (@degrees: 0deg, @start: transparent, @stop: gray, @image: none) {
-            &:hover             { .gradient(@degrees, @start, @stop, @image); }
+        .hover (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+            &:hover             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .active (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
-            &:active            { .gradient(@degrees, @start, @stop, @image); }
+        .active (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+            &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .focus (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
-            &:focus             { .gradient(@degrees, @start, @stop, @image); }
+        .focus (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+            &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .visited (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
-            &:visited           { .gradient(@degrees, @start, @stop, @image); }
+        .visited (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+            &:visited           { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .hover-focus (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
+        .hover-focus (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
             &:hover,
-            &:focus             { .gradient(@degrees, @start, @stop, @image); }
+            &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .normal-active (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
+        .normal-active (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
             &,
-            &:active            { .gradient(@degrees, @start, @stop, @image); }
+            &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
     }

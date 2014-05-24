@@ -44,30 +44,30 @@
                 column-width: @width;
     }
 
-    .gradient (@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@color = null) {
-        .gradient.directional(@degrees, @start, @stop, @image);
+    .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = null) {
+        .gradient.directional(@start, @stop, @degrees, @image);
     }
 
     .gradient {
-        .directional(@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@start = null) {
-            .back(@stop, @image, repeat-x, center);
+        .directional(@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = null) {
+            .back(@start, @image, repeat-x, center);
              background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
              background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
              background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
         }
-        .to-bottom(@start: white, @stop: gray, @image: none) when not (@start = null) {
-            .gradient.directional(0deg, @start, @stop, @image);
+        .to-bottom(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(@start, @stop, 180deg, @image);
         }
-        .to-right(@start: white, @stop: gray, @image: none) when not (@start = null) {
-            .gradient.directional(90deg, @start, @stop, @image);
+        .to-right(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(@start, @stop, 270deg, @image);
         }
-        .to-top(@start: white, @stop: gray, @image: none) when not (@start = null) {
-            .gradient.directional(180deg, @start, @stop, @image);
+        .to-top(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(@start, @stop, 0deg, @image);
         }
-        .to-left(@start: white, @stop: gray, @image: none) when not (@start = null) {
-            .gradient.directional(270deg, @start, @stop, @image);
+        .to-left(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(@start, @stop, 90deg, @image);
         }
-        .radial(@inner: white, @outer: gray, @image: none) when not (@inner = null) {
+        .radial(@inner: transparent, @outer: gray, @image: none) when not (@inner = null) {
             .back(@outer, @image, repeat-x, center);
              background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer));// Chrome, Safari 4+
              background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Safari 5.1+, Chrome 10+

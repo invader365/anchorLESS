@@ -11,32 +11,6 @@
 // i. Mixins
 // ----------------------------------------------------------------------- //
 
-    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = null) and (@query = 0) {
-        top: @top;
-        right: @right;
-        bottom: @bottom;
-        left: @left;
-    }
-
-    .align {
-        .left-top (@left: auto, @top: auto) when not (@left = null) {
-            left: @left;
-            top: @top; 
-        }
-        .left-bottom (@left: auto, @bottom: auto) when not (@left = null) {
-            left: @left;
-            bottom: @bottom; 
-        }
-        .right-top (@right: auto, @top: auto) when not (@right = null) {
-            right: @right;
-            top: @top; 
-        }
-        .right-bottom (@right: auto, @bottom: auto) when not (@right = null) {
-            right: @right; 
-            bottom: @bottom;
-        }
-    }
-
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = null) and (@image = none) and (@query = 0) {
         background: @color none @repeat @position;
     }
@@ -235,8 +209,6 @@
 // Nulls
 // ----------------------------------------------------------------------- //
 
-    .align (@var) when (@var = null) {}
-
     .appearance (@var) when (@var = null) {}
 
     .back (@var) when (@var = null) {}
@@ -377,12 +349,6 @@
 
 // Queries
 // ----------------------------------------------------------------------- //
-
-    .align (@top: auto, @left: auto, @bottom: auto, @right: auto, @position: absolute, @query: 0) when (@query > 0) {
-        @media all and (min-width: @query) {
-            .align (@top, @left, @bottom, @right, @position);
-        } 
-    }
 
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when (@query > 0) { 
         @media all and (min-width: @query) {
@@ -591,30 +557,30 @@
                 column-width: @width;
     }
 
-    .gradient (@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@color = null) {
-        .gradient.directional(@degrees, @start, @stop, @image);
+    .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = null) {
+        .gradient.directional(@start, @stop, @degrees, @image);
     }
 
     .gradient {
-        .directional(@degrees: 0deg, @start: white, @stop: gray, @image: none) when not (@start = null) {
-            .back(@stop, @image, repeat-x, center);
+        .directional(@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = null) {
+            .back(@start, @image, repeat-x, center);
              background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
              background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
              background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
         }
-        .to-bottom(@start: white, @stop: gray, @image: none) when not (@start = null) {
-            .gradient.directional(0deg, @start, @stop, @image);
+        .to-bottom(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(@start, @stop, 180deg, @image);
         }
-        .to-right(@start: white, @stop: gray, @image: none) when not (@start = null) {
-            .gradient.directional(90deg, @start, @stop, @image);
+        .to-right(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(@start, @stop, 270deg, @image);
         }
-        .to-top(@start: white, @stop: gray, @image: none) when not (@start = null) {
-            .gradient.directional(180deg, @start, @stop, @image);
+        .to-top(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(@start, @stop, 0deg, @image);
         }
-        .to-left(@start: white, @stop: gray, @image: none) when not (@start = null) {
-            .gradient.directional(270deg, @start, @stop, @image);
+        .to-left(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+            .gradient.directional(@start, @stop, 90deg, @image);
         }
-        .radial(@inner: white, @outer: gray, @image: none) when not (@inner = null) {
+        .radial(@inner: transparent, @outer: gray, @image: none) when not (@inner = null) {
             .back(@outer, @image, repeat-x, center);
              background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer));// Chrome, Safari 4+
              background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Safari 5.1+, Chrome 10+
@@ -771,7 +737,7 @@
     }
     
 //
-// ii. Helpers 
+// ii. Utilities 
 // ----------------------------------------------------------------------- //
 
     @d                      :   e('/');         // divider escape
@@ -834,10 +800,6 @@
 // Helpers
 // ----------------------------------------------------------------------- //
 
-    .absolute () {
-        position: absolute;
-    }
-
     .block () {
         display: block;
         position: relative;
@@ -858,13 +820,13 @@
         overflow: hidden; 
     }
 
-    .hidetext () { 
+    .hide-text () { 
         text-indent: -9999px; 
         text-align: left;
         overflow: hidden; 
     }
 
-    .hyphens () {
+    .hyphens () {                   // When available
         -ms-word-break: break-all;
             word-break: break-all;
             word-break: break-word;
@@ -884,13 +846,9 @@
         float: none;
     }
 
-    .linebreak () {  
+    .line-break () {  
         margin-left: 0; 
         clear: left; 
-    }
-
-    .relative () {
-        position: relative;
     }
 
 // Filters
@@ -903,7 +861,7 @@
 // ----------------------------------------------------------------------- //
 
     @to-bottom-gray15  : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
-    @x-image            : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
+    @x-black           : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
 
 
 //
@@ -963,7 +921,7 @@
         top: 50%;
     }
 
-    .offset (@padding: 0, @query: 0) when (@query = 0) {
+    .offset-block (@padding: 0, @query: 0) when (@query = 0) {
         @offset: 100% * @padding / (100% - @padding);
         margin-left: round(-@offset, 2);
         padding-left: round(@offset, 2);
@@ -1064,32 +1022,33 @@
 // Gradient
 
     .gradient                   { 
-        .hover (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
-            &:hover             { .gradient(@degrees, @start, @stop, @image); }
+        .hover (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+            &:hover             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .active (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
-            &:active            { .gradient(@degrees, @start, @stop, @image); }
+        .active (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+            &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .focus (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
-            &:focus             { .gradient(@degrees, @start, @stop, @image); }
+        .focus (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+            &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .visited (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
-            &:visited           { .gradient(@degrees, @start, @stop, @image); }
+        .visited (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+            &:visited           { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .hover-focus (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
+        .hover-focus (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
             &:hover,
-            &:focus             { .gradient(@degrees, @start, @stop, @image); }
+            &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .normal-active (@degrees: 0deg, @start: white, @stop: gray, @image: none) {
+        .normal-active (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
             &,
-            &:active            { .gradient(@degrees, @start, @stop, @image); }
+            &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
     }
+
     
 // Tables
 // ----------------------------------------------------------------------- //
@@ -1112,7 +1071,7 @@
             & tfoot td          { padding: @padding; }
         }
         .rounded (@radius: none) when not (@radius = null) {  
-            &                                       { .rename-rounded(@radius); }
+            &                                       { .re-rounded(@radius); }
             & thead tr:first-child th:first-child   { .rounded.left-top(@radius); }
             & thead tr:first-child th:last-child    { .rounded.right-top(@radius); }
             & tbody tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
@@ -1120,6 +1079,6 @@
         }
     }
 
-    .rename-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack
+    .re-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack
 
     

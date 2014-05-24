@@ -19,7 +19,7 @@
         top: 50%;
     }
 
-    .offset (@padding: 0, @query: 0) when (@query = 0) {
+    .offset-block (@padding: 0, @query: 0) when (@query = 0) {
         @offset: 100% * @padding / (100% - @padding);
         margin-left: round(-@offset, 2);
         padding-left: round(@offset, 2);

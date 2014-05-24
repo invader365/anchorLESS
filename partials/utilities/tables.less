@@ -20,7 +20,7 @@
             & tfoot td          { padding: @padding; }
         }
         .rounded (@radius: none) when not (@radius = null) {  
-            &                                       { .rename-rounded(@radius); }
+            &                                       { .re-rounded(@radius); }
             & thead tr:first-child th:first-child   { .rounded.left-top(@radius); }
             & thead tr:first-child th:last-child    { .rounded.right-top(@radius); }
             & tbody tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
@@ -28,4 +28,4 @@
         }
     }
 
-    .rename-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack
+    .re-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack
