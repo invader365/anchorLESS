@@ -17,7 +17,7 @@
         .color (@color: transparent) when not (@color = null) {
             background-color: @color; 
         }
-        .clip (@clip: border) when not (@color = null) {
+        .clip (@clip: border) when not (@clip = null) {
             .background-clip(@clip); 
         }
         .position (@position: 0 0) when not (@position = null) { 
@@ -26,7 +26,7 @@
         .repeat (@repeat: repeat) when not (@repeat = null) { 
             background-repeat: @repeat; 
         }
-        .size (@size: auto) when not (@repeat = null) { 
+        .size (@size: auto) when not (@size = null) { 
            .background-size(@size);
         }
     }
@@ -57,17 +57,17 @@
     
     .font (@font: normal 1em, @family: inherit) when not (@font = null) and (@family = inherit) {
         font: @font a;
-        font-family: inherit; // font shortcut dont allow inherit
+        font-family: inherit;       // font shortcut not supported inherit
     }
 
     .font (@font: normal 1em, @family: inherit) when not (@font = null) and not (@family = inherit) {
         font: @font @family;
     }
 
-    .font-face (@name: a, @path: 'foo') when not (@name = null) {
+    .font-face (@name: a, @path: '/') when not (@name = null) {
         @font-face {
             font-family: @name;
-            src: url('@{path}.eot');                                        // ie9
+            src: url('@{path}.eot');                                        // IE9
             src: url('@{path}.eot?#iefix') format('embedded-opentype'),     
                  url("@{path}.woff") format("woff"),
                  url("@{path}.ttf") format("truetype"),
@@ -158,7 +158,7 @@
 
     .resize (@direction: none) when not (@direction = null) {
         resize: @direction;
-        overflow: auto; // Safari fix
+        overflow: auto;         // Safari fix
     }
 
     .rgba (@hex-color: #fff, @alpha: 0.5) when not (@hex-color = null) { 

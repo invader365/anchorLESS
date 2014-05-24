@@ -37,10 +37,12 @@
     .gradient (@var) when (@var = null) {}
 
     .gradient {
-        .to-bottom (@var) when (@var = null) {}
-        .to-left   (@var) when (@var = null) {}
-        .to-right  (@var) when (@var = null) {}
-        .to-top    (@var) when (@var = null) {}
+        .directional (@var) when (@var = null) {}
+        .to-bottom   (@var) when (@var = null) {}
+        .to-left     (@var) when (@var = null) {}
+        .to-right    (@var) when (@var = null) {}
+        .to-top      (@var) when (@var = null) {}
+        .radial      (@var) when (@var = null) {}
     }
 
     .height (@var) when (@var = null) {}
@@ -115,7 +117,7 @@
     .strong-div-width (@var) when (@var = null) {}
 
     .table {
-        .backcolor   (@var) when (@var = null) {}
+        .back-color  (@var) when (@var = null) {}
         .border      (@var) when (@var = null) {}
         .cell-border (@var) when (@var = null) {}
         .padding     (@var) when (@var = null) {}

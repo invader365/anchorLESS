@@ -1,15 +1,15 @@
-// ----------------------------------------------------------------------- //
-//
-// Anchor LESS - A LESS mixins library
-// https://github.com/invader365/anchorLESS
-// 
-// Licensed under the Apache 2.0 License.
-//
-// ----------------------------------------------------------------------- //
+/*  --------------------------------------------------
 
-//
-// i. Mixins
-// ----------------------------------------------------------------------- //
+    Anchor LESS - A LESS mixins library
+
+    https://github.com/invader365/anchorLESS
+    Licensed under the Apache License v2.0
+
+    --------------------------------------------------  */
+
+//  -----------------------------------------------------------------------
+//  i. Mixins
+//  ----------------------------------------------------------------------- //
 
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = null) and (@image = none) and (@query = 0) {
         background: @color none @repeat @position;
@@ -26,7 +26,7 @@
         .color (@color: transparent) when not (@color = null) {
             background-color: @color; 
         }
-        .clip (@clip: border) when not (@color = null) {
+        .clip (@clip: border) when not (@clip = null) {
             .background-clip(@clip); 
         }
         .position (@position: 0 0) when not (@position = null) { 
@@ -35,7 +35,7 @@
         .repeat (@repeat: repeat) when not (@repeat = null) { 
             background-repeat: @repeat; 
         }
-        .size (@size: auto) when not (@repeat = null) { 
+        .size (@size: auto) when not (@size = null) { 
            .background-size(@size);
         }
     }
@@ -66,17 +66,17 @@
     
     .font (@font: normal 1em, @family: inherit) when not (@font = null) and (@family = inherit) {
         font: @font a;
-        font-family: inherit; // font shortcut dont allow inherit
+        font-family: inherit;       // font shortcut not supported inherit
     }
 
     .font (@font: normal 1em, @family: inherit) when not (@font = null) and not (@family = inherit) {
         font: @font @family;
     }
 
-    .font-face (@name: a, @path: 'foo') when not (@name = null) {
+    .font-face (@name: a, @path: '/') when not (@name = null) {
         @font-face {
             font-family: @name;
-            src: url('@{path}.eot');                                        // ie9
+            src: url('@{path}.eot');                                        // IE9
             src: url('@{path}.eot?#iefix') format('embedded-opentype'),     
                  url("@{path}.woff") format("woff"),
                  url("@{path}.ttf") format("truetype"),
@@ -167,7 +167,7 @@
 
     .resize (@direction: none) when not (@direction = null) {
         resize: @direction;
-        overflow: auto; // Safari fix
+        overflow: auto;         // Safari fix
     }
 
     .rgba (@hex-color: #fff, @alpha: 0.5) when not (@hex-color = null) { 
@@ -206,8 +206,8 @@
         width: @width;
     }
 
-// Nulls
-// ----------------------------------------------------------------------- //
+//  Nulls
+//  ----------------------------------------------------------------------- //
 
     .appearance (@var) when (@var = null) {}
 
@@ -244,10 +244,12 @@
     .gradient (@var) when (@var = null) {}
 
     .gradient {
-        .to-bottom (@var) when (@var = null) {}
-        .to-left   (@var) when (@var = null) {}
-        .to-right  (@var) when (@var = null) {}
-        .to-top    (@var) when (@var = null) {}
+        .directional (@var) when (@var = null) {}
+        .to-bottom   (@var) when (@var = null) {}
+        .to-left     (@var) when (@var = null) {}
+        .to-right    (@var) when (@var = null) {}
+        .to-top      (@var) when (@var = null) {}
+        .radial      (@var) when (@var = null) {}
     }
 
     .height (@var) when (@var = null) {}
@@ -320,7 +322,7 @@
     .strong-div-width (@var) when (@var = null) {}
 
     .table {
-        .backcolor   (@var) when (@var = null) {}
+        .back-color  (@var) when (@var = null) {}
         .border      (@var) when (@var = null) {}
         .cell-border (@var) when (@var = null) {}
         .padding     (@var) when (@var = null) {}
@@ -539,7 +541,7 @@
                 background-size: @size;     // IE 9+
     }
 
-    .box-sizing(@box-model: content-box) when not (@box-model = null) {
+    .box-sizing (@box-model: content-box) when not (@box-model = null) {
         -webkit-box-sizing: @box-model;    // Safari 5
            -moz-box-sizing: @box-model;    // Firefox 19
                 box-sizing: @box-model;    // IE 8+
@@ -581,7 +583,7 @@
             .gradient.directional(@start, @stop, 90deg, @image);
         }
         .radial(@inner: transparent, @outer: gray, @image: none) when not (@inner = null) {
-            .back(@outer, @image, repeat-x, center);
+            .back(@inner, @image, repeat-x, center);
              background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer));// Chrome, Safari 4+
              background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Safari 5.1+, Chrome 10+
              background-image:    -moz-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Firefox 3.6+
@@ -735,10 +737,10 @@
            -moz-user-select: @select;
             -ms-user-select: @select;
     }
-    
-//
-// ii. Utilities 
-// ----------------------------------------------------------------------- //
+
+//  -----------------------------------------------------------------------
+//  ii. Utilities
+//  ----------------------------------------------------------------------- //
 
     @d                      :   e('/');         // divider escape
 
@@ -762,7 +764,7 @@
     @hexef                  :     #f6f6f7;
     @hexf                   :     #fff;
 
-// Hexadecimal Colors
+// Color Codes
 
     @aqua                   :     #0ff;
     @black                  :     #000;
@@ -826,7 +828,7 @@
         overflow: hidden; 
     }
 
-    .hyphens () {                   // When available
+    .hyphens () {                   // Whenever available
         -ms-word-break: break-all;
             word-break: break-all;
             word-break: break-word;
@@ -864,12 +866,13 @@
     @x-black           : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
 
 
-//
-// iii. Assets 
-//
+//  -----------------------------------------------------------------------
+//  i. Assets
+//  ----------------------------------------------------------------------- //
 
-// Arrows
-// ----------------------------------------------------------------------- //
+//
+//  Arrows
+//  ----------------------------------------------------------------------- //
 
     .arrow {
         .tip (@width) {
@@ -921,7 +924,7 @@
         top: 50%;
     }
 
-    .offset-block (@padding: 0, @query: 0) when (@query = 0) {
+    .offset (@padding: 0, @query: 0) when (@query = 0) {
         @offset: 100% * @padding / (100% - @padding);
         margin-left: round(-@offset, 2);
         padding-left: round(@offset, 2);
@@ -1022,28 +1025,28 @@
 // Gradient
 
     .gradient                   { 
-        .hover (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .hover (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:hover             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .active (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .focus (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .visited (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .visited (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:visited           { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .hover-focus (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .hover-focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:hover,
             &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .normal-active (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .normal-active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &,
             &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
@@ -1054,9 +1057,13 @@
 // ----------------------------------------------------------------------- //
 
     .table {
-        .backcolor (@count: even, @color: none) when not (@count = null) {
-            & tbody tr:nth-child(@{count}) td,
-            & tbody tr.@{count} td { .back.color(@color); }
+        .back-color (@color: none, @rows: all) when not (@color = null) and not (@rows = all) {
+            & tbody tr:nth-child(@{rows}) td,
+            & tbody tr.@{rows} td { .back.color(@color); }
+        }
+        .back-color (@color: none, @rows: all) when not (@color = null) and (@rows = all) {
+            & tbody tr td,
+            & tbody tr td { .back.color(@color); }
         }
         .border (@width: 0, @style: none, @color: none) when not (@width = null) {
             &                   { border-width: @width; border-style: @style; border-color: @color; }
@@ -1078,7 +1085,6 @@
             & tbody tr:last-child  td:last-child    { .rounded.right-bottom(@radius); }
         }
     }
-
-    .re-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack
+    .re-rounded (@radius)       { .rounded(@radius); }  // Avoids double name stack
 
     

@@ -1,11 +1,15 @@
-
+//
 // Tables
 // ----------------------------------------------------------------------- //
 
     .table {
-        .backcolor (@count: even, @color: none) when not (@count = null) {
-            & tbody tr:nth-child(@{count}) td,
-            & tbody tr.@{count} td { .back.color(@color); }
+        .back-color (@color: none, @rows: all) when not (@color = null) and not (@rows = all) {
+            & tbody tr:nth-child(@{rows}) td,
+            & tbody tr.@{rows} td { .back.color(@color); }
+        }
+        .back-color (@color: none, @rows: all) when not (@color = null) and (@rows = all) {
+            & tbody tr td,
+            & tbody tr td { .back.color(@color); }
         }
         .border (@width: 0, @style: none, @color: none) when not (@width = null) {
             &                   { border-width: @width; border-style: @style; border-color: @color; }
@@ -28,4 +32,4 @@
         }
     }
 
-    .re-rounded (@radius)   { .rounded(@radius); }  // Avoids double name stack
+    .re-rounded (@radius)       { .rounded(@radius); }  // Avoids double name stack

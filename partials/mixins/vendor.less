@@ -26,7 +26,7 @@
                 background-size: @size;     // IE 9+
     }
 
-    .box-sizing(@box-model: content-box) when not (@box-model = null) {
+    .box-sizing (@box-model: content-box) when not (@box-model = null) {
         -webkit-box-sizing: @box-model;    // Safari 5
            -moz-box-sizing: @box-model;    // Firefox 19
                 box-sizing: @box-model;    // IE 8+
@@ -68,7 +68,7 @@
             .gradient.directional(@start, @stop, 90deg, @image);
         }
         .radial(@inner: transparent, @outer: gray, @image: none) when not (@inner = null) {
-            .back(@outer, @image, repeat-x, center);
+            .back(@inner, @image, repeat-x, center);
              background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer));// Chrome, Safari 4+
              background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Safari 5.1+, Chrome 10+
              background-image:    -moz-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Firefox 3.6+

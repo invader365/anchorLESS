@@ -104,13 +104,13 @@
 00. .gradient.visited (start, stop, degrees, image);
 00. .gradient.hover-focus (start, stop, degrees, image);
 00. .gradient.normal-active (start, stop, degrees, image);
-00. .table.backcolor (count, color);
+00. .table.back-color (count, color);
 00. .table.border (width, style, color);
 00. .table.cell-border (width, style, color);
 00. .table.padding (padding);
 00. .table.rounded (radius);
 
-## Helpers:
+## Assets:
 
 00. .block();
 00. .clearfix();
@@ -119,4 +119,4 @@
 00. .hyphens();
 00. .inline();
 00. .inline-block();
-00. .linebreak();
+00. .line-break();

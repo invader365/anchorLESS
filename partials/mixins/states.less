@@ -1,8 +1,8 @@
+//
+//  States
+//  ----------------------------------------------------------------------- //
 
-// States
-// ----------------------------------------------------------------------- //
-
-// Color
+//  Colors
 
     .color                      { 
         .hover (@color: inherit, @back-color: null) {
@@ -32,31 +32,31 @@
         }
     }
 
-// Gradient
+//  Gradients
 
     .gradient                   { 
-        .hover (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .hover (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:hover             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .active (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .focus (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .visited (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .visited (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:visited           { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .hover-focus (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .hover-focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:hover,
             &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
 
-        .normal-active (@start: transparent, @stop: gray, @degrees: 0deg, @image: none) {
+        .normal-active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &,
             &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
