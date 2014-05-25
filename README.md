@@ -1,6 +1,6 @@
 # Anchor LESS
 
-> A **LESS mixins library**!
+> A comprehensive **LESS mixins library**
 
 Anchor LESS is a collection of mixins, assets and utilities to write better and faster CSS.
 
@@ -9,7 +9,7 @@ Highlights:
 - Harder. Responsive mixins (mobile-first approach), assets and utilities.
 - Better. Seamless integration with html5 frameworks.
 - Faster. Faster performance (Less.js build-in functions).
-- Stronger. The most extensive LESS mixins library.
+- Stronger. The most extensive (and growing) LESS mixins library.
 
 ## Library
 
@@ -29,9 +29,9 @@ Common mixins list:
 00. .square (size, query);
 00. .transition (property, durations, function, delay);
 00. .width (width, query);
-00. ..
+00. **[..](partials/LIBRARY.md)**
 
-To see the **[full list](partials/SUMMARY.md)**
+To see the **[full list](partials/LIBRARY.md)**.
 
 ## Usage
 ```css
@@ -41,10 +41,10 @@ Example:
 ```css
     #foo {
         .back(#222, '../images/logo.png', no-repeat, left top);
+        .rounded(5px);
         .width(100%);
         .width(50%, 640px);
         .width(20%, 960px);
-        .rounded(5px);
     }
 ```
 CSS output:

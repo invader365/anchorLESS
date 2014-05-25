@@ -1,4 +1,4 @@
-# Anchor LESS Library:
+# Anchor LESS
 
 ## Mixins
 
@@ -37,7 +37,7 @@
 00. .opacity (opacity, query);
 00. .overflow (x, y);
 00. .padding (padding, query);
-00. .perspective(perspective) {
+00. .perspective (perspective);
 00. .placeholder (color);
 00. .position (position, query);
 00. .position.all (position, top, right, bottom, left);
@@ -81,12 +81,12 @@
 00. .arrow.bottom (width, color);
 00. .arrow.right (width, color);
 00. .arrow.left (width, color);
-00. .center-block (width, query)
-00. .center-inline (display, query)
-00. .center-vertical (height)
-00. .offset-block (padding, query)
-00. .reset-center (margin-left, query)
-00. .reset-vertical (margin-top, query)
+00. .center-block (width, query);
+00. .center-inline (display, query);
+00. .center-vertical (height);
+00. .offset (padding, query);
+00. .reset-center (margin-left, query);
+00. .reset-vertical (margin-top, query);
 00. .list-style (type, image);
 00. .pseudo-container (display);
 00. .pseudo (content, width, height);
@@ -121,16 +121,6 @@
 00. .inline();
 00. .inline-block();
 00. .line-break();
-00. Shades of gray:
-    @hex0
-    ..
-    @hexf
-00. Color codes:
-    @aqua
-    ..
-    @yellow
-00. Websafe fonts:
-    @font-mono
-    @font-sans
-    @font-script
-    @font-serif
+00. Shades of gray: @hex0 .. @hexf
+00. Color codes: @aqua .. @yellow
+00. Web safe fonts: @font-mono -sans -script -serif

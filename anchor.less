@@ -1,15 +1,16 @@
 /*  --------------------------------------------------
 
-    Anchor LESS - A LESS mixins library
-
+    Anchor LESS
+    A Comprehensive LESS mixins library
     https://github.com/invader365/anchorLESS
+
     Licensed under the Apache License v2.0
 
     -------------------------------------------------- */
 
-/*  --------------------------------------------------------------------
+/*  -----------------------------------------------------------------------
     i. Mixins
-    -------------------------------------------------------------------- */
+    ----------------------------------------------------------------------- */
 
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = null) and (@image = none) and (@query = 0) {
         background: @color none @repeat @position;
@@ -617,7 +618,7 @@
         &::-webkit-input-placeholder  { color: @color; } // Chrome, Safari
     }
 
-    .perspective(@perspective) {
+    .perspective (@perspective) {
         -webkit-perspective: @perspective;
            -moz-perspective: @perspective;
                 perspective: @perspective;
@@ -739,9 +740,9 @@
             -ms-user-select: @select;
     }
 
-/*  --------------------------------------------------------------------
+/*  -----------------------------------------------------------------------
     ii. Utilities
-    -------------------------------------------------------------------- */
+    ----------------------------------------------------------------------- */
 
     @d                      :   e('/');         // divider escape
 
@@ -867,9 +868,9 @@
     @x-black           : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
 
 
-/*  --------------------------------------------------------------------
+/*  -----------------------------------------------------------------------
     iii. Assets
-    -------------------------------------------------------------------- */
+    ----------------------------------------------------------------------- */
 
 //  Arrows
 //  ----------------------------------------------------------------------- //
@@ -992,7 +993,7 @@
 // States
 // ----------------------------------------------------------------------- //
 
-// Color
+// Colors
 
     .color                      { 
         .hover (@color: inherit, @back-color: null) {
@@ -1022,7 +1023,7 @@
         }
     }
 
-// Gradient
+// Gradients
 
     .gradient                   { 
         .hover (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -1052,7 +1053,6 @@
         }
     }
 
-    
 // Tables
 // ----------------------------------------------------------------------- //
 
