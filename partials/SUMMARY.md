@@ -1,6 +1,6 @@
-# Anchor LESS
+# Anchor LESS Library:
 
-## Mixins:
+## Mixins
 
 00. .appearance (appearance);
 00. .back (color, image, repeat, position, query);
@@ -75,7 +75,7 @@
 00. .user-select (select);
 00. .width (width, query);
 
-## Utilities:
+## Utilities
 
 00. .arrow.top (width, color);
 00. .arrow.bottom (width, color);
@@ -111,7 +111,7 @@
 00. .table.padding (padding);
 00. .table.rounded (radius);
 
-## Assets:
+## Assets
 
 00. .block();
 00. .clearfix();
@@ -121,3 +121,16 @@
 00. .inline();
 00. .inline-block();
 00. .line-break();
+00. Shades of gray:
+    @hex0
+    ..
+    @hexf
+00. Color codes:
+    @aqua
+    ..
+    @yellow
+00. Websafe fonts:
+    @font-mono
+    @font-sans
+    @font-script
+    @font-serif

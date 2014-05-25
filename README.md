@@ -1,15 +1,17 @@
 # Anchor LESS
 
-> A harder, better, faster, stronger **LESS library**!
+> A **LESS mixins library**!
 
-Anchor LESS is a LESS/CSS library build to save time. Highlights:
+Anchor LESS is a collection of mixins, assets and utilities to write better and faster CSS.
 
-- Harder. The most extensive LESS mixins library!
-- Better. The best complement to your prefered html framework.
-- Faster. Less.js build-in functions for faster performance.
-- Stronger. Responsive mixins (mobile-first approach), assets and utilities.
+Highlights:
 
-## Install
+- Harder. Responsive mixins (mobile-first approach), assets and utilities.
+- Better. Seamless integration with html5 frameworks.
+- Faster. Faster performance (Less.js build-in functions).
+- Stronger. The most extensive LESS mixins library.
+
+## Usage
 ```css
 @import "anchor.less";
     
@@ -21,7 +23,7 @@ Anchor LESS is a LESS/CSS library build to save time. Highlights:
 
 ## Mixins:
 
-Anchor LESS comes with a set of mixins, assets and utilities. Common mixins:
+Some common mixins:
 
 00. .back (color, image, repeat, position, query);
 00. .color (color, back, border);
@@ -39,11 +41,9 @@ Anchor LESS comes with a set of mixins, assets and utilities. Common mixins:
 00. .width (width, query);
 00. ..
 
-See the **[full list](partials/SUMMARY.md)**
+To see the **[full list](partials/SUMMARY.md)**
   
-## Usage
-
-Example:
+## Example
 
     #foo {
         .back(#222, '../images/logo.png', no-repeat, left top);
