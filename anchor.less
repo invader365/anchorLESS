@@ -5,11 +5,11 @@
     https://github.com/invader365/anchorLESS
     Licensed under the Apache License v2.0
 
-    --------------------------------------------------  */
+    -------------------------------------------------- */
 
-//  -----------------------------------------------------------------------
-//  i. Mixins
-//  ----------------------------------------------------------------------- //
+/*  --------------------------------------------------------------------
+    i. Mixins
+    -------------------------------------------------------------------- */
 
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = null) and (@image = none) and (@query = 0) {
         background: @color none @repeat @position;
@@ -112,11 +112,6 @@
         max-width: @width;
     }
 
-    .min-size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {
-        min-width: @width;
-        min-height: @height;
-    }
-
     .min-width (@width: 0, @query: 0) when not (@width = null) and (@query = 0) {
         min-width: @width;
     }
@@ -178,6 +173,11 @@
     .size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {
         width: @width;
         height: @height;
+    }
+
+    .size-min (@min-width: auto, @min-height: auto, @query: 0) when not (@min-width = null) and (@query = 0) {
+        min-width: @min-width;
+        min-height: @min-height;
     }
 
     .spacing (@margin: 0, @padding: 0, @query: 0) when not (@margin = null) and (@query = 0) {
@@ -266,8 +266,6 @@
 
     .max-width (@var) when (@var = null) {}
 
-    .min-size (@var) when (@var = null) {}
-
     .min-width (@var) when (@var = null) {}
 
     .opacity (@var) when (@var = null) {}
@@ -313,6 +311,8 @@
 
     .size (@var) when (@var = null) {}
 
+    .size-min (@var) when (@var = null) {}
+
     .skew (@var) when (@var = null) {}
 
     .spacing (@var) when (@var = null) {}
@@ -325,6 +325,7 @@
         .back-color  (@var) when (@var = null) {}
         .border      (@var) when (@var = null) {}
         .cell-border (@var) when (@var = null) {}
+        .thead-font  (@var) when (@var = null) {}
         .padding     (@var) when (@var = null) {}
         .rounded     (@var) when (@var = null) {}
     }
@@ -424,12 +425,6 @@
         }
     }
 
-    .min-size (@width: 0, @height: 0, @query: 0) when (@query > 0) {
-        @media all and (min-width: @query) {
-            .min-size (@width, @height);
-        }
-    }
-
     .min-width (@width: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .min-width (@width);
@@ -472,9 +467,15 @@
         } 
     }
 
-    .size (@width: auto, @height: auto, @display: nodisplay, @query: 0) when (@query > 0) {
+    .size (@width: auto, @height: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .size (@width, @height, @display);
+        }
+    }
+
+    .size-min (@min-width: 0, @min-height: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .size-min (@min-width, @min-height);
         }
     }
 
@@ -484,9 +485,9 @@
         }
     }
 
-    .square (@size: auto, @display: nodisplay, @query: 0) when (@query > 0) {
+    .square (@size: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .square (@square, @display);
+            .square (@square);
         }
     }
 
@@ -738,9 +739,9 @@
             -ms-user-select: @select;
     }
 
-//  -----------------------------------------------------------------------
-//  ii. Utilities
-//  ----------------------------------------------------------------------- //
+/*  --------------------------------------------------------------------
+    ii. Utilities
+    -------------------------------------------------------------------- */
 
     @d                      :   e('/');         // divider escape
 
@@ -866,11 +867,10 @@
     @x-black           : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
 
 
-//  -----------------------------------------------------------------------
-//  i. Assets
-//  ----------------------------------------------------------------------- //
+/*  --------------------------------------------------------------------
+    iii. Assets
+    -------------------------------------------------------------------- */
 
-//
 //  Arrows
 //  ----------------------------------------------------------------------- //
 
@@ -1058,12 +1058,11 @@
 
     .table {
         .back-color (@color: none, @rows: all) when not (@color = null) and not (@rows = all) {
-            & tbody tr:nth-child(@{rows}) td,
-            & tbody tr.@{rows} td { .back.color(@color); }
+            & tr:nth-child(@{rows}) td,
+            & tr.@{rows} td     { .back.color(@color); }
         }
         .back-color (@color: none, @rows: all) when not (@color = null) and (@rows = all) {
-            & tbody tr td,
-            & tbody tr td { .back.color(@color); }
+            & tr td             { .back.color(@color); }
         }
         .border (@width: 0, @style: none, @color: none) when not (@width = null) {
             &                   { border-width: @width; border-style: @style; border-color: @color; }
@@ -1072,19 +1071,19 @@
             & tr th,
             & tr td             { border-width: @width; border-style: @style; border-color: @color; }
         }
+        .thead-font (@font: normal 1em, @family: inherit) when not (@font = null) {
+            & tr th             { .font(@font, @family); }
+        }
         .padding (@padding: 0) when not (@padding = null) {
-            & thead th,
-            & tbody td,
-            & tfoot td          { padding: @padding; }
+            & tr th,
+            & tr td             { padding: @padding; }
         }
         .rounded (@radius: none) when not (@radius = null) {  
-            &                                       { .re-rounded(@radius); }
-            & thead tr:first-child th:first-child   { .rounded.left-top(@radius); }
-            & thead tr:first-child th:last-child    { .rounded.right-top(@radius); }
-            & tbody tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
-            & tbody tr:last-child  td:last-child    { .rounded.right-bottom(@radius); }
+            &                                 { .re-rounded(@radius){ .rounded(@radius); }; }  // Double name stack Fix
+            & tr:first-child th:first-child   { .rounded.left-top(@radius); }
+            & tr:first-child th:last-child    { .rounded.right-top(@radius); }
+            & tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
+            & tr:last-child  td:last-child    { .rounded.right-bottom(@radius); }
         }
     }
-    .re-rounded (@radius)       { .rounded(@radius); }  // Avoids double name stack
-
     

@@ -1,4 +1,4 @@
-
+//
 // Mixins
 // ----------------------------------------------------------------------- //
 
@@ -21,7 +21,7 @@
             .background-clip(@clip); 
         }
         .position (@position: 0 0) when not (@position = null) { 
-            background-position: @position; 
+            background-position: @position;
         }
         .repeat (@repeat: repeat) when not (@repeat = null) { 
             background-repeat: @repeat; 
@@ -103,11 +103,6 @@
         max-width: @width;
     }
 
-    .min-size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {
-        min-width: @width;
-        min-height: @height;
-    }
-
     .min-width (@width: 0, @query: 0) when not (@width = null) and (@query = 0) {
         min-width: @width;
     }
@@ -169,6 +164,11 @@
     .size (@width: auto, @height: auto, @query: 0) when not (@width = null) and (@query = 0) {
         width: @width;
         height: @height;
+    }
+
+    .size-min (@min-width: auto, @min-height: auto, @query: 0) when not (@min-width = null) and (@query = 0) {
+        min-width: @min-width;
+        min-height: @min-height;
     }
 
     .spacing (@margin: 0, @padding: 0, @query: 0) when not (@margin = null) and (@query = 0) {

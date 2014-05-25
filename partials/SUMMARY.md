@@ -33,7 +33,6 @@
 00. .inner-shadow (spread, color, alpha);
 00. .margin (margin, query);
 00. .max-width (width, query);
-00. .min-size (width, height, query);
 00. .min-width (width, query);
 00. .opacity (opacity, query);
 00. .overflow (x, y);
@@ -59,6 +58,7 @@
 00. .rounded.right-bottom (radius);
 00. .rgba (hex-color, alpha);
 00. .size (width, height, query);
+00. .size-min (min-width, min-height, query);
 00. .scale (factor);
 00. .shadow (spread, color, alpha);
 00. .skew (x, y);
@@ -107,6 +107,7 @@
 00. .table.back-color (count, color);
 00. .table.border (width, style, color);
 00. .table.cell-border (width, style, color);
+00. .table.thead-font (font, family);
 00. .table.padding (padding);
 00. .table.rounded (radius);
 

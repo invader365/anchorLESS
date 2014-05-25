@@ -74,12 +74,6 @@
         }
     }
 
-    .min-size (@width: 0, @height: 0, @query: 0) when (@query > 0) {
-        @media all and (min-width: @query) {
-            .min-size (@width, @height);
-        }
-    }
-
     .min-width (@width: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .min-width (@width);
@@ -122,9 +116,15 @@
         } 
     }
 
-    .size (@width: auto, @height: auto, @display: nodisplay, @query: 0) when (@query > 0) {
+    .size (@width: auto, @height: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .size (@width, @height, @display);
+        }
+    }
+
+    .size-min (@min-width: 0, @min-height: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .size-min (@min-width, @min-height);
         }
     }
 
@@ -134,7 +134,7 @@
         }
     }
 
-    .square (@size: auto, @display: nodisplay, @query: 0) when (@query > 0) {
+    .square (@size: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .square (@square, @display);
         }
