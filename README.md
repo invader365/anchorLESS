@@ -11,19 +11,9 @@ Highlights:
 - Faster. Faster performance (Less.js build-in functions).
 - Stronger. The most extensive LESS mixins library.
 
-## Usage
-```css
-@import "anchor.less";
-    
-#foo {
-   .border(1px 1px 3px, solid, gray);
-   .rounded(5px);
-}
-```
+## Library
 
-## Mixins:
-
-Some common mixins:
+Common mixins:
 
 00. .back (color, image, repeat, position, query);
 00. .color (color, back, border);
@@ -43,7 +33,12 @@ Some common mixins:
 
 To see the **[full list](partials/SUMMARY.md)**
   
-## Example
+
+## Usage
+```css
+@import "anchor.less";
+```
+Example:
 
     #foo {
         .back(#222, '../images/logo.png', no-repeat, left top);
