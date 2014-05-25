@@ -13,7 +13,7 @@ Highlights:
 
 ## Library
 
-Common mixins:
+Common mixins list:
 
 00. .back (color, image, repeat, position, query);
 00. .color (color, back, border);
@@ -32,14 +32,13 @@ Common mixins:
 00. ..
 
 To see the **[full list](partials/SUMMARY.md)**
-  
 
 ## Usage
 ```css
 @import "anchor.less";
 ```
 Example:
-
+```css
     #foo {
         .back(#222, '../images/logo.png', no-repeat, left top);
         .width(100%);
@@ -47,9 +46,9 @@ Example:
         .width(20%, 960px);
         .rounded(5px);
     }
-
+```
 CSS output:
-
+```css
     #foo {
         background: #222 url('../images/logo.png') no-repeat left top;
         -webkit-border-radius: 5px;
@@ -67,7 +66,7 @@ CSS output:
             width: 20%;
         }
     }
-
+```
 ## License
 
-Copyright © 2014 Licensed under the [Apache 2.0 License](LICENSE).
+Copyright © 2014 Licensed under the [Apache License Version 2.0](LICENSE).
