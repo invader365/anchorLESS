@@ -5,28 +5,28 @@
 //  Colors
 
     .color                      { 
-        .hover (@color: inherit, @back-color: null) {
+        .hover (@color: inherit, @back-color: skip) {
             &:hover             { .color(@color, @back-color); }
         }
 
-        .active (@color: inherit, @back-color: null) {
+        .active (@color: inherit, @back-color: skip) {
             &:active            { .color(@color, @back-color); }
         }
 
-        .focus (@color: inherit, @back-color: null) {
+        .focus (@color: inherit, @back-color: skip) {
             &:focus             { .color(@color, @back-color); }
         }
 
-        .visited (@color: inherit, @back-color: null) {
+        .visited (@color: inherit, @back-color: skip) {
             &:visited           { .color(@color, @back-color); }
         }
 
-        .hover-focus (@color: inherit, @back-color: null) {
+        .hover-focus (@color: inherit, @back-color: skip) {
             &:hover,
             &:focus             { .color(@color, @back-color); }
         }
 
-        .normal-active (@color: inherit, @back-color: null) {
+        .normal-active (@color: inherit, @back-color: skip) {
             &,
             &:active            { .color(@color, @back-color); }
         }

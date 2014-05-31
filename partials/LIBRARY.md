@@ -40,7 +40,7 @@
 00. .perspective (perspective);
 00. .placeholder (color);
 00. .position (position, query);
-00. .position.all (position, top, right, bottom, left);
+00. .position.fill (position, top, right, bottom, left);
 00. .position.left-top (position, left, top);
 00. .position.left-bottom (position, left, bottom);
 00. .position.right-top (position, right, top);
@@ -121,6 +121,8 @@
 00. .inline();
 00. .inline-block();
 00. .line-break();
+00. .to-lower();
+00. .to-upper();
 00. Shades of gray: @hex0 .. @hexf
 00. Color codes: @aqua .. @yellow
 00. Web safe fonts: @font-mono -sans -script -serif

@@ -50,6 +50,12 @@
         } 
     }
 
+    .indent (@indent: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .indent (@indent);
+        }
+    }
+
     .height (@height: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .height (@height);
@@ -143,12 +149,6 @@
     .text-align (@align: center, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .text-align (@align);
-        }
-    }
-
-    .text-indent (@indent: 0, @query: 0) when (@query > 0) {
-        @media all and (min-width: @query) {
-            .text-indent (@indent);
         }
     }
 

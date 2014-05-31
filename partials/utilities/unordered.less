@@ -2,12 +2,12 @@
 // Others
 // ----------------------------------------------------------------------- //
 
-    .strong-div-width (@strong: 100%, @div: 100%, @query: 0) when not (@strong = null) and (@query = 0) {
+    .strong-div-width (@strong: 100%, @div: 100%, @query: 0) when not (@strong = skip) and (@query = 0) {
         & > strong              { width: @strong; }
         & > div                 { width: @div; }
     }
 
-    .strong-div-width (@strong: 100%, @div: 100%, @query: 0) when not (@strong = null) and (@query > 0) {
+    .strong-div-width (@strong: 100%, @div: 100%, @query: 0) when not (@strong = skip) and (@query > 0) {
         @media print, screen and (min-width: @query) {
             .strong-div-width (@strong, @div);
         }

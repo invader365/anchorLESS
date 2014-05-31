@@ -2,37 +2,37 @@
 // Vendor Mixins
 // ----------------------------------------------------------------------- //
 
-    .appearance (@appearance: normal) when not (@appearance = null) {
+    .appearance (@appearance: normal) when not (@appearance = skip) {
         -webkit-appearance: @appearance;
            -moz-appearance: @appearance;
                 appearance: @appearance;
     }
 
-    .backface (@visibility: hidden) when not (@visibility = null) {
+    .backface (@visibility: hidden) when not (@visibility = skip) {
         -webkit-backface-visibility: @visibility;
            -moz-backface-visibility: @visibility;
                 backface-visibility: @visibility;
     }
 
-    .background-clip (@clip: border) when not (@clip = null) {
+    .background-clip (@clip: border) when not (@clip = skip) {
         -webkit-background-clip: @clip;             // Safari 4? Chrome 6?
            -moz-background-clip: @clip;             // Firefox 3.6
                 background-clip: ~'@{clip}-box';    // Firefox 4, Safari 5, Opera 10, IE9
     }
 
-    .background-size (@size: auto) when not (@size = null) {
+    .background-size (@size: auto) when not (@size = skip) {
         -webkit-background-size: @size;     // Safari 3.0+, Chrome 1.0+
            -moz-background-size: @size;     // Firefox 3.6
                 background-size: @size;     // IE 9+
     }
 
-    .box-sizing (@box-model: content-box) when not (@box-model = null) {
+    .box-sizing (@box-model: content-box) when not (@box-model = skip) {
         -webkit-box-sizing: @box-model;    // Safari 5
            -moz-box-sizing: @box-model;    // Firefox 19
                 box-sizing: @box-model;    // IE 8+
     }
 
-    .columns (@count: auto, @gap: normal, @width: auto) when not (@count = null) {
+    .columns (@count: auto, @gap: normal, @width: auto) when not (@count = skip) {
         -webkit-column-count: @count;
            -moz-column-count: @count;
                 column-count: @count;
@@ -44,30 +44,30 @@
                 column-width: @width;
     }
 
-    .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = null) {
+    .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = skip) {
         .gradient.directional(@start, @stop, @degrees, @image);
     }
 
     .gradient {
-        .directional(@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = null) {
+        .directional(@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = skip) {
             .back(@start, @image, repeat-x, center);
              background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
              background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
              background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
         }
-        .to-bottom(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+        .to-bottom(@start: transparent, @stop: gray, @image: none) when not (@start = skip) {
             .gradient.directional(@start, @stop, 180deg, @image);
         }
-        .to-right(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+        .to-right(@start: transparent, @stop: gray, @image: none) when not (@start = skip) {
             .gradient.directional(@start, @stop, 270deg, @image);
         }
-        .to-top(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+        .to-top(@start: transparent, @stop: gray, @image: none) when not (@start = skip) {
             .gradient.directional(@start, @stop, 0deg, @image);
         }
-        .to-left(@start: transparent, @stop: gray, @image: none) when not (@start = null) {
+        .to-left(@start: transparent, @stop: gray, @image: none) when not (@start = skip) {
             .gradient.directional(@start, @stop, 90deg, @image);
         }
-        .radial(@inner: transparent, @outer: gray, @image: none) when not (@inner = null) {
+        .radial(@inner: transparent, @outer: gray, @image: none) when not (@inner = skip) {
             .back(@inner, @image, repeat-x, center);
              background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer));// Chrome, Safari 4+
              background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Safari 5.1+, Chrome 10+
@@ -76,25 +76,25 @@
         }
     }
 
-    .highlight (@highlight: gray) when not (@highlight = null) {
+    .highlight (@highlight: gray) when not (@highlight = skip) {
         -webkit-tap-highlight-color: @highlight;
            -moz-tap-highlight-color: @highlight;
                 tap-highlight-color: @highlight;
     }
 
-    .inner-shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = null) {
+    .inner-shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
         @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
         -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
                 box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
     }
 
-    .overflow (@x: visible, @y: visible) when not (@x = null) {
+    .overflow (@x: visible, @y: visible) when not (@x = skip) {
         overflow-x: @x;
         overflow-y: @y;
         -webkit-overflow-scrolling: touch;
     }
 
-    .placeholder (@color: gray) when not (@color = null) {
+    .placeholder (@color: gray) when not (@color = skip) {
         &:-moz-placeholder            { color: @color; } // Firefox 4-18
         &::-moz-placeholder           { color: @color; } // Firefox 19+
         &:-ms-input-placeholder       { color: @color; } // IE 10+
@@ -107,117 +107,117 @@
                 perspective: @perspective;
     }
 
-    .rotate (@degrees: 0) when not (@degrees = null) {
+    .rotate (@degrees: 0) when not (@degrees = skip) {
         -webkit-transform: rotate(@degrees);
             -ms-transform: rotate(@degrees);
                 transform: rotate(@degrees);
     }
 
-    .rounded (@radius: 0) when not (@radius = null) {
+    .rounded (@radius: 0) when not (@radius = skip) {
         -webkit-border-radius: @radius;
            -moz-border-radius: @radius;
                 border-radius: @radius;
     }
 
     .rounded {
-        .top (@radius: 0) when not (@radius = null) {
+        .top (@radius: 0) when not (@radius = skip) {
             .rounded.left-top     (@radius);
             .rounded.right-top    (@radius);
         }
-        .right (@radius: 0) when not (@radius = null) {
+        .right (@radius: 0) when not (@radius = skip) {
             .rounded.right-top    (@radius);
             .rounded.right-bottom (@radius);
         }
-        .bottom (@radius: 0) when not (@radius = null) {
+        .bottom (@radius: 0) when not (@radius = skip) {
             .rounded.left-bottom (@radius);
             .rounded.right-bottom (@radius);
         }
-        .left (@radius: 0) when not (@radius = null) {
+        .left (@radius: 0) when not (@radius = skip) {
             .rounded.left-top     (@radius);
             .rounded.left-bottom  (@radius);
         }
-        .left-top (@radius: 0) when not (@radius = null) {
+        .left-top (@radius: 0) when not (@radius = skip) {
             -webkit-border-top-left-radius: @radius;
                 -moz-border-radius-topleft: @radius;
                     border-top-left-radius: @radius;
         }
-        .left-bottom (@radius: 0) when not (@radius = null) {
+        .left-bottom (@radius: 0) when not (@radius = skip) {
             -webkit-border-bottom-left-radius: @radius;
                 -moz-border-radius-bottomleft: @radius;
                     border-bottom-left-radius: @radius;
         }
-        .right-top (@radius: 0) when not (@radius = null) {
+        .right-top (@radius: 0) when not (@radius = skip) {
             -webkit-border-top-right-radius: @radius;
                 -moz-border-radius-topright: @radius;
                     border-top-right-radius: @radius;
         }
-        .right-bottom (@radius: 0) when not (@radius = null) {
+        .right-bottom (@radius: 0) when not (@radius = skip) {
             -webkit-border-bottom-right-radius: @radius;
                 -moz-border-radius-bottomright: @radius;
                     border-bottom-right-radius: @radius;
         }
     }
 
-    .scale (@factor: 0) when not (@factor = null) {
+    .scale (@factor: 0) when not (@factor = skip) {
         -webkit-transform: scale(@factor);
             -ms-transform: scale(@factor);
                 transform: scale(@factor);
     }
 
-    .shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = null) {
+    .shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
         @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
         -webkit-box-shadow: @spread @hsla;     // Android 2.3+, iOS 4.0.2-4.2
                 box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
     }
 
-    .skew (@x: 0, @y: 0) when not (@x = null) {
+    .skew (@x: 0, @y: 0) when not (@x = skip) {
         -webkit-transform: skew(@x, @y);
            -moz-transform: skew(@x, @y);
             -ms-transform: skewX(@x) skewY(@y);
                 transform: skew(@x, @y);
     }
 
-    .transform (@transform: none) when not (@transform = null) {
+    .transform (@transform: none) when not (@transform = skip) {
         -webkit-transform: @transform;
            -moz-transform: @transform;
             -ms-transform: @transform;
                 transform: @transform;
     }
 
-    .transition (@property: all, @duration: 0s, @function: ease, @delay: 0s) when not (@property = null) {
+    .transition (@property: all, @duration: 0s, @function: ease, @delay: 0s) when not (@property = skip) {
         -webkit-transition: @property @duration @function @delay;
                 transition: @property @duration @function @delay;
     }
 
-    .transitions (@first: none, @second: none) when not (@first = null) and not (@first = none) and not (@second = none) {
+    .transitions (@first: none, @second: none) when not (@first = skip) and not (@first = none) and not (@second = none) {
         -webkit-transition: @first, @second;
                 transition: @first, @second;
     }
 
-    .transitions (@first: none, @second: none) when not (@first = null) and not (@first = none) and (@second = none) {
+    .transitions (@first: none, @second: none) when not (@first = skip) and not (@first = none) and (@second = none) {
         -webkit-transition: @first;
                 transition: @first;
     }
 
-    .transitions (@first: none, @second: none) when not (@first = null) and (@first = none) and (@second = none) {
+    .transitions (@first: none, @second: none) when not (@first = skip) and (@first = none) and (@second = none) {
         -webkit-transition: all 0s ease 0s;
                 transition: all 0s ease 0s;
     }
 
-    .translate (@x: 0, @y: 0) when not (@x = null) {
+    .translate (@x: 0, @y: 0) when not (@x = skip) {
         -webkit-transform: translate(@x, @y);
            -moz-transform: translate(@x, @y);
             -ms-transform: translate(@x, @y);   
                 transform: translate(@x, @y);
     }
 
-    .translate3d (@x: 0, @y: 0, @z: 0) when not (@x = null) {
+    .translate3d (@x: 0, @y: 0, @z: 0) when not (@x = skip) {
         -webkit-transform: translate3d(@x, @y, @z);
            -moz-transform: translate3d(@x, @y, @z);
                 transform: translate3d(@x, @y, @z);
     }
 
-    .user-select (@select: none) when not (@select = null) {
+    .user-select (@select: none) when not (@select = skip) {
         -webkit-user-select: @select;
            -moz-user-select: @select;
             -ms-user-select: @select;
