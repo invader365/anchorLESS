@@ -3,33 +3,38 @@
 // ----------------------------------------------------------------------- //
 
     .arrow {
-        .pseudo () {
+        .base () {
             display: block;
             content: '';
             width: 0;
             height: 0;
         }
         .top (@size: 0, @color: transparent) {
+            .arrow.base;
             border: @size solid transparent;
             border-top-color: @color;
             border-top-style: solid;
         }
         .bottom (@size: 0, @color: transparent) {
+            .arrow.base;
             border: @size solid transparent;
             border-bottom-color: @color;
             border-bottom-style: solid;
         }
         .right (@size: 0, @color: transparent) {
+            .arrow.base;
             border: @size solid transparent;
             border-right-color: @color;
             border-right-style: solid;
         }
         .left (@size: 0, @color: transparent) {
+            .arrow.base;
             border: @size solid transparent;
             border-left-color: @color;
             border-left-style: solid;
         }
         .top-left (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+            .arrow.base;
             @width  : @size / @hscale;
             @height : @size / @vscale;
             border-width: @height @width 0 0;
@@ -37,6 +42,7 @@
             border-style: inset;
         }
         .top-right (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+            .arrow.base;
             @width  : @size / @hscale;
             @height : @size / @vscale;
             border-width: 0 @width @height 0;
@@ -44,6 +50,7 @@
             border-style: solid;
         }
         .bottom-right (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+            .arrow.base;
             @width  : @size / @hscale;
             @height : @size / @vscale;
             border-width: 0 0 @height @width;
@@ -51,6 +58,7 @@
             border-style: solid;
         }
         .bottom-left (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+            .arrow.base;
             @width  : @size / @hscale;
             @height : @size / @vscale;
             border-width: @width 0 0 @height;
