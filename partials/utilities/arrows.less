@@ -3,31 +3,58 @@
 // ----------------------------------------------------------------------- //
 
     .arrow {
-        .tip (@width) {
-            content: '';
+        .pseudo () {
             display: block;
+            content: '';
             width: 0;
             height: 0;
-            border: @width inset transparent;
         }
-        .top (@width: 0, @color: transparent) {
-           .arrow.tip(@width);
+        .top (@size: 0, @color: transparent) {
+            border: @size solid transparent;
             border-top-color: @color;
             border-top-style: solid;
         }
-        .bottom (@width: 0, @color: transparent) {
-           .arrow.tip(@width);
+        .bottom (@size: 0, @color: transparent) {
+            border: @size solid transparent;
             border-bottom-color: @color;
             border-bottom-style: solid;
         }
-        .right (@width: 0, @color: transparent) {
-           .arrow.tip(@width);
+        .right (@size: 0, @color: transparent) {
+            border: @size solid transparent;
             border-right-color: @color;
             border-right-style: solid;
         }
-        .left (@width: 0, @color: transparent) {
-           .arrow.tip(@width);
+        .left (@size: 0, @color: transparent) {
+            border: @size solid transparent;
             border-left-color: @color;
             border-left-style: solid;
+        }
+        .top-left (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+            @width  : @size / @hscale;
+            @height : @size / @vscale;
+            border-width: @height @width 0 0;
+            border-color: @color transparent transparent;
+            border-style: inset;
+        }
+        .top-right (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+            @width  : @size / @hscale;
+            @height : @size / @vscale;
+            border-width: 0 @width @height 0;
+            border-color: transparent @color transparent transparent;
+            border-style: solid;
+        }
+        .bottom-right (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+            @width  : @size / @hscale;
+            @height : @size / @vscale;
+            border-width: 0 0 @height @width;
+            border-color: transparent transparent @color;
+            border-style: solid;
+        }
+        .bottom-left (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+            @width  : @size / @hscale;
+            @height : @size / @vscale;
+            border-width: @width 0 0 @height;
+            border-color: transparent transparent transparent @color;
+            border-style: solid;
         }
     }

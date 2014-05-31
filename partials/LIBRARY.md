@@ -117,10 +117,10 @@
 00. .clearfix();
 00. .ellipsis();
 00. .hide-text();
-00. .hyphens();
 00. .inline();
 00. .inline-block();
 00. .line-break();
+00. .word-break();
 00. Shades of gray: @hex0 .. @hexf
 00. Color codes: @aqua .. @yellow
 00. Web safe fonts: @font-mono -sans -script -serif
