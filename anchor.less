@@ -67,7 +67,7 @@
     
     .font (@font: normal 1em, @family: inherit) when not (@font = skip) and (@family = inherit) {
         font: @font a;
-        font-family: inherit;       // font shortcut not supported inherit
+        font-family: inherit;           //  Inherit is not a valid value within shorthand
     }
 
     .font (@font: normal 1em, @family: inherit) when not (@font = skip) and not (@family = inherit) {
@@ -77,7 +77,7 @@
     .font-face (@name: a, @path: '/') when not (@name = skip) {
         @font-face {
             font-family: @name;
-            src: url('@{path}.eot');                                        // IE9
+            src: url('@{path}.eot');    // IE9
             src: url('@{path}.eot?#iefix') format('embedded-opentype'),     
                  url("@{path}.woff") format("woff"),
                  url("@{path}.ttf") format("truetype"),

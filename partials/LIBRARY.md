@@ -121,8 +121,6 @@
 00. .inline();
 00. .inline-block();
 00. .line-break();
-00. .to-lower();
-00. .to-upper();
 00. Shades of gray: @hex0 .. @hexf
 00. Color codes: @aqua .. @yellow
 00. Web safe fonts: @font-mono -sans -script -serif
