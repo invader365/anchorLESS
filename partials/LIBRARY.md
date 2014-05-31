@@ -81,10 +81,10 @@
 00. .arrow.bottom (width, color);
 00. .arrow.right (width, color);
 00. .arrow.left (width, color);
-00. .arrow.top-left (width, color, hscale, vscale);
-00. .arrow.top-right (width, color, hscale, vscale);
-00. .arrow.bottom-left (width, color, hscale, vscale);
-00. .arrow.bottom-right (width, color, hscale, vscale);
+00. .arrow.top-left (width, color, vratio);
+00. .arrow.top-right (width, color, vratio);
+00. .arrow.bottom-left (width, color, vratio);
+00. .arrow.bottom-right (width, color, vratio);
 00. .center-block (width, query);
 00. .center-inline (display, query);
 00. .center-vertical (height);

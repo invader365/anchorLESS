@@ -760,55 +760,47 @@
         .top (@size: 0, @color: transparent) {
             .arrow.base;
             border: @size solid transparent;
-            border-top-color: @color;
-            border-top-style: solid;
+            border-bottom-color: @color;
         }
         .bottom (@size: 0, @color: transparent) {
             .arrow.base;
             border: @size solid transparent;
-            border-bottom-color: @color;
-            border-bottom-style: solid;
-        }
-        .right (@size: 0, @color: transparent) {
-            .arrow.base;
-            border: @size solid transparent;
-            border-right-color: @color;
-            border-right-style: solid;
+            border-top-color: @color;
         }
         .left (@size: 0, @color: transparent) {
             .arrow.base;
             border: @size solid transparent;
-            border-left-color: @color;
-            border-left-style: solid;
+            border-right-color: @color;
         }
-        .top-left (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+        .right (@size: 0, @color: transparent) {
             .arrow.base;
-            @width  : @size / @hscale;
-            @height : @size / @vscale;
+            border: @size solid transparent;
+            border-left-color: @color;
+        }
+        .top-left (@width: 0, @color: transparent, @vratio: 1) {
+            .arrow.base;
+            @height: @width * @vratio;
             border-width: @height @width 0 0;
             border-color: @color transparent transparent;
-            border-style: inset;
+            border-style: solid;
         }
-        .top-right (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+        .top-right (@width: 0, @color: transparent, @vratio: 1) {
             .arrow.base;
-            @width  : @size / @hscale;
-            @height : @size / @vscale;
+            @height: @width * @vratio;
             border-width: 0 @width @height 0;
             border-color: transparent @color transparent transparent;
             border-style: solid;
         }
-        .bottom-right (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+        .bottom-right (@width: 0, @color: transparent, @vratio: 1) {
             .arrow.base;
-            @width  : @size / @hscale;
-            @height : @size / @vscale;
+            @height: @width * @vratio;
             border-width: 0 0 @height @width;
             border-color: transparent transparent @color;
             border-style: solid;
         }
-        .bottom-left (@size: 0, @color: transparent, @hscale: 1, @vscale: 1) {
+        .bottom-left (@width: 0, @color: transparent, @vratio: 1) {
             .arrow.base;
-            @width  : @size / @hscale;
-            @height : @size / @vscale;
+            @height: @width * @vratio;
             border-width: @width 0 0 @height;
             border-color: transparent transparent transparent @color;
             border-style: solid;
