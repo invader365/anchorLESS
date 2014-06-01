@@ -777,30 +777,30 @@
             border: @size solid transparent;
             border-left-color: @color;
         }
-        .top-left (@width: 0, @color: transparent, @vratio: 1) {
+        .top-left (@width: 0, @color: transparent, @ratio: 1) {
             .arrow.base;
-            @height: @width * @vratio;
+            @height: @width * @ratio;
             border-width: @height @width 0 0;
             border-color: @color transparent transparent;
             border-style: solid;
         }
-        .top-right (@width: 0, @color: transparent, @vratio: 1) {
+        .top-right (@width: 0, @color: transparent, @ratio: 1) {
             .arrow.base;
-            @height: @width * @vratio;
+            @height: @width * @ratio;
             border-width: 0 @width @height 0;
             border-color: transparent @color transparent transparent;
             border-style: solid;
         }
-        .bottom-right (@width: 0, @color: transparent, @vratio: 1) {
+        .bottom-right (@width: 0, @color: transparent, @ratio: 1) {
             .arrow.base;
-            @height: @width * @vratio;
+            @height: @width * @ratio;
             border-width: 0 0 @height @width;
             border-color: transparent transparent @color;
             border-style: solid;
         }
-        .bottom-left (@width: 0, @color: transparent, @vratio: 1) {
+        .bottom-left (@width: 0, @color: transparent, @ratio: 1) {
             .arrow.base;
-            @height: @width * @vratio;
+            @height: @width * @ratio;
             border-width: @width 0 0 @height;
             border-color: transparent transparent transparent @color;
             border-style: solid;
@@ -817,11 +817,12 @@
 
     .center-inline (@display: inline-block, @query: 0) when (@query = 0) {
         display: @display;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
         float: none;
     }
 
-    .center-vertical (@height: 0) {
+    .center-vertical (@height: 0) when (@query = 0) {
         margin-top: (@height / 2) * -1;
         position: absolute;
         top: 50%;
@@ -842,7 +843,7 @@
 
     .reset-vertical (@margin-top: 0, @query: 0) when (@query = 0) {
         margin-top: @margin-top;
-        position: static;
+        position: relative;
         top: auto;
     }
 

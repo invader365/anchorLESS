@@ -9,11 +9,12 @@
 
     .center-inline (@display: inline-block, @query: 0) when (@query = 0) {
         display: @display;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
         float: none;
     }
 
-    .center-vertical (@height: 0) {
+    .center-vertical (@height: 0) when (@query = 0) {
         margin-top: (@height / 2) * -1;
         position: absolute;
         top: 50%;
@@ -34,6 +35,6 @@
 
     .reset-vertical (@margin-top: 0, @query: 0) when (@query = 0) {
         margin-top: @margin-top;
-        position: static;
+        position: relative;
         top: auto;
     }
