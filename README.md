@@ -31,7 +31,7 @@ Common mixins list:
 00. .width (width, query);
 00. **[..](partials/LIBRARY.md)**
 
-To see the **[full list](partials/LIBRARY.md)**.
+To see the **[full list](partials/README.md)**.
 
 ## Usage
 ```css

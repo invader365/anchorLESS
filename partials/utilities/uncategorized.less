@@ -2,13 +2,13 @@
 //  Unocategorized
 //  ----------------------------------------------------------------------- //
 
-    .enclose (@width: 0, @query: 0) when not (@width = skip) and (@query > 0) {
+    .contain-max (@width: 0, @query: 0) when not (@width = skip) and (@query > 0) {
         @media all and (min-width: @query) {
-            .enclose(@width);
+            .contain-max(@width);
         }
     }
 
-    .enclose (@width: 0, @query: 0) when not (@width = skip) and (@query = 0) {
+    .contain-max (@width: 0, @query: 0) when not (@width = skip) and (@query = 0) {
          max-width: @width;
         .center-block(@width);
     }

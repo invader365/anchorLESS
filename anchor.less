@@ -233,9 +233,9 @@
 
     .columns (@var) when (@var = skip) {}
 
-    .display (@var) when (@var = skip) {}
+    .contain-max (@var) when (@var = skip) {}
 
-    .enclose (@var) when (@var = skip) {}
+    .display (@var) when (@var = skip) {}
 
     .float (@var) when (@var = skip) {}
 
@@ -328,12 +328,12 @@
     .strong-div-width (@var) when (@var = skip) {}
 
     .table {
-        .back-color  (@var) when (@var = skip) {}
         .border      (@var) when (@var = skip) {}
         .cell-border (@var) when (@var = skip) {}
-        .thead-font  (@var) when (@var = skip) {}
         .padding     (@var) when (@var = skip) {}
         .rounded     (@var) when (@var = skip) {}
+        .tbody-color (@var) when (@var = skip) {}
+        .thead-font  (@var) when (@var = skip) {}
     }
 
     .text-align (@var) when (@var = skip) {}
@@ -822,7 +822,7 @@
         float: none;
     }
 
-    .center-vertical (@height: 0) when (@query = 0) {
+    .center-vertical (@height: 0, @query: 0) when (@query = 0) {
         margin-top: (@height / 2) * -1;
         position: absolute;
         top: 50%;
@@ -946,13 +946,6 @@
 // ----------------------------------------------------------------------- //
 
     .table {
-        .back-color (@color: none, @rows: all) when not (@color = skip) and not (@rows = all) {
-            & tr:nth-child(@{rows}) td,
-            & tr.@{rows} td     { .back.color(@color); }
-        }
-        .back-color (@color: none, @rows: all) when not (@color = skip) and (@rows = all) {
-            & tr td             { .back.color(@color); }
-        }
         .border (@width: 0, @style: none, @color: none) when not (@width = skip) {
             &                   { border-width: @width; border-style: @style; border-color: @color; }
         }
@@ -960,32 +953,39 @@
             & tr th,
             & tr td             { border-width: @width; border-style: @style; border-color: @color; }
         }
-        .thead-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
-            & tr th             { .font(@font, @family); }
-        }
         .padding (@padding: 0) when not (@padding = skip) {
             & tr th,
             & tr td             { padding: @padding; }
         }
         .rounded (@radius: none) when not (@radius = skip) {  
-            &                                 { .re-rounded(@radius){ .rounded(@radius); }; }  // Double name stack Fix
-            & tr:first-child th:first-child   { .rounded.left-top(@radius); }
-            & tr:first-child th:last-child    { .rounded.right-top(@radius); }
-            & tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
-            & tr:last-child  td:last-child    { .rounded.right-bottom(@radius); }
+            &                               { .re-rounded(@radius){ .rounded(@radius); }; }  // Double name stack Fix
+            & tr:first-child th:first-child { .rounded.left-top(@radius); }
+            & tr:first-child th:last-child  { .rounded.right-top(@radius); }
+            & tr:last-child  td:first-child { .rounded.left-bottom(@radius); }
+            & tr:last-child  td:last-child  { .rounded.right-bottom(@radius); }
+        }
+        .tbody-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and not (@rows = all) {
+            & tr:nth-child(@{rows}) td,
+            & tr.@{rows} td     { .color(@color, @back-color); }
+        }
+        .tbody-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and (@rows = all) {
+            & tr td             { .color(@color, @back-color); }
+        }
+        .thead-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
+            & tr th             { .font(@font, @family); }
         }
     }
-
+    
 // Unocategorized
 // ----------------------------------------------------------------------- //
 
-    .enclose (@width: 0, @query: 0) when not (@width = skip) and (@query > 0) {
+    .contain-max (@width: 0, @query: 0) when not (@width = skip) and (@query > 0) {
         @media all and (min-width: @query) {
-            .enclose(@width);
+            .contain-max(@width);
         }
     }
 
-    .enclose (@width: 0, @query: 0) when not (@width = skip) and (@query = 0) {
+    .contain-max (@width: 0, @query: 0) when not (@width = skip) and (@query = 0) {
          max-width: @width;
         .center-block(@width);
     }
@@ -1126,5 +1126,5 @@
 // ----------------------------------------------------------------------- //
 
     @to-bottom-gray15  : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
-    @x-black           : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
+    @x-img-black       : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
 

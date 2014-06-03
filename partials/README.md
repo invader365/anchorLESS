@@ -29,6 +29,7 @@
 00. .height (height, query);
 00. .highlight (highlight);
 00. .image (image);
+00. .indent (indent, query);
 00. .index (index, query);
 00. .inner-shadow (spread, color, alpha);
 00. .margin (margin, query);
@@ -65,7 +66,6 @@
 00. .spacing (margin, padding, query);
 00. .square (size, query);
 00. .text-align (align, query);
-00. .text-indent (indent, query);
 00. .text-shadow (spread, color, alpha, query);
 00. .transform (transform);
 00. .transition (property, durations, function, delay);
@@ -108,12 +108,12 @@
 00. .gradient.visited (start, stop, degrees, image);
 00. .gradient.hover-focus (start, stop, degrees, image);
 00. .gradient.normal-active (start, stop, degrees, image);
-00. .table.back-color (count, color);
 00. .table.border (width, style, color);
 00. .table.cell-border (width, style, color);
-00. .table.thead-font (font, family);
 00. .table.padding (padding);
 00. .table.rounded (radius);
+00. .table.tbody-color (color, back-color, rows);
+00. .table.thead-font (font, family);
 
 ## Assets
 

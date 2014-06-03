@@ -3,13 +3,6 @@
 // ----------------------------------------------------------------------- //
 
     .table {
-        .back-color (@color: none, @rows: all) when not (@color = skip) and not (@rows = all) {
-            & tr:nth-child(@{rows}) td,
-            & tr.@{rows} td     { .back.color(@color); }
-        }
-        .back-color (@color: none, @rows: all) when not (@color = skip) and (@rows = all) {
-            & tr td             { .back.color(@color); }
-        }
         .border (@width: 0, @style: none, @color: none) when not (@width = skip) {
             &                   { border-width: @width; border-style: @style; border-color: @color; }
         }
@@ -17,18 +10,25 @@
             & tr th,
             & tr td             { border-width: @width; border-style: @style; border-color: @color; }
         }
-        .thead-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
-            & tr th             { .font(@font, @family); }
-        }
         .padding (@padding: 0) when not (@padding = skip) {
             & tr th,
             & tr td             { padding: @padding; }
         }
         .rounded (@radius: none) when not (@radius = skip) {  
-            &                                 { .re-rounded(@radius){ .rounded(@radius); }; }  // Double name stack Fix
-            & tr:first-child th:first-child   { .rounded.left-top(@radius); }
-            & tr:first-child th:last-child    { .rounded.right-top(@radius); }
-            & tr:last-child  td:first-child   { .rounded.left-bottom(@radius); }
-            & tr:last-child  td:last-child    { .rounded.right-bottom(@radius); }
+            &                               { .re-rounded(@radius){ .rounded(@radius); }; }  // Double name stack Fix
+            & tr:first-child th:first-child { .rounded.left-top(@radius); }
+            & tr:first-child th:last-child  { .rounded.right-top(@radius); }
+            & tr:last-child  td:first-child { .rounded.left-bottom(@radius); }
+            & tr:last-child  td:last-child  { .rounded.right-bottom(@radius); }
+        }
+        .tbody-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and not (@rows = all) {
+            & tr:nth-child(@{rows}) td,
+            & tr.@{rows} td     { .color(@color, @back-color); }
+        }
+        .tbody-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and (@rows = all) {
+            & tr td             { .color(@color, @back-color); }
+        }
+        .thead-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
+            & tr th             { .font(@font, @family); }
         }
     }
