@@ -41,7 +41,7 @@
 00. .perspective (perspective);
 00. .placeholder (color);
 00. .position (position, query);
-00. .position.fill (position, top, right, bottom, left);
+00. .position.fill (position, top, right, bottom, left, query);
 00. .position.left-top (position, left, top);
 00. .position.left-bottom (position, left, bottom);
 00. .position.right-top (position, right, top);
@@ -81,10 +81,10 @@
 00. .arrow.bottom (width, color);
 00. .arrow.right (width, color);
 00. .arrow.left (width, color);
-00. .arrow.top-left (width, color, ratio);
-00. .arrow.top-right (width, color, ratio);
-00. .arrow.bottom-left (width, color, ratio);
-00. .arrow.bottom-right (width, color, ratio);
+00. .arrow.left-top (width, color, ratio);
+00. .arrow.right-top (width, color, ratio);
+00. .arrow.left-bottom (width, color, ratio);
+00. .arrow.right-bottom (width, color, ratio);
 00. .center-block (width, query);
 00. .center-inline (display, query);
 00. .center-vertical (height);

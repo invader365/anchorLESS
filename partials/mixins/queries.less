@@ -110,6 +110,14 @@
         }
     }
 
+    .position {
+        .fill (@position: absolute, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .position.fill (@position, @top, @right, @bottom, @left);
+            }
+        }
+    }
+
     .reset-center (@margin-left: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .reset-center (@margin-left);

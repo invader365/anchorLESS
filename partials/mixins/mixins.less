@@ -126,7 +126,7 @@
     }
 
     .position {
-        .fill (@position: static, @top: auto, @right: auto, @bottom: auto, @left: auto) when not (@position = skip) {
+        .fill (@position: static, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@position = null) and (@query = 0) {
             position: @position;
             top: @top; 
             right: @right;

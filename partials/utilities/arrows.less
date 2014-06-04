@@ -29,32 +29,32 @@
             border: @size solid transparent;
             border-left-color: @color;
         }
-        .top-left (@width: 0, @color: transparent, @ratio: 1) {
+        .left-top (@width: 0, @color: transparent, @ratio: 1) {
             .arrow.base;
             @height: @width * @ratio;
             border-width: @height @width 0 0;
             border-color: @color transparent transparent;
             border-style: solid;
         }
-        .top-right (@width: 0, @color: transparent, @ratio: 1) {
+        .left-bottom (@width: 0, @color: transparent, @ratio: 1) {
+            .arrow.base;
+            @height: @width * @ratio;
+            border-width: @width 0 0 @height;
+            border-color: transparent transparent transparent @color;
+            border-style: solid;
+        }
+        .right-top (@width: 0, @color: transparent, @ratio: 1) {
             .arrow.base;
             @height: @width * @ratio;
             border-width: 0 @width @height 0;
             border-color: transparent @color transparent transparent;
             border-style: solid;
         }
-        .bottom-right (@width: 0, @color: transparent, @ratio: 1) {
+        .right-bottom (@width: 0, @color: transparent, @ratio: 1) {
             .arrow.base;
             @height: @width * @ratio;
             border-width: 0 0 @height @width;
             border-color: transparent transparent @color;
-            border-style: solid;
-        }
-        .bottom-left (@width: 0, @color: transparent, @ratio: 1) {
-            .arrow.base;
-            @height: @width * @ratio;
-            border-width: @width 0 0 @height;
-            border-color: transparent transparent transparent @color;
             border-style: solid;
         }
     }
