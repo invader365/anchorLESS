@@ -29,7 +29,7 @@ Common mixins list:
 00. .square (size, query);
 00. .transition (property, durations, function, delay);
 00. .width (width, query);
-00. **[..](partials/LIBRARY.md)**
+00. **[..](partials/README.md)**
 
 To see the **[full list](partials/README.md)**.
 

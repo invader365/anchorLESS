@@ -1,4 +1,4 @@
-# Anchor LESS
+# Anchor LESS partials
 
 ## Mixins
 
