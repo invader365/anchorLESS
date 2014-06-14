@@ -51,6 +51,12 @@
         }
     }
 
+    .border (@width: 0, @style: none, @color: none, @query: 0) when (@query > 0) { 
+        @media all and (min-width: @query) {
+            .border (@width, @style, @color);
+        }
+    }
+
     .center-block (@width: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .center-block (@width);

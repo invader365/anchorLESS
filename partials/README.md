@@ -11,7 +11,7 @@
 00. .back.repeat (repeat);
 00. .back.size (size);
 00. .backface (visibility);
-00. .border (width, style, color);
+00. .border (width, style, color, @query);
 00. .box-sizing(box-model);
 00. .color (color, back, border);
 00. .columns (count, gap, width);
@@ -77,14 +77,14 @@
 
 ## Utilities
 
-00. .arrow.top (width, color);
-00. .arrow.bottom (width, color);
-00. .arrow.right (width, color);
-00. .arrow.left (width, color);
-00. .arrow.left-top (width, color, ratio);
-00. .arrow.right-top (width, color, ratio);
-00. .arrow.left-bottom (width, color, ratio);
-00. .arrow.right-bottom (width, color, ratio);
+00. .arrow.top (width, color, query);
+00. .arrow.bottom (width, color, query);
+00. .arrow.right (width, color, query);
+00. .arrow.left (width, color, query);
+00. .arrow.left-top (width, color, ratio, query);
+00. .arrow.right-top (width, color, ratio, query);
+00. .arrow.left-bottom (width, color, ratio, query);
+00. .arrow.right-bottom (width, color, ratio, query);
 00. .center-block (width, query);
 00. .center-inline (display, query);
 00. .center-vertical (height);

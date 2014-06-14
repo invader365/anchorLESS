@@ -42,12 +42,12 @@
         }
     }
 
-    .border (@width: 0, @style: none, @color: none) when not (@width = skip) and (@color = none) {
+    .border (@width: 0, @style: none, @color: none, @query: 0) when not (@width = skip) and (@color = none) and (@query = 0) {
         border-width: @width;
         border-style: @style;
     }
 
-    .border (@width: 0, @style: none, @color: none) when not (@width = skip) and not (@color = none) {
+    .border (@width: 0, @style: none, @color: none, @query: 0) when not (@width = skip) and not (@color = none) and (@query = 0) {
         border-width: @width;
         border-style: @style;
         border-color: @color;
@@ -403,6 +403,12 @@
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when (@query > 0) { 
         @media all and (min-width: @query) {
             .back (@color, @image, @repeat, @position);
+        }
+    }
+
+    .border (@width: 0, @style: none, @color: none, @query: 0) when (@query > 0) { 
+        @media all and (min-width: @query) {
+            .border (@width, @style, @color);
         }
     }
 
@@ -795,7 +801,7 @@
     }
 
 //  ---------------------------------------------------------------------------
-//  ii. Utilities
+//  ii. Assets
 //  ---------------------------------------------------------------------------
 
 //  Arrows
@@ -1053,7 +1059,7 @@
     }
     
 //  -----------------------------------------------------------------------
-//  iii. Assets
+//  iii. Utilities
 //  ----------------------------------------------------------------------- 
 
     @d                      :   e('/');         // divider escape

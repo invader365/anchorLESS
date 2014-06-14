@@ -31,12 +31,12 @@
         }
     }
 
-    .border (@width: 0, @style: none, @color: none) when not (@width = skip) and (@color = none) {
+    .border (@width: 0, @style: none, @color: none, @query: 0) when not (@width = skip) and (@color = none) and (@query = 0) {
         border-width: @width;
         border-style: @style;
     }
 
-    .border (@width: 0, @style: none, @color: none) when not (@width = skip) and not (@color = none) {
+    .border (@width: 0, @style: none, @color: none, @query: 0) when not (@width = skip) and not (@color = none) and (@query = 0) {
         border-width: @width;
         border-style: @style;
         border-color: @color;
