@@ -11,7 +11,7 @@
 00. .back.repeat (repeat);
 00. .back.size (size);
 00. .backface (visibility);
-00. .border (width, style, color, @query);
+00. .border (width, style, color, query);
 00. .box-sizing(box-model);
 00. .color (color, back, border);
 00. .columns (count, gap, width);
@@ -75,7 +75,7 @@
 00. .user-select (select);
 00. .width (width, query);
 
-## Utilities
+## Assets
 
 00. .arrow.top (width, color, query);
 00. .arrow.bottom (width, color, query);
@@ -115,7 +115,7 @@
 00. .table.tbody-color (color, back-color, rows);
 00. .table.thead-font (font, family);
 
-## Assets
+## Utilities
 
 00. .block();
 00. .clearfix();
@@ -124,7 +124,9 @@
 00. .inline();
 00. .inline-block();
 00. .line-break();
+00. .nowrap();
 00. .word-break();
+00. .wrap();
 00. Shades of gray: @hex0 .. @hexf
 00. Color codes: @aqua .. @yellow
 00. Web safe fonts: @font-mono -sans -script -serif

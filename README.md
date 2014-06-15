@@ -16,7 +16,7 @@ Highlights:
 Common mixins list:
 
 00. .back (color, image, repeat, position, query);
-00. .border (width, style, color, @query);
+00. .border (width, style, color, query);
 00. .color (color, back, border);
 00. .font (font, family);
 00. .gradient (start, stop, degrees, image);

@@ -1148,6 +1148,12 @@
         overflow: hidden; 
     }
 
+    .hyphens () {
+        -webkit-hyphens: auto;
+           -moz-hyphens: auto;
+                hyphens: auto;
+    }
+
     .inline () {
         display: inline;
         float: none;
@@ -1163,14 +1169,19 @@
         margin-left: 0; 
         clear: left; 
     }
+    
+    .nowrap () {
+        white-space: nowrap;
+    }
 
     .word-break () {
         -ms-word-break: break-all;
             word-break: break-all;
             word-break: break-word;
-        -webkit-hyphens: auto;
-           -moz-hyphens: auto;
-                hyphens: auto;
+    }
+    
+    .wrap () {
+        white-space: normal; // validate
     }
 
 // Filters
