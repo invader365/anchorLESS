@@ -121,6 +121,7 @@
 00. .clearfix();
 00. .ellipsis();
 00. .hide-text();
+00. .hyphens();
 00. .inline();
 00. .inline-block();
 00. .line-break();

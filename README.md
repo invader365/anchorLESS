@@ -27,7 +27,6 @@ Common mixins list:
 00. .rounded (radius);
 00. .shadow (spread, color, alpha, offset);
 00. .size (width, height, query);
-00. .square (size, query);
 00. .transition (property, durations, function, delay);
 00. .width (width, query);
 00. **[..](partials/README.md)**
