@@ -233,8 +233,6 @@
 
     .columns (@var) when (@var = skip) {}
 
-    .contain-max (@var) when (@var = skip) {}
-
     .display (@var) when (@var = skip) {}
 
     .float (@var) when (@var = skip) {}
@@ -324,8 +322,6 @@
     .spacing (@var) when (@var = skip) {}
 
     .square (@var) when (@var = skip) {}
-
-    .strong-div-width (@var) when (@var = skip) {}
 
     .table {
         .border      (@var) when (@var = skip) {}
@@ -1036,27 +1032,18 @@
 // Unocategorized
 // ----------------------------------------------------------------------- //
 
-    .contain-max (@width: 0, @max: 0, @query: 0) when not (@width = skip) and (@query = 0) {
-         max-width: @max;
-        .center-block(@width);
+    .strong-div-width (@swidth: 100%, @dwidth: 100%, @query: 0) when not (@swidth = skip) and (@query = 0) {
+        & > strong              { display: block; width: @swidth; float: left; }
+        & > div                 { width: @dwidth; }
     }
 
-    .contain-max (@width: 0, @max: 0, @query: 0) when not (@width = skip) and (@query > 0) {
-        @media all and (min-width: @query) {
-            .contain-max(@width, @max);
-        }
-    }
-
-    .strong-div-width (@strong: 100%, @div: 100%, @query: 0) when not (@strong = skip) and (@query = 0) {
-        & > strong              { width: @strong; }
-        & > div                 { width: @div; }
-    }
-
-    .strong-div-width (@strong: 100%, @div: 100%, @query: 0) when not (@strong = skip) and (@query > 0) {
+    .strong-div-width (@swidth: 100%, @dwidth: 100%, @query: 0) when not (@swidth = skip) and (@query > 0) {
         @media print, screen and (min-width: @query) {
-            .strong-div-width (@strong, @div);
+            .strong-div-width (@swidth, @dwidth);
         }
     }
+
+    .strong-div-width (@var) when (@var = skip) {}
     
 //  -----------------------------------------------------------------------
 //  iii. Utilities
