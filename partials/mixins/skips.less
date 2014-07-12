@@ -2,6 +2,14 @@
 //  Skips
 //  ----------------------------------------------------------------------- //
 
+    .align {
+        .cover        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
+
     .appearance (@var) when (@var = skip) {}
 
     .back (@var) when (@var = skip) {}
@@ -76,14 +84,6 @@
     .placeholder (@var) when (@var = skip) {}
 
     .position (@var) when (@var = skip) {}
-
-    .position {
-        .fill         (@var) when (@var = skip) {}
-        .left-top     (@var) when (@var = skip) {}
-        .left-bottom  (@var) when (@var = skip) {}
-        .right-top    (@var) when (@var = skip) {}
-        .right-bottom (@var) when (@var = skip) {}
-    }
 
     .resize (@var) when (@var = skip) {}
 

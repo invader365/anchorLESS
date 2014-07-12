@@ -2,6 +2,31 @@
 // Mixins
 // ----------------------------------------------------------------------- //
 
+    .align {
+        .cover (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@position = null) and (@query = 0) {
+            top: @top; 
+            right: @right;
+            bottom: @bottom;
+            left: @left;
+        }
+        .left-top (@left: auto, @top: auto) when not (@position = skip) {
+            left: @left;
+            top: @top; 
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@position = skip) {
+            left: @left;
+            bottom: @bottom;
+        }
+        .right-top (@right: auto, @top: auto) when not (@position = skip) {
+            right: @right;
+            top: @top;
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@position = skip) {
+            right: @right; 
+            bottom: @bottom;
+        }
+    }
+
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = skip) and (@image = none) and (@query = 0) {
         background: @color none @repeat @position;
     }
@@ -123,36 +148,6 @@
 
     .position (@position: static, @query: 0) when not (@position = skip) and (@query = 0) {
         position: @position;
-    }
-
-    .position {
-        .fill (@position: static, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@position = null) and (@query = 0) {
-            position: @position;
-            top: @top; 
-            right: @right;
-            bottom: @bottom;
-            left: @left;
-        }
-        .left-top (@position: static, @left: auto, @top: auto) when not (@position = skip) {
-            position: @position;
-            left: @left;
-            top: @top; 
-        }
-        .left-bottom (@position: static, @left: auto, @bottom: auto) when not (@position = skip) {
-            position: @position;
-            left: @left;
-            bottom: @bottom;
-        }
-        .right-top (@position: static, @right: auto, @top: auto) when not (@position = skip) {
-            position: @position;
-            right: @right;
-            top: @top;
-        }
-        .right-bottom (@position: static, @right: auto, @bottom: auto) when not (@position = skip) {
-            position: @position;
-            right: @right; 
-            bottom: @bottom;
-        }
     }
 
     .resize (@direction: none) when not (@direction = skip) {

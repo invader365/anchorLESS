@@ -13,6 +13,36 @@
 //  i. Mixins
 //  ---------------------------------------------------------------------------
 
+    .align {
+        .cover (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@position = null) and (@query = 0) {
+            position: @position;
+            top: @top; 
+            right: @right;
+            bottom: @bottom;
+            left: @left;
+        }
+        .left-top (@left: auto, @top: auto) when not (@position = skip) {
+            position: @position;
+            left: @left;
+            top: @top; 
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@position = skip) {
+            position: @position;
+            left: @left;
+            bottom: @bottom; 
+        }
+        .right-top (@right: auto, @top: auto) when not (@position = skip) {
+            position: @position;
+            right: @right;
+            top: @top; 
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@position = skip) {
+            position: @position;
+            right: @right; 
+            bottom: @bottom;
+        }
+    }
+
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when not (@color = skip) and (@image = none) and (@query = 0) {
         background: @color none @repeat @position;
     }
@@ -136,36 +166,6 @@
         position: @position;
     }
 
-    .position {
-        .fill (@position: static, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@position = null) and (@query = 0) {
-            position: @position;
-            top: @top; 
-            right: @right;
-            bottom: @bottom;
-            left: @left;
-        }
-        .left-top (@position: static, @left: auto, @top: auto) when not (@position = skip) {
-            position: @position;
-            left: @left;
-            top: @top; 
-        }
-        .left-bottom (@position: static, @left: auto, @bottom: auto) when not (@position = skip) {
-            position: @position;
-            left: @left;
-            bottom: @bottom; 
-        }
-        .right-top (@position: static, @right: auto, @top: auto) when not (@position = skip) {
-            position: @position;
-            right: @right;
-            top: @top; 
-        }
-        .right-bottom (@position: static, @right: auto, @bottom: auto) when not (@position = skip) {
-            position: @position;
-            right: @right; 
-            bottom: @bottom;
-        }
-    }
-
     .resize (@direction: none) when not (@direction = skip) {
         resize: @direction;
         overflow: auto;         // Safari fix
@@ -210,6 +210,14 @@
 
 //  Skips
 //  ----------------------------------------------------------------------- //
+
+    .align {
+        .cover        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
 
     .appearance (@var) when (@var = skip) {}
 
@@ -282,14 +290,6 @@
 
     .position (@var) when (@var = skip) {}
 
-    .position {
-        .fill         (@var) when (@var = skip) {}
-        .left-top     (@var) when (@var = skip) {}
-        .left-bottom  (@var) when (@var = skip) {}
-        .right-top    (@var) when (@var = skip) {}
-        .right-bottom (@var) when (@var = skip) {}
-    }
-
     .resize (@var) when (@var = skip) {}
 
     .rgba (@var) when (@var = skip) {}
@@ -352,6 +352,14 @@
 
 // Queries
 // ----------------------------------------------------------------------- //
+
+    .align {
+        .cover (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .align.cover (@top, @right, @bottom, @left);
+            }
+        }
+    }
 
     .arrow {
         .top (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
@@ -507,14 +515,6 @@
     .position (@position: absolute, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .position (@position);
-        }
-    }
-
-    .position {
-        .fill (@position: absolute, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
-            @media all and (min-width: @query) {
-                .position.fill (@position, @top, @right, @bottom, @left);
-            }
         }
     }
 
@@ -1182,4 +1182,6 @@
 
     @to-bottom-gray15  : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
     @x-img-black       : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
+    
+    @spacer-trans         : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 

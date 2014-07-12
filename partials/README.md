@@ -2,6 +2,11 @@
 
 ## Mixins
 
+00. .align.cover (align, top, right, bottom, left, query);
+00. .align.left-top (align, left, top);
+00. .align.left-bottom (align, left, bottom);
+00. .align.right-top (align, right, top);
+00. .align.right-bottom (align, right, bottom);
 00. .appearance (appearance);
 00. .back (color, image, repeat, position, query);
 00. .back.attachment (attachment);
@@ -41,11 +46,6 @@
 00. .perspective (perspective);
 00. .placeholder (color);
 00. .position (position, query);
-00. .position.fill (position, top, right, bottom, left, query);
-00. .position.left-top (position, left, top);
-00. .position.left-bottom (position, left, bottom);
-00. .position.right-top (position, right, top);
-00. .position.right-bottom (position, right, bottom);
 00. .resize (direction);
 00. .rotate (degrees);
 00. .rounded (radius);

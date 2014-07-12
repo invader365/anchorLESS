@@ -2,6 +2,14 @@
 // Queries
 // ----------------------------------------------------------------------- //
 
+    .align {
+        .cover (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .align.cover (@top, @right, @bottom, @left);
+            }
+        }
+    }
+
     .arrow {
         .top (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
@@ -156,14 +164,6 @@
     .position (@position: absolute, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .position (@position);
-        }
-    }
-
-    .position {
-        .fill (@position: absolute, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
-            @media all and (min-width: @query) {
-                .position.fill (@position, @top, @right, @bottom, @left);
-            }
         }
     }
 
