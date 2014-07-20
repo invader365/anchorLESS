@@ -2,11 +2,11 @@
 
 ## Mixins
 
-00. .align.cover (align, top, right, bottom, left, query);
-00. .align.left-top (align, left, top);
-00. .align.left-bottom (align, left, bottom);
-00. .align.right-top (align, right, top);
-00. .align.right-bottom (align, right, bottom);
+00. .align (top, right, bottom, left, query);
+00. .align.left-top (left, top);
+00. .align.left-bottom (left, bottom);
+00. .align.right-top (right, top);
+00. .align.right-bottom (right, bottom);
 00. .appearance (appearance);
 00. .back (color, image, repeat, position, query);
 00. .back.attachment (attachment);
@@ -25,12 +25,12 @@
 00. .font (font, family);
 00. .font-face (name, path);
 00. .font-size (size, query);
-00. .gradient(start, stop, degrees, image);
-00. .gradient.to-bottom(start, stop, image);
-00. .gradient.to-left(start, stop, image);
-00. .gradient.to-right(start, stop, image);
-00. .gradient.to-top(start, stop, image);
-00. .gradient.radial(inner, outer, image);
+00. .gradient (start, stop, degrees, image);
+00. .gradient.to-bottom (start, stop, image);
+00. .gradient.to-left (start, stop, image);
+00. .gradient.to-right (start, stop, image);
+00. .gradient.to-top (start, stop, image);
+00. .gradient.radial (inner, outer, image);
 00. .height (height, query);
 00. .highlight (highlight);
 00. .image (image);
@@ -46,6 +46,11 @@
 00. .perspective (perspective);
 00. .placeholder (color);
 00. .position (position, query);
+00. .relative.align (top, right, bottom, left, query);
+00. .relative.left-top (left, top);
+00. .relative.left-bottom (left, bottom);
+00. .relative.right-top (right, top);
+00. .relative.right-bottom (right, bottom);
 00. .resize (direction);
 00. .rotate (degrees);
 00. .rounded (radius);

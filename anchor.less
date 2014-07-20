@@ -9,35 +9,49 @@
 //
 //  -------------------------------------------------- //
 
-//  ---------------------------------------------------------------------------
-//  i. Mixins
-//  ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------- //
+// i. Mixins
+// ----------------------------------------------------------------------- //
+
+    .absolute {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = skip) and (@query = 0) {
+           .position.align(absolute, @top, @right, @bottom, @left);
+        }
+        .left-top (@left: auto, @top: auto) when not (@left = skip) {
+            .position.left-top(absolute, @left, @top);
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = skip) {
+            .position.left-bottom(absolute, @left, @bottom);
+        }
+        .right-top (@right: auto, @top: auto) when not (@right = skip) {
+            .position.right-top(absolute, @right, @top);
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = skip) {
+            .position.right-bottom(absolute, @right, @bottom);
+        }
+    }
+
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = skip) and (@query = 0) {
+        top: @top; 
+        right: @right;
+        bottom: @bottom;
+        left: @left;
+    }
 
     .align {
-        .cover (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@position = null) and (@query = 0) {
-            position: @position;
+        .left-top (@left: auto, @top: auto) when not (@left = skip) {
+            left: @left;
             top: @top; 
-            right: @right;
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = skip) {
+            left: @left;
             bottom: @bottom;
-            left: @left;
         }
-        .left-top (@left: auto, @top: auto) when not (@position = skip) {
-            position: @position;
-            left: @left;
-            top: @top; 
-        }
-        .left-bottom (@left: auto, @bottom: auto) when not (@position = skip) {
-            position: @position;
-            left: @left;
-            bottom: @bottom; 
-        }
-        .right-top (@right: auto, @top: auto) when not (@position = skip) {
-            position: @position;
+        .right-top (@right: auto, @top: auto) when not (@right = skip) {
             right: @right;
-            top: @top; 
+            top: @top;
         }
-        .right-bottom (@right: auto, @bottom: auto) when not (@position = skip) {
-            position: @position;
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = skip) {
             right: @right; 
             bottom: @bottom;
         }
@@ -62,7 +76,7 @@
             .background-clip(@clip); 
         }
         .position (@position: 0 0) when not (@position = skip) { 
-            background-position: @position; 
+            background-position: @position;
         }
         .repeat (@repeat: repeat) when not (@repeat = skip) { 
             background-repeat: @repeat; 
@@ -92,13 +106,31 @@
         display: @display;
     }
 
+    .fixed {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = skip) and (@query = 0) {
+           .position.align(fixed, @top, @right, @bottom, @left);
+        }
+        .left-top (@left: auto, @top: auto) when not (@left = skip) {
+            .position.left-top(fixed, @left, @top);
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = skip) {
+            .position.left-bottom(fixed, @left, @bottom);
+        }
+        .right-top (@right: auto, @top: auto) when not (@right = skip) {
+            .position.right-top(fixed, @right, @top);
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = skip) {
+            .position.right-bottom(fixed, @right, @bottom);
+        }
+    }
+
     .float (@float: none, @query: 0) when not (@float = skip) and (@query = 0) {
         float: @float;
     }
     
     .font (@font: normal 1em, @family: inherit) when not (@font = skip) and (@family = inherit) {
         font: @font a;
-        font-family: inherit;           //  Inherit is not a valid value within shorthand
+        font-family: inherit;           // Inherit is not a valid value within shorthand
     }
 
     .font (@font: normal 1em, @family: inherit) when not (@font = skip) and not (@family = inherit) {
@@ -166,6 +198,54 @@
         position: @position;
     }
 
+    .position {
+        .align (@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@position = skip) and (@query = 0) {
+            position: @position;
+            top: @top; 
+            right: @right;
+            bottom: @bottom;
+            left: @left;
+        }
+        .left-top (@position: relative, @left: auto, @top: auto) when not (@position = skip) {
+            position: @position;
+            left: @left;
+            top: @top; 
+        }
+        .left-bottom (@position: relative, @left: auto, @bottom: auto) when not (@position = skip) {
+            position: @position;
+            left: @left;
+            bottom: @bottom;
+        }
+        .right-top (@position: relative, @right: auto, @top: auto) when not (@position = skip) {
+            position: @position;
+            right: @right;
+            top: @top; 
+        }
+        .right-bottom (@position: relative, @right: auto, @bottom: auto) when not (@position = skip) {
+            position: @position;
+            right: @right;
+            bottom: @bottom;
+        }
+    }
+
+    .relative {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = skip) and (@query = 0) {
+           .position.align(relative, @top, @right, @bottom, @left);
+        }
+        .left-top (@left: auto, @top: auto) when not (@left = skip) {
+            .position.left-top(relative, @left, @top);
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = skip) {
+            .position.left-bottom(relative, @left, @bottom);
+        }
+        .right-top (@right: auto, @top: auto) when not (@right = skip) {
+            .position.right-top(relative, @right, @top);
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = skip) {
+            .position.right-bottom(relative, @right, @bottom);
+        }
+    }
+
     .resize (@direction: none) when not (@direction = skip) {
         resize: @direction;
         overflow: auto;         // Safari fix
@@ -208,156 +288,12 @@
         width: @width;
     }
 
-//  Skips
-//  ----------------------------------------------------------------------- //
-
-    .align {
-        .cover        (@var) when (@var = skip) {}
-        .left-top     (@var) when (@var = skip) {}
-        .left-bottom  (@var) when (@var = skip) {}
-        .right-top    (@var) when (@var = skip) {}
-        .right-bottom (@var) when (@var = skip) {}
-    }
-
-    .appearance (@var) when (@var = skip) {}
-
-    .back (@var) when (@var = skip) {}
-
-    .back {
-        .attachment (@var) when (@var = skip)  {}
-        .color      (@var) when (@var = skip)  {}
-        .position   (@var) when (@var = skip)  {}
-        .repeat     (@var) when (@var = skip)  {}
-        .size       (@var) when (@var = skip)  {}
-    }
-
-    .backface (@var) when (@var = skip) {}
-
-    .border (@var) when (@var = skip) {}
-
-    .box-sizing(@var) when (@var = skip) {}
-
-    .color (@var) when (@var = skip) {}
-
-    .columns (@var) when (@var = skip) {}
-
-    .display (@var) when (@var = skip) {}
-
-    .float (@var) when (@var = skip) {}
-
-    .font (@var) when (@var = skip) {}
-
-    .font-face (@var) when (@var = skip) {}
-
-    .font-size (@var) when (@var = skip) {}
-
-    .gradient (@var) when (@var = skip) {}
-
-    .gradient {
-        .directional (@var) when (@var = skip) {}
-        .to-bottom   (@var) when (@var = skip) {}
-        .to-left     (@var) when (@var = skip) {}
-        .to-right    (@var) when (@var = skip) {}
-        .to-top      (@var) when (@var = skip) {}
-        .radial      (@var) when (@var = skip) {}
-    }
-
-    .height (@var) when (@var = skip) {}
-
-    .highlight (@var) when (@var = skip) {}
-
-    .image (@var) when (@var = skip) {}
-
-    .indent (@var) when (@var = skip) {}
-
-    .index (@var) when (@var = skip) {}
-
-    .list-style (@var) when (@var = skip) {}
-
-    .margin (@var) when (@var = skip) {}
-
-    .max-width (@var) when (@var = skip) {}
-
-    .min-width (@var) when (@var = skip) {}
-
-    .opacity (@var) when (@var = skip) {}
-
-    .overflow (@var) when (@var = skip) {}
-
-    .padding (@var) when (@var = skip) {}
-
-    .placeholder (@var) when (@var = skip) {}
-
-    .position (@var) when (@var = skip) {}
-
-    .resize (@var) when (@var = skip) {}
-
-    .rgba (@var) when (@var = skip) {}
-
-    .rotate (@var) when (@var = skip) {}
-
-    .rounded (@var) when (@var = skip) {}
-
-    .rounded {
-        .top    (@var) when (@var = skip)  {}
-        .right  (@var) when (@var = skip)  {}
-        .bottom (@var) when (@var = skip)  {}
-        .left   (@var) when (@var = skip)  {}
-        .left-top     (@var) when (@var = skip) {}
-        .left-bottom  (@var) when (@var = skip) {}
-        .right-top    (@var) when (@var = skip) {}
-        .right-bottom (@var) when (@var = skip) {}
-    }
-    
-    .scale (@var) when (@var = skip) {}
-
-    .shadow (@var) when (@var = skip) {}
-
-    .size (@var) when (@var = skip) {}
-
-    .size-min (@var) when (@var = skip) {}
-
-    .skew (@var) when (@var = skip) {}
-
-    .spacing (@var) when (@var = skip) {}
-
-    .square (@var) when (@var = skip) {}
-
-    .table {
-        .border      (@var) when (@var = skip) {}
-        .cell-border (@var) when (@var = skip) {}
-        .padding     (@var) when (@var = skip) {}
-        .rounded     (@var) when (@var = skip) {}
-        .tbody-color (@var) when (@var = skip) {}
-        .thead-font  (@var) when (@var = skip) {}
-    }
-
-    .text-align (@var) when (@var = skip) {}
-
-    .text-shadow (@var) when (@var = skip) {}
-
-    .transform (@var) when (@var = skip) {}
-
-    .transition (@var) when (@var = skip) {}
-
-    .transitions (@var) when (@var = skip) {}
-
-    .translate (@var) when (@var = skip) {}
-
-    .translate3d (@var) when (@var = skip) {}
-
-    .user-select (@var) when (@var = skip) {}
-
-    .width (@var) when (@var = skip) {}
-
 // Queries
 // ----------------------------------------------------------------------- //
 
-    .align {
-        .cover (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
-            @media all and (min-width: @query) {
-                .align.cover (@top, @right, @bottom, @left);
-            }
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .align (@top, @right, @bottom, @left);
         }
     }
 
@@ -403,7 +339,7 @@
             }
         }
     }
-    
+
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when (@query > 0) { 
         @media all and (min-width: @query) {
             .back (@color, @image, @repeat, @position);
@@ -518,6 +454,14 @@
         }
     }
 
+    .position {
+        .align (@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .position.align (@position, @top, @right, @bottom, @left);
+            }
+        }
+    }
+
     .reset-center (@margin-left: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .reset-center (@margin-left);
@@ -550,7 +494,7 @@
 
     .square (@size: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .square (@square);
+            .square (@square, @display);
         }
     }
 
@@ -569,6 +513,248 @@
     .width (@width: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .width (@width);
+        }
+    }
+//
+//  Skips
+//  ----------------------------------------------------------------------- //
+    
+    .absolute {
+        .align        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
+
+    .align (@var) when (@var = skip) {}
+
+    .align {
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
+
+    .appearance (@var) when (@var = skip) {}
+
+    .back (@var) when (@var = skip) {}
+
+    .back {
+        .attachment (@var) when (@var = skip)  {}
+        .color      (@var) when (@var = skip)  {}
+        .position   (@var) when (@var = skip)  {}
+        .repeat     (@var) when (@var = skip)  {}
+        .size       (@var) when (@var = skip)  {}
+    }
+
+    .backface (@var) when (@var = skip) {}
+
+    .border (@var) when (@var = skip) {}
+
+    .box-sizing(@var) when (@var = skip) {}
+
+    .color (@var) when (@var = skip) {}
+
+    .columns (@var) when (@var = skip) {}
+
+    .contain-max (@var) when (@var = skip) {}
+
+    .display (@var) when (@var = skip) {}
+    
+    .fixed {
+        .align        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
+
+    .float (@var) when (@var = skip) {}
+
+    .font (@var) when (@var = skip) {}
+
+    .font-face (@var) when (@var = skip) {}
+
+    .font-size (@var) when (@var = skip) {}
+
+    .gradient (@var) when (@var = skip) {}
+
+    .gradient {
+        .directional (@var) when (@var = skip) {}
+        .to-bottom   (@var) when (@var = skip) {}
+        .to-left     (@var) when (@var = skip) {}
+        .to-right    (@var) when (@var = skip) {}
+        .to-top      (@var) when (@var = skip) {}
+        .radial      (@var) when (@var = skip) {}
+    }
+
+    .height (@var) when (@var = skip) {}
+
+    .highlight (@var) when (@var = skip) {}
+
+    .image (@var) when (@var = skip) {}
+
+    .indent (@var) when (@var = skip) {}
+
+    .index (@var) when (@var = skip) {}
+
+    .inner-shadow (@var) when (@var = skip) {}
+
+    .list-style (@var) when (@var = skip) {}
+
+    .margin (@var) when (@var = skip) {}
+
+    .max-width (@var) when (@var = skip) {}
+
+    .min-width (@var) when (@var = skip) {}
+
+    .opacity (@var) when (@var = skip) {}
+
+    .overflow (@var) when (@var = skip) {}
+
+    .padding (@var) when (@var = skip) {}
+
+    .placeholder (@var) when (@var = skip) {}
+
+    .position (@var) when (@var = skip) {}
+    
+    .position {
+        .align        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
+    
+    .relative {
+        .align        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
+
+    .resize (@var) when (@var = skip) {}
+
+    .rgba (@var) when (@var = skip) {}
+
+    .rotate (@var) when (@var = skip) {}
+
+    .rounded (@var) when (@var = skip) {}
+
+    .rounded {
+        .top    (@var) when (@var = skip)  {}
+        .right  (@var) when (@var = skip)  {}
+        .bottom (@var) when (@var = skip)  {}
+        .left   (@var) when (@var = skip)  {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
+    
+    .scale (@var) when (@var = skip) {}
+
+    .shadow (@var) when (@var = skip) {}
+
+    .size (@var) when (@var = skip) {}
+
+    .size-min (@var) when (@var = skip) {}
+
+    .skew (@var) when (@var = skip) {}
+
+    .spacing (@var) when (@var = skip) {}
+
+    .square (@var) when (@var = skip) {}
+
+    .table {
+        .border      (@var) when (@var = skip) {}
+        .cell-border (@var) when (@var = skip) {}
+        .padding     (@var) when (@var = skip) {}
+        .rounded     (@var) when (@var = skip) {}
+        .tbody-color (@var) when (@var = skip) {}
+        .thead-font  (@var) when (@var = skip) {}
+    }
+
+    .text-align (@var) when (@var = skip) {}
+
+    .text-shadow (@var) when (@var = skip) {}
+
+    .transform (@var) when (@var = skip) {}
+
+    .transition (@var) when (@var = skip) {}
+
+    .transitions (@var) when (@var = skip) {}
+
+    .translate (@var) when (@var = skip) {}
+
+    .translate3d (@var) when (@var = skip) {}
+
+    .user-select (@var) when (@var = skip) {}
+
+    .width (@var) when (@var = skip) {}
+    //
+//  States
+//  ----------------------------------------------------------------------- //
+
+//  Colors
+
+    .color                      { 
+        .hover (@color: inherit, @back-color: skip) {
+            &:hover             { .color(@color, @back-color); }
+        }
+
+        .active (@color: inherit, @back-color: skip) {
+            &:active            { .color(@color, @back-color); }
+        }
+
+        .focus (@color: inherit, @back-color: skip) {
+            &:focus             { .color(@color, @back-color); }
+        }
+
+        .visited (@color: inherit, @back-color: skip) {
+            &:visited           { .color(@color, @back-color); }
+        }
+
+        .hover-focus (@color: inherit, @back-color: skip) {
+            &:hover,
+            &:focus             { .color(@color, @back-color); }
+        }
+
+        .normal-active (@color: inherit, @back-color: skip) {
+            &,
+            &:active            { .color(@color, @back-color); }
+        }
+    }
+
+//  Gradients
+
+    .gradient                   { 
+        .hover (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+            &:hover             { .gradient(@start, @stop, @degrees, @image); }
+        }
+
+        .active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+            &:active            { .gradient(@start, @stop, @degrees, @image); }
+        }
+
+        .focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+            &:focus             { .gradient(@start, @stop, @degrees, @image); }
+        }
+
+        .visited (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+            &:visited           { .gradient(@start, @stop, @degrees, @image); }
+        }
+
+        .hover-focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+            &:hover,
+            &:focus             { .gradient(@start, @stop, @degrees, @image); }
+        }
+
+        .normal-active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+            &,
+            &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
     }
 
@@ -780,7 +966,7 @@
     .translate (@x: 0, @y: 0) when not (@x = skip) {
         -webkit-transform: translate(@x, @y);
            -moz-transform: translate(@x, @y);
-            -ms-transform: translate(@x, @y);
+            -ms-transform: translate(@x, @y);   
                 transform: translate(@x, @y);
     }
 
@@ -800,8 +986,8 @@
 //  ii. Assets
 //  ---------------------------------------------------------------------------
 
-//  Arrows
-//  ----------------------------------------------------------------------- //
+// Arrows
+// ----------------------------------------------------------------------- //
 
     .arrow {
         .base () {
@@ -859,11 +1045,12 @@
             border-style: solid;
         }
     }
-
+// 
 // Blocks
 // ----------------------------------------------------------------------- //
 
     .center-block (@width: 0, @query: 0) when (@query = 0) {
+        width: @width;
         left: (@width / 2) * -1;
         margin-left: 50%;
     }
@@ -921,7 +1108,7 @@
     .pseudo-container (@display: inline-block) {
         display: @display;
         position: relative; 
-        overflow: visible;          // overflow IE8/9
+        overflow: visible;  // overflow ie8/9
     }
 
     .pseudo (@content: '', @width: auto, @height: auto) {
@@ -931,70 +1118,7 @@
         height: @height;
         vertical-align: middle;
     }
-
-// States
-// ----------------------------------------------------------------------- //
-
-// Colors
-
-    .color                      { 
-        .hover (@color: inherit, @back-color: skip) {
-            &:hover             { .color(@color, @back-color); }
-        }
-
-        .active (@color: inherit, @back-color: skip) {
-            &:active            { .color(@color, @back-color); }
-        }
-
-        .focus (@color: inherit, @back-color: skip) {
-            &:focus             { .color(@color, @back-color); }
-        }
-
-        .visited (@color: inherit, @back-color: skip) {
-            &:visited           { .color(@color, @back-color); }
-        }
-
-        .hover-focus (@color: inherit, @back-color: skip) {
-            &:hover,
-            &:focus             { .color(@color, @back-color); }
-        }
-
-        .normal-active (@color: inherit, @back-color: skip) {
-            &,
-            &:active            { .color(@color, @back-color); }
-        }
-    }
-
-// Gradients
-
-    .gradient                   { 
-        .hover (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
-            &:hover             { .gradient(@start, @stop, @degrees, @image); }
-        }
-
-        .active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
-            &:active            { .gradient(@start, @stop, @degrees, @image); }
-        }
-
-        .focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
-            &:focus             { .gradient(@start, @stop, @degrees, @image); }
-        }
-
-        .visited (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
-            &:visited           { .gradient(@start, @stop, @degrees, @image); }
-        }
-
-        .hover-focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
-            &:hover,
-            &:focus             { .gradient(@start, @stop, @degrees, @image); }
-        }
-
-        .normal-active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
-            &,
-            &:active            { .gradient(@start, @stop, @degrees, @image); }
-        }
-    }
-
+//
 // Tables
 // ----------------------------------------------------------------------- //
 
@@ -1028,9 +1152,8 @@
             & tr th             { .font(@font, @family); }
         }
     }
-    
-// Unocategorized
-// ----------------------------------------------------------------------- //
+//  Unocategorized
+//  ----------------------------------------------------------------------- //
 
     .strong-div-width (@swidth: 100%, @dwidth: 100%, @query: 0) when not (@swidth = skip) and (@query = 0) {
         & > strong              { display: block; width: @swidth; float: left; }
@@ -1049,9 +1172,13 @@
 //  iii. Utilities
 //  ----------------------------------------------------------------------- 
 
+//
+//  Constants 
+//  ----------------------------------------------------------------------- //
+
     @d                      :   e('/');         // divider escape
 
-// Shades of Gray
+//  Shades of Gray
 
     @hex0                   :     #000;
     @hex1                   :     #111;
@@ -1071,7 +1198,7 @@
     @hexef                  :     #f6f6f7;
     @hexf                   :     #fff;
 
-// Color Codes
+//  Colors Codes
 
     @aqua                   :     #0ff;
     @black                  :     #000;
@@ -1099,7 +1226,7 @@
     @yellow                 :     #ff0;
     @yellowGreen            :     #9acd32;
 
-// Websafe Fonts
+//  Websafe Fonts
 
     @font-mono              :   'Menlo, Monaco, Consolas, monospace';
     @font-sans              :   'Helvetica Neue, Helvetica, Arial, sans-serif';
@@ -1175,13 +1302,15 @@
 // ----------------------------------------------------------------------- //
 
     @grayscale      : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale";
+
     @grayscale-ie10 : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale";
 
 // Inline Images
 // ----------------------------------------------------------------------- //
 
-    @to-bottom-gray15  : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
-    @x-img-black       : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
+    @trans-to-gray15    : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
+    @close-black            : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
     
-    @spacer-trans         : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+    @spacer-trans       : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 
+    @square-black75     : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA9JREFUeNpiYGBgWAYQYAAAqwCnu+qxhQAAAABJRU5ErkJggg==";

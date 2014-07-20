@@ -2,11 +2,9 @@
 // Queries
 // ----------------------------------------------------------------------- //
 
-    .align {
-        .cover (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
-            @media all and (min-width: @query) {
-                .align.cover (@top, @right, @bottom, @left);
-            }
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .align (@top, @right, @bottom, @left);
         }
     }
 
@@ -164,6 +162,14 @@
     .position (@position: absolute, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .position (@position);
+        }
+    }
+
+    .position {
+        .align (@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .position.align (@position, @top, @right, @bottom, @left);
+            }
         }
     }
 

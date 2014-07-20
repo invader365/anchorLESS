@@ -2,26 +2,45 @@
 // Mixins
 // ----------------------------------------------------------------------- //
 
+    .absolute {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = skip) and (@query = 0) {
+           .position.align(absolute, @top, @right, @bottom, @left);
+        }
+        .left-top (@left: auto, @top: auto) when not (@left = skip) {
+            .position.left-top(absolute, @left, @top);
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = skip) {
+            .position.left-bottom(absolute, @left, @bottom);
+        }
+        .right-top (@right: auto, @top: auto) when not (@right = skip) {
+            .position.right-top(absolute, @right, @top);
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = skip) {
+            .position.right-bottom(absolute, @right, @bottom);
+        }
+    }
+
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = skip) and (@query = 0) {
+        top: @top; 
+        right: @right;
+        bottom: @bottom;
+        left: @left;
+    }
+
     .align {
-        .cover (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@position = null) and (@query = 0) {
-            top: @top; 
-            right: @right;
-            bottom: @bottom;
-            left: @left;
-        }
-        .left-top (@left: auto, @top: auto) when not (@position = skip) {
+        .left-top (@left: auto, @top: auto) when not (@left = skip) {
             left: @left;
             top: @top; 
         }
-        .left-bottom (@left: auto, @bottom: auto) when not (@position = skip) {
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = skip) {
             left: @left;
             bottom: @bottom;
         }
-        .right-top (@right: auto, @top: auto) when not (@position = skip) {
+        .right-top (@right: auto, @top: auto) when not (@right = skip) {
             right: @right;
             top: @top;
         }
-        .right-bottom (@right: auto, @bottom: auto) when not (@position = skip) {
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = skip) {
             right: @right; 
             bottom: @bottom;
         }
@@ -74,6 +93,24 @@
 
     .display (@display: none, @query: 0) when not (@display = skip) and (@query = 0) {
         display: @display;
+    }
+
+    .fixed {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = skip) and (@query = 0) {
+           .position.align(fixed, @top, @right, @bottom, @left);
+        }
+        .left-top (@left: auto, @top: auto) when not (@left = skip) {
+            .position.left-top(fixed, @left, @top);
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = skip) {
+            .position.left-bottom(fixed, @left, @bottom);
+        }
+        .right-top (@right: auto, @top: auto) when not (@right = skip) {
+            .position.right-top(fixed, @right, @top);
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = skip) {
+            .position.right-bottom(fixed, @right, @bottom);
+        }
     }
 
     .float (@float: none, @query: 0) when not (@float = skip) and (@query = 0) {
@@ -148,6 +185,54 @@
 
     .position (@position: static, @query: 0) when not (@position = skip) and (@query = 0) {
         position: @position;
+    }
+
+    .position {
+        .align (@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@position = skip) and (@query = 0) {
+            position: @position;
+            top: @top; 
+            right: @right;
+            bottom: @bottom;
+            left: @left;
+        }
+        .left-top (@position: relative, @left: auto, @top: auto) when not (@position = skip) {
+            position: @position;
+            left: @left;
+            top: @top; 
+        }
+        .left-bottom (@position: relative, @left: auto, @bottom: auto) when not (@position = skip) {
+            position: @position;
+            left: @left;
+            bottom: @bottom;
+        }
+        .right-top (@position: relative, @right: auto, @top: auto) when not (@position = skip) {
+            position: @position;
+            right: @right;
+            top: @top; 
+        }
+        .right-bottom (@position: relative, @right: auto, @bottom: auto) when not (@position = skip) {
+            position: @position;
+            right: @right;
+            bottom: @bottom;
+        }
+    }
+
+    .relative {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = skip) and (@query = 0) {
+           .position.align(relative, @top, @right, @bottom, @left);
+        }
+        .left-top (@left: auto, @top: auto) when not (@left = skip) {
+            .position.left-top(relative, @left, @top);
+        }
+        .left-bottom (@left: auto, @bottom: auto) when not (@left = skip) {
+            .position.left-bottom(relative, @left, @bottom);
+        }
+        .right-top (@right: auto, @top: auto) when not (@right = skip) {
+            .position.right-top(relative, @right, @top);
+        }
+        .right-bottom (@right: auto, @bottom: auto) when not (@right = skip) {
+            .position.right-bottom(relative, @right, @bottom);
+        }
     }
 
     .resize (@direction: none) when not (@direction = skip) {

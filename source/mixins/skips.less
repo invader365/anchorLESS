@@ -1,9 +1,18 @@
 //
 //  Skips
 //  ----------------------------------------------------------------------- //
+    
+    .absolute {
+        .align        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
+
+    .align (@var) when (@var = skip) {}
 
     .align {
-        .cover        (@var) when (@var = skip) {}
         .left-top     (@var) when (@var = skip) {}
         .left-bottom  (@var) when (@var = skip) {}
         .right-top    (@var) when (@var = skip) {}
@@ -35,6 +44,14 @@
     .contain-max (@var) when (@var = skip) {}
 
     .display (@var) when (@var = skip) {}
+    
+    .fixed {
+        .align        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
 
     .float (@var) when (@var = skip) {}
 
@@ -84,6 +101,22 @@
     .placeholder (@var) when (@var = skip) {}
 
     .position (@var) when (@var = skip) {}
+    
+    .position {
+        .align        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
+    
+    .relative {
+        .align        (@var) when (@var = skip) {}
+        .left-top     (@var) when (@var = skip) {}
+        .left-bottom  (@var) when (@var = skip) {}
+        .right-top    (@var) when (@var = skip) {}
+        .right-bottom (@var) when (@var = skip) {}
+    }
 
     .resize (@var) when (@var = skip) {}
 
