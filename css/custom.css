@@ -1,0 +1,140 @@
+.button {
+  text-decoration: none;
+}
+.button:hover {
+  text-decoration: none;
+}
+ul,
+ol {
+  margin-bottom: 24px;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a {
+  color: inherit;
+}
+pre {
+  display: block;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+pre code {
+  display: block;
+  color: inherit;
+  font-size: inherit;
+  white-space: pre-wrap;
+}
+.selector {
+  color: #fb292d;
+}
+.mixins {
+  color: #dadbb1;
+}
+.panel.primary code {
+  color: #dadbb1;
+}
+table tr .first {
+  width: 33.33%;
+}
+hr {
+  margin: -1px 0 0;
+}
+nav > section {
+  border-bottom: 1px solid #121212;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+footer > section {
+  border-top: 1px solid #121212;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset;
+}
+.m-brand h1 {
+  text-align: center;
+  margin: 0;
+  text-shadow: 0px 0px 5px #000000;
+}
+.m-brand h1 a {
+  color: #ffffff;
+  word-spacing: -2px;
+  letter-spacing: -1px;
+  text-decoration: none;
+}
+.m-brand h1 img {
+  margin: 0 7px -10px 0;
+}
+.m-brand .headline {
+  text-align: center;
+}
+.l-top-nav .m-brand h1 {
+  font-size: 4.8em;
+}
+.l-right-top-nav .m-brand {
+  padding-top: 24px;
+}
+.l-right-top-nav .m-brand h1 {
+  font-size: 1.6em;
+  padding: 13px 0;
+}
+.l-right-top-nav .m-brand h1 a {
+  letter-spacing: 0;
+}
+.l-right-top-nav .m-brand h1 img {
+  width: 32px;
+}
+body.home .navbar .home a,
+body.reference .navbar .reference a,
+body.usage .navbar .usage a,
+.navbar li a:hover {
+  color: #fb292d;
+}
+.m-mainnav {
+  padding-top: 24px;
+}
+.m-mainnav a {
+  text-decoration: none;
+}
+.c-filters {
+  border-right: 1px solid #121212;
+  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.07) inset;
+  padding-right: 24px;
+}
+.c-module .letter {
+  padding: 0;
+  font: 1.8em / 1 a;
+  font-family: inherit;
+}
+.m-submenu {
+  border-bottom: 1px solid #121212;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+.m-submenu a:hover,
+.m-submenu .current a {
+  background: rgba(0, 0, 0, 0.3) none repeat 0 0;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.m-submenu a {
+  margin-right: 1em;
+  padding: 0.3em 0.7em;
+}
+.m-submenu-2 .title {
+  font-size: 1.6em;
+  text-align: right;
+}
+.m-submenu-2 li {
+  text-align: right;
+}
+.m-submenu-2 li a {
+  color: #c6c6c6;
+  text-decoration: none;
+}
+.m-legal {
+  padding-top: 24px;
+}

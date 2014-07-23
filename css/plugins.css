@@ -1,0 +1,41 @@
+.icon:before {
+  font: 1.6em / 1em 'FontAwesome';
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+}
+.icon {
+  display: inline-block;
+  position: relative;
+  overflow: visible;
+}
+.icon:before {
+  display: inline-block;
+  content: '';
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+}
+.icon.align-right:before {
+  right: 0;
+}
+.icon.align-left:before {
+  left: 0;
+}
+.icon.search:before {
+  content: "\f002";
+}
+.icon.back:before {
+  content: "\f112";
+}
+.icon.menu:before {
+  content: "\f0c9";
+}
+.icon.home:before {
+  content: "\f015";
+}
+.icon.summary:before {
+  content: "\f105";
+}
+.icon.summary.active:before {
+  content: "\f107";
+}
