@@ -1,4 +1,4 @@
-# ![Logo](http://invader365.github.io/anchorLESS/images/logo-main.png) [Anchor LESS](http://invader365.github.io/anchorLESS)
+# ![Logo](http://invader365.github.io/anchorLESS/images/logo-main-small.png) [Anchor LESS](http://invader365.github.io/anchorLESS)
 
 > The most extensive **Less mixins library**
 
