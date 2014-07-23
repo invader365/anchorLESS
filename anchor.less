@@ -591,15 +591,11 @@
 
     .height (@var) when (@var = skip) {}
 
-    .highlight (@var) when (@var = skip) {}
-
     .image (@var) when (@var = skip) {}
 
     .indent (@var) when (@var = skip) {}
 
     .index (@var) when (@var = skip) {}
-
-    .inner-shadow (@var) when (@var = skip) {}
 
     .list-style (@var) when (@var = skip) {}
 
@@ -641,6 +637,10 @@
 
     .rotate (@var) when (@var = skip) {}
 
+    .rotateX (@var) when (@var = skip) {}
+
+    .rotateY (@var) when (@var = skip) {}
+
     .rounded (@var) when (@var = skip) {}
 
     .rounded {
@@ -658,6 +658,8 @@
 
     .shadow (@var) when (@var = skip) {}
 
+    .shadow-inset (@var) when (@var = skip) {}
+
     .size (@var) when (@var = skip) {}
 
     .size-min (@var) when (@var = skip) {}
@@ -668,13 +670,15 @@
 
     .square (@var) when (@var = skip) {}
 
+    .tap-highlight (@var) when (@var = skip) {}
+
     .table {
         .border      (@var) when (@var = skip) {}
         .cell-border (@var) when (@var = skip) {}
         .padding     (@var) when (@var = skip) {}
         .rounded     (@var) when (@var = skip) {}
-        .tbody-color (@var) when (@var = skip) {}
-        .thead-font  (@var) when (@var = skip) {}
+        .body-color  (@var) when (@var = skip) {}
+        .head-font   (@var) when (@var = skip) {}
     }
 
     .text-align (@var) when (@var = skip) {}
@@ -684,8 +688,8 @@
     .transform (@var) when (@var = skip) {}
 
     .transition (@var) when (@var = skip) {}
-
-    .transitions (@var) when (@var = skip) {}
+    
+    .transition-list (@var) when (@var = skip) {}
 
     .translate (@var) when (@var = skip) {}
 
@@ -835,18 +839,6 @@
         }
     }
 
-    .highlight (@highlight: gray) when not (@highlight = skip) {
-        -webkit-tap-highlight-color: @highlight;
-           -moz-tap-highlight-color: @highlight;
-                tap-highlight-color: @highlight;
-    }
-
-    .inner-shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
-        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
-        -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
-                box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
-    }
-
     .overflow (@x: visible, @y: visible) when not (@x = skip) {
         overflow-x: @x;
         overflow-y: @y;
@@ -860,16 +852,28 @@
         &::-webkit-input-placeholder  { color: @color; } // Chrome, Safari
     }
 
-    .perspective (@perspective) {
-        -webkit-perspective: @perspective;
-           -moz-perspective: @perspective;
-                perspective: @perspective;
+    .perspective (@length) {
+        -webkit-perspective: @length;
+           -moz-perspective: @length;
+                perspective: @length;
     }
 
-    .rotate (@degrees: 0) when not (@degrees = skip) {
+    .rotate (@degrees: 0deg) when not (@degrees = skip) {
         -webkit-transform: rotate(@degrees);
             -ms-transform: rotate(@degrees);
                 transform: rotate(@degrees);
+    }
+
+    .rotateX (@degrees: 0deg) when not (@degrees = skip) {
+        -webkit-transform: rotateX(@degrees);
+            -ms-transform: rotateX(@degrees);
+                transform: rotateX(@degrees);
+    }
+
+    .rotateY (@degrees: 0deg) when not (@degrees = skip) {
+        -webkit-transform: rotateY(@degrees);
+            -ms-transform: rotateY(@degrees);
+                transform: rotateY(@degrees);
     }
 
     .rounded (@radius: 0) when not (@radius = skip) {
@@ -929,11 +933,28 @@
                 box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
     }
 
+    .shadow-inset (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
+        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+        -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+    }
+
+    .shadow-list (...) {
+        -webkit-box-shadow: @arguments;
+                box-shadow: @arguments;
+    }
+
     .skew (@x: 0, @y: 0) when not (@x = skip) {
         -webkit-transform: skew(@x, @y);
            -moz-transform: skew(@x, @y);
             -ms-transform: skewX(@x) skewY(@y);
                 transform: skew(@x, @y);
+    }
+
+    .tap-highlight (@color: gray) when not (@color = skip) {
+        -webkit-tap-highlight-color: @color;
+           -moz-tap-highlight-color: @color;
+                tap-highlight-color: @color;
     }
 
     .transform (@transform: none) when not (@transform = skip) {
@@ -948,19 +969,9 @@
                 transition: @property @duration @function @delay;
     }
 
-    .transitions (@first: none, @second: none) when not (@first = skip) and not (@first = none) and not (@second = none) {
-        -webkit-transition: @first, @second;
-                transition: @first, @second;
-    }
-
-    .transitions (@first: none, @second: none) when not (@first = skip) and not (@first = none) and (@second = none) {
-        -webkit-transition: @first;
-                transition: @first;
-    }
-
-    .transitions (@first: none, @second: none) when not (@first = skip) and (@first = none) and (@second = none) {
-        -webkit-transition: all 0s ease 0s;
-                transition: all 0s ease 0s;
+    .transition-list (@transitions: all 0s ease 0s) when not (@transitions = skip) {
+        -webkit-transition: @arguments;
+                transition: @arguments;
     }
 
     .translate (@x: 0, @y: 0) when not (@x = skip) {
@@ -1141,14 +1152,14 @@
             & tr:last-child  td:first-child { .rounded.left-bottom(@radius); }
             & tr:last-child  td:last-child  { .rounded.right-bottom(@radius); }
         }
-        .tbody-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and not (@rows = all) {
+        .body-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and not (@rows = all) {
             & tr:nth-child(@{rows}) td,
             & tr.@{rows} td     { .color(@color, @back-color); }
         }
-        .tbody-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and (@rows = all) {
+        .body-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and (@rows = all) {
             & tr td             { .color(@color, @back-color); }
         }
-        .thead-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
+        .head-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
             & tr th             { .font(@font, @family); }
         }
     }
@@ -1301,16 +1312,16 @@
 // Filters
 // ----------------------------------------------------------------------- //
 
-    @grayscale      : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale";
+    @svg-grayscale      : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale";
 
-    @grayscale-ie10 : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale";
+    @svg-grayscale-ie10 : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale";
 
 // Inline Images
 // ----------------------------------------------------------------------- //
 
-    @trans-to-gray15    : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
-    @close-black            : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
+    @png-to-gray15      : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
+    @gif-x-close        : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
     
-    @spacer-trans       : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+    @gif-spacer         : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 
-    @square-black75     : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA9JREFUeNpiYGBgWAYQYAAAqwCnu+qxhQAAAABJRU5ErkJggg==";
+    @png-black75        : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA9JREFUeNpiYGBgWAYQYAAAqwCnu+qxhQAAAABJRU5ErkJggg==";

@@ -21,14 +21,14 @@
             & tr:last-child  td:first-child { .rounded.left-bottom(@radius); }
             & tr:last-child  td:last-child  { .rounded.right-bottom(@radius); }
         }
-        .tbody-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and not (@rows = all) {
+        .body-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and not (@rows = all) {
             & tr:nth-child(@{rows}) td,
             & tr.@{rows} td     { .color(@color, @back-color); }
         }
-        .tbody-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and (@rows = all) {
+        .body-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and (@rows = all) {
             & tr td             { .color(@color, @back-color); }
         }
-        .thead-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
+        .head-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
             & tr th             { .font(@font, @family); }
         }
     }

@@ -76,18 +76,6 @@
         }
     }
 
-    .highlight (@highlight: gray) when not (@highlight = skip) {
-        -webkit-tap-highlight-color: @highlight;
-           -moz-tap-highlight-color: @highlight;
-                tap-highlight-color: @highlight;
-    }
-
-    .inner-shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
-        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
-        -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
-                box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
-    }
-
     .overflow (@x: visible, @y: visible) when not (@x = skip) {
         overflow-x: @x;
         overflow-y: @y;
@@ -101,16 +89,28 @@
         &::-webkit-input-placeholder  { color: @color; } // Chrome, Safari
     }
 
-    .perspective (@perspective) {
-        -webkit-perspective: @perspective;
-           -moz-perspective: @perspective;
-                perspective: @perspective;
+    .perspective (@length) {
+        -webkit-perspective: @length;
+           -moz-perspective: @length;
+                perspective: @length;
     }
 
-    .rotate (@degrees: 0) when not (@degrees = skip) {
+    .rotate (@degrees: 0deg) when not (@degrees = skip) {
         -webkit-transform: rotate(@degrees);
             -ms-transform: rotate(@degrees);
                 transform: rotate(@degrees);
+    }
+
+    .rotateX (@degrees: 0deg) when not (@degrees = skip) {
+        -webkit-transform: rotateX(@degrees);
+            -ms-transform: rotateX(@degrees);
+                transform: rotateX(@degrees);
+    }
+
+    .rotateY (@degrees: 0deg) when not (@degrees = skip) {
+        -webkit-transform: rotateY(@degrees);
+            -ms-transform: rotateY(@degrees);
+                transform: rotateY(@degrees);
     }
 
     .rounded (@radius: 0) when not (@radius = skip) {
@@ -170,11 +170,28 @@
                 box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
     }
 
+    .shadow-inset (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
+        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+        -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+    }
+
+    .shadow-list (...) {
+        -webkit-box-shadow: @arguments;
+                box-shadow: @arguments;
+    }
+
     .skew (@x: 0, @y: 0) when not (@x = skip) {
         -webkit-transform: skew(@x, @y);
            -moz-transform: skew(@x, @y);
             -ms-transform: skewX(@x) skewY(@y);
                 transform: skew(@x, @y);
+    }
+
+    .tap-highlight (@color: gray) when not (@color = skip) {
+        -webkit-tap-highlight-color: @color;
+           -moz-tap-highlight-color: @color;
+                tap-highlight-color: @color;
     }
 
     .transform (@transform: none) when not (@transform = skip) {
@@ -189,19 +206,9 @@
                 transition: @property @duration @function @delay;
     }
 
-    .transitions (@first: none, @second: none) when not (@first = skip) and not (@first = none) and not (@second = none) {
-        -webkit-transition: @first, @second;
-                transition: @first, @second;
-    }
-
-    .transitions (@first: none, @second: none) when not (@first = skip) and not (@first = none) and (@second = none) {
-        -webkit-transition: @first;
-                transition: @first;
-    }
-
-    .transitions (@first: none, @second: none) when not (@first = skip) and (@first = none) and (@second = none) {
-        -webkit-transition: all 0s ease 0s;
-                transition: all 0s ease 0s;
+    .transition-list (@transitions: all 0s ease 0s) when not (@transitions = skip) {
+        -webkit-transition: @arguments;
+                transition: @arguments;
     }
 
     .translate (@x: 0, @y: 0) when not (@x = skip) {
