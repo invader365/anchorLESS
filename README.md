@@ -1,10 +1,10 @@
-# Anchor LESS
+# [Anchor LESS](http://invader365.github.io/anchorLESS)
 
-> A comprehensive **LESS mixins library**
+> The most extensive **Less mixins library**
 
 Anchor LESS is a collection of mixins, assets and utilities to write better and faster CSS.
 
-Highlights:
+Features:
 
 - Harder. Responsive mixins (mobile-first approach), assets and utilities.
 - Better. Seamless integration with html5 frameworks.
