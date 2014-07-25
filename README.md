@@ -31,7 +31,7 @@ Common mixins list:
 00. .width (width, query);
 00. **[..](partials/README.md)**
 
-To see the **[full list](partials/README.md)**.
+To see the **[full reference](http://invader365.github.io/anchorLESS/html/110_reference.html)**.
 
 ## Usage
 ```css

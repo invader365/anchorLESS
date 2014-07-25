@@ -66,7 +66,7 @@
     }
 
     .back {
-        .attachment (@attachment: scroll) when not (@attachment = skip)  { 
+        .attach (@attachment: scroll) when not (@attachment = skip)  { 
             background-attachment: @attachment; 
         }
         .color (@color: transparent) when not (@color = skip) {
@@ -462,9 +462,9 @@
         }
     }
 
-    .reset-center (@margin-left: 0, @query: 0) when (@query > 0) {
+    .reset-block (@margin-left: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .reset-center (@margin-left);
+            .reset-block (@margin-left);
         } 
     }
 
@@ -541,7 +541,7 @@
     .back (@var) when (@var = skip) {}
 
     .back {
-        .attachment (@var) when (@var = skip)  {}
+        .attach     (@var) when (@var = skip)  {}
         .color      (@var) when (@var = skip)  {}
         .position   (@var) when (@var = skip)  {}
         .repeat     (@var) when (@var = skip)  {}
@@ -674,11 +674,13 @@
 
     .table {
         .border      (@var) when (@var = skip) {}
-        .cell-border (@var) when (@var = skip) {}
+        .border-outer(@var) when (@var = skip) {}
+        .color       (@var) when (@var = skip) {}
+        .font        (@var) when (@var = skip) {}
+        .head-color  (@var) when (@var = skip) {}
+        .head-font   (@var) when (@var = skip) {}
         .padding     (@var) when (@var = skip) {}
         .rounded     (@var) when (@var = skip) {}
-        .body-color  (@var) when (@var = skip) {}
-        .head-font   (@var) when (@var = skip) {}
     }
 
     .text-align (@var) when (@var = skip) {}
@@ -1087,7 +1089,7 @@
        .box-sizing;
     }
 
-    .reset-center (@margin-left: 0, @query: 0) when (@query = 0) {
+    .reset-block (@margin-left: 0, @query: 0) when (@query = 0) {
         margin-left: @margin-left;
         left: auto;
     }
@@ -1135,11 +1137,27 @@
 
     .table {
         .border (@width: 0, @style: none, @color: none) when not (@width = skip) {
-            &                   { border-width: @width; border-style: @style; border-color: @color; }
-        }
-        .cell-border (@width: 0, @style: none, @color: none) when not (@width = skip) {
             & tr th,
             & tr td             { border-width: @width; border-style: @style; border-color: @color; }
+        }
+        .border-outer (@width: 0, @style: none, @color: none) when not (@width = skip) {
+            &                   { border-width: @width; border-style: @style; border-color: @color; }
+        }
+        .color (@color: inherit, @back: transparent, @rows: all) when not (@color = skip) and not (@rows = all) {
+            & tr:nth-child(@{rows}) td,
+            & tr.@{rows} td     { color: @color; background-color: @back; }
+        }
+        .color (@color: inherit, @back: transparent, @rows: all) when not (@color = skip) and (@rows = all) {
+            & tr td             { color: @color; background-color: @back; }
+        }
+        .font (@font: normal 1em, @family: inherit) when not (@font = skip) {
+            & tr td             { .font(@font, @family); }
+        }
+        .head-color (@color: inherit, @back: transparent) when not (@color = skip) {
+            & tr th             { color: @color; background-color: @back; }
+        }
+        .head-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
+            & tr th             { .font(@font, @family); }
         }
         .padding (@padding: 0) when not (@padding = skip) {
             & tr th,
@@ -1152,17 +1170,8 @@
             & tr:last-child  td:first-child { .rounded.left-bottom(@radius); }
             & tr:last-child  td:last-child  { .rounded.right-bottom(@radius); }
         }
-        .body-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and not (@rows = all) {
-            & tr:nth-child(@{rows}) td,
-            & tr.@{rows} td     { .color(@color, @back-color); }
-        }
-        .body-color (@color: inherit, @back-color: transparent, @rows: all) when not (@color = skip) and (@rows = all) {
-            & tr td             { .color(@color, @back-color); }
-        }
-        .head-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
-            & tr th             { .font(@font, @family); }
-        }
     }
+    
 //  Unocategorized
 //  ----------------------------------------------------------------------- //
 

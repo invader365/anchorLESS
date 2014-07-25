@@ -26,7 +26,7 @@
     .back (@var) when (@var = skip) {}
 
     .back {
-        .attachment (@var) when (@var = skip)  {}
+        .attach     (@var) when (@var = skip)  {}
         .color      (@var) when (@var = skip)  {}
         .position   (@var) when (@var = skip)  {}
         .repeat     (@var) when (@var = skip)  {}
@@ -159,11 +159,13 @@
 
     .table {
         .border      (@var) when (@var = skip) {}
-        .cell-border (@var) when (@var = skip) {}
+        .border-outer(@var) when (@var = skip) {}
+        .color       (@var) when (@var = skip) {}
+        .font        (@var) when (@var = skip) {}
+        .head-color  (@var) when (@var = skip) {}
+        .head-font   (@var) when (@var = skip) {}
         .padding     (@var) when (@var = skip) {}
         .rounded     (@var) when (@var = skip) {}
-        .body-color  (@var) when (@var = skip) {}
-        .head-font   (@var) when (@var = skip) {}
     }
 
     .text-align (@var) when (@var = skip) {}
