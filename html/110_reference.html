@@ -4,15 +4,21 @@
 <!--[if gt IE 9]>  <html lang="es"> <![endif]-->
 <!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
 <head>
-  <title>Anchor LESS</title>
+  <title>Anchor Less | The Most Extensive Less Mixins Library</title>
   <meta charset="utf-8">
   <meta name="author" content="invader365">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no">
-  <meta name="keywords" content="anchor, anchorLess, css, less, mixins, library">
-  <meta name="description" content="AnchorLess is a collection of useful less Mixins, Assets and Utilities.">
+  <meta name="keywords" content="anchor, anchorLess, css, less, mixins, library, assets, utilities">
+  <meta name="description" content="Anchor less is a collection of less Mixins, Assets and Utilities.">
+  <meta property="og:title" content="Anchor Less">
+  <meta property="og:description" content="Anchor less is a collection of less Mixins, Assets and Utilities.">
+  <meta property="og:image" content="http://invader365.github.io/anchorLESS/images/logo-main-small.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://invader365.github.io/anchorLESS">
   <link href="../images/favicon.ico" type="image/x-icon" rel="shortcut icon">
   <link href="../css/uno.css" rel="stylesheet">
+  <script src="../javascript/analytics.js"></script>
   <link href="../fonts/FontAwesome/css/font-awesome.min.css" rel="stylesheet">
   <script src="../javascript/libs/jquery-1.11.1.min.js"></script>
   <script src="../javascript/modernizr.js"></script>
@@ -22,7 +28,7 @@
   <header>
     <section class="max-width">
       <div class="m-brand">
-        <h1><a href="index.html"><img src="../images/logo-main.png"><strong>Anchor Less</strong></a></h1>
+        <h1><a href="../index.html"><img src="../images/logo-main.png"><strong>Anchor Less</strong></a></h1>
       </div>
       <div class="m-sidemenu hide"><a href="#" class="toggle js-navbar"><i class="fa fa-bars"></i></a></div>
     </section>
@@ -66,7 +72,7 @@
                 <li><a href="#centering">Centering</a></li>
                 <li><a href="#lists">Lists</a></li>
                 <li><a href="#pseudo">Pseudo</a></li>
-                <li><a href="#states">Link states</a></li>
+                <li><a href="#states">States</a></li>
                 <li><a href="#tables">Tables</a></li>
               </ul>
             <h2 class="title">Utilities</h2>
@@ -85,8 +91,9 @@
             <div class="details">
               <hr>
               <h2 class="heading primary">Reference</h2>
+              <p><strong>Search: </strong><a href="#A">A </a>| <a href="#B">B </a>|  <a href="#C">C </a>|  <a href="#D">D </a>|  <a href="#E">E </a>|  <a href="#F">F </a>|  <a href="#G">G </a>|  <a href="#H">H </a>|  <a href="#I">I </a>|  <a href="#L">L </a>|  <a href="#M">M </a>|  <a href="#N">N </a>|  <a href="#O">O </a>|  <a href="#P">P </a>|  <a href="#R">R </a>|  <a href="#S">S </a>|  <a href="#T">T </a>|  <a href="#U">U </a>|  <a href="#W">W</a></p>
               <div class="grid split-6">
-                <h3 class="letter">A</h3>
+                <h3 id="A" class="letter">A</h3>
                 <ul class="grid split-3 span-5">
                   <li>.animation ();</li>
                   <li>.animation.delay ();</li>
@@ -119,38 +126,53 @@
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">B</h3>
+                <h3 id="B" class="letter">B</h3>
                 <ul class="grid split-3 span-5">
                   <li>.back ();</li>
-                  <li>.back.attachment ();</li>
+                  <li>.back.attach ();</li>
                   <li>.back.color ();</li>
                   <li>.back.clip ();</li>
                   <li>.back.position ();</li>
                   <li>.back.repeat ();</li>
                   <li>.back.size ();</li>
                   <li>.backface ();</li>
+                  <li>.block ();</li>
                   <li>.border ();</li>
                   <li>.box-sizing ();</li>
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">C</h3>
+                <h3 id="C" class="letter">C</h3>
                 <ul class="grid split-3 span-5">
                   <li>.center-block ();</li>
                   <li>.center-inline ();</li>
                   <li>.center-vertical ();</li>
+                  <li>.clearfix ();</li>
                   <li>.color ();</li>
+                  <li>.color.active ();</li>
+                  <li>.color.focus ();</li>
+                  <li>.color.hover ();</li>
+                  <li>.color.normal ();</li>
+                  <li>.color.visited ();</li>
+                  <li>.color.hover-focus ();</li>
+                  <li>.color.normal-active ();</li>
                   <li>.columns ();</li>
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">D</h3>
+                <h3 id="D" class="letter">D</h3>
                 <ul class="grid split-3 span-5">
                   <li>.display (display, query);</li>
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">F</h3>
+                <h3 id="E" class="letter">E</h3>
+                <ul class="grid split-3 span-5">
+                  <li>.ellipsis ();</li>
+                </ul>
+              </div>
+              <div class="grid split-6">
+                <h3 id="F" class="letter">F</h3>
                 <ul class="grid split-3 span-5">
                   <li>.fixed.align ();</li>
                   <li>.float ();</li>
@@ -160,9 +182,16 @@
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">G</h3>
+                <h3 id="G" class="letter">G</h3>
                 <ul class="grid split-3 span-5">
                   <li>.gradient ();</li>
+                  <li>.gradient.active ();</li>
+                  <li>.gradient.focus ();</li>
+                  <li>.gradient.hover ();</li>
+                  <li>.gradient.normal ();</li>
+                  <li>.gradient.visited ();</li>
+                  <li>.gradient.hover-focus ();</li>
+                  <li>.gradient.normal-active ();</li>
                   <li>.gradient.to-bottom ();</li>
                   <li>.gradient.to-left ();</li>
                   <li>.gradient.to-right ();</li>
@@ -171,27 +200,31 @@
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">H</h3>
+                <h3 id="H" class="letter">H</h3>
                 <ul class="grid split-3 span-5">
                   <li>.height ();</li>
+                  <li>.hyphens ();</li>
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">I</h3>
+                <h3 id="I" class="letter">I</h3>
                 <ul class="grid split-3 span-5">
                   <li>.image ();</li>
                   <li>.indent ();</li>
                   <li>.index ();</li>
+                  <li>.inline ();</li>
+                  <li>.inline-block ();</li>
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">L</h3>
+                <h3 id="L" class="letter">L</h3>
                 <ul class="grid split-3 span-5">
+                  <li>.line-break ();</li>
                   <li>.list-style ();</li>
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">M</h3>
+                <h3 id="M" class="letter">M</h3>
                 <ul class="grid split-3 span-5">
                   <li>.margin ();</li>
                   <li>.max-width ();</li>
@@ -199,7 +232,13 @@
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">O</h3>
+                <h3 id="N" class="letter">N</h3>
+                <ul class="grid split-3 span-5">
+                  <li>.nowrap ();</li>
+                </ul>
+              </div>
+              <div class="grid split-6">
+                <h3 id="O" class="letter">O</h3>
                 <ul class="grid split-3 span-5">
                   <li>.offset ();</li>
                   <li>.opacity ();</li>
@@ -207,7 +246,7 @@
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">P</h3>
+                <h3 id="P" class="letter">P</h3>
                 <ul class="grid split-3 span-5">
                   <li>.padding ();</li>
                   <li>.perspective ();</li>
@@ -218,9 +257,9 @@
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">R</h3>
+                <h3 id="R" class="letter">R</h3>
                 <ul class="grid split-3 span-5">
-                  <li>.reset-center ();</li>
+                  <li>.reset-block ();</li>
                   <li>.reset-vertical ();</li>
                   <li>.resize ();</li>
                   <li>.rgba ();</li>
@@ -238,7 +277,7 @@
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">S</h3>
+                <h3 id="S" class="letter">S</h3>
                 <ul class="grid split-3 span-5">
                   <li>.scale ();</li>
                   <li>.skew ();</li>
@@ -252,8 +291,16 @@
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">T</h3>
+                <h3 id="T" class="letter">T</h3>
                 <ul class="grid split-3 span-5">
+                  <li>.table.border ();</li>
+                  <li>.table.border-outer ();</li>
+                  <li>.table.color ();</li>
+                  <li>.table.font ();</li>
+                  <li>.table.head-color ();</li>
+                  <li>.table.head-font ();</li>
+                  <li>.table.padding ();</li>
+                  <li>.table.rounded ();</li>
                   <li>.tap-highlight ();</li>
                   <li>.text-align ();</li>
                   <li>.text-shadow ();</li>
@@ -265,17 +312,17 @@
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">U</h3>
+                <h3 id="U" class="letter">U</h3>
                 <ul class="grid split-3 span-5">
                   <li>.user-select ();</li>
                 </ul>
               </div>
               <div class="grid split-6">
-                <h3 class="letter">W</h3>
+                <h3 id="W" class="letter">W</h3>
                 <ul class="grid split-3 span-5">
                   <li>.width ();</li>
-                  <li></li>
-                  <li></li>
+                  <li>.word-break ();</li>
+                  <li>.wrap ();</li>
                 </ul>
               </div>
             </div>
@@ -359,8 +406,8 @@
                       <td>.back (color, image, repeat, position, query);</td>
                     </tr>
                     <tr>
-                      <td>.back.attachment ();</td>
-                      <td>.back.attachment (attachment);</td>
+                      <td>.back.attach ();</td>
+                      <td>.back.attach (attachment);</td>
                     </tr>
                     <tr>
                       <td>.back.color ();</td>
@@ -779,7 +826,7 @@
                   <li><a href="#centering">Centering</a></li>
                   <li><a href="#lists">Lists</a></li>
                   <li><a href="#pseudo">Pseudo</a></li>
-                  <li><a href="#states">Link states</a></li>
+                  <li><a href="#states">States</a></li>
                   <li><a href="#tables">Tables</a></li>
                 </ul>
               <h4 id="arrows">Arrows</h4>
@@ -854,8 +901,8 @@
                       <td>.offset (padding, query);</td>
                     </tr>
                     <tr>
-                      <td>.reset-center ();</td>
-                      <td>.reset-center (margin-left, query);</td>
+                      <td>.reset-block ();</td>
+                      <td>.reset-block (margin-left, query);</td>
                     </tr>
                     <tr>
                       <td>.reset-vertical ();</td>
@@ -986,8 +1033,24 @@
                       <td>.table.border (width, style, color);</td>
                     </tr>
                     <tr>
-                      <td>.table.cell-border ();</td>
-                      <td>.table.cell-border (width, style, color);</td>
+                      <td>.table.border-outer ();</td>
+                      <td>.table.border-outer (width, style, color);</td>
+                    </tr>
+                    <tr>
+                      <td>.table.color ();</td>
+                      <td>.table.color (color, back, rows);</td>
+                    </tr>
+                    <tr>
+                      <td>.table.font ();</td>
+                      <td>.table.font (font, family);</td>
+                    </tr>
+                    <tr>
+                      <td>.table.head-color ();</td>
+                      <td>.table.head-color (color, back);</td>
+                    </tr>
+                    <tr>
+                      <td>.table.head-font ();</td>
+                      <td>.table.head-font (font, family);</td>
                     </tr>
                     <tr>
                       <td>.table.padding ();</td>
@@ -996,14 +1059,6 @@
                     <tr>
                       <td>.table.rounded ();</td>
                       <td>.table.rounded (radius);</td>
-                    </tr>
-                    <tr>
-                      <td>.table.body-color ();</td>
-                      <td>.table.body-color (color, back, rows);</td>
-                    </tr>
-                    <tr>
-                      <td>.table.head-font ();</td>
-                      <td>.table.head-font (font, family);</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1032,47 +1087,47 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>.block ()</td>
-                      <td></td>
+                      <td>.block ();</td>
+                      <td>Turns an inline element into a floated block</td>
                     </tr>
                     <tr>
-                      <td>.clearfix ()</td>
+                      <td>.clearfix ();</td>
                       <td>A snippet for an element to clear after itself</td>
                     </tr>
                     <tr>
-                      <td>.ellipsis ()</td>
-                      <td></td>
+                      <td>.ellipsis ();</td>
+                      <td>Applies properties to an element to render an ellipsis '...'</td>
                     </tr>
                     <tr>
-                      <td>.hide-text ()</td>
+                      <td>.hide-text ();</td>
                       <td>A way have text without showing it up </td>
                     </tr>
                     <tr>
-                      <td>.hyphens ()</td>
-                      <td></td>
+                      <td>.hyphens ();</td>
+                      <td>Splits words whenever available</td>
                     </tr>
                     <tr>
-                      <td>.inline ()</td>
-                      <td></td>
+                      <td>.inline ();</td>
+                      <td>Turns a block element into an inline</td>
                     </tr>
                     <tr>
-                      <td>.inline-block ()</td>
-                      <td></td>
+                      <td>.inline-block ();</td>
+                      <td>Turns an element into an unfloated inline-block</td>
                     </tr>
                     <tr>
-                      <td>.line-break ()</td>
+                      <td>.line-break ();</td>
                       <td>Clears a left floated element</td>
                     </tr>
                     <tr>
-                      <td>.nowrap ()</td>
+                      <td>.nowrap ();</td>
                       <td></td>
                     </tr>
                     <tr>
-                      <td>.word-break ()</td>
+                      <td>.word-break ();</td>
                       <td></td>
                     </tr>
                     <tr>
-                      <td>.wrap ()</td>
+                      <td>.wrap ();</td>
                       <td></td>
                     </tr>
                   </tbody>
@@ -1353,9 +1408,9 @@
   </footer>
   <script src="../javascript/scripts.js"></script>
   <script>
-    function active_tab (varname) {
+    function active_tab (name) {
         $('.tabset > .summary').removeClass('active');
-        $('.tabset > .summary.' + varname).addClass('active');
+        $('.tabset > .summary.' + name).addClass('active');
     };
     
     $('.cat_mixins a').click(function(){
@@ -1367,6 +1422,6 @@
     $('.cat_utilities a').click(function(){
         active_tab ('utilities');
     });
+    
   </script>
-  <script src="../javascript/analytics.js"></script>
 </body>
