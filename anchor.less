@@ -536,6 +536,8 @@
         .right-bottom (@var) when (@var = skip) {}
     }
 
+    .animation (@var) when (@var = skip) {}
+
     .appearance (@var) when (@var = skip) {}
 
     .back (@var) when (@var = skip) {}
@@ -700,69 +702,76 @@
     .user-select (@var) when (@var = skip) {}
 
     .width (@var) when (@var = skip) {}
-    //
+
+//  ----------------------------------------------------------------------- //
 //  States
 //  ----------------------------------------------------------------------- //
 
-//  Colors
 
-    .color                      { 
-        .hover (@color: inherit, @back-color: skip) {
-            &:hover             { .color(@color, @back-color); }
-        }
+    .hover {
+        .color (@color: inherit, @back-color: skip) {
+            &:hover             { .color(@color, @back-color); } // added border
+        } 
 
-        .active (@color: inherit, @back-color: skip) {
-            &:active            { .color(@color, @back-color); }
-        }
-
-        .focus (@color: inherit, @back-color: skip) {
-            &:focus             { .color(@color, @back-color); }
-        }
-
-        .visited (@color: inherit, @back-color: skip) {
-            &:visited           { .color(@color, @back-color); }
-        }
-
-        .hover-focus (@color: inherit, @back-color: skip) {
-            &:hover,
-            &:focus             { .color(@color, @back-color); }
-        }
-
-        .normal-active (@color: inherit, @back-color: skip) {
-            &,
-            &:active            { .color(@color, @back-color); }
-        }
-    }
-
-//  Gradients
-
-    .gradient                   { 
-        .hover (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:hover             { .gradient(@start, @stop, @degrees, @image); }
         }
+    }
 
-        .active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+    .active {
+        .color (@color: inherit, @back-color: skip) {
+            &:active            { .color(@color, @back-color); } // added border
+        }
+
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
+    }
 
-        .focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+    .focus {
+        .color (@color: inherit, @back-color: skip) {
+            &:focus             { .color(@color, @back-color); } // added border
+        }
+
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
+    }
 
-        .visited (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
-            &:visited           { .gradient(@start, @stop, @degrees, @image); }
+    .visited {
+        .color (@color: inherit, @back-color: skip) {
+            &:visited           { .color(@color, @back-color); } // added border
         }
 
-        .hover-focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+            &:visited           { .gradient(@start, @stop, @degrees, @image); }
+        }
+    }
+
+    .hover-focus {
+        .color (@color: inherit, @back-color: skip) {
+            &:hover,
+            &:focus             { .color(@color, @back-color); } // added border
+        }
+
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:hover,
             &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
+    }
 
-        .normal-active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+    .normal-active {
+        .color (@color: inherit, @back-color: skip) {
+            &,
+            &:active            { .color(@color, @back-color); } // added border
+        }
+
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &,
             &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
     }
+    
 
 // Vendor Mixins
 // ----------------------------------------------------------------------- //
@@ -1382,6 +1391,49 @@
     .wrap () {
         white-space: normal; // validate
     }
+//  ----------------------------------------------------------------------- //
+//  Easing
+//  ----------------------------------------------------------------------- //
+
+    // Cubic
+    @ease-in-cubic      : cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    @ease-out-cubic     : cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    @ease-in-out-cubic  : cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+    // Circ
+    @ease-in-circ       : cubic-bezier(0.600, 0.040, 0.980, 0.335);
+    @ease-out-circ      : cubic-bezier(0.075, 0.820, 0.165, 1.000);
+    @ease-in-out-circ   : cubic-bezier(0.785, 0.135, 0.150, 0.860);
+
+    // Expo
+    @ease-in-expo       : cubic-bezier(0.950, 0.050, 0.795, 0.035);
+    @ease-out-expo      : cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    @ease-in-out-expo   : cubic-bezier(1.000, 0.000, 0.000, 1.000);
+
+    // Quad
+    @ease-in-quad       : cubic-bezier(0.550, 0.085, 0.680, 0.530);
+    @ease-out-quad      : cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    @ease-in-out-quad   : cubic-bezier(0.455, 0.030, 0.515, 0.955);
+
+    // Quart
+    @ease-in-quart      : cubic-bezier(0.895, 0.030, 0.685, 0.220);
+    @ease-out-quart     : cubic-bezier(0.165, 0.840, 0.440, 1.000);
+    @ease-in-out-quart  : cubic-bezier(0.770, 0.000, 0.175, 1.000);
+
+    // Quint
+    @ease-in-quint      : cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    @ease-out-quint     : cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    @ease-in-out-quint  : cubic-bezier(0.860, 0.000, 0.070, 1.000);
+
+    // Sine
+    @ease-in-sine       : cubic-bezier(0.470, 0.000, 0.745, 0.715);
+    @ease-out-sine      : cubic-bezier(0.390, 0.575, 0.565, 1.000);
+    @ease-in-out-sine   : cubic-bezier(0.445, 0.050, 0.550, 0.950);
+
+    // Back
+    @ease-in-back       : cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    @ease-out-back      : cubic-bezier(0.175,  0.885, 0.320, 1.275);
+    @ease-in-out-back   : cubic-bezier(0.680, -0.550, 0.265, 1.550);
     
 //  ----------------------------------------------------------------------- //
 //  Keyframes
@@ -1390,11 +1442,11 @@
     .keyframes-fade-in () {
         ._fade-in () {
             0% {
-                opacity: 1;
+                opacity: 0;
             }
 
             100% {
-                opacity: 0;
+                opacity: 1;
             }
         }
 
@@ -1410,11 +1462,11 @@
     .keyframes-fade-out () {
         ._fade-out () {
             0% {
-                opacity: 0;
+                opacity: 1;
             }
 
             100% {
-                opacity: 1;
+                opacity: 0;
             }
         }
 

@@ -21,7 +21,7 @@
             & tr td             { .font(@font, @family); }
         }
         .head-color (@color: inherit, @back: transparent) when not (@color = skip) {
-            & tr th             { color: @color; background-color: @back; }
+            & tr th             { .color(@color, @back); }
         }
         .head-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
             & tr th             { .font(@font, @family); }

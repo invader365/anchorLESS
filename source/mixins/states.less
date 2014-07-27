@@ -1,63 +1,69 @@
-//
+//  ----------------------------------------------------------------------- //
 //  States
 //  ----------------------------------------------------------------------- //
 
-//  Colors
 
-    .color                      { 
-        .hover (@color: inherit, @back-color: skip) {
-            &:hover             { .color(@color, @back-color); }
-        }
+    .hover {
+        .color (@color: inherit, @back-color: skip) {
+            &:hover             { .color(@color, @back-color); } // added border
+        } 
 
-        .active (@color: inherit, @back-color: skip) {
-            &:active            { .color(@color, @back-color); }
-        }
-
-        .focus (@color: inherit, @back-color: skip) {
-            &:focus             { .color(@color, @back-color); }
-        }
-
-        .visited (@color: inherit, @back-color: skip) {
-            &:visited           { .color(@color, @back-color); }
-        }
-
-        .hover-focus (@color: inherit, @back-color: skip) {
-            &:hover,
-            &:focus             { .color(@color, @back-color); }
-        }
-
-        .normal-active (@color: inherit, @back-color: skip) {
-            &,
-            &:active            { .color(@color, @back-color); }
-        }
-    }
-
-//  Gradients
-
-    .gradient                   { 
-        .hover (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:hover             { .gradient(@start, @stop, @degrees, @image); }
         }
+    }
 
-        .active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+    .active {
+        .color (@color: inherit, @back-color: skip) {
+            &:active            { .color(@color, @back-color); } // added border
+        }
+
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
+    }
 
-        .focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+    .focus {
+        .color (@color: inherit, @back-color: skip) {
+            &:focus             { .color(@color, @back-color); } // added border
+        }
+
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
+    }
 
-        .visited (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
-            &:visited           { .gradient(@start, @stop, @degrees, @image); }
+    .visited {
+        .color (@color: inherit, @back-color: skip) {
+            &:visited           { .color(@color, @back-color); } // added border
         }
 
-        .hover-focus (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+            &:visited           { .gradient(@start, @stop, @degrees, @image); }
+        }
+    }
+
+    .hover-focus {
+        .color (@color: inherit, @back-color: skip) {
+            &:hover,
+            &:focus             { .color(@color, @back-color); } // added border
+        }
+
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &:hover,
             &:focus             { .gradient(@start, @stop, @degrees, @image); }
         }
+    }
 
-        .normal-active (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
+    .normal-active {
+        .color (@color: inherit, @back-color: skip) {
+            &,
+            &:active            { .color(@color, @back-color); } // added border
+        }
+
+        .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
             &,
             &:active            { .gradient(@start, @stop, @degrees, @image); }
         }
     }
+    
