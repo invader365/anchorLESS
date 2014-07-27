@@ -1,15 +1,16 @@
-# ![Logo](http://invader365.github.io/anchorLESS/images/logo-main-small.png) [Anchor LESS](http://invader365.github.io/anchorLESS)
+# ![Logo](http://invader365.github.io/anchorLESS/images/logo-main-small.png) [ Anchor LESS](http://invader365.github.io/anchorLESS)
 
 > The most extensive **Less mixins library**
 
-Anchor LESS is a collection of mixins, assets and utilities to write better and faster CSS.
+Anchor less is a collection of less Mixins, Assets and Utilities to write better and faster CSS. [Documentation](http://invader365.github.io/anchorLESS)
 
 Features:
 
-- Harder. Responsive mixins (mobile-first approach), assets and utilities.
-- Better. Seamless integration with html5 frameworks.
-- Faster. Faster performance (Less.js build-in functions).
-- Stronger. The most extensive (and growing) LESS mixins library.
+- Responsive mixins (mobile-first approach), assets and utilities.
+- Seamless integration with html5 frameworks.
+- Faster performance (Less.js build-in functions).
+- The most extensive (and growing) LESS mixins library.
+- A single 'anchor.less' file, no other dependencies.
 
 ## Library
 
@@ -31,7 +32,7 @@ Common mixins list:
 00. .width (width, query);
 00. **[..](partials/README.md)**
 
-To see the **[full reference](http://invader365.github.io/anchorLESS/html/110_reference.html)**.
+To see the **[full list](http://invader365.github.io/anchorLESS/html/110_reference.html)**.
 
 ## Usage
 ```css
