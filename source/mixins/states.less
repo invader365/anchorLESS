@@ -2,10 +2,9 @@
 //  States
 //  ----------------------------------------------------------------------- //
 
-
     .hover {
         .color (@color: inherit, @back-color: skip) {
-            &:hover             { .color(@color, @back-color); } // added border
+            &:hover             { color: @color; .back.color(@back-color); } // added border
         } 
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -15,7 +14,7 @@
 
     .active {
         .color (@color: inherit, @back-color: skip) {
-            &:active            { .color(@color, @back-color); } // added border
+            &:active            { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -25,7 +24,7 @@
 
     .focus {
         .color (@color: inherit, @back-color: skip) {
-            &:focus             { .color(@color, @back-color); } // added border
+            &:focus             { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -35,7 +34,7 @@
 
     .visited {
         .color (@color: inherit, @back-color: skip) {
-            &:visited           { .color(@color, @back-color); } // added border
+            &:visited           { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -46,7 +45,7 @@
     .hover-focus {
         .color (@color: inherit, @back-color: skip) {
             &:hover,
-            &:focus             { .color(@color, @back-color); } // added border
+            &:focus             { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -58,7 +57,7 @@
     .normal-active {
         .color (@color: inherit, @back-color: skip) {
             &,
-            &:active            { .color(@color, @back-color); } // added border
+            &:active            { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {

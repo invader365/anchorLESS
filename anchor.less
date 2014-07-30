@@ -707,10 +707,9 @@
 //  States
 //  ----------------------------------------------------------------------- //
 
-
     .hover {
         .color (@color: inherit, @back-color: skip) {
-            &:hover             { .color(@color, @back-color); } // added border
+            &:hover             { color: @color; .back.color(@back-color); } // added border
         } 
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -720,7 +719,7 @@
 
     .active {
         .color (@color: inherit, @back-color: skip) {
-            &:active            { .color(@color, @back-color); } // added border
+            &:active            { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -730,7 +729,7 @@
 
     .focus {
         .color (@color: inherit, @back-color: skip) {
-            &:focus             { .color(@color, @back-color); } // added border
+            &:focus             { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -740,7 +739,7 @@
 
     .visited {
         .color (@color: inherit, @back-color: skip) {
-            &:visited           { .color(@color, @back-color); } // added border
+            &:visited           { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -751,7 +750,7 @@
     .hover-focus {
         .color (@color: inherit, @back-color: skip) {
             &:hover,
-            &:focus             { .color(@color, @back-color); } // added border
+            &:focus             { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -763,7 +762,7 @@
     .normal-active {
         .color (@color: inherit, @back-color: skip) {
             &,
-            &:active            { .color(@color, @back-color); } // added border
+            &:active            { color: @color; .back.color(@back-color); } // added border
         }
 
         .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) {
@@ -1228,7 +1227,7 @@
             & tr td             { .font(@font, @family); }
         }
         .head-color (@color: inherit, @back: transparent) when not (@color = skip) {
-            & tr th             { color: @color; background-color: @back; }
+            & tr th             { .color(@color, @back); }
         }
         .head-font (@font: normal 1em, @family: inherit) when not (@font = skip) {
             & tr th             { .font(@font, @family); }
