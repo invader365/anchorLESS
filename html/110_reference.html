@@ -142,6 +142,9 @@
                   <li>.backface ();</li>
                   <li>.block ();</li>
                   <li>.border ();</li>
+                  <li>.border.color ();</li>
+                  <li>.border.style ();</li>
+                  <li>.border.width ();</li>
                   <li>.box-sizing ();</li>
                 </ul>
               </div>
@@ -293,7 +296,7 @@
                   <li>.skew ();</li>
                   <li>.shadow ();</li>
                   <li>.shadow-inset ();</li>
-                  <li>.shadow-list ();</li>
+                  <li>.shadow-multi ();</li>
                   <li>.size ();</li>
                   <li>.size-min ();</li>
                   <li>.spacing ();</li>
@@ -316,7 +319,7 @@
                   <li>.text-shadow ();</li>
                   <li>.transform ();</li>
                   <li>.transition ();</li>
-                  <li>.transition-list ();</li>
+                  <li>.transition-multi ();</li>
                   <li>.translate ();</li>
                   <li>.translate3d ();</li>
                 </ul>
@@ -448,7 +451,7 @@
                     </tr>
                     <tr>
                       <td>.color ();</td>
-                      <td>.color (color, back);</td>
+                      <td>.color (color, back-color);</td>
                     </tr>
                     <tr>
                       <td>.gradient ();</td>
@@ -498,6 +501,18 @@
                     <tr>
                       <td>.border ();</td>
                       <td>.border (width, style, color, query);</td>
+                    </tr>
+                    <tr>
+                      <td>.border.color ();</td>
+                      <td>.border.color (color);</td>
+                    </tr>
+                    <tr>
+                      <td>.border.style ();</td>
+                      <td>.border.style (style);</td>
+                    </tr>
+                    <tr>
+                      <td>.border.width ();</td>
+                      <td>.border.width (width);</td>
                     </tr>
                     <tr>
                       <td>.rounded ();</td>
@@ -585,8 +600,8 @@
                       <td>.shadow-inset (spread, color, alpha);</td>
                     </tr>
                     <tr>
-                      <td>.shadow-list ();</td>
-                      <td>.shadow-list (arguments);</td>
+                      <td>.shadow-multi ();</td>
+                      <td>.shadow-multi (arguments);</td>
                     </tr>
                     <tr>
                       <td>.tap-highlight ();</td>
@@ -826,8 +841,8 @@
                       <td>.transition (property, durations, function, delay);</td>
                     </tr>
                     <tr>
-                      <td>.transition-list ();</td>
-                      <td>.transition-list (arguments);</td>
+                      <td>.transition-multi ();</td>
+                      <td>.transition-multi (arguments);</td>
                     </tr>
                   </tbody>
                 </table>
