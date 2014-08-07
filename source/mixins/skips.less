@@ -37,6 +37,13 @@
 
     .border (@var) when (@var = skip) {}
 
+    .border {
+        .min       (@var) when (@var = skip)  {}
+        .width     (@var) when (@var = skip)  {}
+        .style     (@var) when (@var = skip)  {}
+        .color     (@var) when (@var = skip)  {}
+    }
+
     .box-sizing(@var) when (@var = skip) {}
 
     .color (@var) when (@var = skip) {}
@@ -145,6 +152,8 @@
 
     .shadow-inset (@var) when (@var = skip) {}
 
+    .shadow-multi (@var) when (@var = skip) {}
+
     .size (@var) when (@var = skip) {}
 
     .size-min (@var) when (@var = skip) {}
@@ -176,7 +185,7 @@
 
     .transition (@var) when (@var = skip) {}
 
-    .transition-list (@var) when (@var = skip) {}
+    .transition-multi (@var) when (@var = skip) {}
 
     .translate (@var) when (@var = skip) {}
 

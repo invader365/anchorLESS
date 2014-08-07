@@ -75,20 +75,31 @@
         }
     }
 
-    .border (@width: 0, @style: none, @color: none, @query: 0) when not (@width = skip) and (@color = none) and (@query = 0) {
-        border-width: @width;
-        border-style: @style;
+    .border (@width: 0, @style: skip, @color: skip, @query: 0) when not (@width = skip) and (@query = 0) {
+         border-width: @width;
+        .border.style(@style);
+        .border.color(@color);
     }
 
-    .border (@width: 0, @style: none, @color: none, @query: 0) when not (@width = skip) and not (@color = none) and (@query = 0) {
-        border-width: @width;
-        border-style: @style;
-        border-color: @color;
+    .border {
+        .min (@border: 0, @query: 0) when not (@border = skip) and (@query = 0) {
+            border: @border;
+        }
+        .width (@width: 0) when not (@width = skip) {
+            border-width: @width;
+        }
+        .style (@style: none) when not (@style = skip) {
+            border-style: @style;
+        }
+        .color (@color: none) when not (@color = skip) {
+            border-color: @color;
+        }
     }
 
-    .color (@color: inherit, @back: skip) when not (@color = skip) {
+    .color (@color: inherit, @back: skip) when not (@color = skip) { //, @border: skip
         color: @color; 
        .back.color(@back);
+       // .border.color(@border);
     }
 
     .display (@display: none, @query: 0) when not (@display = skip) and (@query = 0) {

@@ -86,15 +86,25 @@
         }
     }
 
-    .border (@width: 0, @style: none, @color: none, @query: 0) when not (@width = skip) and (@color = none) and (@query = 0) {
-        border-width: @width;
-        border-style: @style;
+    .border (@width: 0, @style: skip, @color: skip, @query: 0) when not (@width = skip) and (@query = 0) {
+        .border.width(@width);
+        .border.style(@style);
+        .border.color(@color);
     }
 
-    .border (@width: 0, @style: none, @color: none, @query: 0) when not (@width = skip) and not (@color = none) and (@query = 0) {
-        border-width: @width;
-        border-style: @style;
-        border-color: @color;
+    .border {
+        .min (@border: 0, @query: 0) when not (@border = skip) and (@query = 0) {
+            border: @border;
+        }
+        .width (@width: 0) when not (@width = skip) {
+            border-width: @width;
+        }
+        .style (@style: none) when not (@style = skip) {
+            border-style: @style;
+        }
+        .color (@color: none) when not (@color = skip) {
+            border-color: @color;
+        }
     }
 
     .color (@color: inherit, @back: skip) when not (@color = skip) {
@@ -352,6 +362,14 @@
         }
     }
 
+    .border { 
+        .min (@border: 0, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .border.min (@border, @query);
+            }
+        }
+    }
+
     .center-block (@width: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .center-block (@width);
@@ -552,7 +570,12 @@
 
     .backface (@var) when (@var = skip) {}
 
-    .border (@var) when (@var = skip) {}
+    .border {
+        .min       (@var) when (@var = skip)  {}
+        .width     (@var) when (@var = skip)  {}
+        .style     (@var) when (@var = skip)  {}
+        .color     (@var) when (@var = skip)  {}
+    }
 
     .box-sizing(@var) when (@var = skip) {}
 
@@ -661,6 +684,8 @@
     .shadow (@var) when (@var = skip) {}
 
     .shadow-inset (@var) when (@var = skip) {}
+
+    .shadow-multi (@var) when (@var = skip) {}
 
     .size (@var) when (@var = skip) {}
 
@@ -1002,21 +1027,21 @@
                 transform: scale(@factor);
     }
 
-    .shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
+    .shadow (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
         @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
         -webkit-box-shadow: @spread @hsla;     // Android 2.3+, iOS 4.0.2-4.2
                 box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
     }
 
-    .shadow-inset (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
+    .shadow-inset (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
         @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
         -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
                 box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
     }
 
-    .shadow-list (...) {
-        -webkit-box-shadow: @arguments;
-                box-shadow: @arguments;
+    .shadow-multi (@shadows: none) when not (@shadows = skip) {
+        -webkit-box-shadow: @shadows;
+                box-shadow: @shadows;
     }
 
     .skew (@x: 0, @y: 0) when not (@x = skip) {
@@ -1045,8 +1070,8 @@
     }
 
     .transition-list (@transitions: all 0s ease 0s) when not (@transitions = skip) {
-        -webkit-transition: @arguments;
-                transition: @arguments;
+        -webkit-transition: @transitions;
+                transition: @transitions;
     }
 
     .translate (@x: 0, @y: 0) when not (@x = skip) {
@@ -1216,17 +1241,17 @@
         .border-outer (@width: 0, @style: none, @color: none) when not (@width = skip) {
             &                   { border-width: @width; border-style: @style; border-color: @color; }
         }
-        .color (@color: inherit, @back: transparent, @rows: all) when not (@color = skip) and not (@rows = all) {
+        .color (@color: inherit, @back: skip, @rows: all) when not (@color = skip) and not (@rows = all) {
             & tr:nth-child(@{rows}) td,
-            & tr.@{rows} td     { color: @color; background-color: @back; }
+            & tr.@{rows} td     { color: @color; .back.color(@back) }
         }
-        .color (@color: inherit, @back: transparent, @rows: all) when not (@color = skip) and (@rows = all) {
-            & tr td             { color: @color; background-color: @back; }
+        .color (@color: inherit, @back: skip, @rows: all) when not (@color = skip) and (@rows = all) {
+            & tr td             { color: @color; .back.color(@back); }
         }
         .font (@font: normal 1em, @family: inherit) when not (@font = skip) {
             & tr td             { .font(@font, @family); }
         }
-        .head-color (@color: inherit, @back: transparent) when not (@color = skip) {
+        .head-color (@color: inherit, @back: skip) when not (@color = skip) {
             & tr th             { .color(@color, @back); }
         }
         .head-font (@font: normal 1em, @family: inherit) when not (@font = skip) {

@@ -229,21 +229,21 @@
                 transform: scale(@factor);
     }
 
-    .shadow (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
+    .shadow (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
         @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
         -webkit-box-shadow: @spread @hsla;     // Android 2.3+, iOS 4.0.2-4.2
                 box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
     }
 
-    .shadow-inset (@spread: 0 0, @color: gray, @alpha: 0.5) when not (@spread = skip) {
+    .shadow-inset (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
         @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
         -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
                 box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
     }
 
-    .shadow-list (...) {
-        -webkit-box-shadow: @arguments;
-                box-shadow: @arguments;
+    .shadow-multi (@shadows: none) when not (@shadows = skip) {
+        -webkit-box-shadow: @shadows;
+                box-shadow: @shadows;
     }
 
     .skew (@x: 0, @y: 0) when not (@x = skip) {
@@ -271,9 +271,9 @@
                 transition: @property @duration @function @delay;
     }
 
-    .transition-list (@transitions: all 0s ease 0s) when not (@transitions = skip) {
-        -webkit-transition: @arguments;
-                transition: @arguments;
+    .transition-multi (@transitions: all 0s ease 0s) when not (@transitions = skip) {
+        -webkit-transition: @transitions;
+                transition: @transitions;
     }
 
     .translate (@x: 0, @y: 0) when not (@x = skip) {
