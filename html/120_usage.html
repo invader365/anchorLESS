@@ -52,32 +52,38 @@
         <pre class="panel primary"><code><span class="selector">@import</span> "anchor.less";</code></pre>
         <p>3. Use your favorite less compiler or try <a href="http://alphapixels.com/prepros/">Prepros</a> (it's FREE and open-source)</p>
         <h4>Example:</h4>
-        <pre class="panel primary"><code><span class="selector">#foo</span> {
-   .back(#222, '../images/logo.png', no-repeat, left top);
-   .border(0 1px 1px 0, solid, #ccc);
-   .rounded(5px);
-   .width(100%);
-   .width(50%, 640px);
-   .width(20%, 960px);
+        <pre class="panel primary"><code><span class="selector">#button</span> {
+  .gradient.to-bottom(#a53df6, #7c16cb);
+  .border(0 1px 2px, solid, #9c33ed);
+  .rounded(7px);
+  .width(25%, 640px);
+  .shadow-inset(0 1px 0 0, #d197fe, .9);
+  .color(@yellow);
+  .size(56px, 128px);
+  .font(bold 12px @d 56px, 'Arial');
 }</code></pre>
         <p>Compiles to:</p>
-        <pre class="panel primary"><code><span class="selector">#foo</span> {
-   background: #222222 url('../images/logo.png') no-repeat left top;
-   border-width: 0 1px 1px 0;
+        <pre class="panel primary"><code><span class="selector">#button</span> {
+   background: #a53df6 none repeat-x center;
+   background-image: -webkit-linear-gradient(180deg, #a53df6, #7c16cb);
+   background-image: -moz-linear-gradient(180deg, #a53df6, #7c16cb);
+   background-image: linear-gradient(180deg, #a53df6, #7c16cb);
+   border-width: 0 1px 2px;
    border-style: solid;
-   border-color: #ccc;
-   -webkit-border-radius: 5px;
-   -moz-border-radius: 5px;
-   border-radius: 5px;
-   width: 100%;
+   border-color: #9c33ed;
+   -webkit-border-radius: 7px;
+   -moz-border-radius: 7px;
+   border-radius: 7px;
+   -webkit-box-shadow: 0 1px 0 0 rgba(208, 149, 254, 0.9) inset;
+   box-shadow: 0 1px 0 0 rgba(208, 149, 254, 0.9) inset;
+   color: #ffff00;
+   width: 56px;
+   height: 128px;
+   font: bold 12px / 56px 'Arial';
 }</code><code><span class="selector">@media all and (min-width: 640px)</span> {
-    #foo {
-        width: 50%;
+    #button {
+        width: 25%;
     }
-}</code><code><span class="selector">@media all and (min-width: 960px)</span> {
-   #foo {
-       width: 20%;
-   }
 }</code></pre>
       </div>
     </section>
