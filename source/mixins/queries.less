@@ -2,6 +2,14 @@
 // Queries
 // ----------------------------------------------------------------------- //
 
+    .absolute {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .absolute.align (@top, @right, @bottom, @left);
+            }
+        }
+    }
+
     .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .align (@top, @right, @bottom, @left);
@@ -95,6 +103,14 @@
         } 
     }
 
+    .fixed {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .fixed.align (@top, @right, @bottom, @left);
+            }
+        }
+    }
+
     .float (@float: none, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .float (@float);
@@ -177,6 +193,14 @@
         .align (@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
                 .position.align (@position, @top, @right, @bottom, @left);
+            }
+        }
+    }
+
+    .relative {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .relative.align (@top, @right, @bottom, @left);
             }
         }
     }

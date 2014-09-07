@@ -235,10 +235,12 @@
                 box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
     }
 
-    .shadow-inset (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
-        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
-        -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
-                box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+    .shadow {
+        .inset (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
+            @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+            -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
+                    box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+        }
     }
 
     .shadow-multi (@shadows: none) when not (@shadows = skip) {

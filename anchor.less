@@ -301,6 +301,14 @@
 // Queries
 // ----------------------------------------------------------------------- //
 
+    .absolute {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .absolute.align (@top, @right, @bottom, @left);
+            }
+        }
+    }
+
     .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .align (@top, @right, @bottom, @left);
@@ -394,6 +402,14 @@
         } 
     }
 
+    .fixed {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .fixed.align (@top, @right, @bottom, @left);
+            }
+        }
+    }
+
     .float (@float: none, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .float (@float);
@@ -480,6 +496,14 @@
         }
     }
 
+    .relative {
+        .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .relative.align (@top, @right, @bottom, @left);
+            }
+        }
+    }
+
     .reset-block (@margin-left: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
             .reset-block (@margin-left);
@@ -533,6 +557,7 @@
             .width (@width);
         }
     }
+
 //
 //  Skips
 //  ----------------------------------------------------------------------- //
@@ -683,7 +708,9 @@
 
     .shadow (@var) when (@var = skip) {}
 
-    .shadow-inset (@var) when (@var = skip) {}
+    .shadow {
+        .inset { (@var) when (@var = skip) {}
+    }
 
     .shadow-multi (@var) when (@var = skip) {}
 
@@ -1033,10 +1060,12 @@
                 box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
     }
 
-    .shadow-inset (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
-        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
-        -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
-                box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+    .shadow {
+        .inset (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
+            @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+            -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
+                    box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+        }
     }
 
     .shadow-multi (@shadows: none) when not (@shadows = skip) {

@@ -19,10 +19,10 @@ Common mixins list:
 00. .align (top, right, bottom, left, query);
 00. .back (color, image, repeat, position, query);
 00. .border (width, style, color, query);
-00. .color (color, back);
+00. .color (color, back-color);
 00. .font (font, family);
 00. .gradient (start, stop, degrees, image);
-00. .image (image);
+00. .image (url);
 00. .opacity (opacity, query);
 00. .pseudo (content, width, height)
 00. .rounded (radius);

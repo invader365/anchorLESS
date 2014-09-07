@@ -150,7 +150,9 @@
 
     .shadow (@var) when (@var = skip) {}
 
-    .shadow-inset (@var) when (@var = skip) {}
+    .shadow {
+        .inset { (@var) when (@var = skip) {}
+    }
 
     .shadow-multi (@var) when (@var = skip) {}
 
