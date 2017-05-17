@@ -1,0 +1,296 @@
+//  Vendor Mixins
+
+    .animation (@name: none, @duration: 0, @ease: ease, @delay: 0, @iteration: 1, @direction: normal) when not (@name = skip) {
+        -webkit-animation: @name @duration @ease @delay @iteration @direction;    // Safari, Chrome
+           -moz-animation: @name @duration @ease @delay @iteration @direction;
+            -ms-animation: @name @duration @ease @delay @iteration @direction;
+                animation: @name @duration @ease @delay @iteration @direction;
+    }
+
+    .animation {
+        .delay (@delay) {
+            -webkit-animation-delay: @delay;
+               -moz-animation-delay: @delay;
+                 -o-animation-delay: @delay;
+                    animation-delay: @delay;
+        }
+
+        .direction (@direction) {
+            -webkit-animation-direction: @direction;
+               -moz-animation-direction: @direction;
+                 -o-animation-direction: @direction;
+                    animation-direction: @direction;
+        }
+
+        .duration (@duration) {
+            -webkit-animation-duration: @duration;
+               -moz-animation-duration: @duration;
+                 -o-animation-duration: @duration;
+                    animation-duration: @duration;
+        }
+
+        .ease (@ease) {
+            -webkit-animation-timing-function: @ease;
+               -moz-animation-timing-function: @ease;
+                 -o-animation-timing-function: @ease;
+                    animation-timing-function: @ease;
+        }
+
+        .fill-mode (@fill-mode) {
+            -webkit-animation-fill-mode: @fill-mode;
+               -moz-animation-fill-mode: @fill-mode;
+                 -o-animation-fill-mode: @fill-mode;
+                    animation-fill-mode: @fill-mode;
+        }
+
+        .iteration (@iteration) {
+            -webkit-animation-iteration-count: @iteration;
+               -moz-animation-iteration-count: @iteration;
+                 -o-animation-iteration-count: @iteration;
+                    animation-iteration-count: @iteration;
+        }
+
+        .name (@name) {
+            -webkit-animation-name: @name;
+               -moz-animation-name: @name;
+                 -o-animation-name: @name;
+                    animation-name: @name;
+        }
+
+        .play-state (@play-state) {
+            -webkit-animation-play-state: @play-state;
+               -moz-animation-play-state: @play-state;
+                 -o-animation-play-state: @play-state;
+                    animation-play-state: @play-state;
+        }
+    }
+    
+    .appearance (@appearance: normal) when not (@appearance = skip) {
+        -webkit-appearance: @appearance;
+           -moz-appearance: @appearance;
+                appearance: @appearance;
+    }
+
+    .backface (@visibility: hidden) when not (@visibility = skip) {
+        -webkit-backface-visibility: @visibility;
+           -moz-backface-visibility: @visibility;
+                backface-visibility: @visibility;
+    }
+
+    .background-clip (@clip: border) when not (@clip = skip) {
+        -webkit-background-clip: @clip;             // Safari 4? Chrome 6?
+           -moz-background-clip: @clip;             // Firefox 3.6
+                background-clip: ~'@{clip}-box';    // Firefox 4, Safari 5, Opera 10, IE9
+    }
+
+    .background-size (@size: auto) when not (@size = skip) {
+        -webkit-background-size: @size;     // Safari 3.0+, Chrome 1.0+
+           -moz-background-size: @size;     // Firefox 3.6
+                background-size: @size;     // IE 9+
+    }
+
+    .box-sizing (@box-model: content-box) when not (@box-model = skip) {
+        -webkit-box-sizing: @box-model;    // Safari 5
+           -moz-box-sizing: @box-model;    // Firefox 19
+                box-sizing: @box-model;    // IE 8+
+    }
+
+    .columns (@count: auto, @gap: normal, @width: auto) when not (@count = skip) {
+        -webkit-column-count: @count;
+           -moz-column-count: @count;
+                column-count: @count;
+        -webkit-column-gap: @gap;
+           -moz-column-gap: @gap;
+                column-gap: @gap;
+        -webkit-column-width: @width;
+           -moz-column-width: @width;
+                column-width: @width;
+    }
+
+    .gradient (@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = skip) {
+        .gradient.directional(@start, @stop, @degrees, @image);
+    }
+
+    .gradient {
+        .directional(@start: transparent, @stop: gray, @degrees: 180deg, @image: none) when not (@start = skip) {
+            .back(@start, @image, repeat-x, center);
+             background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
+             background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
+             background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
+        }
+        .to-bottom(@start: transparent, @stop: gray, @image: none) when not (@start = skip) {
+            .gradient.directional(@start, @stop, 180deg, @image);
+        }
+        .to-right(@start: transparent, @stop: gray, @image: none) when not (@start = skip) {
+            .gradient.directional(@start, @stop, 270deg, @image);
+        }
+        .to-top(@start: transparent, @stop: gray, @image: none) when not (@start = skip) {
+            .gradient.directional(@start, @stop, 0deg, @image);
+        }
+        .to-left(@start: transparent, @stop: gray, @image: none) when not (@start = skip) {
+            .gradient.directional(@start, @stop, 90deg, @image);
+        }
+        .radial(@inner: transparent, @outer: gray, @image: none) when not (@inner = skip) {
+            .back(@inner, @image, repeat-x, center);
+             background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer));// Chrome, Safari 4+
+             background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Safari 5.1+, Chrome 10+
+             background-image:    -moz-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Firefox 3.6+
+             background-image:         radial-gradient(ellipse at center, @inner 0%, @outer 100%); // W3C
+        }
+    }
+
+    .overflow (@x: visible, @y: visible) when not (@x = skip) {
+        overflow-x: @x;
+        overflow-y: @y;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .placeholder (@color: gray) when not (@color = skip) {
+        &:-moz-placeholder            { color: @color; } // Firefox 4-18
+        &::-moz-placeholder           { color: @color; } // Firefox 19+
+        &:-ms-input-placeholder       { color: @color; } // IE 10+
+        &::-webkit-input-placeholder  { color: @color; } // Chrome, Safari
+    }
+
+    .perspective (@length) {
+        -webkit-perspective: @length;
+           -moz-perspective: @length;
+                perspective: @length;
+    }
+
+    .rotate (@degrees: 0deg) when not (@degrees = skip) {
+        -webkit-transform: rotate(@degrees);
+            -ms-transform: rotate(@degrees);
+                transform: rotate(@degrees);
+    }
+
+    .rotateX (@degrees: 0deg) when not (@degrees = skip) {
+        -webkit-transform: rotateX(@degrees);
+            -ms-transform: rotateX(@degrees);
+                transform: rotateX(@degrees);
+    }
+
+    .rotateY (@degrees: 0deg) when not (@degrees = skip) {
+        -webkit-transform: rotateY(@degrees);
+            -ms-transform: rotateY(@degrees);
+                transform: rotateY(@degrees);
+    }
+
+    .rounded (@radius: 0) when not (@radius = skip) {
+        -webkit-border-radius: @radius;
+           -moz-border-radius: @radius;
+                border-radius: @radius;
+    }
+
+    .rounded {
+        .top (@radius: 0) when not (@radius = skip) {
+            .rounded.left-top     (@radius);
+            .rounded.right-top    (@radius);
+        }
+        .right (@radius: 0) when not (@radius = skip) {
+            .rounded.right-top    (@radius);
+            .rounded.right-bottom (@radius);
+        }
+        .bottom (@radius: 0) when not (@radius = skip) {
+            .rounded.left-bottom (@radius);
+            .rounded.right-bottom (@radius);
+        }
+        .left (@radius: 0) when not (@radius = skip) {
+            .rounded.left-top     (@radius);
+            .rounded.left-bottom  (@radius);
+        }
+        .left-top (@radius: 0) when not (@radius = skip) {
+            -webkit-border-top-left-radius: @radius;
+                -moz-border-radius-topleft: @radius;
+                    border-top-left-radius: @radius;
+        }
+        .left-bottom (@radius: 0) when not (@radius = skip) {
+            -webkit-border-bottom-left-radius: @radius;
+                -moz-border-radius-bottomleft: @radius;
+                    border-bottom-left-radius: @radius;
+        }
+        .right-top (@radius: 0) when not (@radius = skip) {
+            -webkit-border-top-right-radius: @radius;
+                -moz-border-radius-topright: @radius;
+                    border-top-right-radius: @radius;
+        }
+        .right-bottom (@radius: 0) when not (@radius = skip) {
+            -webkit-border-bottom-right-radius: @radius;
+                -moz-border-radius-bottomright: @radius;
+                    border-bottom-right-radius: @radius;
+        }
+    }
+
+    .scale (@factor: 0) when not (@factor = skip) {
+        -webkit-transform: scale(@factor);
+            -ms-transform: scale(@factor);
+                transform: scale(@factor);
+    }
+
+    .shadow (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
+        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+        -webkit-box-shadow: @spread @hsla;     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
+    }
+
+    .shadow {
+        .inset (@spread: 0 0, @color: gray, @alpha: .5) when not (@spread = skip) {
+            @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+            -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
+                    box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+        }
+    }
+
+    .shadow-multi (@shadows: none) when not (@shadows = skip) {
+        -webkit-box-shadow: @shadows;
+                box-shadow: @shadows;
+    }
+
+    .skew (@x: 0, @y: 0) when not (@x = skip) {
+        -webkit-transform: skew(@x, @y);
+           -moz-transform: skew(@x, @y);
+            -ms-transform: skewX(@x) skewY(@y);
+                transform: skew(@x, @y);
+    }
+
+    .tap-highlight (@color: gray) when not (@color = skip) {
+        -webkit-tap-highlight-color: @color;
+           -moz-tap-highlight-color: @color;
+                tap-highlight-color: @color;
+    }
+
+    .transform (@transform: none) when not (@transform = skip) {
+        -webkit-transform: @transform;
+           -moz-transform: @transform;
+            -ms-transform: @transform;
+                transform: @transform;
+    }
+
+    .transition (@property: all, @duration: 0s, @function: ease, @delay: 0s) when not (@property = skip) {
+        -webkit-transition: @property @duration @function @delay;
+                transition: @property @duration @function @delay;
+    }
+
+    .transition-multi (@transitions: all 0s ease 0s) when not (@transitions = skip) {
+        -webkit-transition: @transitions;
+                transition: @transitions;
+    }
+
+    .translate (@x: 0, @y: 0) when not (@x = skip) {
+        -webkit-transform: translate(@x, @y);
+           -moz-transform: translate(@x, @y);
+            -ms-transform: translate(@x, @y);   
+                transform: translate(@x, @y);
+    }
+
+    .translate3d (@x: 0, @y: 0, @z: 0) when not (@x = skip) {
+        -webkit-transform: translate3d(@x, @y, @z);
+           -moz-transform: translate3d(@x, @y, @z);
+                transform: translate3d(@x, @y, @z);
+    }
+
+    .user-select (@select: none) when not (@select = skip) {
+        -webkit-user-select: @select;
+           -moz-user-select: @select;
+            -ms-user-select: @select;
+    }

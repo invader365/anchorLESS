@@ -1,17 +1,17 @@
 //  -------------------------------------------------- //
 //
-//  Anchor LESS
-//  --------------------------------------------------
-//  A Comprehensive LESS mixins library
+//  AnchorLESS
+//  -------------------------------------------------- //
+//  The most extensive LESS mixins library
 //  https://github.com/invader365/anchorLESS
 //
 //  Licensed under the Apache License v2.0
 //
 //  -------------------------------------------------- //
-
-// ----------------------------------------------------------------------- //
-// i. Mixins
-// ----------------------------------------------------------------------- //
+//
+//  01. Mixins
+//  ---------------------------------------------------------------------------
+//  Mixins 
 
     .absolute {
         .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when not (@top = skip) and (@query = 0) {
@@ -74,6 +74,9 @@
         }
         .clip (@clip: border) when not (@clip = skip) {
             .background-clip(@clip); 
+        }
+        .image (@image: none) when not (@image = skip) {
+            .image(@image)
         }
         .position (@position: 0 0) when not (@position = skip) { 
             background-position: @position;
@@ -140,7 +143,7 @@
     
     .font (@font: normal 1em, @family: inherit) when not (@font = skip) and (@family = inherit) {
         font: @font a;
-        font-family: inherit;           // Inherit is not a valid value within shorthand
+        font-family: inherit;           // inherit is not valid on shorthand
     }
 
     .font (@font: normal 1em, @family: inherit) when not (@font = skip) and not (@family = inherit) {
@@ -297,201 +300,199 @@
     .width (@width: auto, @query: 0) when not (@width = skip) and (@query = 0) {
         width: @width;
     }
-
-// Queries
-// ----------------------------------------------------------------------- //
+//  Queries
 
     .absolute {
         .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .absolute.align (@top, @right, @bottom, @left);
+                .absolute.align(@top, @right, @bottom, @left);
             }
         }
     }
 
     .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .align (@top, @right, @bottom, @left);
+            .align(@top, @right, @bottom, @left);
         }
     }
 
     .arrow {
         .top (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .arrow.top (@size, @color, @query);
+                .arrow.top(@size, @color, @query);
             }
         }
         .bottom (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .arrow.bottom (@size, @color, @query);
+                .arrow.bottom(@size, @color, @query);
             }
         }
         .left (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .arrow.left (@size, @color, @query);
+                .arrow.left(@size, @color, @query);
             }
         }
         .right (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .arrow.right (@size, @color, @query);
+                .arrow.right(@size, @color, @query);
             }
         }
         .left-top (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .arrow.left-top (@width, @color, @ratio, @query);
+                .arrow.left-top(@width, @color, @ratio, @query);
             }
         }
         .left-bottom (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .arrow.left-bottom (@width, @color, @ratio, @query);
+                .arrow.left-bottom(@width, @color, @ratio, @query);
             }
         }
         .right-top (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .arrow.right-top (@width, @color, @ratio, @query);
+                .arrow.right-top(@width, @color, @ratio, @query);
             }
         }
         .right-bottom (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .arrow.right-bottom (@width, @color, @ratio, @query);
+                .arrow.right-bottom(@width, @color, @ratio, @query);
             }
         }
     }
 
     .back (@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query: 0) when (@query > 0) { 
         @media all and (min-width: @query) {
-            .back (@color, @image, @repeat, @position);
+            .back(@color, @image, @repeat, @position);
         }
     }
 
     .border (@width: 0, @style: none, @color: none, @query: 0) when (@query > 0) { 
         @media all and (min-width: @query) {
-            .border (@width, @style, @color);
+            .border(@width, @style, @color);
         }
     }
 
     .border { 
-        .min (@border: 0, @query: 0) when (@query > 0) {
+        .short (@border: 0, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .border.min (@border, @query);
+                .border.short(@border, @query);
             }
         }
     }
 
     .center-block (@width: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .center-block (@width);
+            .center-block(@width);
         } 
     }
 
     .center-inline (@display: inline-block, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .center-inline (@display);
+            .center-inline(@display);
         } 
     }
 
     .center-vertical (@height: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .center-vertical (@height);
+            .center-vertical(@height);
         } 
     }
 
     .display (@display: none, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .display (@display);
+            .display(@display);
         } 
     }
 
     .fixed {
         .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .fixed.align (@top, @right, @bottom, @left);
+                .fixed.align(@top, @right, @bottom, @left);
             }
         }
     }
 
     .float (@float: none, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .float (@float);
+            .float(@float);
         } 
     }
 
     .font-size (@font: none, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .font-size (@font);
+            .font-size(@font);
         } 
     }
 
     .image (@url: none, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .image (@url);
+            .image(@url);
         } 
     }
 
     .indent (@indent: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .indent (@indent);
+            .indent(@indent);
         }
     }
 
     .height (@height: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .height (@height);
+            .height(@height);
         } 
     }
 
     .index (@index: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .index (@index);
+            .index(@index);
         }
     }
 
     .margin (@margin: none, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .margin (@margin);
+            .margin(@margin);
         } 
     }
 
     .max-width (@width: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .max-width (@width);
+            .max-width(@width);
         }
     }
 
     .min-width (@width: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .min-width (@width);
+            .min-width(@width);
         }
     }
 
     .offset (@offset: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .offset (@offset);
+            .offset(@offset);
         }
     }
 
     .opacity (@opacity: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .opacity (@opacity);
+            .opacity(@opacity);
         }
     }
 
     .padding (@padding: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .padding (@padding);
+            .padding(@padding);
         }
     }
 
     .position (@position: absolute, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .position (@position);
+            .position(@position);
         }
     }
 
     .position {
         .align (@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .position.align (@position, @top, @right, @bottom, @left);
+                .position.align(@position, @top, @right, @bottom, @left);
             }
         }
     }
@@ -499,68 +500,66 @@
     .relative {
         .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) when (@query > 0) {
             @media all and (min-width: @query) {
-                .relative.align (@top, @right, @bottom, @left);
+                .relative.align(@top, @right, @bottom, @left);
             }
         }
     }
 
     .reset-block (@margin-left: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .reset-block (@margin-left);
+            .reset-block(@margin-left);
         } 
     }
 
     .reset-vertical (@margin-top: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .reset-vertical (@margin-top);
+            .reset-vertical(@margin-top);
         } 
     }
 
     .size (@width: auto, @height: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .size (@width, @height);
+            .size(@width, @height);
         }
     }
 
     .size-min (@min-width: 0, @min-height: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .size-min (@min-width, @min-height);
+            .size-min(@min-width, @min-height);
         }
     }
 
     .spacing (@margin: 0, @padding: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .spacing (@margin, @padding);
+            .spacing(@margin, @padding);
         }
     }
 
     .square (@size: auto, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .square (@square, @display);
+            .square(@square, @display);
         }
     }
 
     .text-align (@align: center, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .text-align (@align);
+            .text-align(@align);
         }
     }
 
     .text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .text-shadow (@shadow, @color, @alpha);
+            .text-shadow(@shadow, @color, @alpha);
         }
     }
 
     .width (@width: 0, @query: 0) when (@query > 0) {
         @media all and (min-width: @query) {
-            .width (@width);
+            .width(@width);
         }
     }
 
-//
 //  Skips
-//  ----------------------------------------------------------------------- //
     
     .absolute {
         .align        (@var) when (@var = skip) {}
@@ -588,6 +587,7 @@
     .back {
         .attach     (@var) when (@var = skip)  {}
         .color      (@var) when (@var = skip)  {}
+        .image      (@var) when (@var = skip)  {}
         .position   (@var) when (@var = skip)  {}
         .repeat     (@var) when (@var = skip)  {}
         .size       (@var) when (@var = skip)  {}
@@ -596,7 +596,7 @@
     .backface (@var) when (@var = skip) {}
 
     .border {
-        .min       (@var) when (@var = skip)  {}
+        .short     (@var) when (@var = skip)  {}
         .width     (@var) when (@var = skip)  {}
         .style     (@var) when (@var = skip)  {}
         .color     (@var) when (@var = skip)  {}
@@ -744,8 +744,8 @@
     .transform (@var) when (@var = skip) {}
 
     .transition (@var) when (@var = skip) {}
-    
-    .transition-list (@var) when (@var = skip) {}
+
+    .transition-multi (@var) when (@var = skip) {}
 
     .translate (@var) when (@var = skip) {}
 
@@ -754,10 +754,8 @@
     .user-select (@var) when (@var = skip) {}
 
     .width (@var) when (@var = skip) {}
-
-//  ----------------------------------------------------------------------- //
+    
 //  States
-//  ----------------------------------------------------------------------- //
 
     .hover {
         .color (@color: inherit, @back-color: skip) {
@@ -823,11 +821,9 @@
         }
     }
     
+//  Vendor Mixins
 
-// Vendor Mixins
-// ----------------------------------------------------------------------- //
-
-    .animation (@name: none, @duration: 0, @ease: ease, @delay: 0, @iteration: 1, @direction: normal) when not (@name = null) {
+    .animation (@name: none, @duration: 0, @ease: ease, @delay: 0, @iteration: 1, @direction: normal) when not (@name = skip) {
         -webkit-animation: @name @duration @ease @delay @iteration @direction;    // Safari, Chrome
            -moz-animation: @name @duration @ease @delay @iteration @direction;
             -ms-animation: @name @duration @ease @delay @iteration @direction;
@@ -891,7 +887,7 @@
                     animation-play-state: @play-state;
         }
     }
-
+    
     .appearance (@appearance: normal) when not (@appearance = skip) {
         -webkit-appearance: @appearance;
            -moz-appearance: @appearance;
@@ -1098,7 +1094,7 @@
                 transition: @property @duration @function @delay;
     }
 
-    .transition-list (@transitions: all 0s ease 0s) when not (@transitions = skip) {
+    .transition-multi (@transitions: all 0s ease 0s) when not (@transitions = skip) {
         -webkit-transition: @transitions;
                 transition: @transitions;
     }
@@ -1122,12 +1118,10 @@
             -ms-user-select: @select;
     }
 
+// 
+//  02. Assets
 //  ---------------------------------------------------------------------------
-//  ii. Assets
-//  ---------------------------------------------------------------------------
-
-// Arrows
-// ----------------------------------------------------------------------- //
+//  Arrows
 
     .arrow {
         .base () {
@@ -1185,9 +1179,8 @@
             border-style: solid;
         }
     }
-// 
-// Blocks
-// ----------------------------------------------------------------------- //
+
+//  Blocks
 
     .center-block (@width: 0, @query: 0) when (@query = 0) {
         width: @width;
@@ -1226,9 +1219,7 @@
         position: relative;
         top: auto;
     }
-
-// Lists
-// ----------------------------------------------------------------------- //
+//  Lists
     
     .list-style (@type: none, @image: none) when not (@type = skip) and (@type = inherit), (@image = inherit) {
         list-style: inherit;
@@ -1241,9 +1232,7 @@
     .list-style (@type: none, @image: none) when not (@type = skip) and not (@image = none) and not (@image = inherit) {
         list-style: none inside url('@{image}');
     }
-
-// Pseudo
-// ----------------------------------------------------------------------- //
+//  Pseudo
 
     .pseudo-container (@display: inline-block) {
         display: @display;
@@ -1258,9 +1247,8 @@
         height: @height;
         vertical-align: middle;
     }
-//
-// Tables
-// ----------------------------------------------------------------------- //
+
+//  Tables
 
     .table {
         .border (@width: 0, @style: none, @color: none) when not (@width = skip) {
@@ -1298,9 +1286,7 @@
             & tr:last-child  td:last-child  { .rounded.right-bottom(@radius); }
         }
     }
-    
 //  Unocategorized
-//  ----------------------------------------------------------------------- //
 
     .strong-div-width (@swidth: 100%, @dwidth: 100%, @query: 0) when not (@swidth = skip) and (@query = 0) {
         & > strong              { display: block; width: @swidth; float: left; }
@@ -1315,18 +1301,15 @@
 
     .strong-div-width (@var) when (@var = skip) {}
     
-//  -----------------------------------------------------------------------
-//  iii. Utilities
-//  ----------------------------------------------------------------------- 
-
 //
+//  03. Utilities
+//  ---------------------------------------------------------------------------
 //  Constants 
-//  ----------------------------------------------------------------------- //
 
-    @d                      :   e('/');         // divider escape
+    //  Divider escape
+    @d                      :   e('/');
 
-//  Shades of Gray
-
+    //  Shades of Gray
     @hex0                   :     #000;
     @hex1                   :     #111;
     @hex2                   :     #222;
@@ -1345,8 +1328,7 @@
     @hexef                  :     #f6f6f7;
     @hexf                   :     #fff;
 
-//  Colors Codes
-
+    //  Colors Codes
     @aqua                   :     #0ff;
     @black                  :     #000;
     @blue                   :     #00f;
@@ -1373,15 +1355,58 @@
     @yellow                 :     #ff0;
     @yellowGreen            :     #9acd32;
 
-//  Websafe Fonts
-
+    //  Websafe Fonts
     @font-mono              :   'Menlo, Monaco, Consolas, monospace';
     @font-sans              :   'Helvetica Neue, Helvetica, Arial, sans-serif';
     @font-script            :   'Brush Script MT, cursive';
     @font-serif             :   'Georgia, Times New Roman, Times, serif';
+//  Easing
 
-// Helpers
-// ----------------------------------------------------------------------- //
+    // Back
+    @ease-in-back       : cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    @ease-out-back      : cubic-bezier(0.175,  0.885, 0.320, 1.275);
+    @ease-in-out-back   : cubic-bezier(0.680, -0.550, 0.265, 1.550);
+
+    // Cubic
+    @ease-in-cubic      : cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    @ease-out-cubic     : cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    @ease-in-out-cubic  : cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+    // Circ
+    @ease-in-circ       : cubic-bezier(0.600, 0.040, 0.980, 0.335);
+    @ease-out-circ      : cubic-bezier(0.075, 0.820, 0.165, 1.000);
+    @ease-in-out-circ   : cubic-bezier(0.785, 0.135, 0.150, 0.860);
+
+    // Expo
+    @ease-in-expo       : cubic-bezier(0.950, 0.050, 0.795, 0.035);
+    @ease-out-expo      : cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    @ease-in-out-expo   : cubic-bezier(1.000, 0.000, 0.000, 1.000);
+
+    // Quad
+    @ease-in-quad       : cubic-bezier(0.550, 0.085, 0.680, 0.530);
+    @ease-out-quad      : cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    @ease-in-out-quad   : cubic-bezier(0.455, 0.030, 0.515, 0.955);
+
+    // Quart
+    @ease-in-quart      : cubic-bezier(0.895, 0.030, 0.685, 0.220);
+    @ease-out-quart     : cubic-bezier(0.165, 0.840, 0.440, 1.000);
+    @ease-in-out-quart  : cubic-bezier(0.770, 0.000, 0.175, 1.000);
+
+    // Quint
+    @ease-in-quint      : cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    @ease-out-quint     : cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    @ease-in-out-quint  : cubic-bezier(0.860, 0.000, 0.070, 1.000);
+
+    // Sine
+    @ease-in-sine       : cubic-bezier(0.470, 0.000, 0.745, 0.715);
+    @ease-out-sine      : cubic-bezier(0.390, 0.575, 0.565, 1.000);
+    @ease-in-out-sine   : cubic-bezier(0.445, 0.050, 0.550, 0.950);
+//  Filters
+
+    @svg-grayscale      : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale";
+
+    @svg-grayscale-ie10 : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale";
+//  Helpers
 
     .block () {
         display: block;
@@ -1444,53 +1469,16 @@
     .wrap () {
         white-space: normal; // validate
     }
-//  ----------------------------------------------------------------------- //
-//  Easing
-//  ----------------------------------------------------------------------- //
+//  Inline Images
 
-    // Cubic
-    @ease-in-cubic      : cubic-bezier(0.550, 0.055, 0.675, 0.190);
-    @ease-out-cubic     : cubic-bezier(0.215, 0.610, 0.355, 1.000);
-    @ease-in-out-cubic  : cubic-bezier(0.645, 0.045, 0.355, 1.000);
-
-    // Circ
-    @ease-in-circ       : cubic-bezier(0.600, 0.040, 0.980, 0.335);
-    @ease-out-circ      : cubic-bezier(0.075, 0.820, 0.165, 1.000);
-    @ease-in-out-circ   : cubic-bezier(0.785, 0.135, 0.150, 0.860);
-
-    // Expo
-    @ease-in-expo       : cubic-bezier(0.950, 0.050, 0.795, 0.035);
-    @ease-out-expo      : cubic-bezier(0.190, 1.000, 0.220, 1.000);
-    @ease-in-out-expo   : cubic-bezier(1.000, 0.000, 0.000, 1.000);
-
-    // Quad
-    @ease-in-quad       : cubic-bezier(0.550, 0.085, 0.680, 0.530);
-    @ease-out-quad      : cubic-bezier(0.250, 0.460, 0.450, 0.940);
-    @ease-in-out-quad   : cubic-bezier(0.455, 0.030, 0.515, 0.955);
-
-    // Quart
-    @ease-in-quart      : cubic-bezier(0.895, 0.030, 0.685, 0.220);
-    @ease-out-quart     : cubic-bezier(0.165, 0.840, 0.440, 1.000);
-    @ease-in-out-quart  : cubic-bezier(0.770, 0.000, 0.175, 1.000);
-
-    // Quint
-    @ease-in-quint      : cubic-bezier(0.755, 0.050, 0.855, 0.060);
-    @ease-out-quint     : cubic-bezier(0.230, 1.000, 0.320, 1.000);
-    @ease-in-out-quint  : cubic-bezier(0.860, 0.000, 0.070, 1.000);
-
-    // Sine
-    @ease-in-sine       : cubic-bezier(0.470, 0.000, 0.745, 0.715);
-    @ease-out-sine      : cubic-bezier(0.390, 0.575, 0.565, 1.000);
-    @ease-in-out-sine   : cubic-bezier(0.445, 0.050, 0.550, 0.950);
-
-    // Back
-    @ease-in-back       : cubic-bezier(0.600, -0.280, 0.735, 0.045);
-    @ease-out-back      : cubic-bezier(0.175,  0.885, 0.320, 1.275);
-    @ease-in-out-back   : cubic-bezier(0.680, -0.550, 0.265, 1.550);
+    @png-to-gray15      : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
     
-//  ----------------------------------------------------------------------- //
+    @gif-x-close        : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
+    
+    @gif-spacer         : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+
+    @png-black75        : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA9JREFUeNpiYGBgWAYQYAAAqwCnu+qxhQAAAABJRU5ErkJggg==";
 //  Keyframes
-//  ----------------------------------------------------------------------- //
 
     .keyframes-fade-in () {
         ._fade-in () {
@@ -1646,20 +1634,3 @@
             ._zoom-out();
         }
     }
-
-// Filters
-// ----------------------------------------------------------------------- //
-
-    @svg-grayscale      : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale";
-
-    @svg-grayscale-ie10 : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale";
-
-// Inline Images
-// ----------------------------------------------------------------------- //
-
-    @png-to-gray15      : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABACAYAAADbER1AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAApSURBVHjaYvj//z8DEwMDw2AmGBgYGBjhXEZcBBORXGJZjHjFIA4CDAAQKgOfld5NPgAAAABJRU5ErkJggg==";
-    @gif-x-close        : "data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///wAAAAAAACH5BAEAAAIALAAAAAALAAsAAAIXBIQpxrr2DmoT0sSgiztqbH1Xc1UlWAAAOw==";
-    
-    @gif-spacer         : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
-
-    @png-black75        : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA9JREFUeNpiYGBgWAYQYAAAqwCnu+qxhQAAAABJRU5ErkJggg==";

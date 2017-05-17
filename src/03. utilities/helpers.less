@@ -1,0 +1,63 @@
+//  Helpers
+
+    .block () {
+        display: block;
+        position: relative;
+        float: left;
+    }
+
+    .clearfix () {
+        &:after { 
+            content: ''; 
+            display: table; 
+            clear: both; 
+        }
+    }
+
+    .ellipsis () { 
+        text-overflow: ellipsis;    // IE8 rendering issue
+        white-space: nowrap; 
+        overflow: hidden; 
+    }
+
+    .hide-text () { 
+        text-indent: -9999px; 
+        text-align: left;
+        overflow: hidden; 
+    }
+
+    .hyphens () {
+        -webkit-hyphens: auto;
+           -moz-hyphens: auto;
+                hyphens: auto;
+    }
+
+    .inline () {
+        display: inline;
+        float: none;
+    }
+
+    .inline-block () {
+        display: inline-block;
+        position: relative;
+        float: none;
+    }
+
+    .line-break () {  
+        margin-left: 0; 
+        clear: left; 
+    }
+    
+    .nowrap () {
+        white-space: nowrap;
+    }
+
+    .word-break () {
+        -ms-word-break: break-all;
+            word-break: break-all;
+            word-break: break-word;
+    }
+    
+    .wrap () {
+        white-space: normal; // validate
+    }
