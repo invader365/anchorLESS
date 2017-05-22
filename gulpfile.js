@@ -6,9 +6,9 @@ var sync   = require('browser-sync').create();
 
 gulp.task('anchorless', function() {
     gulp.src([
-            './src/01. mixins/**/*.less',
-            './src/02. assets/**/*.less',
-            './src/03. utilities/**/*.less'
+            './src/01_mixins/**/*.less',
+            './src/02_assets/**/*.less',
+            './src/03_utilities/**/*.less'
         ])
         .pipe(concat('anchor.less'))
         .pipe(gulp.dest('./'))
