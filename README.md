@@ -30,9 +30,9 @@ Common mixins list:
 00. .size (width, height, query);
 00. .transition (property, durations, function, delay);
 00. .width (width, query);
-00. **[..](partials/README.md)**
+00. **[..](src/README.md)**
 
-To see the **[full list](http://invader365.github.io/anchorLESS/html/110_reference.html)**.
+To see the **[full list](http://invader365.github.io/anchorLESS/html/reference.html)**.
 
 ## Usage
 ```css
