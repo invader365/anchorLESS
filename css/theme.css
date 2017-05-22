@@ -1,5 +1,5 @@
 body {
-  font: 1.6em / 1.5 Calibri, Helvetica, Arial, sans-serif;
+  font: 1.6em / 1.5 Calibri, Helvetica, sans-serif;
   color: #c6c6c6;
   background-color: #2f2f2f;
 }
@@ -29,14 +29,19 @@ hr {
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
 }
+::-moz-selection {
+  color: #ffffff;
+  background-color: #fb292d;
+  text-shadow: none;
+}
 ::selection {
   color: #ffffff;
-  background-color: #ee5358;
+  background-color: #fb292d;
   text-shadow: none;
 }
 ::-moz-selection {
   color: #ffffff;
-  background-color: #ee5358;
+  background-color: #fb292d;
   text-shadow: none;
 }
 .input,
@@ -44,8 +49,6 @@ hr {
 input,
 select,
 textarea {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 .input.focus,
@@ -78,8 +81,6 @@ textarea:hover {
   margin-bottom: 24px;
 }
 .breadcrumb.primary {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
   border-width: 1px;
   border-style: solid;
@@ -118,8 +119,6 @@ textarea:hover {
   color: black;
   border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 0.2em 0.5em;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
   border-radius: 4px;
   font: 1.4em a;
   font-family: inherit;
@@ -131,8 +130,6 @@ textarea:hover {
 .button.secondary {
   font: bold 1em / 1 a;
   font-family: inherit;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
@@ -180,8 +177,6 @@ textarea:hover {
   border-style: solid;
   border-color: #cccccc;
   font-size: 0.96em;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
   border-radius: 3px;
 }
 .message.primary.error {
@@ -240,8 +235,6 @@ textarea:hover {
   border-style: solid;
   border-color: #bbbbbb;
   float: right;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 .pagination.primary .pages span,
@@ -272,17 +265,17 @@ textarea:hover {
 .panel.primary {
   background-color: #212121;
   padding: 24px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.8) inset;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.8) inset;
+          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.8) inset;
 }
 .panel.primary .title {
   font: 2em a;
   font-family: inherit;
   color: #ffffff;
   border-bottom: 1px solid #121212;
-  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.07);
+  -webkit-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.07);
+          box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.07);
 }
 .panel.primary .fa {
   color: #fb292d;
@@ -299,7 +292,7 @@ textarea:hover {
 }
 .table.primary caption {
   color: #ffffff;
-  background-color: #ee5358;
+  background-color: #fb292d;
   padding: 0.35em;
   font: bold 1.2em a;
   font-family: inherit;
@@ -330,9 +323,8 @@ textarea:hover {
 .tabset.primary > .summary a:hover,
 .tabset.primary > .summary.active {
   background: rgba(0, 0, 0, 0.3) none repeat 0 0;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
+          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
   border-radius: 5px;
   text-decoration: none;
 }
@@ -345,8 +337,6 @@ textarea:hover {
   color: #ffffff;
   background-color: #333333;
   padding: 7px 14px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 .tooltip.primary.up:before {

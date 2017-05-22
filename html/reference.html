@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<!--[if IE 8]>     <html lang="es" class="ie ie8"> <![endif]-->
+<!DOCTYPE html><!--[if IE 8]>     <html lang="es" class="ie ie8"> <![endif]-->
 <!--[if IE 9]>     <html lang="es" class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]>  <html lang="es"> <![endif]-->
 <!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
 <head>
-  <title>Anchor Less | The Most Extensive Less Mixins Library</title>
+  <title>Anchor Less | page.title</title>
   <meta charset="utf-8">
   <meta name="author" content="invader365">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,13 +15,13 @@
   <meta property="og:image" content="http://invader365.github.io/anchorLESS/images/logo-main-small.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="http://invader365.github.io/anchorLESS">
+  <script src="../js/analytics.js"></script>
+  <script src="../js/modernizr.js"></script>
+  <script src="../js/modernizr.load.js">       </script>
   <link href="../images/favicon.ico" type="image/x-icon" rel="shortcut icon">
+  <link href="../bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
   <link href="../css/uno.css" rel="stylesheet">
-  <script src="../javascript/analytics.js"></script>
-  <link href="../fonts/FontAwesome/css/font-awesome.min.css" rel="stylesheet">
-  <script src="../javascript/libs/jquery-1.11.1.min.js"></script>
-  <script src="../javascript/modernizr.js"></script>
-  <script src="../javascript/modernizr.load.js"></script>
+  <script src="../js/libs/jquery-1.11.1.min.js"></script>
 </head>
 <body class="uno l-right-top-nav reference">
   <header>
@@ -38,8 +37,8 @@
       <div class="m-mainnav navbar primary">
         <ul class="lined-up">
           <li class="home"><a href="../index.html">Home</a></li>
-          <li class="reference"><a href="110_reference.html">Reference</a></li>
-          <li class="usage"><a href="120_usage.html">Usage</a></li>
+          <li class="reference"><a href="../html/reference.html">Reference</a></li>
+          <li class="usage"><a href="../html/usage.html">Usage</a></li>
         </ul>
       </div>
     </section>
@@ -49,42 +48,42 @@
       <div class="grid split-6 separate">
         <div class="c-filters">
           <div class="m-version hide">
-            <p>Source on <a href="https://github.com/invader365/anchorLESS">GitHub</a></p>
+            <p>Source on<a href="https://github.com/invader365/anchorLESS">GitHub</a></p>
           </div>
           <div class="m-submenu-2">
             <h2 class="title">By Category:</h2>
             <hr>
             <h2 class="title">Mixins</h2>
-              <ul class="cat_mixins">
-                <li><a href="#animation">Animation</a></li>
-                <li><a href="#background">Background and Color</a></li>
-                <li><a href="#border">Border</a></li>
-                <li><a href="#properties">Box Properties</a></li>
-                <li><a href="#font">Font and Text</a></li>
-                <li><a href="#position">Positioning</a></li>
-                <li><a href="#size">Size and Spacing</a></li>
-                <li><a href="#transform">Transform</a></li>
-                <li><a href="#transition">Transition</a></li>
-              </ul>
+            <ul class="cat_mixins">
+              <li><a href="#animation">Animation</a></li>
+              <li><a href="#background">Background and Color</a></li>
+              <li><a href="#border">Border</a></li>
+              <li><a href="#properties">Box Properties</a></li>
+              <li><a href="#font">Font and Text</a></li>
+              <li><a href="#position">Positioning</a></li>
+              <li><a href="#size">Size and Spacing</a></li>
+              <li><a href="#transform">Transform</a></li>
+              <li><a href="#transition">Transition</a></li>
+            </ul>
             <h2 class="title">Assets</h2>
-              <ul class="cat_assets">
-                <li><a href="#arrows">Arrows</a></li>
-                <li><a href="#centering">Centering</a></li>
-                <li><a href="#lists">Lists</a></li>
-                <li><a href="#pseudo">Pseudo</a></li>
-                <li><a href="#states">States</a></li>
-                <li><a href="#tables">Tables</a></li>
-              </ul>
+            <ul class="cat_assets">
+              <li><a href="#arrows">Arrows</a></li>
+              <li><a href="#centering">Centering</a></li>
+              <li><a href="#lists">Lists</a></li>
+              <li><a href="#pseudo">Pseudo</a></li>
+              <li><a href="#states">States</a></li>
+              <li><a href="#tables">Tables</a></li>
+            </ul>
             <h2 class="title">Utilities</h2>
-              <ul class="cat_utilities">
-                <li><a href="#colornames">Color names</a></li>
-                <li><a href="#easing">Easing</a></li>
-                <li><a href="#grays">Gray shades</a></li>
-                <li><a href="#helpers">Helpers</a></li>
-                <li><a href="#keyframes">Keyframes</a></li>
-                <li><a href="#webfonts">Web-safe fonts</a></li>
-                <li><a href="#resources">Uri resources</a></li>
-              </ul>
+            <ul class="cat_utilities">
+              <li><a href="#colornames">Color names</a></li>
+              <li><a href="#easing">Easing</a></li>
+              <li><a href="#grays">Gray shades</a></li>
+              <li><a href="#helpers">Helpers</a></li>
+              <li><a href="#keyframes">Keyframes</a></li>
+              <li><a href="#webfonts">Web-safe fonts</a></li>
+              <li><a href="#resources">Uri resources</a></li>
+            </ul>
           </div>
         </div>
         <div class="c-module span-5">
@@ -93,7 +92,7 @@
             <div class="details">
               <hr>
               <h2 class="heading primary">Reference</h2>
-              <p><strong>Index: </strong><a href="#A">A </a>| <a href="#B">B </a>|  <a href="#C">C </a>|  <a href="#D">D </a>|  <a href="#E">E </a>|  <a href="#F">F </a>|  <a href="#G">G </a>|  <a href="#H">H </a>|  <a href="#I">I </a>|  <a href="#K">K </a>|  <a href="#L">L </a>|  <a href="#M">M </a>|  <a href="#N">N </a>|  <a href="#O">O </a>|  <a href="#P">P </a>|  <a href="#R">R </a>|  <a href="#S">S </a>|  <a href="#T">T </a>|  <a href="#U">U </a>|  <a href="#V">V </a>|  <a href="#W">W</a></p>
+              <p><strong>Index: </strong><a href="#A">A </a>| <a href="#B">B </a>| <a href="#C">C </a>| <a href="#D">D </a>| <a href="#E">E </a>| <a href="#F">F </a>| <a href="#G">G </a>| <a href="#H">H </a>| <a href="#I">I </a>| <a href="#K">K </a>| <a href="#L">L </a>| <a href="#M">M </a>| <a href="#N">N </a>| <a href="#O">O </a>| <a href="#P">P </a>| <a href="#R">R </a>| <a href="#S">S </a>| <a href="#T">T </a>| <a href="#U">U </a>| <a href="#V">V </a>| <a href="#W">W</a></p>
               <div class="grid split-6">
                 <h3 id="A" class="letter">A</h3>
                 <ul class="grid split-3 span-5">
@@ -351,17 +350,17 @@
               <hr>
               <h3 class="heading primary">Mixins</h3>
               <p>Mixins are sets of code that can be configured to modify an element's properties.</p>
-                <ul class="grid split-3">
-                  <li><a href="#animation">Animation</a></li>
-                  <li><a href="#background">Background and Color</a></li>
-                  <li><a href="#border">Border</a></li>
-                  <li><a href="#properties">Box Properties</a></li>
-                  <li><a href="#font">Font and Text</a></li>
-                  <li><a href="#position">Positioning</a></li>
-                  <li><a href="#size">Size and Spacing</a></li>
-                  <li><a href="#transform">Transform</a></li>
-                  <li><a href="#transition">Transition</a></li>
-                </ul>
+              <ul class="grid split-3 circle">
+                <li><a href="#animation">Animation</a></li>
+                <li><a href="#background">Background and Color</a></li>
+                <li><a href="#border">Border</a></li>
+                <li><a href="#properties">Box Properties</a></li>
+                <li><a href="#font">Font and Text</a></li>
+                <li><a href="#position">Positioning</a></li>
+                <li><a href="#size">Size and Spacing</a></li>
+                <li><a href="#transform">Transform</a></li>
+                <li><a href="#transition">Transition</a></li>
+              </ul>
               <h4 id="animation">Animation</h4>
               <div class="scrollable">
                 <table class="table primary">
@@ -370,8 +369,7 @@
                       <th class="first">Name</th>
                       <th>Syntax</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    <tbody></tbody>
                     <tr>
                       <td>.animation ();</td>
                       <td>.animation (name, duration, ease, delay, iteration, direction);</td>
@@ -408,7 +406,7 @@
                       <td>.animation.play-state ();</td>
                       <td>.animation.play-state (play-state);</td>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
               </div>
               <h4 id="background">Background and Color</h4>
@@ -419,8 +417,7 @@
                       <th class="first">Name</th>
                       <th>Syntax</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    <tbody></tbody>
                     <tr>
                       <td>.back ();</td>
                       <td>.back (color, image, repeat, position, query);</td>
@@ -485,7 +482,7 @@
                       <td>.rgba ();</td>
                       <td>.rgba (hex-color, alpha);</td>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
               </div>
               <h4 id="border">Border</h4>
@@ -496,8 +493,7 @@
                       <th class="first">Name</th>
                       <th>Syntax</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    <tbody></tbody>
                     <tr>
                       <td>.border ();</td>
                       <td>.border (width, style, color, query);</td>
@@ -550,7 +546,7 @@
                       <td>.rounded.right-bottom ();</td>
                       <td>.rounded.right-bottom (radius);</td>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
               </div>
               <h4 id="properties">Box Properties</h4>
@@ -561,8 +557,7 @@
                       <th class="first">Name</th>
                       <th>Syntax</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    <tbody></tbody>
                     <tr>
                       <td>.appearance ();</td>
                       <td>.appearance (appearance);</td>
@@ -611,7 +606,7 @@
                       <td>.user-select ();</td>
                       <td>.user-select (select);</td>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
               </div>
               <h4 id="font">Font and Text</h4>
@@ -622,8 +617,7 @@
                       <th class="first">Name</th>
                       <th>Syntax</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    <tbody></tbody>
                     <tr>
                       <td>.font ();</td>
                       <td>.font (font, family);</td>
@@ -648,7 +642,7 @@
                       <td>.text-shadow ();</td>
                       <td>.text-shadow (spread, color, alpha, query);</td>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
               </div>
               <h4 id="position">Positioning</h4>
@@ -659,8 +653,7 @@
                       <th class="first">Name</th>
                       <th>Syntax</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    <tbody></tbody>
                     <tr>
                       <td>.absolute.align ();</td>
                       <td>.absolute.align (top, right, bottom, left, query);</td>
@@ -725,7 +718,7 @@
                       <td>.relative.align ();</td>
                       <td>.relative.align (top, right, bottom, left, query);</td>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
               </div>
               <h4 id="size">Size and Spacing</h4>
@@ -736,8 +729,7 @@
                       <th class="first">Name</th>
                       <th>Syntax</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    <tbody></tbody>
                     <tr>
                       <td>.height ();</td>
                       <td>.height (height, query);</td>
@@ -778,7 +770,7 @@
                       <td>.width ();</td>
                       <td>.width (width, query);</td>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
               </div>
               <h4 id="transform">Transform</h4>
@@ -789,8 +781,7 @@
                       <th class="first">Name</th>
                       <th>Syntax</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    <tbody></tbody>
                     <tr>
                       <td>.perspective ();</td>
                       <td>.perspective (length);</td>
@@ -823,7 +814,7 @@
                       <td>.translate3d ();</td>
                       <td>.translate3d (x, y, z);</td>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
               </div>
               <h4 id="transition">Transition</h4>
@@ -834,8 +825,7 @@
                       <th class="first">Name</th>
                       <th>Syntax</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    <tbody></tbody>
                     <tr>
                       <td>.transition ();</td>
                       <td>.transition (property, durations, function, delay);</td>
@@ -844,7 +834,7 @@
                       <td>.transition-multi ();</td>
                       <td>.transition-multi (arguments);</td>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
               </div>
             </div>
@@ -853,238 +843,226 @@
               <hr>
               <h3 class="heading primary">Assets</h3>
               <p>Assets are sets of code to create or modify an specific element or component.</p>
-                <ul class="grid split-3">
-                  <li><a href="#arrows">Arrows</a></li>
-                  <li><a href="#centering">Centering</a></li>
-                  <li><a href="#lists">Lists</a></li>
-                  <li><a href="#pseudo">Pseudo</a></li>
-                  <li><a href="#states">States</a></li>
-                  <li><a href="#tables">Tables</a></li>
-                </ul>
+              <ul class="grid split-3 circle">
+                <li><a href="#arrows">Arrows</a></li>
+                <li><a href="#centering">Centering</a></li>
+                <li><a href="#lists">Lists</a></li>
+                <li><a href="#pseudo">Pseudo</a></li>
+                <li><a href="#states">States</a></li>
+                <li><a href="#tables">Tables</a></li>
+              </ul>
               <h4 id="arrows">Arrows</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Syntax</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>.arrow.top ();</td>
-                      <td>.arrow.top (width, color, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.arrow.bottom ();</td>
-                      <td>.arrow.bottom (width, color, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.arrow.right ();</td>
-                      <td>.arrow.right (width, color, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.arrow.left ();</td>
-                      <td>.arrow.left (width, color, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.arrow.left-top ();</td>
-                      <td>.arrow.left-top (width, color, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.arrow.left-bottom ();</td>
-                      <td>.arrow.left-bottom (width, color, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.arrow.right-top ();</td>
-                      <td>.arrow.right-top (width, color, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.arrow.right-bottom ();</td>
-                      <td>.arrow.right-bottom (width, color, query);</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Syntax</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>.arrow.top ();</td>
+                    <td>.arrow.top (width, color, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.arrow.bottom ();</td>
+                    <td>.arrow.bottom (width, color, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.arrow.right ();</td>
+                    <td>.arrow.right (width, color, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.arrow.left ();</td>
+                    <td>.arrow.left (width, color, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.arrow.left-top ();</td>
+                    <td>.arrow.left-top (width, color, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.arrow.left-bottom ();</td>
+                    <td>.arrow.left-bottom (width, color, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.arrow.right-top ();</td>
+                    <td>.arrow.right-top (width, color, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.arrow.right-bottom ();</td>
+                    <td>.arrow.right-bottom (width, color, query);</td>
+                  </tr>
                 </table>
               </div>
               <h4 id="centering">Centering</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Syntax</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>.center-block ();</td>
-                      <td>.center-block (width, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.center-inline ();</td>
-                      <td>.center-inline (display, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.center-vertical ();</td>
-                      <td>.center-vertical (height);</td>
-                    </tr>
-                    <tr>
-                      <td>.offset ();</td>
-                      <td>.offset (padding, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.reset-block ();</td>
-                      <td>.reset-block (margin-left, query);</td>
-                    </tr>
-                    <tr>
-                      <td>.reset-vertical ();</td>
-                      <td>.reset-vertical (margin-top, query);</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Syntax</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>.center-block ();</td>
+                    <td>.center-block (width, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.center-inline ();</td>
+                    <td>.center-inline (display, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.center-vertical ();</td>
+                    <td>.center-vertical (height);</td>
+                  </tr>
+                  <tr>
+                    <td>.offset ();</td>
+                    <td>.offset (padding, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.reset-block ();</td>
+                    <td>.reset-block (margin-left, query);</td>
+                  </tr>
+                  <tr>
+                    <td>.reset-vertical ();</td>
+                    <td>.reset-vertical (margin-top, query);</td>
+                  </tr>
                 </table>
               </div>
               <h4 id="lists">Lists</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Syntax</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>.list-style ();</td>
-                      <td>.list-style (type, image);</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Syntax</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>.list-style ();</td>
+                    <td>.list-style (type, image);</td>
+                  </tr>
                 </table>
               </div>
               <h4 id="pseudo">Pseudo</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Syntax</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>.pseudo-container ();</td>
-                      <td>.pseudo-container (display);</td>
-                    </tr>
-                    <tr>
-                      <td>.pseudo ();</td>
-                      <td>.pseudo (content, width, height);</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Syntax</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>.pseudo-container ();</td>
+                    <td>.pseudo-container (display);</td>
+                  </tr>
+                  <tr>
+                    <td>.pseudo ();</td>
+                    <td>.pseudo (content, width, height);</td>
+                  </tr>
                 </table>
               </div>
               <h4 id="states">States</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Syntax</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>.active.color ();</td>
-                      <td>.active.color (color, back);</td>
-                    </tr>
-                    <tr>
-                      <td>.active.gradient ();</td>
-                      <td>.active.gradient (start, stop, degrees, image);</td>
-                    </tr>
-                    <tr>
-                      <td>.focus.color ();</td>
-                      <td>.focus.color (color, back);</td>
-                    </tr>
-                    <tr>
-                      <td>.focus.gradient ();</td>
-                      <td>.focus.gradient (start, stop, degrees, image);</td>
-                    </tr>
-                    <tr>
-                      <td>.hover.color ();</td>
-                      <td>.hover.color (color, back);</td>
-                    </tr>
-                    <tr>
-                      <td>.hover.gradient ();</td>
-                      <td>.hover.gradient (start, stop, degrees, image);</td>
-                    </tr>
-                    <tr>
-                      <td>.visited.color ();</td>
-                      <td>.visited.color (color, back);</td>
-                    </tr>
-                    <tr>
-                      <td>.visited.gradient ();</td>
-                      <td>.visited.gradient (start, stop, degrees, image);</td>
-                    </tr>
-                    <tr>
-                      <td>.hover-focus.color ();</td>
-                      <td>.hover-focus.color (color, back);</td>
-                    </tr>
-                    <tr>
-                      <td>.hover-focus.gradient ();</td>
-                      <td>.hover-focus.gradient (start, stop, degrees, image);</td>
-                    </tr>
-                    <tr>
-                      <td>.normal-active.color ();</td>
-                      <td>.normal-active.color (color, back);</td>
-                    </tr>
-                    <tr>
-                      <td>.normal-active.gradient ();</td>
-                      <td>.normal-active.gradient (start, stop, degrees, image);</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Syntax</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>.active.color ();</td>
+                    <td>.active.color (color, back);</td>
+                  </tr>
+                  <tr>
+                    <td>.active.gradient ();</td>
+                    <td>.active.gradient (start, stop, degrees, image);</td>
+                  </tr>
+                  <tr>
+                    <td>.focus.color ();</td>
+                    <td>.focus.color (color, back);</td>
+                  </tr>
+                  <tr>
+                    <td>.focus.gradient ();</td>
+                    <td>.focus.gradient (start, stop, degrees, image);</td>
+                  </tr>
+                  <tr>
+                    <td>.hover.color ();</td>
+                    <td>.hover.color (color, back);</td>
+                  </tr>
+                  <tr>
+                    <td>.hover.gradient ();</td>
+                    <td>.hover.gradient (start, stop, degrees, image);</td>
+                  </tr>
+                  <tr>
+                    <td>.visited.color ();</td>
+                    <td>.visited.color (color, back);</td>
+                  </tr>
+                  <tr>
+                    <td>.visited.gradient ();</td>
+                    <td>.visited.gradient (start, stop, degrees, image);</td>
+                  </tr>
+                  <tr>
+                    <td>.hover-focus.color ();</td>
+                    <td>.hover-focus.color (color, back);</td>
+                  </tr>
+                  <tr>
+                    <td>.hover-focus.gradient ();</td>
+                    <td>.hover-focus.gradient (start, stop, degrees, image);</td>
+                  </tr>
+                  <tr>
+                    <td>.normal-active.color ();</td>
+                    <td>.normal-active.color (color, back);</td>
+                  </tr>
+                  <tr>
+                    <td>.normal-active.gradient ();</td>
+                    <td>.normal-active.gradient (start, stop, degrees, image);</td>
+                  </tr>
                 </table>
               </div>
               <h4 id="tables">Tables</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Syntax</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>.table.border ();</td>
-                      <td>.table.border (width, style, color);</td>
-                    </tr>
-                    <tr>
-                      <td>.table.border-outer ();</td>
-                      <td>.table.border-outer (width, style, color);</td>
-                    </tr>
-                    <tr>
-                      <td>.table.color ();</td>
-                      <td>.table.color (color, back, rows);</td>
-                    </tr>
-                    <tr>
-                      <td>.table.font ();</td>
-                      <td>.table.font (font, family);</td>
-                    </tr>
-                    <tr>
-                      <td>.table.head-color ();</td>
-                      <td>.table.head-color (color, back);</td>
-                    </tr>
-                    <tr>
-                      <td>.table.head-font ();</td>
-                      <td>.table.head-font (font, family);</td>
-                    </tr>
-                    <tr>
-                      <td>.table.padding ();</td>
-                      <td>.table.padding (padding);</td>
-                    </tr>
-                    <tr>
-                      <td>.table.rounded ();</td>
-                      <td>.table.rounded (radius);</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Syntax</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>.table.border ();</td>
+                    <td>.table.border (width, style, color);</td>
+                  </tr>
+                  <tr>
+                    <td>.table.border-outer ();</td>
+                    <td>.table.border-outer (width, style, color);</td>
+                  </tr>
+                  <tr>
+                    <td>.table.color ();</td>
+                    <td>.table.color (color, back, rows);</td>
+                  </tr>
+                  <tr>
+                    <td>.table.font ();</td>
+                    <td>.table.font (font, family);</td>
+                  </tr>
+                  <tr>
+                    <td>.table.head-color ();</td>
+                    <td>.table.head-color (color, back);</td>
+                  </tr>
+                  <tr>
+                    <td>.table.head-font ();</td>
+                    <td>.table.head-font (font, family);</td>
+                  </tr>
+                  <tr>
+                    <td>.table.padding ();</td>
+                    <td>.table.padding (padding);</td>
+                  </tr>
+                  <tr>
+                    <td>.table.rounded ();</td>
+                    <td>.table.rounded (radius);</td>
+                  </tr>
                 </table>
               </div>
             </div>
@@ -1093,480 +1071,466 @@
               <hr>
               <h3 class="heading primary">Utilities</h3>
               <p>Helpers, Shortcodes and Build-in resources.</p>
-                <ul class="grid split-3">
-                  <li><a href="#colornames">Color names</a></li>
-                  <li><a href="#easing">Easing</a></li>
-                  <li><a href="#grays">Gray shades</a></li>
-                  <li><a href="#helpers">Helpers</a></li>
-                  <li><a href="#keyframes">Keyframes</a></li>
-                  <li><a href="#webfonts">Web-safe fonts</a></li>
-                  <li><a href="#resources">Uri resources</a></li>
-                </ul>
+              <ul class="grid split-3 circle">
+                <li><a href="#colornames">Color names</a></li>
+                <li><a href="#easing">Easing</a></li>
+                <li><a href="#grays">Gray shades</a></li>
+                <li><a href="#helpers">Helpers</a></li>
+                <li><a href="#keyframes">Keyframes</a></li>
+                <li><a href="#webfonts">Web-safe fonts</a></li>
+                <li><a href="#resources">Uri resources</a></li>
+              </ul>
               <h4 id="helpers">Helpers</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>.block ();</td>
-                      <td>Turns an inline element into a floated block</td>
-                    </tr>
-                    <tr>
-                      <td>.clearfix ();</td>
-                      <td>A snippet for an element to clear after itself</td>
-                    </tr>
-                    <tr>
-                      <td>.ellipsis ();</td>
-                      <td>Applies properties to an element to render an ellipsis '...'</td>
-                    </tr>
-                    <tr>
-                      <td>.hide-text ();</td>
-                      <td>A way have text without showing it up </td>
-                    </tr>
-                    <tr>
-                      <td>.hyphens ();</td>
-                      <td>Splits words whenever available</td>
-                    </tr>
-                    <tr>
-                      <td>.inline ();</td>
-                      <td>Turns a block element into an inline</td>
-                    </tr>
-                    <tr>
-                      <td>.inline-block ();</td>
-                      <td>Turns an element into an unfloated inline-block</td>
-                    </tr>
-                    <tr>
-                      <td>.line-break ();</td>
-                      <td>Clears a left floated element</td>
-                    </tr>
-                    <tr>
-                      <td>.nowrap ();</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>.word-break ();</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>.wrap ();</td>
-                      <td></td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>.block ();</td>
+                    <td>Turns an inline element into a floated block</td>
+                  </tr>
+                  <tr>
+                    <td>.clearfix ();</td>
+                    <td>A snippet for an element to clear after itself</td>
+                  </tr>
+                  <tr>
+                    <td>.ellipsis ();</td>
+                    <td>Applies properties to an element to render an ellipsis '...'</td>
+                  </tr>
+                  <tr>
+                    <td>.hide-text ();</td>
+                    <td>A way have text without showing it up </td>
+                  </tr>
+                  <tr>
+                    <td>.hyphens ();</td>
+                    <td>Splits words whenever available</td>
+                  </tr>
+                  <tr>
+                    <td>.inline ();</td>
+                    <td>Turns a block element into an inline</td>
+                  </tr>
+                  <tr>
+                    <td>.inline-block ();</td>
+                    <td>Turns an element into an unfloated inline-block</td>
+                  </tr>
+                  <tr>
+                    <td>.line-break ();</td>
+                    <td>Clears a left floated element</td>
+                  </tr>
+                  <tr>
+                    <td>.nowrap ();</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>.word-break ();</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>.wrap ();</td>
+                    <td></td>
+                  </tr>
                 </table>
               </div>
               <h4 id="colornames">Color Names</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Output</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>@aqua</td>
-                      <td>#00ffff</td>
-                    </tr>
-                    <tr>
-                      <td>@black</td>
-                      <td>#000000</td>
-                    </tr>
-                    <tr>
-                      <td>@blue</td>
-                      <td>#0000ff</td>
-                    </tr>
-                    <tr>
-                      <td>@blueViolet</td>
-                      <td>#8a2be2</td>
-                    </tr>
-                    <tr>
-                      <td>@brown</td>
-                      <td>#a52a2a</td>
-                    </tr>
-                    <tr>
-                      <td>@fuchsia</td>
-                      <td>#ff00ff</td>
-                    </tr>
-                    <tr>
-                      <td>@gold</td>
-                      <td>#ffd700</td>
-                    </tr>
-                    <tr>
-                      <td>@green</td>
-                      <td>#008000</td>
-                    </tr>
-                    <tr>
-                      <td>@gray</td>
-                      <td>#808080</td>
-                    </tr>
-                    <tr>
-                      <td>@lime</td>
-                      <td>#00ff00</td>
-                    </tr>
-                    <tr>
-                      <td>@maroon</td>
-                      <td>#85144b</td>
-                    </tr>
-                    <tr>
-                      <td>@navy</td>
-                      <td>#001f3f</td>
-                    </tr>
-                    <tr>
-                      <td>@olive</td>
-                      <td>#808000</td>
-                    </tr>
-                    <tr>
-                      <td>@orange</td>
-                      <td>#ffa500</td>
-                    </tr>
-                    <tr>
-                      <td>@orangeRed</td>
-                      <td>#ff4500</td>
-                    </tr>
-                    <tr>
-                      <td>@pink</td>
-                      <td>#ffc0cb</td>
-                    </tr>
-                    <tr>
-                      <td>@purple</td>
-                      <td>#800080</td>
-                    </tr>
-                    <tr>
-                      <td>@red</td>
-                      <td>#ff0000</td>
-                    </tr>
-                    <tr>
-                      <td>@silver</td>
-                      <td>#c0c0c0</td>
-                    </tr>
-                    <tr>
-                      <td>@teal</td>
-                      <td>#008080</td>
-                    </tr>
-                    <tr>
-                      <td>@trans</td>
-                      <td>transparent</td>
-                    </tr>
-                    <tr>
-                      <td>@violet</td>
-                      <td>#ee82ee</td>
-                    </tr>
-                    <tr>
-                      <td>@white</td>
-                      <td>#ffffff</td>
-                    </tr>
-                    <tr>
-                      <td>@yellow</td>
-                      <td>#ffff00</td>
-                    </tr>
-                    <tr>
-                      <td>@yellowGreen</td>
-                      <td>#9acd32</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Output</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>@aqua</td>
+                    <td>#00ffff</td>
+                  </tr>
+                  <tr>
+                    <td>@black</td>
+                    <td>#000000</td>
+                  </tr>
+                  <tr>
+                    <td>@blue</td>
+                    <td>#0000ff</td>
+                  </tr>
+                  <tr>
+                    <td>@blueViolet</td>
+                    <td>#8a2be2</td>
+                  </tr>
+                  <tr>
+                    <td>@brown</td>
+                    <td>#a52a2a</td>
+                  </tr>
+                  <tr>
+                    <td>@fuchsia</td>
+                    <td>#ff00ff</td>
+                  </tr>
+                  <tr>
+                    <td>@gold</td>
+                    <td>#ffd700</td>
+                  </tr>
+                  <tr>
+                    <td>@green</td>
+                    <td>#008000</td>
+                  </tr>
+                  <tr>
+                    <td>@gray</td>
+                    <td>#808080</td>
+                  </tr>
+                  <tr>
+                    <td>@lime</td>
+                    <td>#00ff00</td>
+                  </tr>
+                  <tr>
+                    <td>@maroon</td>
+                    <td>#85144b</td>
+                  </tr>
+                  <tr>
+                    <td>@navy</td>
+                    <td>#001f3f</td>
+                  </tr>
+                  <tr>
+                    <td>@olive</td>
+                    <td>#808000</td>
+                  </tr>
+                  <tr>
+                    <td>@orange</td>
+                    <td>#ffa500</td>
+                  </tr>
+                  <tr>
+                    <td>@orangeRed</td>
+                    <td>#ff4500</td>
+                  </tr>
+                  <tr>
+                    <td>@pink</td>
+                    <td>#ffc0cb</td>
+                  </tr>
+                  <tr>
+                    <td>@purple</td>
+                    <td>#800080</td>
+                  </tr>
+                  <tr>
+                    <td>@red</td>
+                    <td>#ff0000</td>
+                  </tr>
+                  <tr>
+                    <td>@silver</td>
+                    <td>#c0c0c0</td>
+                  </tr>
+                  <tr>
+                    <td>@teal</td>
+                    <td>#008080</td>
+                  </tr>
+                  <tr>
+                    <td>@trans</td>
+                    <td>transparent</td>
+                  </tr>
+                  <tr>
+                    <td>@violet</td>
+                    <td>#ee82ee</td>
+                  </tr>
+                  <tr>
+                    <td>@white</td>
+                    <td>#ffffff</td>
+                  </tr>
+                  <tr>
+                    <td>@yellow</td>
+                    <td>#ffff00</td>
+                  </tr>
+                  <tr>
+                    <td>@yellowGreen</td>
+                    <td>#9acd32</td>
+                  </tr>
                 </table>
               </div>
               <h4 id="grays">Gray Shades</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Hexadecimal value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>@hex0</td>
-                      <td>#000000</td>
-                    </tr>
-                    <tr>
-                      <td>@hex1</td>
-                      <td>#111111</td>
-                    </tr>
-                    <tr>
-                      <td>@hex2</td>
-                      <td>#222222</td>
-                    </tr>
-                    <tr>
-                      <td>@hex3</td>
-                      <td>#333333</td>
-                    </tr>
-                    <tr>
-                      <td>@hex4</td>
-                      <td>#444444</td>
-                    </tr>
-                    <tr>
-                      <td>@hex5</td>
-                      <td>#555555</td>
-                    </tr>
-                    <tr>
-                      <td>@hex6</td>
-                      <td>#666666</td>
-                    </tr>
-                    <tr>
-                      <td>@hex7</td>
-                      <td>#777777</td>
-                    </tr>
-                    <tr>
-                      <td>@hex8</td>
-                      <td>#888888</td>
-                    </tr>
-                    <tr>
-                      <td>@hex9</td>
-                      <td>#999999</td>
-                    </tr>
-                    <tr>
-                      <td>@hexa</td>
-                      <td>#aaaaaa</td>
-                    </tr>
-                    <tr>
-                      <td>@hexb</td>
-                      <td>#bbbbbb</td>
-                    </tr>
-                    <tr>
-                      <td>@hexc</td>
-                      <td>#cccccc</td>
-                    </tr>
-                    <tr>
-                      <td>@hexd</td>
-                      <td>#dddddd</td>
-                    </tr>
-                    <tr>
-                      <td>@hexe</td>
-                      <td>#eeeeee</td>
-                    </tr>
-                    <tr>
-                      <td>@hexef</td>
-                      <td>#f6f6f7</td>
-                    </tr>
-                    <tr>
-                      <td>@hexf</td>
-                      <td>#ffffff</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Hexadecimal value</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>@hex0</td>
+                    <td>#000000</td>
+                  </tr>
+                  <tr>
+                    <td>@hex1</td>
+                    <td>#111111</td>
+                  </tr>
+                  <tr>
+                    <td>@hex2</td>
+                    <td>#222222</td>
+                  </tr>
+                  <tr>
+                    <td>@hex3</td>
+                    <td>#333333</td>
+                  </tr>
+                  <tr>
+                    <td>@hex4</td>
+                    <td>#444444</td>
+                  </tr>
+                  <tr>
+                    <td>@hex5</td>
+                    <td>#555555</td>
+                  </tr>
+                  <tr>
+                    <td>@hex6</td>
+                    <td>#666666</td>
+                  </tr>
+                  <tr>
+                    <td>@hex7</td>
+                    <td>#777777</td>
+                  </tr>
+                  <tr>
+                    <td>@hex8</td>
+                    <td>#888888</td>
+                  </tr>
+                  <tr>
+                    <td>@hex9</td>
+                    <td>#999999</td>
+                  </tr>
+                  <tr>
+                    <td>@hexa</td>
+                    <td>#aaaaaa</td>
+                  </tr>
+                  <tr>
+                    <td>@hexb</td>
+                    <td>#bbbbbb</td>
+                  </tr>
+                  <tr>
+                    <td>@hexc</td>
+                    <td>#cccccc</td>
+                  </tr>
+                  <tr>
+                    <td>@hexd</td>
+                    <td>#dddddd</td>
+                  </tr>
+                  <tr>
+                    <td>@hexe</td>
+                    <td>#eeeeee</td>
+                  </tr>
+                  <tr>
+                    <td>@hexef</td>
+                    <td>#f6f6f7</td>
+                  </tr>
+                  <tr>
+                    <td>@hexf</td>
+                    <td>#ffffff</td>
+                  </tr>
                 </table>
               </div>
               <h4 id="easing">Easing</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>@ease-in-back</td>
-                      <td>Further reference http://matthewlein.com/ceaser/</td>
-                    </tr>
-                    <tr>
-                      <td>@ease-out-back</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-out-back</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-cubic</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-out-cubic</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-out-cubic</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-circ</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-out-circ</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-out-circ</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-expo</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-out-expo</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-out-expo</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-quad</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-out-quad</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-out-quad</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-quart</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-out-quart</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-out-quart</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-quint</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-out-quint</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-out-quint</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-sine</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-out-sine</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>@ease-in-out-sine</td>
-                      <td></td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>@ease-in-back</td>
+                    <td>Further reference http://matthewlein.com/ceaser/</td>
+                  </tr>
+                  <tr>
+                    <td>@ease-out-back</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-out-back</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-cubic</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-out-cubic</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-out-cubic</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-circ</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-out-circ</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-out-circ</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-expo</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-out-expo</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-out-expo</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-quad</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-out-quad</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-out-quad</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-quart</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-out-quart</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-out-quart</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-quint</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-out-quint</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-out-quint</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-sine</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-out-sine</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>@ease-in-out-sine</td>
+                    <td></td>
+                  </tr>
                 </table>
               </div>
               <h4 id="keyframes">Keyframes</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>.keyframes-fade-in ();</td>
-                      <td>Keyframes for fade-in animation</td>
-                    </tr>
-                    <tr>
-                      <td>.keyframes-fade-out ();</td>
-                      <td>Keyframes for fade-out animation</td>
-                    </tr>
-                    <tr>
-                      <td>.keyframes-shake ();</td>
-                      <td>Keyframes for shake animation</td>
-                    </tr>
-                    <tr>
-                      <td>.keyframes-slide-down ();</td>
-                      <td>Keyframes for slide-down animation</td>
-                    </tr>
-                    <tr>
-                      <td>.keyframes-slide-up ();</td>
-                      <td>Keyframes for slide-up animation</td>
-                    </tr>
-                    <tr>
-                      <td>.keyframes-zoom-in ();</td>
-                      <td>Keyframes for zoom-in animation</td>
-                    </tr>
-                    <tr>
-                      <td>.keyframes-zoom-out ();</td>
-                      <td>Keyframes for zoom-out animation</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>.keyframes-fade-in ();</td>
+                    <td>Keyframes for fade-in animation</td>
+                  </tr>
+                  <tr>
+                    <td>.keyframes-fade-out ();</td>
+                    <td>Keyframes for fade-out animation</td>
+                  </tr>
+                  <tr>
+                    <td>.keyframes-shake ();</td>
+                    <td>Keyframes for shake animation</td>
+                  </tr>
+                  <tr>
+                    <td>.keyframes-slide-down ();</td>
+                    <td>Keyframes for slide-down animation</td>
+                  </tr>
+                  <tr>
+                    <td>.keyframes-slide-up ();</td>
+                    <td>Keyframes for slide-up animation</td>
+                  </tr>
+                  <tr>
+                    <td>.keyframes-zoom-in ();</td>
+                    <td>Keyframes for zoom-in animation</td>
+                  </tr>
+                  <tr>
+                    <td>.keyframes-zoom-out ();</td>
+                    <td>Keyframes for zoom-out animation</td>
+                  </tr>
                 </table>
               </div>
               <h4 id="webfonts">Web Safe Fonts</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Output</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>@font-mono </td>
-                      <td>Menlo, Monaco, Consolas, monospace</td>
-                    </tr>
-                    <tr>
-                      <td>@font-sans </td>
-                      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
-                    </tr>
-                    <tr>
-                      <td>@font-script </td>
-                      <td>Brush Script MT, cursive</td>
-                    </tr>
-                    <tr>
-                      <td>@font-serif </td>
-                      <td>Georgia, Times New Roman, Times, serif</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Output</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>@font-mono </td>
+                    <td>Menlo, Monaco, Consolas, monospace</td>
+                  </tr>
+                  <tr>
+                    <td>@font-sans </td>
+                    <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
+                  </tr>
+                  <tr>
+                    <td>@font-script </td>
+                    <td>Brush Script MT, cursive</td>
+                  </tr>
+                  <tr>
+                    <td>@font-serif </td>
+                    <td>Georgia, Times New Roman, Times, serif</td>
+                  </tr>
                 </table>
               </div>
               <h4 id="resources">Uri resources</h4>
               <div class="scrollable">
                 <table class="table primary">
-                  <thead>
-                    <tr>
-                      <th class="first">Name</th>
-                      <th>Output</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>@gif-spacer</td>
-                      <td>1px x 1px transparent gif</td>
-                    </tr>
-                    <tr>
-                      <td>@gif-x-close</td>
-                      <td>10px x 10px black X</td>
-                    </tr>
-                    <tr>
-                      <td>@png-square-black75</td>
-                      <td>1px x 1px 75% black png</td>
-                    </tr>
-                    <tr>
-                      <td>@png-to-gray15</td>
-                      <td>1px x 64px transparent to 75% gray</td>
-                    </tr>
-                    <tr>
-                      <td>@svg-grayscale</td>
-                      <td>Grayscale filter</td>
-                    </tr>
-                    <tr>
-                      <td>@svg-grayscale-ie10</td>
-                      <td>Grayscale filter for ie10</td>
-                    </tr>
-                  </tbody>
+                  <thead></thead>
+                  <tr>
+                    <th class="first">Name</th>
+                    <th>Output</th>
+                  </tr>
+                  <tbody></tbody>
+                  <tr>
+                    <td>@gif-spacer</td>
+                    <td>1px x 1px transparent gif</td>
+                  </tr>
+                  <tr>
+                    <td>@gif-x-close</td>
+                    <td>10px x 10px black X</td>
+                  </tr>
+                  <tr>
+                    <td>@png-square-black75</td>
+                    <td>1px x 1px 75% black png</td>
+                  </tr>
+                  <tr>
+                    <td>@png-to-gray15</td>
+                    <td>1px x 64px transparent to 75% gray</td>
+                  </tr>
+                  <tr>
+                    <td>@svg-grayscale</td>
+                    <td>Grayscale filter</td>
+                  </tr>
+                  <tr>
+                    <td>@svg-grayscale-ie10</td>
+                    <td>Grayscale filter for ie10</td>
+                  </tr>
                 </table>
               </div>
             </div>
@@ -1578,17 +1542,16 @@
   <footer>
     <section class="max-width">
       <div class="m-legal">
-        <p class="copy">Copyright © Anchor Less 2014.</p>
+        <p class="copy">Copyright © AnchorLess 2017.</p>
       </div>
     </section>
   </footer>
-  <script src="../javascript/scripts.js"></script>
+  <script src="../js/scripts.js"></script>
   <script>
     function active_tab (name) {
         $('.tabset > .summary').removeClass('active');
         $('.tabset > .summary.' + name).addClass('active');
     };
-    
     $('.cat_mixins a').click(function(){
         active_tab ('mixins');
     });
@@ -1598,6 +1561,5 @@
     $('.cat_utilities a').click(function(){
         active_tab ('utilities');
     });
-    
   </script>
 </body>

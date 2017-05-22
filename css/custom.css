@@ -100,7 +100,8 @@ body.usage .navbar .usage a,
 .c-filters {
   display: none;
   border-right: 1px solid #121212;
-  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.07) inset;
+  -webkit-box-shadow: -1px 0 0 rgba(255, 255, 255, 0.07) inset;
+          box-shadow: -1px 0 0 rgba(255, 255, 255, 0.07) inset;
   padding-right: 24px;
 }
 @media all and (min-width: 800px) {
@@ -121,9 +122,8 @@ body.usage .navbar .usage a,
 .m-submenu a:hover,
 .m-submenu .current a {
   background: rgba(0, 0, 0, 0.3) none repeat 0 0;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
+          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
   border-radius: 5px;
 }
 .m-submenu a {

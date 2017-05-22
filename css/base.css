@@ -2,8 +2,7 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+          box-sizing: border-box;
 }
 html {
   font: 62.5% Arial;
@@ -210,6 +209,7 @@ a,
   border: none;
   min-width: inherit;
   -webkit-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
   transition: all 0.4s ease 0s;
 }
 .button {
@@ -224,6 +224,7 @@ a,
   cursor: pointer;
   outline: 0;
   -webkit-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
   transition: all 0.4s ease 0s;
   padding: 0 1.2em;
 }
@@ -258,6 +259,7 @@ textarea {
   color: #222222;
   border: 1px solid #cccccc;
   -webkit-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
   transition: all 0.2s ease 0s;
 }
 input.error,
@@ -455,26 +457,18 @@ table.bordered tr td {
 }
 .table.rounded tr:first-child th:first-child,
 table.rounded tr:first-child th:first-child {
-  -webkit-border-top-left-radius: 5px;
-  -moz-border-radius-topleft: 5px;
   border-top-left-radius: 5px;
 }
 .table.rounded tr:first-child th:last-child,
 table.rounded tr:first-child th:last-child {
-  -webkit-border-top-right-radius: 5px;
-  -moz-border-radius-topright: 5px;
   border-top-right-radius: 5px;
 }
 .table.rounded tr:last-child td:first-child,
 table.rounded tr:last-child td:first-child {
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
 }
 .table.rounded tr:last-child td:last-child,
 table.rounded tr:last-child td:last-child {
-  -webkit-border-bottom-right-radius: 5px;
-  -moz-border-radius-bottomright: 5px;
   border-bottom-right-radius: 5px;
 }
 .badge {
@@ -510,27 +504,17 @@ table.rounded tr:last-child td:last-child {
   width: auto;
   border-left-width: 0;
   margin: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
   border-radius: 0;
   float: left;
 }
 .items-wrapper.horizontal :first-child {
   border-left-width: 1px;
-  -webkit-border-top-left-radius: 5px;
-  -moz-border-radius-topleft: 5px;
   border-top-left-radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
 }
 .items-wrapper.horizontal :last-child,
 .items-wrapper.horizontal .last {
-  -webkit-border-top-right-radius: 5px;
-  -moz-border-radius-topright: 5px;
   border-top-right-radius: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  -moz-border-radius-bottomright: 5px;
   border-bottom-right-radius: 5px;
 }
 .items-wrapper.vertical .button,
@@ -539,26 +523,16 @@ table.rounded tr:last-child td:last-child {
   width: 100%;
   border-top-width: 0;
   margin: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
   border-radius: 0;
 }
 .items-wrapper.vertical :first-child {
   border-top-width: 1px;
-  -webkit-border-top-left-radius: 5px;
-  -moz-border-radius-topleft: 5px;
   border-top-left-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
-  -moz-border-radius-topright: 5px;
   border-top-right-radius: 5px;
 }
 .items-wrapper.vertical :last-child,
 .items-wrapper.vertical .last {
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  -moz-border-radius-bottomright: 5px;
   border-bottom-right-radius: 5px;
 }
 .form label.wide {
@@ -779,7 +753,8 @@ table.rounded tr:last-child td:last-child {
 }
 .tabset.horizontal > .summary a {
   display: block;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -803,7 +778,8 @@ table.rounded tr:last-child td:last-child {
 }
 .tabset.vertical > .summary a {
   display: block;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -831,7 +807,8 @@ table.rounded tr:last-child td:last-child {
 }
 .tabset.left > .summary a {
   display: block;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -922,6 +899,7 @@ html .show {
 }
 html .fastclick {
   -webkit-transition: all 0s ease 0s;
+  -o-transition: all 0s ease 0s;
   transition: all 0s ease 0s;
 }
 html .uppercase {
@@ -1438,7 +1416,8 @@ html .uppercase {
   width: 50px;
   height: 100%;
   border-radius: 10px 0 0 10px;
-  box-shadow: -5px 0 7px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: -5px 0 7px rgba(0, 0, 0, 0.15);
+          box-shadow: -5px 0 7px rgba(0, 0, 0, 0.15);
   content: '';
   z-index: 1;
 }
@@ -1446,7 +1425,8 @@ html .uppercase {
   height: 12px;
 }
 .scrollable > div::-webkit-scrollbar-track {
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15) inset;
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.15) inset;
+          box-shadow: 0 0 2px rgba(0, 0, 0, 0.15) inset;
   background: #f0f0f0;
 }
 .scrollable > div::-webkit-scrollbar-thumb {
@@ -1465,10 +1445,10 @@ html .uppercase {
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transform: translate(0, 0);
-  -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   transform: translate(0, 0);
   -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
   z-index: 2;
 }
@@ -1516,7 +1496,6 @@ html .uppercase {
 .tooltip.fixed.up:before,
 .tooltip.fixed.up:after {
   -webkit-transform: translate(0, -4px);
-  -moz-transform: translate(0, -4px);
   -ms-transform: translate(0, -4px);
   transform: translate(0, -4px);
 }
@@ -1536,7 +1515,6 @@ html .uppercase {
 .tooltip.fixed.down:before,
 .tooltip.fixed.down:after {
   -webkit-transform: translate(0, 4px);
-  -moz-transform: translate(0, 4px);
   -ms-transform: translate(0, 4px);
   transform: translate(0, 4px);
 }
@@ -1557,7 +1535,6 @@ html .uppercase {
 .tooltip.fixed.right:before,
 .tooltip.fixed.right:after {
   -webkit-transform: translate(6px, 0);
-  -moz-transform: translate(6px, 0);
   -ms-transform: translate(6px, 0);
   transform: translate(6px, 0);
 }
@@ -1578,7 +1555,6 @@ html .uppercase {
 .tooltip.fixed.left:before,
 .tooltip.fixed.left:after {
   -webkit-transform: translate(-6px, 0);
-  -moz-transform: translate(-6px, 0);
   -ms-transform: translate(-6px, 0);
   transform: translate(-6px, 0);
 }
