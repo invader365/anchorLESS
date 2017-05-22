@@ -4,22 +4,23 @@ var less   = require('gulp-less');
 var prefix = require('gulp-autoprefixer');
 var sync   = require('browser-sync').create();
 
-gulp.task('anchor', function() {
+gulp.task('anchorless', function() {
     gulp.src([
-            './src/intro.less',
             './src/01. mixins/**/*.less',
             './src/02. assets/**/*.less',
             './src/03. utilities/**/*.less'
         ])
         .pipe(concat('anchor.less'))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./'))
+        .pipe(browse.stream());
 });
 
-gulp.task('less', function() {
+gulp.task('example', function() {
     gulp.src('./example/*.less')
         .pipe(less())
         .pipe(prefix({browsers: ['last 5 versions']}))
         .pipe(gulp.dest('./example'))
+        .pipe(browse.stream());
 });
 
 gulp.task('sync', function() {
@@ -33,7 +34,6 @@ gulp.task('sync', function() {
 
 gulp.task('serve', function() {
     gulp.start(['anchor', 'less', 'sync']);
-    gulp.watch("./**/*.less", ['anchor', 'less']);
-    gulp.watch("./example/*.css").on('change', sync.reload);
+    gulp.watch("./**/*.less", ['anchorless', 'example']);
     gulp.watch("./example/*.html").on('change', sync.reload);
 });
