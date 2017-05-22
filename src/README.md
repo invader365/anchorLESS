@@ -1,7 +1,7 @@
 # Anchor LESS partials
 
 Contains partials from "anchor.less" located on the project root directory.
-NOT REQUIRED for development.
+NOT REQUIRED for use/development.
 
 ## Contents
 
