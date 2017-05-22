@@ -23,7 +23,9 @@
   "author": "@invader365",
   "license": "Apache-2.0",
   "devDependencies": {
+    "browser-sync": "^2.18.12",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-less": "^3.3.0"
   }
