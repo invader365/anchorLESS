@@ -1,0 +1,144 @@
+    @import "anchor";
+
+//  Variables
+
+    @responsive-menu    : 1025px;
+    @max-width          :  840px;
+
+//  Nav
+
+    ._offside () {
+        .main (@distance: 100%, @query: 0)   { 
+            &                                {  overflow-x: hidden; }
+            & > section                      { .transition(all, 0.3s); }
+            .js-toggle & > section           { .translate(@distance, 0); }
+            // .js-toggle.touch body            { position: fixed; } // screw the animation
+
+            @media screen and (min-width: @query) {
+               .js-toggle & > section        { .translate; }
+            }
+        }
+        .side (@distance: 100%, @query: 0)   {
+            &                                { .transition(all, 0.3s); .translate(-@distance, 0); .index(2); }
+            .js-toggle &                     { .translate; }
+
+            @media screen and (min-width: @query) {
+               &                             { .translate; }
+            }
+        } 
+    }
+
+//  Section
+
+    ._section {
+        .contain (@width: 960px)             {
+
+            & .fixed.max-width               { .center-block(@width); }
+            & .lined-up > li                 {  width: auto; }
+
+            &.fixed                          {
+                @media all and (min-width: @width) {
+                    &                        {  position: relative; }
+                    & .max-width             { .center-block(@width); position: relative; }
+                }
+            }
+        }
+
+        .left (@section, @left: 0, @max: 960px) {
+            @offset   : @max/2 - @left;
+
+            & @{section}                     { width: @left; margin: 0 0 0 -@left; left: @left; z-index: 2; }
+
+            &.fixed                          {
+                @media all and (min-width: @max) {
+                    & @{section}             { width: 50%; left: @left - @offset; }
+                    & @{section} > section   { padding-left: @offset; }
+                    & @{section} .max-width  { width: @left; padding: 0; position: relative; .reset-block; float: right; }
+                }
+            }
+        }
+
+        .push-right (@section, @left: 0, @max: 960px) {
+            & @{section} > section           { padding-left: @left; }
+        }
+
+        .right (@section, @left: 0, @max: 960px) {
+
+            & @{section} > section           { padding-left: @left; }
+
+            &.fixed                          {
+                @media all and (min-width: @max) {
+                    & @{section}             { margin-left: -50%; left: @left; }
+                }
+            }
+        }
+
+        .fix (@section, @left: 0, @max: 960px) {
+            @offset   : @max/2 - @left;
+
+            & @{section}                     { .fixed.align(0, auto, 0, 0); width: @left; .index(2); }
+            & @{section} > section           { .overflow(hidden, auto); max-height: 100%; }
+
+            &.fixed                          {
+                @media all and (min-width: @max) {
+                    & @{section}             { .position(fixed); width: 50%; left: -@offset; }
+                    & @{section} > section   {  padding-left: @offset; }
+                    & @{section} .max-width  {  position: relative; width: @left; padding: 0; float: right; .reset-block; }
+                }
+            }
+        }
+
+        .top (@section, @top: 0, @max: 960px) {
+            &                                {  padding-top: @top; }
+            & @{section}                     { .absolute.left-top(0, 0); height: @top; }
+        }
+    }
+
+//  Layouts
+
+    .l-stacked                               { ._section.contain(@max-width); }
+
+    .l-top-nav                               { 
+        &                                    { ._section.contain(@max-width);
+                                               ._section.top(nav, 65px, @max-width); }
+    }
+
+    .l-right-top-nav                         { 
+        &                                    { ._section.contain(@max-width); 
+                                               ._section.left(header, 192px, @max-width); 
+                                               ._section.right(nav, 192px, @max-width); }
+        & main                               { clear: left; }
+    }
+
+    .l-left-nav                              { 
+        &                                    { ._section.contain(@max-width); 
+                                               ._section.left(nav, 275px, @max-width); 
+                                               ._section.right(main, 275px, @max-width); }
+        & nav,
+        & footer                             { clear: left; }
+    }
+
+    .l-right-nav                             { 
+        &                                    { ._section.contain(@max-width); 
+                                               ._section.left(nav, 275px, @max-width); 
+                                               ._section.right(main, 275px, @max-width); }
+        & nav,
+        & footer                             { clear: left; }
+    }
+
+    .l-fix-left-nav                          { 
+        &                                    { ._section.contain(@max-width); 
+                                               ._section.push-right(header, 275px, @max-width); 
+                                               ._section.push-right(main, 275px, @max-width); 
+                                               ._section.push-right(footer, 275px, @max-width); 
+                                               ._section.fix(nav, 275px, @max-width); }
+        & nav                                { clear: left; } // full width
+    }
+
+    // .l-left-bottom-nav                    { 
+    //     &                                 { ._section.contain(@max-width); 
+    //                                         ._section.left(nav, 275px, @max-width); 
+    //                                         ._section.right(main, 275px, @max-width); 
+    //                                         ._section.push-right(footer, 275px, @max-width); }
+    //     & nav                             {  clear: left; } // full width
+    // }

@@ -1,5 +1,5 @@
 body {
-  font: 1.6em / 1.5 Calibri, Helvetica, sans-serif;
+  font: 1.6em / 1.5 Calibri, Helvetica, Arial, sans-serif;
   color: #c6c6c6;
   background-color: #2f2f2f;
 }
@@ -30,18 +30,18 @@ hr {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 ::-moz-selection {
-  color: #ffffff;
-  background-color: #fb292d;
+  color: #fff;
+  background-color: #ee5358;
   text-shadow: none;
 }
 ::selection {
-  color: #ffffff;
-  background-color: #fb292d;
+  color: #fff;
+  background-color: #ee5358;
   text-shadow: none;
 }
 ::-moz-selection {
-  color: #ffffff;
-  background-color: #fb292d;
+  color: #fff;
+  background-color: #ee5358;
   text-shadow: none;
 }
 .input,
@@ -84,7 +84,7 @@ textarea:hover {
   border-radius: 5px;
   border-width: 1px;
   border-style: solid;
-  border-color: #dddddd;
+  border-color: #ddd;
   background-color: #f6f6f7;
 }
 .breadcrumb.primary li {
@@ -93,16 +93,16 @@ textarea:hover {
   line-height: 20px;
 }
 .breadcrumb.primary li a {
-  color: #888888;
+  color: #888;
   padding-right: 14px;
-  text-shadow: 0 1px #ffffff 0.3;
+  text-shadow: 0 1px #fff 0.3;
   position: relative;
 }
 .breadcrumb.primary li a:hover {
   color: #d9161c;
 }
 .breadcrumb.primary li a:after {
-  color: #cccccc;
+  color: #ccc;
   font-size: 1.2em;
   display: inline-block;
   content: '/';
@@ -135,12 +135,12 @@ textarea:hover {
 }
 .button.secondary:hover,
 .button.secondary:focus {
-  color: #ffffff;
+  color: #fff;
   background-color: #ae1f17;
 }
 .button.secondary,
 .button.secondary:active {
-  color: #ffffff;
+  color: #fff;
   background-color: #d9161c;
 }
 .button.secondary.big {
@@ -151,7 +151,7 @@ textarea:hover {
 .heading.primary {
   font: 2.2em / 55px a;
   font-family: inherit;
-  color: #ffffff;
+  color: #fff;
   border-bottom: 1px solid #121212;
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
@@ -159,28 +159,28 @@ textarea:hover {
 .grid.primary li {
   border-width: 1px 0 0 1px;
   border-style: solid;
-  border-color: #cccccc;
+  border-color: #ccc;
   padding: 0.2em 0.25em 0 0.75em;
   min-height: 53px;
 }
 .grid.primary li strong {
   font: 0.86em a;
   font-family: inherit;
-  color: #888888;
+  color: #888;
 }
 .message.primary {
   margin-bottom: 24px;
   padding: 1em 28px 1em 1em;
-  color: #222222;
+  color: #222;
   background-color: #f6f6f7;
   border-width: 3px 0 0 0;
   border-style: solid;
-  border-color: #cccccc;
+  border-color: #ccc;
   font-size: 0.96em;
   border-radius: 3px;
 }
 .message.primary.error {
-  background-color: #fdf7f7;
+  background-color: #FDF7F7;
   border-color: #d1302b;
 }
 .message.primary.error .heading,
@@ -189,7 +189,7 @@ textarea:hover {
   color: #d1302b;
 }
 .message.primary.warning {
-  background-color: #fcf8f2;
+  background-color: #FCF8F2;
   border-color: #e9a23c;
 }
 .message.primary.warning .heading,
@@ -207,7 +207,7 @@ textarea:hover {
   color: #7bb903;
 }
 .message.primary.info {
-  background-color: #f4f8fa;
+  background-color: #F4F8FA;
   border-color: #11a0ca;
 }
 .message.primary.info .heading,
@@ -217,7 +217,7 @@ textarea:hover {
 }
 .navbar.primary li a {
   font-size: 1.6em;
-  color: #ffffff;
+  color: #fff;
   padding: 7px 14px;
   text-shadow: 0px 0px 3px #000000;
 }
@@ -233,16 +233,16 @@ textarea:hover {
 .pagination.primary .pages {
   border-width: 1px;
   border-style: solid;
-  border-color: #bbbbbb;
+  border-color: #bbb;
   float: right;
   border-radius: 5px;
 }
 .pagination.primary .pages span,
 .pagination.primary .pages a {
-  color: #444444;
+  color: #444;
   border-width: 0 0 0 1px;
   border-style: solid;
-  border-color: #bbbbbb;
+  border-color: #bbb;
   width: auto;
   height: 32px;
   line-height: 32px;
@@ -253,14 +253,13 @@ textarea:hover {
 }
 .pagination.primary .pages a:first-child {
   border-width: 0;
-  border-style: none;
 }
 .pagination.primary .pages .current {
-  color: #ffffff;
+  color: #fff;
   background-color: #d9161c;
 }
 .pagination.primary .pages a:hover {
-  background-color: #dddddd;
+  background-color: #ddd;
 }
 .panel.primary {
   background-color: #212121;
@@ -272,7 +271,7 @@ textarea:hover {
 .panel.primary .title {
   font: 2em a;
   font-family: inherit;
-  color: #ffffff;
+  color: #fff;
   border-bottom: 1px solid #121212;
   -webkit-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.07);
           box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.07);
@@ -291,15 +290,15 @@ textarea:hover {
   }
 }
 .table.primary caption {
-  color: #ffffff;
-  background-color: #fb292d;
+  color: #fff;
+  background-color: #ee5358;
   padding: 0.35em;
   font: bold 1.2em a;
   font-family: inherit;
 }
 .table.primary thead tr th {
-  color: #ffffff;
-  background-color: #222222;
+  color: #fff;
+  background-color: #222;
 }
 .table.primary thead tr th a {
   color: #d9161c;
@@ -309,10 +308,10 @@ textarea:hover {
 }
 .table.primary tbody tr:hover {
   color: #c6c6c6;
-  background-color: #222222;
+  background-color: #222;
 }
 .table.primary tbody tr.selected {
-  color: #ffffff;
+  color: #fff;
   background-color: #d9161c;
 }
 .tabset.primary > .summary {
@@ -334,8 +333,8 @@ textarea:hover {
 .tooltip.primary:after {
   font: 14px / 1.2 a;
   font-family: inherit;
-  color: #ffffff;
-  background-color: #333333;
+  color: #fff;
+  background-color: #333;
   padding: 7px 14px;
   border-radius: 5px;
 }
@@ -345,7 +344,7 @@ textarea:hover {
   width: 0;
   height: 0;
   border: 4px solid transparent;
-  border-top-color: #333333;
+  border-top-color: #333;
 }
 .tooltip.primary.down:before {
   display: block;
@@ -353,7 +352,7 @@ textarea:hover {
   width: 0;
   height: 0;
   border: 4px solid transparent;
-  border-bottom-color: #333333;
+  border-bottom-color: #333;
 }
 .tooltip.primary.right:before {
   display: block;
@@ -361,7 +360,7 @@ textarea:hover {
   width: 0;
   height: 0;
   border: 4px solid transparent;
-  border-right-color: #333333;
+  border-right-color: #333;
 }
 .tooltip.primary.left:before {
   display: block;
@@ -369,7 +368,7 @@ textarea:hover {
   width: 0;
   height: 0;
   border: 4px solid transparent;
-  border-left-color: #333333;
+  border-left-color: #333;
 }
 .tooltip.primary.wrap:after {
   min-width: 160px;
