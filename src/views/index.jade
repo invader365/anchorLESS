@@ -1,0 +1,87 @@
+- var page = { 'root': '', 'title': 'The Most Extensive Less Mixins Library' }
+
+include includes/html
+    head
+        include includes/head
+    body.uno.l-top-nav.fixed.home
+        include includes/header
+        include includes/nav
+        main
+            section.max-width
+                .m-module.span-5
+                    hr
+                    p
+                        strong Anchor Less
+                        |  is a collection of less Mixins, Assets and Utilities.
+                        |  These enables you to create blocks of reusable css, avoiding duplication of code and making it more maintenable.
+                .grid.split-2.separate
+                    div
+                        .panel.primary
+                            h4.title
+                                i.fa.fa-check
+                                |  Features
+                            ul.decimal
+                                li The most extensive Less mixins library.
+                                li Ready to use with html5 frameworks.
+                                li Faster performance (Less.js powered).
+                                li Responsive mixins (mobile-first)
+                                li A single 'anchor.less' file, no dependencies.
+                        .panel.primary
+                            h4.title
+                                i.fa.fa-rocket
+                                |  Less.js
+                            p Anchor uses 
+                                a(href='http://lesscss.org/', target='_blank') Less.js
+                                | , a javascript pre-processor that extends CSS with features like variables, functions and operations.
+                            p Supports Less 1.7.1 +
+                    div
+                        .panel.primary
+                            h4.title
+                                i.fa.fa-recycle
+                                |  Mixins
+                            ul
+                                li
+                                    span.mix .back 
+                                    |  (color, image, repeat, position, query);
+                                li
+                                    span.mix .border 
+                                    |  (width, style, color, query);
+                                li
+                                    span.mix .color 
+                                    | (color, back-color);
+                                li
+                                    span.mix .font 
+                                    | (font, family);
+                                li
+                                    span.mix .gradient 
+                                    | (start, stop, degrees, image);
+                                li
+                                    span.mix .image 
+                                    | (url);
+                                li
+                                    span.mix .opacity 
+                                    | (opacity, query);
+                                li
+                                    span.mix .pseudo 
+                                    | (content, width, height)
+                                li
+                                    span.mix .rounded 
+                                    | (radius);
+                                li
+                                    span.mix .shadow 
+                                    | (spread, color, alpha, offset);
+                                li
+                                    span.mix .size 
+                                    | (width, height, query);
+                                li
+                                    span.mix .transition 
+                                    | (property, duration, function, delay);
+                            p
+                                a(href='html/reference.html') See the full list
+                        .m-download
+                            a.button.secondary.big(href='https://github.com/invader365/anchorLESS/archive/master.zip')
+                                i.fa.fa-arrow-circle-o-down
+                                |  Download Anchor Less
+                            p Source on 
+                                a(href='https://github.com/invader365/anchorLESS') GitHub
+        include includes/footer

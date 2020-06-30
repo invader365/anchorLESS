@@ -1,39 +1,66 @@
-var gulp   = require('gulp');
-var concat = require('gulp-concat');
-var less   = require('gulp-less');
-var prefix = require('gulp-autoprefixer');
-var sync   = require('browser-sync').create();
+const { src, dest, watch, parallel, series } = require('gulp')
 
-gulp.task('anchorless', function() {
-    gulp.src([
-            './src/01_mixins/**/*.less',
-            './src/02_assets/**/*.less',
-            './src/03_utilities/**/*.less'
-        ])
+const concat = require('gulp-concat')
+const less   = require('gulp-less')
+const jade   = require('gulp-jade')
+const rename = require('gulp-rename')
+const prefix = require('gulp-autoprefixer')
+const bsync  = require('browser-sync').create()
+
+const dir = {
+    src:    './',
+    core:   './core/',
+    core_partials: [
+        './core/mixins/*.less',
+        './core/assets/*.less',
+        './core/utilities/*.less'
+    ],
+    views:  './src/views/',
+    styles: './src/styles/',
+    webapp: './public/'
+}
+
+generateCore = done => {
+    src(dir.core_partials)
         .pipe(concat('anchor.less'))
-        .pipe(gulp.dest('./'))
-        .pipe(browse.stream());
-});
+        .pipe(dest(dir.core))
+    done()
+}
 
-gulp.task('example', function() {
-    gulp.src('./example/*.less')
+generateViews = done => {
+    src(dir.views + '*.jade')
+        .pipe(jade({pretty: true}))
+        .pipe(dest(dir.webapp))
+    done()
+}
+
+generateStyles = done => {
+    src(dir.styles + 'custom.less')
         .pipe(less())
-        .pipe(prefix({browsers: ['last 5 versions']}))
-        .pipe(gulp.dest('./example'))
-        .pipe(browse.stream());
-});
+        // .pipe(prefix({browsers: ['last 5 versions']}))
+        .pipe(rename('main.css'))
+        .pipe(dest(dir.webapp + 'css/'))
+    done()
+}
 
-gulp.task('sync', function() {
-    sync.init(null, {
-        open: false,
-        server: {
-            baseDir: ['./example']
-        }
-    });
-});
+serve = () => {
+    bsync.init({
+        open: true,
+        server: dir.webapp 
+    })
+}
 
-gulp.task('serve', function() {
-    gulp.start(['anchor', 'less', 'sync']);
-    gulp.watch("./**/*.less", ['anchorless', 'example']);
-    gulp.watch("./example/*.html").on('change', sync.reload);
-});
+reload = done => {
+    bsync.reload(),
+    done()
+}
+
+watchFiles = () => {
+    watch(dir.core_partials, series(generateCore, reload)),
+    watch(dir.views + '**/*.jade', series(generateViews, reload)),
+    watch(dir.styles + '**/*.less', series(generateStyles, reload)),
+    watch(dir.webapp + '**/*.{html,js,css}', series(reload))
+}
+
+exports.reload  = reload
+exports.default = parallel(serve, watchFiles)

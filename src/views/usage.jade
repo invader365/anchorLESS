@@ -1,0 +1,64 @@
+- var page = { 'root': '../', 'title': 'Usage' }
+
+include includes/html
+    head
+        include includes/head
+    body.uno.l-right-top-nav.usage
+        include includes/header_pages
+        include includes/nav
+        main
+            section.max-width.fixed
+                .m-module.span-5
+                h2.heading.primary Usage
+                p 1. Download the "anchor.less" file
+                p 2. Reference for use globally with: 
+                pre.panel.primary
+                    code
+                        span.selector @import
+                        |  "anchorless";
+                p
+                    | 3. Use your favorite less compiler
+                h4 Example:
+                pre.panel.primary
+                    code
+                        span.selector #button
+                        |  {
+                        |    .gradient.to-bottom(#a53df6, #7c16cb);
+                        |    .border(0 1px 2px, solid, #9c33ed);
+                        |    .rounded(7px);
+                        |    .width(25%, 640px);
+                        |    .shadow.inset(0 1px 0 0, #d197fe, .9);
+                        |    .color(@yellow);
+                        |    .size(56px, 128px);
+                        |    .font(bold 12px @d 56px, 'Arial');
+                        |  }
+                p Compiles to:
+                pre.panel.primary
+                    code
+                        span.selector #button
+                        |  {
+                        |      background: #a53df6 none repeat-x center;
+                        |      background-image: -webkit-linear-gradient(180deg, #a53df6, #7c16cb);
+                        |      background-image: -moz-linear-gradient(180deg, #a53df6, #7c16cb);
+                        |      background-image: linear-gradient(180deg, #a53df6, #7c16cb);
+                        |      border-width: 0 1px 2px;
+                        |      border-style: solid;
+                        |      border-color: #9c33ed;
+                        |      -webkit-border-radius: 7px;
+                        |      -moz-border-radius: 7px;
+                        |      border-radius: 7px;
+                        |      -webkit-box-shadow: 0 1px 0 0 rgba(208, 149, 254, 0.9) inset;
+                        |      box-shadow: 0 1px 0 0 rgba(208, 149, 254, 0.9) inset;
+                        |      color: #ffff00;
+                        |      width: 56px;
+                        |      height: 128px;
+                        |      font: bold 12px / 56px 'Arial';
+                        |  }
+                    code
+                        span.selector @media all and (min-width: 640px)
+                        |  {
+                        |      #button {
+                        |          width: 25%;
+                        |      }
+                        |  }
+        include includes/footer

@@ -1,0 +1,203 @@
+@import "../../core/anchor";
+
+//
+//  Theme - Variables 
+//  ---------------------------------------------------------------------------
+//  Global styles
+
+    @base-font-size         :   1.6em;
+    @base-line-height       :   1.5;
+
+    @base-font              :   Calibri, Helvetica, Arial, sans-serif;
+    @accent-font            :   Corisande, Helvetica, Arial, sans-serif;
+
+    @base-px                :   16px;
+    @base-radius            :   5px;
+    @base-margin            :   24px;
+
+//  Color variatons
+
+    @base                   :   #2f2f2f;
+    @primary                :   #d9161c;
+    @secondary              :   #ae1f17;
+    @accent                 :   #fb292d;
+
+    @text-base              :   #c6c6c6;
+    @text-primary           :   #fff;
+    @text-secondary         :   #fff;
+
+    @border-base            :   #ccc;
+    @border-primary         :   #8c0101;
+    @border-secondary       :   #c61e03;
+
+    @primary-lighter        :   lighten(@primary, 16%);
+    @primary-light          :   lighten(@primary,  4%);
+    @primary-dark           :   #b2090c;
+    @primary-darker         :   darken(@primary,  16%);
+
+    @secondary-lighter      :   lighten(@secondary, 16%);
+    @secondary-light        :   lighten(@secondary,  4%);
+    @secondary-dark         :   darken(@secondary,   8%);
+    @secondary-darker       :   darken(@secondary,  16%);
+
+//  Alert colors
+
+    @error                  :   #FDF7F7;
+    @warning                :   #FCF8F2;
+    @success                :   #effae0;
+    @info                   :   #F4F8FA;
+
+    @text-error             :   #d1302b;
+    @text-warning           :   #e9a23c;
+    @text-success           :   #7bb903;
+    @text-info              :   #11a0ca;
+
+    @border-error           :   #d1302b;
+    @border-warning         :   #e9a23c;
+    @border-success         :   #7bb903;
+    @border-info            :   #11a0ca;
+
+//  Page layout
+
+    body                        { .font(@base-font-size @d @base-line-height, @base-font); .color(@text-base, @base); 
+        // .back(@trans, '../images/back.png'); background-attachment: fixed; 
+    }
+
+    // header > section            { .color(@hexf, @hex4); }
+    // main > section              { .color(@text-base, @hexf); }
+    // footer > section            { .color(@hexf, @accent); }
+
+    header > section,
+    nav > section,
+    main > section,
+    footer > section            { .padding(0 4%); .padding(0 2%, 800px); }
+
+//  Page elements
+
+    a, 
+    .link                       { .color(#84bcde); }
+
+    // a:hover                     { text-decoration: underline; }
+    
+    em                          { .color(@accent); }
+
+    hr                          { border-bottom: 1px solid #121212; .shadow(0 1px 0, @hexf, .07); }
+
+    .mark ()                    { .color(@hexf, @primary-lighter); text-shadow: none; }
+    ::selection                 { .mark; }
+    ::-moz-selection            { .mark; }
+
+    .input, .select,
+    input, select,
+    textarea                    {
+        &                       { .rounded(@base-radius); }
+        &.focus,
+        &:focus,
+        &.hover,
+        &:hover                 {  border-color: @secondary; }
+    }
+
+    .breadcrumb,
+    .button-group,
+    .pagination,
+    .panel,
+    .table                      {
+        &                       { margin-bottom: @base-margin; }
+    }
+
+//  Primary styles
+
+    .breadcrumb.primary         {
+        &                       { .rounded(@base-radius); .border(1px, solid, @hexd); .back.color(@hexef); }
+        & li                    {  padding:6px 0 6px 12px; font-size: 12px; line-height: 20px; }
+        & li a                  {  color: @hex8; .hover.color(@primary); padding-right: 14px; text-shadow: 0 1px @hexf .3; position: relative; }
+        & li a:after            {  color: @hexc; font-size: 1.2em; .pseudo('/', auto, 16px); .center-vertical(20px); right: 0; }
+    }
+
+    .button.primary             { 
+        &                       { background: none repeat scroll 0 0 rgba(255, 255, 255, 0.06); color:black;  border: 1px solid rgba(0, 0, 0, 0.5); .padding(.2em .5em); .rounded(4px); .font(1.4em); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.08); }
+        &.big                   { .padding(.5em 1em); } 
+    }
+    .button.secondary           {
+        &                       { .font(bold 1em @d 1); .rounded(@base-radius); .hover-focus.color(@hexf, @secondary); .normal-active.color(@hexf, @primary); text-shadow: 0 1px 0 rgba(0, 0, 0, .2); }
+        &.big                   { .padding(1em 2em); .shadow(0 0 2px, black, .3); } 
+    }
+
+    .heading.primary            { .font(2.2em @d 55px); .color(@hexf); border-bottom: 1px solid #121212; .shadow(0 1px 0, @hexf, .07); }
+
+    .grid.primary               { 
+        & li                    { .border(1px 0 0 1px, solid, @hexc); .padding(.2em .25em 0 .75em); min-height: 53px; }
+        & li strong             { .font(.86em); .color(@hex8); }
+    }
+    
+    .message.primary            {
+        &                       {  margin-bottom: @base-margin; padding: 1em 28px 1em 1em; .color(@hex2, @hexef); .border(3px 0 0 0 , solid, @hexc); .font-size(0.96em); .rounded(3px); }
+        &.error                 { 
+            &                   { .back.color(@error); border-color: @border-error; }
+            & .heading, strong, a { color: @text-error; }
+        }
+        &.warning               { 
+            &                   { .back.color(@warning); border-color: @border-warning; }
+            & .heading, strong, a { color: @text-warning; }
+        }
+        &.success               { 
+            &                   { .back.color(@success); border-color: @border-success; }
+            & .heading, strong, a { color: @text-success; }
+        }
+        &.info                  { 
+            &                   { .back.color(@info); border-color: @border-info; }
+            & .heading, strong, a { color: @text-info; }
+        }
+    }
+
+    .navbar.primary             {
+        & li a                  { .font-size(1.6em); .color(@hexf);  padding: 7px 14px; text-shadow: 0px 0px 3px rgba(0, 0, 0, 1); }
+        // & li:first-child a      { padding-left: 0; }
+        & li:last-child a       { padding-right: 0; }
+        & li ul li a            { .font-size(1em); } 
+    }
+
+    .pagination.primary         {
+        & .results              { line-height: 32px; }
+        & .pages                {
+            &                   { .border(1px, solid, @hexb); float:right; .rounded(@base-radius); }
+            & span,
+            & a                 {  color: @hex4; .border(0 0 0 1px, solid, @hexb); .size(auto, 32px); line-height:32px; min-width:32px; text-align: center; padding: 0 .6em; float:left; }
+            & a:first-child     { .border; }
+            & .current          { .color(@hexf, @primary); }
+            & a:hover           { .back.color(@hexd); }
+        }
+    }
+
+    .panel.primary              { 
+        &                       { .back.color(#212121); .padding(@base-margin); .rounded(@base-radius); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.8) inset;}
+        & .title                { .font(2em); .color(@hexf); border-bottom: 1px solid #121212; box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.07); }
+        & .fa                   { .color(@accent); font-size: .86em; }
+    }
+
+    .table.primary              {
+        &                       { .table.padding(.2em .7em); .font-size(.9em, 800px); }
+        & caption               { .color(@text-primary, @primary-lighter); .padding(.35em); .font(bold 1.2em); }
+        & thead tr th           { .color(@text-primary, #222); }
+        & thead tr th a         {  color: @primary; .hover.color(@secondary); }
+        & tbody tr              { .hover.color(@text-base, #222); }
+        & tbody tr.selected     { .color(@hexf, @primary); }
+    }
+
+    .tabset.primary             {
+        & > .summary            {
+            &                   { .spacing(@base-margin/3 1em 0 0, 0); font-size: 1em; }
+            & a:hover,
+            &.active            { .back(rgba(0, 0, 0, 0.3), none, repeat); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset; .rounded(@base-radius); text-decoration: none; }
+            & a                 { .padding(.3em .7em); }
+        }
+    }
+
+    .tooltip.primary            { 
+        &:after                 { .font(14px @d 1.2); .color(@hexf, #333); .padding(7px 14px); .rounded(@base-radius); }
+        &.up:before             { .arrow.bottom(4px, #333); }
+        &.down:before           { .arrow.top(4px, #333); }
+        &.right:before          { .arrow.left(4px, #333); }
+        &.left:before           { .arrow.right(4px, #333); }
+        &.wrap:after            {  min-width: 160px; }
+    }
