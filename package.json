@@ -1,32 +1,35 @@
 {
   "name": "anchorless",
   "version": "1.0.0",
-  "description": "anchorLess: The most extensive Less mixins library",
+  "description": "The most extensive Less mixins library",
   "repository": {
     "type": "git",
     "url": "https://github.com/invader365/anchorLESS.git"
   },
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"No test specified\" && exit 1"
+  "style": "anchor.less",
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": ">= 6.9.0"
   },
+  "scripts": {
+    "start": "gulp",
+    "example": "gulp example"
+  },
+  "homepage": "http://invader365.github.io/anchorLESS/",
   "keywords": [
-    "anchorLess",
-    "anchor",
+    "anchorless",
     "less",
     "mixins",
     "assets",
     "utilities",
-    "library",
     "css"
   ],
   "author": "@invader365",
   "license": "Apache-2.0",
-  "devDependencies": {
+  "dependencies": {
     "browser-sync": "^2.18.12",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-concat": "^2.6.1",
+    "gulp": "^4.0.2",
     "gulp-less": "^3.3.0"
   }
 }

@@ -1,24 +1,100 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>AnchorLess | Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no">
-    <link href="styles.css" rel="stylesheet">
-</head>
-<body>
-    <div class="block">
-        <h1>Example</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu bibendum orci, vel vulputate sem. 
-          Maecenas aliquet, arcu sit amet consequat mollis, felis nunc euismod mi, laoreet volutpat dui 
-          felis eu orci.</p>
-        <a href="#">Click Me</a>
-        <h2>List</h2>
-        <ul>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-        </ul>
-    </div>
-</body>
+    <head>
+        <title>AnchorLess | Example</title>
+        <meta charset="utf-8">
+        <link href="styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <section>
+                <h2>Using the example</h2>
+                <p>1. Install npm modules</p>
+<pre>
+<code>
+<span class="media">npm</span> install</strong>
+</code>
+</pre>
+                <p>2. Run gulp example</p>
+<pre>
+<code>
+<span class="media">gulp</span> example
+</code>
+</pre>
+                <p>3. Edit styles.less located on the example folder</p>
+<pre>
+<code>
+<span class="attr">cd</span> /example
+</code>
+</pre>
+                <p>Your browser will reload after saving changes</p>
+
+                <h2>Semantic</h2>
+                <p>1. Import anchor.less at the top of your less file: </p>
+<pre>
+<code>
+<span class="comment">// Relative path to anchorless, ie:</span>
+<span class="media">@import</span> "../node_modules/anchorless/anchor.less";
+</code>
+</pre>
+                <p>2. Write anchorless semantic</p>
+<pre>
+<code>
+<span class="selector">#button</span> {
+    <span class="anchor">.gradient.to-bottom</span>(#6e8efb, #a777e3);
+    <span class="anchor">.border</span>(0 1px 2px, solid, #9c33ed);
+    <span class="anchor">.padding</span>(0.2em 0.8em);
+    <span class="anchor">.rounded</span>(4px);
+    <span class="anchor">.width</span>(25%, 640px);
+    <span class="anchor">.shadow.inset</span>(0 5px 15px, #d197fe, .3);
+    <span class="anchor">.color</span>(@white);
+    <span class="anchor">.size</span>(128px, 36px);
+    <span class="anchor">.font</span>(bold 12px @d 34px, 'Arial');
+}
+</code>
+</pre>
+                <p>Compiles to:</p>
+<pre>
+<code>
+<span class="selector">#button</span> {
+    <span class="attr">background:</span> #6e8efb none repeat-x center;
+    <span class="attr">background-image:</span> -webkit-linear-gradient(180deg, #6e8efb, #a777e3);
+    <span class="attr">background-image:</span> -moz-linear-gradient(180deg, #6e8efb, #a777e3);
+    <span class="attr">background-image:</span> linear-gradient(180deg, #6e8efb, #a777e3);
+    <span class="attr">border-width:</span> 0 1px 2px;
+    <span class="attr">border-style:</span> solid;
+    <span class="attr">border-color:</span> #9c33ed;
+    <span class="attr">padding:</span> 0.2em 0.8em;
+    <span class="attr">-webkit-border-radius:</span> 4px;
+    <span class="attr">-moz-border-radius:</span> 4px;
+    <span class="attr">border-radius:</span> 4px;
+    <span class="attr">-webkit-box-shadow:</span> 0 5px 15px rgba(0, 0, 0, 0.3) inset;
+    <span class="attr">box-shadow:</span> 0 5px 15px rgba(0, 0, 0, 0.3) inset;
+    <span class="attr">color:</span> #ffffff;
+    <span class="attr">width:</span> 128px;
+    <span class="attr">height:</span> 36px;
+    <span class="attr">font:</span> bold 12px / 34px 'Arial';
+}
+</code>
+<code>
+<span class="media">@media all and</span> (<span class="attr">min-width:</span> 640px) {
+    <span class="selector">#button</span> {
+        <span class="attr">width:</span> 25%;
+    }
+}
+</code>
+</pre>
+                <p>3. For more information, please visit the 
+                    <a id="button" href="http://invader365.github.io/anchorLESS/html/reference.html">documentation</a> >
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <section>
+                <p>Copyright © 
+                    <a href="http://invader365.github.io/anchorLESS/">AnchorLESS</a> 2020.</p>
+            </section>
+        </footer>
+    </body>
 </html>

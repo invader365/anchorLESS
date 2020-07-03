@@ -1,39 +1,37 @@
-var gulp   = require('gulp');
-var concat = require('gulp-concat');
-var less   = require('gulp-less');
-var prefix = require('gulp-autoprefixer');
-var sync   = require('browser-sync').create();
+'use strict'
 
-gulp.task('anchorless', function() {
-    gulp.src([
-            './src/01_mixins/**/*.less',
-            './src/02_assets/**/*.less',
-            './src/03_utilities/**/*.less'
-        ])
-        .pipe(concat('anchor.less'))
-        .pipe(gulp.dest('./'))
-        .pipe(browse.stream());
-});
+const { src, dest, watch, parallel, series } = require('gulp')
 
-gulp.task('example', function() {
-    gulp.src('./example/*.less')
-        .pipe(less())
-        .pipe(prefix({browsers: ['last 5 versions']}))
-        .pipe(gulp.dest('./example'))
-        .pipe(browse.stream());
-});
+const less = require('gulp-less')
+const bsync = require('browser-sync').create()
 
-gulp.task('sync', function() {
-    sync.init(null, {
-        open: false,
-        server: {
-            baseDir: ['./example']
-        }
-    });
-});
+const dir = {
+    src:    './',
+    example: './example/'
+}
 
-gulp.task('serve', function() {
-    gulp.start(['anchor', 'less', 'sync']);
-    gulp.watch("./**/*.less", ['anchorless', 'example']);
-    gulp.watch("./example/*.html").on('change', sync.reload);
-});
+const styles = done => {
+  src(dir.example + '*.less')
+    .pipe(less())
+    .pipe(dest(dir.example))
+  done()
+}
+
+const serve = () => {
+  bsync.init({
+    open: true,
+    server: './example/'
+  })
+}
+
+const reload = done => {
+  bsync.reload(), 
+  done()
+}
+
+const watchFiles = () => {
+  watch('./example/*.less', series(styles, reload)), 
+  watch('./example/*.html', series(reload))
+}
+
+exports.default = parallel(serve, watchFiles)
