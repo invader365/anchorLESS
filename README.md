@@ -35,10 +35,10 @@ Common mixins list:
 To see the **[full list](http://invader365.github.io/anchorLESS/html/reference.html)**.
 
 ## Usage
-Import the absolute url path to `anchor` inside your less file
+Import the relative url at the top of your less file
 
 ```css
-@import "/path/to/anchor";
+@import "../node_modules/anchorless/anchor.less";
 ```
 Example:
 ```css
