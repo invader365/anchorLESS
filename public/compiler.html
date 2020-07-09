@@ -19,8 +19,11 @@
     <link href="../img/favicon.ico" type="image/x-icon" rel="shortcut icon">
     <link href="../fonts/FontAwesome/css/font-awesome.css" rel="stylesheet">
     <link href="../css/custom.css" rel="stylesheet">
+    <style type="text/css" class="style css"></style>
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.1/less.min.js" type="text/javascript"></script>
   </head>
-  <body class="uno l-right-top-nav usage">
+  <body class="uno l-right-top-nav compiler">
     <header>
       <section class="max-width">
         <div class="m-brand">
@@ -40,56 +43,55 @@
         </div>
       </section>
     </nav>
-    <main>
-      <section class="max-width fixed">
-        <div class="m-module span-5"></div>
-        <h2 class="heading primary">Usage</h2>
-        <p>1. Download the "anchor.less" file</p>
-        <p>2. Reference for use globally with: </p>
-        <pre class="panel primary"><code><span class="selector">@import</span> "anchorless";</code></pre>
-        <p>3. Use your favorite less compiler</p>
-        <h4>Example:</h4>
-        <pre class="panel primary"><code><span class="selector">#button</span> {
-   .gradient.to-bottom(#a53df6, #7c16cb);
-   .border(0 1px 2px, solid, #9c33ed);
-   .rounded(7px);
-   .width(25%, 640px);
-   .shadow.inset(0 1px 0 0, #d197fe, .9);
-   .color(@yellow);
-   .size(56px, 128px);
-   .font(bold 12px @d 56px, 'Arial');
- }</code></pre>
-        <p>Compiles to:</p>
-        <pre class="panel primary"><code><span class="selector">#button</span> {
-     background: #a53df6 none repeat-x center;
-     background-image: -webkit-linear-gradient(180deg, #a53df6, #7c16cb);
-     background-image: -moz-linear-gradient(180deg, #a53df6, #7c16cb);
-     background-image: linear-gradient(180deg, #a53df6, #7c16cb);
-     border-width: 0 1px 2px;
-     border-style: solid;
-     border-color: #9c33ed;
-     -webkit-border-radius: 7px;
-     -moz-border-radius: 7px;
-     border-radius: 7px;
-     -webkit-box-shadow: 0 1px 0 0 rgba(208, 149, 254, 0.9) inset;
-     box-shadow: 0 1px 0 0 rgba(208, 149, 254, 0.9) inset;
-     color: #ffff00;
-     width: 56px;
-     height: 128px;
-     font: bold 12px / 56px 'Arial';
- }</code><code><span class="selector">@media all and (min-width: 640px)</span> {
-     #button {
-         width: 25%;
-     }
- }</code></pre>
-      </section>
-    </main>
-    <footer>
-      <section class="max-width">
-        <div class="m-legal">
-          <p class="copy">Copyright © AnchorLess 2020.</p>
-        </div>
-      </section>
-    </footer>
   </body>
+  <main>
+    <section class="max-width fixed">
+      <h2 class="title">Less Live-Compiler</h2>
+      <div class="panel primary"><code contenteditable="true" onkeyup="compileCSS()" spellcheck="false" class="code less"></code>
+        <div class="toggle"><a onclick="showHide()" class="no-select">Result</a></div>
+        <div style="display:none" class="result">
+          <div class="box">box</div>
+        </div>
+      </div>
+      <h4>CSS</h4><code class="code css"></code>
+    </section>
+  </main>
+  <script>
+    const pre = {
+    less: `  .box {
+    .rounded(20px);
+    .size(200px, 40px);
+    .spacing(20px auto, 0);
+    .gradient.to-bottom(orange, darken(#fb292d, 20%));
+    }`,
+    error:`  .box {
+    Parse error: Unrecognized input
+    }`
+    };
+    const compileCSS = result => {
+      const codeLess = document.querySelector(`.code.less`);
+      const codeCss  = document.querySelector(`.code.css`);
+      const styleTag = document.querySelector(`.style.css`);
+      const anchorLess = "@import './less/anchor.less';";
+      if(result) codeLess.innerHTML = eval(result).less;
+      styleTag.innerHTML = anchorLess + codeLess.textContent;
+      styleTag.setAttribute("type", "text/less");
+      less.refreshStyles();
+      setTimeout(() => {
+        codeCss.innerHTML = (styleTag.innerHTML.slice(0, 1) != '@') ? styleTag.innerHTML : eval(pre).error
+      }, 200)
+    };
+    compileCSS(pre);
+    const showHide = () => {
+      const result = document.querySelector(`.result`);
+      result.style.display = (result.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+  <footer>
+    <section class="max-width">
+      <div class="m-legal">
+        <p class="copy">Copyright © AnchorLess 2020.</p>
+      </div>
+    </section>
+  </footer>
 </html>

@@ -1,3 +1,42 @@
+.less-error-message {
+  display: none;
+}
+.compiler {
+  position: relative;
+  overflow: hidden;
+  height: 240px;
+  width: 100%;
+  border: 1px solid #ccc;
+  background: LightYellow;
+  text-align: center;
+  border-radius: 7px;
+  color: #0099ff;
+  margin-bottom: 10px;
+}
+.compiler .play {
+  display: inline-block;
+  font-size: 2rem;
+  border-radius: 1rem;
+}
+code {
+  display: block;
+  padding: 1rem;
+  overflow-y: auto;
+  font-size: 18px;
+  line-height: 22px;
+  white-space: pre;
+  border-radius: 5px;
+  margin: 10px auto 20px;
+  border: 1px solid transparent;
+}
+code.less:hover,
+code.less:focus {
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+code.css {
+  color: #222;
+}
 body {
   margin: 0;
   padding: 0;
@@ -63,9 +102,9 @@ body section {
   padding: 20px;
   width: 100%;
 }
-@media all and (min-width: 640px) {
+@media all and (min-width: 980px) {
   body section {
-    width: 600px;
+    width: 940px;
   }
 }
 body footer {

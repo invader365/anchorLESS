@@ -2,6 +2,8 @@
 @import "base";
 @import "theme";
 
+@accent: #fb292d;
+
 //  Global
 
     // * { background-image: radial-gradient(circle at 1% 1%, #328bf2, #1644ad) }
@@ -16,9 +18,7 @@
 
     pre {
         display: block;
-        word-break: break-all;
-        word-wrap: break-word;
-        white-space: pre-wrap;
+        .word-break();
 
         code {
             display: block;
@@ -40,10 +40,6 @@
         color: #dadbb1;
     }
 
-    .panel.primary code {
-        color: #dadbb1;
-    }
-
     table tr .first { 
         width: 33.33%; 
     }
@@ -53,11 +49,22 @@
     }
     
     .button { 
-        text-decoration: none; 
+        text-decoration: none;
+    }
 
-        &:hover {
-            text-decoration: none; 
-        }
+    .badge {
+        .rounded(5px);
+        .square(9px);
+        .absolute.right-top(-15px, 15px);
+        .gradient.to-bottom(@accent, darken(@accent, 20%));
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-right {
+        text-align: right;
     }
 
 //  Header
@@ -114,6 +121,7 @@
     body.home .navbar .home a,
     body.reference .navbar .reference a,
     body.usage .navbar .usage a,
+    body.compiler .navbar .compiler a,
     .navbar li a:hover {  
         color: @accent; 
     }
@@ -192,3 +200,47 @@
     .m-legal {
         padding-top: @base-margin; 
     }
+
+    .no-select {
+        .user-select();
+    }
+
+//  Compiler
+.less-error-message {
+    display: none;
+}
+
+main {
+    .result {
+        width: 100%;
+        text-align: center;
+
+        .box {
+            display: inline-block;
+            font-size: 2.6rem;
+            float: none;
+            .user-select();
+        }
+    }
+
+    .toggle {
+        text-align: right;
+        font-size: 0.7em;
+    }
+
+    code {
+        display: block;
+        padding: 1rem;
+        overflow-y: auto;
+        font-size: 18px;
+        line-height: 22px;
+        white-space: pre;
+        border-radius: 5px;
+        border: 1px solid transparent;
+        
+        &.less:hover, &.less:focus {
+            .color(#ffffe6, #212121);
+            outline: 0;
+        }
+    }
+}

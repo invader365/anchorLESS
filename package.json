@@ -24,6 +24,7 @@
   "author": "@invader365",
   "license": "Apache-2.0",
   "dependencies": {
+    "@angular/cli": "^10.0.1",
     "browser-sync": "^2.18.12",
     "gulp": "^4.0.2",
     "gulp-jade": "^1.1.0",

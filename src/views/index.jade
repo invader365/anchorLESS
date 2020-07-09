@@ -1,6 +1,7 @@
 - var page = { 'root': '', 'title': 'The Most Extensive Less Mixins Library' }
 
-include includes/html
+doctype html
+html(lang="es")
     head
         include includes/head
     body.uno.l-top-nav.fixed.home
@@ -13,7 +14,7 @@ include includes/html
                     p
                         strong Anchor Less
                         |  is a collection of less Mixins, Assets and Utilities.
-                        |  These enables you to create blocks of reusable css, avoiding duplication of code and making it more maintenable.
+                        |  These enables you to create blocks of reusable css, avoiding duplication of code and making it maintenable.
                 .grid.split-2.separate
                     div
                         .panel.primary
@@ -23,18 +24,8 @@ include includes/html
                             ul.decimal
                                 li The most extensive Less mixins library.
                                 li Ready to use with html5 frameworks.
-                                li Faster performance (Less.js powered).
                                 li Responsive mixins (mobile-first)
-                                li A single 'anchor.less' file, no dependencies.
-                        .panel.primary
-                            h4.title
-                                i.fa.fa-rocket
-                                |  Less.js
-                            p Anchor uses 
-                                a(href='http://lesscss.org/', target='_blank') Less.js
-                                | , a javascript pre-processor that extends CSS with features like variables, functions and operations.
-                            p Supports Less 1.7.1 +
-                    div
+                                li Faster performance (Less.js powered).
                         .panel.primary
                             h4.title
                                 i.fa.fa-recycle
@@ -44,23 +35,14 @@ include includes/html
                                     span.mix .back 
                                     |  (color, image, repeat, position, query);
                                 li
-                                    span.mix .border 
-                                    |  (width, style, color, query);
-                                li
                                     span.mix .color 
                                     | (color, back-color);
-                                li
-                                    span.mix .font 
-                                    | (font, family);
                                 li
                                     span.mix .gradient 
                                     | (start, stop, degrees, image);
                                 li
                                     span.mix .image 
                                     | (url);
-                                li
-                                    span.mix .opacity 
-                                    | (opacity, query);
                                 li
                                     span.mix .pseudo 
                                     | (content, width, height)
@@ -77,11 +59,24 @@ include includes/html
                                     span.mix .transition 
                                     | (property, duration, function, delay);
                             p
-                                a(href='html/reference.html') See the full list
+                                a(href=page.root + 'reference.html') See the full list
+                    div
+                        .panel.primary
+                            h4.title
+                                i.fa.fa-rocket
+                                |  Compiler
+                            p Try the less 
+                                a(href=page.root + 'compiler.html') compiler
+                                |  to see how it works!
+                            img(src=page.root + 'img/compiler.gif')
                         .m-download
-                            a.button.secondary.big(href='https://github.com/invader365/anchorLESS/archive/master.zip')
-                                i.fa.fa-arrow-circle-o-down
-                                |  Download Anchor Less
-                            p Source on 
+                            p 
+                                a(href='http://lesscss.org/', target='_blank', rel="external") LESS JS
+                                |  is a javascript pre-processor that extends CSS with features like variables, functions and operations.
+                            p.text-right
+                                a.button.secondary.big(href='https://github.com/invader365/anchorLESS/archive/master.zip')
+                                    i.fa.fa-arrow-circle-o-down
+                                    |  Download Anchor Less
+                            p.text-right Source on 
                                 a(href='https://github.com/invader365/anchorLESS') GitHub
         include includes/footer

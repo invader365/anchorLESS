@@ -1,0 +1,55 @@
+- var page = { 'root': '../', 'title': 'Compiler' }
+
+doctype html
+html(lang="es")
+    head
+        include includes/head
+        style.style.css(type="text/css")
+        script(src='../js/libs/jquery-1.11.1.min.js')
+        script(src="http://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.1/less.min.js", type="text/javascript")
+
+    body.uno.l-right-top-nav.compiler
+        include includes/header_pages
+        include includes/nav
+    main
+      section.max-width.fixed
+        h2.title Less Live-Compiler
+        .panel.primary
+          code.code.less(contenteditable='true', onkeyup='compileCSS()', spellcheck="false")
+          .toggle
+            a.no-select(onclick="showHide()") Result
+          .result(style="display:none")
+            .box box
+        h4 CSS
+        code.code.css
+    script.
+      const pre = {
+      less: `  .box {
+      .rounded(20px);
+      .size(200px, 40px);
+      .spacing(20px auto, 0);
+      .gradient.to-bottom(orange, darken(#fb292d, 20%));
+      }`,
+      error:`  .box {
+      Parse error: Unrecognized input
+      }`
+      };
+      const compileCSS = result => {
+        const codeLess = document.querySelector(`.code.less`);
+        const codeCss  = document.querySelector(`.code.css`);
+        const styleTag = document.querySelector(`.style.css`);
+        const anchorLess = "@import './less/anchor.less';";
+        if(result) codeLess.innerHTML = eval(result).less;
+        styleTag.innerHTML = anchorLess + codeLess.textContent;
+        styleTag.setAttribute("type", "text/less");
+        less.refreshStyles();
+        setTimeout(() => {
+          codeCss.innerHTML = (styleTag.innerHTML.slice(0, 1) != '@') ? styleTag.innerHTML : eval(pre).error
+        }, 200)
+      };
+      compileCSS(pre);
+      const showHide = () => {
+        const result = document.querySelector(`.result`);
+        result.style.display = (result.style.display === 'block') ? 'none' : 'block';
+      }
+    include includes/footer

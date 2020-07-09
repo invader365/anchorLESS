@@ -1,6 +1,7 @@
 - var page = { 'root': '../', 'title': 'Reference' }
 
-include includes/html
+doctype html
+html(lang="es")
     head
         include includes/head
         script(src='../js/libs/jquery-1.11.1.min.js')
@@ -70,7 +71,7 @@ include includes/html
                                     a(href='#resources') Uri resources
                     .c-module.span-5
                         .tabset.primary.horizontal
-                            h2.summary.active
+                            h2.summary
                                 a(href='#') All
                             .details
                                 hr
@@ -327,7 +328,7 @@ include includes/html
                                         li .width ();
                                         li .word-break ();
                                         li .wrap ();
-                            h2.summary.mixins
+                            h2.summary.mixins.active
                                 a(href='#') Mixins
                             .details
                                 hr
