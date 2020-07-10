@@ -1606,9 +1606,9 @@ html .uppercase {
   height: 65px;
 }
 .l-right-top-nav .fixed.max-width {
-  width: 100%;
-  left: 0;
-  margin-left: 0;
+  width: 840px;
+  left: -420px;
+  margin-left: 50%;
 }
 .l-right-top-nav .lined-up > li {
   width: auto;
@@ -1617,7 +1617,7 @@ html .uppercase {
   .l-right-top-nav.fixed {
     position: relative;
   }
-  .l-right-top-nav .fixed.max-width {
+  .l-right-top-nav.fixed .max-width {
     width: 840px;
     left: -420px;
     margin-left: 50%;
@@ -1951,7 +1951,7 @@ textarea:hover {
 .pagination,
 .panel,
 .table {
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 .breadcrumb.primary {
   -webkit-border-radius: 5px;
@@ -2048,7 +2048,7 @@ textarea:hover {
   color: #888;
 }
 .message.primary {
-  margin-bottom: 18px;
+  margin-bottom: 24px;
   padding: 1em 28px 1em 1em;
   color: #222;
   background-color: #f6f6f7;
@@ -2146,7 +2146,7 @@ textarea:hover {
 }
 .panel.primary {
   background-color: #212121;
-  padding: 18px;
+  padding: 24px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -2198,7 +2198,7 @@ textarea:hover {
   background-color: #d9161c;
 }
 .tabset.primary > .summary {
-  margin: 6px 1em 0 0;
+  margin: 8px 1em 0 0;
   padding: 0;
   font-size: 1em;
 }
@@ -2268,9 +2268,9 @@ h5 a {
 }
 pre {
   display: block;
-  -ms-word-break: break-all;
   word-break: break-all;
-  word-break: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 pre code {
   display: block;
@@ -2280,12 +2280,15 @@ pre code {
 }
 ul,
 ol {
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 .selector {
   color: #fb292d;
 }
 .mix {
+  color: #dadbb1;
+}
+.panel.primary code {
   color: #dadbb1;
 }
 table tr .first {
@@ -2297,25 +2300,8 @@ hr {
 .button {
   text-decoration: none;
 }
-.badge {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  width: 9px;
-  height: 9px;
-  position: absolute;
-  right: -15px;
-  top: 15px;
-  background: #fb292d none repeat-x center;
-  background-image: -webkit-linear-gradient(180deg, #fb292d, #bb0307);
-  background-image: -moz-linear-gradient(180deg, #fb292d, #bb0307);
-  background-image: linear-gradient(180deg, #fb292d, #bb0307);
-}
-.text-center {
-  text-align: center;
-}
-.text-right {
-  text-align: right;
+.button:hover {
+  text-decoration: none;
 }
 .m-brand h1 {
   text-align: center;
@@ -2338,7 +2324,7 @@ hr {
   font-size: 4.8em;
 }
 .l-right-top-nav .m-brand {
-  padding-top: 18px;
+  padding-top: 24px;
 }
 .l-right-top-nav .m-brand h1 {
   font-size: 1.6em;
@@ -2353,7 +2339,6 @@ hr {
 body.home .navbar .home a,
 body.reference .navbar .reference a,
 body.usage .navbar .usage a,
-body.compiler .navbar .compiler a,
 .navbar li a:hover {
   color: #fb292d;
 }
@@ -2363,7 +2348,7 @@ nav > section {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 .m-mainnav {
-  padding-top: 18px;
+  padding-top: 24px;
 }
 .m-mainnav a {
   text-decoration: none;
@@ -2372,7 +2357,7 @@ nav > section {
   display: none;
   border-right: 1px solid #121212;
   box-shadow: -1px 0 0 rgba(255, 255, 255, 0.07) inset;
-  padding-right: 18px;
+  padding-right: 24px;
 }
 @media all and (min-width: 800px) {
   .c-filters {
@@ -2421,45 +2406,5 @@ footer > section {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset;
 }
 .m-legal {
-  padding-top: 18px;
-}
-.no-select {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-.less-error-message {
-  display: none;
-}
-main .result {
-  width: 100%;
-  text-align: center;
-}
-main .result .box {
-  display: inline-block;
-  font-size: 2.6rem;
-  float: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-main .toggle {
-  text-align: right;
-  font-size: 0.7em;
-}
-main code {
-  display: block;
-  padding: 1rem;
-  overflow-y: auto;
-  font-size: 18px;
-  line-height: 22px;
-  white-space: pre;
-  border-radius: 5px;
-  border: 1px solid transparent;
-}
-main code.less:hover,
-main code.less:focus {
-  color: #ffffe6;
-  background-color: #212121;
-  outline: 0;
+  padding-top: 24px;
 }

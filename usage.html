@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Anchor Less | Usage</title>
+    <meta charset="utf-8">
+    <meta name="author" content="invader365">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="anchorLess, anchor, less, mixins, assets, utilities, library, css">
+    <meta name="description" content="Anchor less is a collection of less Mixins, Assets and Utilities. These enables you to create blocks of reusable css, avoiding duplication of code and making it more maintenable. ">
+    <meta property="og:title" content="Anchor Less">
+    <meta property="og:description" content="Anchor less is a collection of less Mixins, Assets and Utilities. These enables you to create blocks of reusable css, avoiding duplication of code and making it more maintenable. ">
+    <meta property="og:image" content="http://invader365.github.io/anchorLESS/images/logo-main-small.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://invader365.github.io/anchorLESS">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172056438-1"></script>
+    <script src="../js/gtag.js"></script>
+    <script src="../js/analytics.js"></script>
+    <link href="../img/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link href="../fonts/FontAwesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+  </head>
+  <body class="uno l-right-top-nav usage">
+    <header>
+      <section class="max-width">
+        <div class="m-brand">
+          <h1><a href="../index.html"><img src="../img/logo-main.png"><strong>Anchor Less</strong></a></h1>
+        </div>
+        <div class="m-sidemenu hide"><a href="#" class="toggle js-navbar"><i class="fa fa-bars"></i></a></div>
+      </section>
+    </header>
+    <nav>
+      <section class="max-width">
+        <div class="m-mainnav navbar primary">
+          <ul class="lined-up">
+            <li class="reference"><a href="../reference.html">Reference</a></li>
+            <li class="usage"><a href="../usage.html">Usage</a></li>
+            <li class="compiler"><a href="../compiler.html">Compiler<span class="badge"></span></a></li>
+          </ul>
+        </div>
+      </section>
+    </nav>
+    <main>
+      <section class="max-width fixed">
+        <div class="m-module span-5">
+          <h2 class="heading primary">Usage</h2>
+          <p>1. Download the "anchor.less" file</p>
+          <p>2. Reference for use globally with: </p>
+          <pre class="panel primary"><code><span class="selector">@import</span> "anchorless";</code></pre>
+          <p>3. Use your favorite less compiler</p>
+          <h4>Example:</h4>
+          <pre class="panel primary"><code><span class="selector">#button</span> {
+   .gradient.to-bottom(#a53df6, #7c16cb);
+   .border(0 1px 2px, solid, #9c33ed);
+   .rounded(7px);
+   .width(25%, 640px);
+   .shadow.inset(0 1px 0 0, #d197fe, .9);
+   .color(@yellow);
+   .size(56px, 128px);
+   .font(bold 12px @d 56px, 'Arial');
+ }</code></pre>
+          <p>Compiles to:</p>
+          <pre class="panel primary"><code><span class="selector">#button</span> {
+     background: #a53df6 none repeat-x center;
+     background-image: -webkit-linear-gradient(180deg, #a53df6, #7c16cb);
+     background-image: -moz-linear-gradient(180deg, #a53df6, #7c16cb);
+     background-image: linear-gradient(180deg, #a53df6, #7c16cb);
+     border-width: 0 1px 2px;
+     border-style: solid;
+     border-color: #9c33ed;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     border-radius: 7px;
+     -webkit-box-shadow: 0 1px 0 0 rgba(208, 149, 254, 0.9) inset;
+     box-shadow: 0 1px 0 0 rgba(208, 149, 254, 0.9) inset;
+     color: #ffff00;
+     width: 56px;
+     height: 128px;
+     font: bold 12px / 56px 'Arial';
+ }</code><code><span class="selector">@media all and (min-width: 640px)</span> {
+     #button {
+         width: 25%;
+     }
+ }</code></pre>
+        </div>
+        <div class="m-module span-5">
+          <h2>Runing the example</h2>
+          <p>1. Install npm modules</p>
+          <pre class="panel primary"><code><span class="selector">npm</span> install </code></pre>
+          <p>2. Run gulp example</p>
+          <pre class="panel primary"><code><span class="selector">gulp</span> example</code></pre>
+          <p>3. Edit styles.less located on the example folder</p>
+          <pre class="panel primary"><code><span class="selector">cd</span> /example</code></pre>
+          <p>Your browser will reload after saving changes</p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <section class="max-width">
+        <div class="m-legal">
+          <p class="copy">Copyright © AnchorLess 2020.</p>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>
