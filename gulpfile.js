@@ -1,37 +1,53 @@
-'use strict'
-
 const { src, dest, watch, parallel, series } = require('gulp')
 
-const less = require('gulp-less')
-const bsync = require('browser-sync').create()
+const less   = require('gulp-less')
+const jade   = require('gulp-jade')
+const bsync  = require('browser-sync').create()
 
 const dir = {
-    src:    './',
-    example: './example/'
+    example: './example/',
+    views:   './src/views/',
+    styles:  './src/styles/',
+    public:  './public/'
 }
 
-const styles = done => {
-  src(dir.example + '*.less')
-    .pipe(less())
-    .pipe(dest(dir.example))
-  done()
+const compileViews = done => {
+    src(dir.views + '*.jade')
+        .pipe(jade({pretty: true}))
+        .pipe(dest(dir.public))
+    done()
 }
 
-const serve = () => {
-  bsync.init({
-    open: true,
-    server: './example/'
-  })
+function compileStyles(source, destination) {
+    return done => {
+        src(source)
+            .pipe(less())
+            .pipe(dest(destination))
+        done()
+    }
 }
 
-const reload = done => {
-  bsync.reload(), 
-  done()
+function startServer(base) {
+    return () => {
+        bsync.init({
+            open: true,
+            server: base 
+        })
+    }
 }
 
-const watchFiles = () => {
-  watch('./example/*.less', series(styles, reload)), 
-  watch('./example/*.html', series(reload))
+const reloadBrowser = done => {
+    bsync.reload(),
+    done()
 }
 
-exports.default = parallel(serve, watchFiles)
+function watchFileChanges(base, styles, stylesSrc, stylesDest, views) {
+    return () => {
+        watch(styles + '**/*.less', series(compileStyles(styles + stylesSrc, base + stylesDest), reloadBrowser)),
+        watch(views + '**/*.jade', series(compileViews, reloadBrowser)),
+        watch(base + '**/*.{html,js,css}', series(reloadBrowser))
+    }
+}
+
+exports.example = parallel(startServer(dir.example), watchFileChanges(dir.example, dir.example, 'styles.less', '', './'))
+exports.default = parallel(startServer(dir.public), watchFileChanges(dir.public, dir.styles, 'custom.less', 'css/', dir.views))

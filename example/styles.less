@@ -1,4 +1,4 @@
-@import '../anchor.less';
+@import 'https://raw.githubusercontent.com/invader365/anchorLESS/master/anchor.less';
 
 @font-family: 'Open Sans', Helvetica, sans-serif;
 @font-mono: "Courier New", Courier, monospace;
@@ -43,30 +43,18 @@ body {
         }
     }
 
-    #button {
-        .box-sizing(border-box);
-        .gradient.to-bottom(#6e8efb, #a777e3, 135deg);
-        .border(0 1px 2px, solid, #9c33ed);
-        .padding(.2em .8em);
-        .rounded(4px);
-        .width(25%, 640px);
-        .shadow(0 5px 15px, #000, .3);
-        .color(@white);
-        .size(86px, 36px);
-        .font(normal 12px @d 34px, 'Arial');
-    }
-
     a {
         .color(@hex6);
-        .hover.color(#fb292d, @hexd);
+        .hover.color(#268bd2, @hexd);
         text-decoration: none;
+        border-bottom: 1px dotted #268bd2;
     }
     
     section {
         .box-sizing(border-box);
         .spacing(0 auto, 20px);
         .width(100%);
-        .width(600px, 640px);
+        .width(940px, 980px);
     }
 
     footer {
