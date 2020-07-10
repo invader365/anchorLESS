@@ -32,7 +32,7 @@ Common mixins list:
 00. .width (width, query);
 00. **[..](src/README.md)**
 
-See the **[full list](http://invader365.github.io/anchorLESS/html/reference.html)**
+See the **[full list](http://invader365.github.io/anchorLESS/reference.html)**
 
 ## Usage
 Import the relative url at the top of your less file
@@ -76,7 +76,7 @@ CSS output:
         }
       }
 ```
-Try the less [compiler](http://invader365.github.io/anchorLESS/html/compiler.html) to see how it works!
+Try the less [compiler](http://invader365.github.io/anchorLESS/compiler.html) to see how it works!
 ## License
 
 Copyright © 2014 Licensed under the [Apache License Version 2.0](LICENSE).
