@@ -56,3 +56,48 @@
             border-style: solid;
         }
     }
+
+    
+
+    .arrow {
+        .top (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.top(@size, @color, @query);
+            }
+        }
+        .bottom (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.bottom(@size, @color, @query);
+            }
+        }
+        .left (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.left(@size, @color, @query);
+            }
+        }
+        .right (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.right(@size, @color, @query);
+            }
+        }
+        .left-top (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.left-top(@width, @color, @ratio, @query);
+            }
+        }
+        .left-bottom (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.left-bottom(@width, @color, @ratio, @query);
+            }
+        }
+        .right-top (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.right-top(@width, @color, @ratio, @query);
+            }
+        }
+        .right-bottom (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.right-bottom(@width, @color, @ratio, @query);
+            }
+        }
+    }

@@ -1,6 +1,6 @@
-# Anchor LESS partials
+# Anchor LESS Core
 
-Contains partials from "anchor.less".
+Contains categorized partial files for "anchor.less".
 
 ## Contents
 
@@ -12,7 +12,7 @@ Contains partials from "anchor.less".
 00. .align.right-top (right, top);
 00. .align.right-bottom (right, bottom);
 00. .appearance (appearance);
-00. .back (color, image, repeat, position, query);
+00. .back (color, image, repeat, position, [min-width-query, max-width-query]);
 00. .back.attachment (attachment);
 00. .back.color (color);
 00. .back.clip (clip);
@@ -20,9 +20,9 @@ Contains partials from "anchor.less".
 00. .back.repeat (repeat);
 00. .back.size (size);
 00. .backface (visibility);
-00. .border (width, style, color, query);
-00. .box-sizing(box-model);
-00. .color (color, back, border);
+00. .border (width, style, color, query, [min-width-query, max-width-query]);
+00. .box-sizing (box-model);
+00. .color (color, back-color, border-color, [min-width-query, max-width-query]);
 00. .columns (count, gap, width);
 00. .display (display, query);
 00. .float (float, query);
@@ -35,18 +35,12 @@ Contains partials from "anchor.less".
 00. .gradient.to-right (start, stop, image);
 00. .gradient.to-top (start, stop, image);
 00. .gradient.radial (inner, outer, image);
-00. .height (height, query);
 00. .highlight (highlight);
-00. .image (image);
 00. .indent (indent, query);
 00. .index (index, query);
 00. .inner-shadow (spread, color, alpha);
-00. .margin (margin, query);
-00. .max-width (width, query);
-00. .min-width (width, query);
 00. .opacity (opacity, query);
 00. .overflow (x, y);
-00. .padding (padding, query);
 00. .perspective (perspective);
 00. .placeholder (color);
 00. .position (position, query);
@@ -67,13 +61,12 @@ Contains partials from "anchor.less".
 00. .rounded.right-top (radius);
 00. .rounded.right-bottom (radius);
 00. .rgba (hex-color, alpha);
-00. .size (width, height, query);
-00. .size-min (min-width, min-height, query);
+00. .size (width, height, [min-width-query, max-width-query]);
+00. .min-size (min-width, min-height, [min-width-query, max-width-query]);
 00. .scale (factor);
 00. .shadow (spread, color, alpha);
 00. .skew (x, y);
-00. .spacing (margin, padding, query);
-00. .square (size, query);
+00. .spacing (margin, padding, [min-width-query, max-width-query]);
 00. .text-align (align, query);
 00. .text-shadow (spread, color, alpha, query);
 00. .transform (transform);
@@ -82,7 +75,6 @@ Contains partials from "anchor.less".
 00. .translate (x, y);
 00. .translate3d (x, y, z);
 00. .user-select (select);
-00. .width (width, query);
 
 ### Assets
 
