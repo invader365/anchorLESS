@@ -1,0 +1,103 @@
+//  Arrows
+
+    .arrow {
+        .base () {
+            display: block;
+            content: '';
+            width: 0;
+            height: 0;
+        }
+        .top (@size: 0, @color: transparent, @query: 0) when (@query = 0) {
+            .arrow.base;
+            border: @size solid transparent;
+            border-bottom-color: @color;
+        }
+        .bottom (@size: 0, @color: transparent, @query: 0) when (@query = 0) {
+            .arrow.base;
+            border: @size solid transparent;
+            border-top-color: @color;
+        }
+        .left (@size: 0, @color: transparent, @query: 0) when (@query = 0) {
+            .arrow.base;
+            border: @size solid transparent;
+            border-right-color: @color;
+        }
+        .right (@size: 0, @color: transparent, @query: 0) when (@query = 0) {
+            .arrow.base;
+            border: @size solid transparent;
+            border-left-color: @color;
+        }
+        .left-top (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query = 0) {
+            .arrow.base;
+            @height: @width * @ratio;
+            border-width: @height @width 0 0;
+            border-color: @color transparent transparent;
+            border-style: solid;
+        }
+        .left-bottom (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query = 0) {
+            .arrow.base;
+            @height: @width * @ratio;
+            border-width: @width 0 0 @height;
+            border-color: transparent transparent transparent @color;
+            border-style: solid;
+        }
+        .right-top (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query = 0) {
+            .arrow.base;
+            @height: @width * @ratio;
+            border-width: 0 @width @height 0;
+            border-color: transparent @color transparent transparent;
+            border-style: solid;
+        }
+        .right-bottom (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query = 0) {
+            .arrow.base;
+            @height: @width * @ratio;
+            border-width: 0 0 @height @width;
+            border-color: transparent transparent @color;
+            border-style: solid;
+        }
+    }
+
+    
+
+    .arrow {
+        .top (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.top(@size, @color, @query);
+            }
+        }
+        .bottom (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.bottom(@size, @color, @query);
+            }
+        }
+        .left (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.left(@size, @color, @query);
+            }
+        }
+        .right (@size: 0, @color: transparent, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.right(@size, @color, @query);
+            }
+        }
+        .left-top (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.left-top(@width, @color, @ratio, @query);
+            }
+        }
+        .left-bottom (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.left-bottom(@width, @color, @ratio, @query);
+            }
+        }
+        .right-top (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.right-top(@width, @color, @ratio, @query);
+            }
+        }
+        .right-bottom (@width: 0, @color: transparent, @ratio: 1, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .arrow.right-bottom(@width, @color, @ratio, @query);
+            }
+        }
+    }
