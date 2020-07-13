@@ -129,9 +129,9 @@
         when not (@top-left = null) and not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@query-min=_) and (@query-max=_)
     {
         // Missing top-left properties for the first parameter
-        -webkit-border-radius: @radius;
-           -moz-border-radius: @radius;
-                border-radius: @radius;
+        -webkit-border-radius: @top-left;
+           -moz-border-radius: @top-left;
+                border-radius: @top-left;
     }
 
     .rounded (@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
