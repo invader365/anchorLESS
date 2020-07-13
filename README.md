@@ -10,27 +10,25 @@ Features:
 - Seamless integration with html5 frameworks.
 - Faster performance (Less.js build-in functions).
 - The most extensive (and growing) LESS mixins library.
-- A single 'anchor.less' file, no other dependencies.
 
 ## Library
 
-Common mixins list:
+Mixins list:
 
 00. .align (top, right, bottom, left, query);
-00. .back (color, image, repeat, position, query);
-00. .border (width, style, color, query);
-00. .color (color, back-color);
+00. .back (color, image, repeat, position, [min-width-query, max-width-query]);
+00. .border (width, style, color, [min-width-query, max-width-query]);
+00. .color (color, back-color, border-color, [min-width-query, max-width-query]);
 00. .font (font, family);
 00. .gradient (start, stop, degrees, image);
-00. .image (url);
 00. .opacity (opacity, query);
 00. .pseudo (content, width, height)
-00. .rounded (radius);
+00. .rounded (top-left, top-right, bottom-right, bottom-left, [min-width-query, max-width-query]);
 00. .shadow (spread, color, alpha, offset);
-00. .size (width, height, query);
+00. .size (width, height, [min-width-query, max-width-query]);
+00. .spacing (width, height, [min-width-query, max-width-query]);
 00. .transition (property, durations, function, delay);
-00. .width (width, query);
-00. **[..](src/README.md)**
+00. **[...](core/README.md)**
 
 See the **[full list](http://invader365.github.io/anchorLESS/reference.html)**
 
@@ -76,7 +74,22 @@ CSS output:
         }
       }
 ```
+##Example
+1. Install npm modules
+```
+  npm install
+```
+2. Run gulp example
+```
+  npm start
+```
+3. Edit styles.less located on the example folder
+```
+  cd /example
+```
+Your browser will reload after saving
+
 Try the less [compiler](http://invader365.github.io/anchorLESS/compiler.html) to see how it works!
 ## License
 
-Copyright © 2014 Licensed under the [Apache License Version 2.0](LICENSE).
+Copyright © 2020 Licensed under the [Apache License Version 2.0](LICENSE).

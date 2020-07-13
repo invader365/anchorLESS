@@ -1,0 +1,296 @@
+//
+// Deprecated mixins won´t be available since v2+
+//
+//----------------------------------------------------------------
+
+    //
+    // Instead use .back.clip(@back-clip)
+
+    .background-clip (@clip: border) 
+        when not (@clip = null) 
+    {
+        -webkit-background-clip: @clip;           // Safari 4? Chrome 6?
+        -moz-background-clip: @clip;           // Firefox 3.6
+                background-clip: ~'@{clip}-box';  // Firefox 4, Safari 5, Opera 10, IE9
+    }
+
+    //
+    // Instead use .back.origin(@back-origin)
+
+    .background-origin (@orign: padding-box) 
+        when not (@orign = null) 
+    {
+        -webkit-background-orign: @orign;        // Safari 4? Chrome 6?
+           -moz-background-orign: @orign;        // Firefox 3.6
+                background-orign: @orign;        // Firefox 4, Safari 5, Opera 10, IE9
+    }
+
+    //
+    // Instead use .back.size(@back-size)
+
+    .background-size (@back-size: auto) 
+        when not (@back-size = null) 
+    {
+        -webkit-background-size: @back-size;         // Safari 3.0+, Chrome 1.0+
+           -moz-background-size: @back-size;         // Firefox 3.6
+                background-size: @back-size;         // IE 9+
+    }
+
+    //
+    // Instead use
+    // .border(@width, @style, @color [@min-width-query, @max-width-query])
+    // .border(@width, _, _, [@min-width-query, @max-width-query])
+    // .border(_, @style, _, [@min-width-query, @max-width-query])
+    // .border(_, _, @color, [@min-width-query, @max-width-query])
+    
+    .border {
+        .min (@border: 0, @query: 0) when not (@border = null) and (@query = 0) {
+            border: @border;
+        }
+        .width (@width: 0) when not (@width = null) {
+            border-width: @width;
+        }
+        .style (@style: none) when not (@style = null) {
+            border-style: @style;
+        }
+        .color (@color: none) when not (@color = null) {
+            border-color: @color;
+        }
+    }
+    
+    .border { 
+        .min (@border: 0, @query: 0) when (@query > 0) {
+            @media all and (min-width: @query) {
+                .border.min(@border, @query);
+            }
+        }
+    }
+
+    //
+    // Instead use .size(_, @height, [@min-width-query, @max-width-query])
+
+    .height (@height: auto, @query: 0) 
+        when not (@height = null) and (@query = 0) 
+    {
+        height: @height;
+    }
+
+    .height (@height: auto, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .height(@height);
+        } 
+    }
+
+    //
+    // Renamed. Instead use .gradient.linear(@start, @stop, @degrees, [@image])
+    
+    .gradient {
+        .directional(@start: transparent, @stop: gray, @degrees: 180deg, @image: none) 
+            when not (@start = null) 
+        {
+            .back(@start, @image, repeat-x, center);
+             background-image: -webkit-linear-gradient(@degrees, @start, @stop);                     // Safari 5.1+, Chrome 10+
+             background-image:    -moz-linear-gradient(@degrees, @start, @stop);                     // Firefox 3.6+
+             background-image:         linear-gradient(@degrees, @start, @stop);                     // IE10
+        }
+    }
+
+    //
+    // Instead use .back.image(@image-url, [@min-width-query, @max-width-query])
+
+    .image (@image-url: none) 
+        when not (@image-url = null) and (@image-url = none) 
+    {
+        background-image: none; 
+    }
+
+    .image (@image-url: none) 
+        when not (@image-url = null) and not (@image-url = none) 
+    {
+        background-image: url('@{image-url}'); 
+    }
+
+    //
+    // Instead use .spacing(@margin, _, [@min-width-query, @max-width-query])
+
+    .margin (@margin: none, @query: 0) 
+        when not (@margin = null) and (@query = 0) 
+    {
+        margin: @margin;
+    }
+
+    .margin (@margin: none, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .margin(@margin);
+        } 
+    }
+
+    //
+    // Instead use .min-size(_, @max-width,[@min-width-query, @max-width-query])
+
+    .max-width (@width: 0, @query: 0) 
+        when not (@width = null) and (@query = 0) 
+    {
+        max-width: @width;
+    }
+
+    .max-width (@width: 0, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .max-width(@width);
+        }
+    }
+
+    //
+    // Instead use .min-size(@min-width, _, [@min-width-query, @max-width-query])
+
+    .min-width (@width: 0, @query: 0) 
+        when not (@width = null) and (@query = 0) 
+    {
+        min-width: @width;
+    }
+
+    .min-width (@width: 0, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .min-width(@width);
+        }
+    }
+
+    //
+    // Instead use .spacing(_,@padding, [@min-width-query, @max-width-query])
+
+    .padding (@padding: 0, @query: 0) 
+        when not (@padding = null) and (@query = 0) 
+    {
+        padding: @padding;
+    }
+
+    .padding (@padding: 0, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .padding(@padding);
+        }
+    }
+
+    //
+    // Instead use
+    // .rounded(@top-left, @top-right, @bottom-right, @bottom-left, [@query-min, @query-max])
+    // ie:
+    // .rounded(@top-left, @top-right, _, _, [@query-min, @query-max])   // rounded top side
+    // .rounded(_, _, _, @bottom-left, [@query-min, @query-max])         // rounded bottom-left corner
+
+    .rounded {
+        .top (@radius: 0) when not (@radius = null) {
+            .rounded.left-top     (@radius);
+            .rounded.right-top    (@radius);
+        }
+        .right (@radius: 0) when not (@radius = null) {
+            .rounded.right-top    (@radius);
+            .rounded.right-bottom (@radius);
+        }
+        .bottom (@radius: 0) when not (@radius = null) {
+            .rounded.left-bottom (@radius);
+            .rounded.right-bottom (@radius);
+        }
+        .left (@radius: 0) when not (@radius = null) {
+            .rounded.left-top     (@radius);
+            .rounded.left-bottom  (@radius);
+        }
+        .left-top (@radius: 0) when not (@radius = null) {
+            -webkit-border-top-left-radius: @radius;
+                -moz-border-radius-topleft: @radius;
+                    border-top-left-radius: @radius;
+        }
+        .left-bottom (@radius: 0) when not (@radius = null) {
+            -webkit-border-bottom-left-radius: @radius;
+                -moz-border-radius-bottomleft: @radius;
+                    border-bottom-left-radius: @radius;
+        }
+        .right-top (@radius: 0) when not (@radius = null) {
+            -webkit-border-top-right-radius: @radius;
+                -moz-border-radius-topright: @radius;
+                    border-top-right-radius: @radius;
+        }
+        .right-bottom (@radius: 0) when not (@radius = null) {
+            -webkit-border-bottom-right-radius: @radius;
+                -moz-border-radius-bottomright: @radius;
+                    border-bottom-right-radius: @radius;
+        }
+    }
+
+    //
+    // Instead use .min-size(@min-width, @max-width, [@min-width-query, @max-width-query])
+
+    .size-min (@min-width: auto, @min-height: auto, @query: 0) 
+        when not (@min-width = null) and (@query = 0) 
+    {
+        min-width: @min-width;
+        min-height: @min-height;
+    }
+
+    .size-min (@min-width: 0, @min-height: 0, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .size-min(@min-width, @min-height);
+        }
+    }
+
+    //
+    // Instead use .size(@size)
+
+    .square (@size: auto, @query: 0) 
+        when not (@size = null) and (@query = 0) 
+    {
+        width: @size;
+        height: @size;
+    }
+
+    .square (@size: auto, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .square(@square, @display);
+        }
+    }
+
+//  Not listed/categorized
+
+    .strong-div-width (@swidth: 100%, @dwidth: 100%, @query: 0) 
+        when not (@swidth = null) and (@query = 0) 
+    {
+        & > strong { 
+            display: block; 
+            width: @swidth; 
+            float: left; }
+        & > div { 
+            width: @dwidth; 
+        }
+    }
+
+    .strong-div-width (@swidth: 100%, @dwidth: 100%, @query: 0) 
+        when not (@swidth = null) and (@query > 0) 
+    {
+        @media print, screen and (min-width: @query) {
+            .strong-div-width (@swidth, @dwidth);
+        }
+    }
+
+    //
+    // Instead use .size(@width, _, [@min-width-query, @max-width-query])
+
+    .width (@width: auto, @query: 0) when not (@width = null) and (@query = 0) {
+        width: @width;
+    }
+
+    .width (@width: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .width(@width);
+        }
+    }

@@ -1,0 +1,152 @@
+//
+// Box properties
+
+    .appearance (@param) 
+        when (@param = null) {}
+
+    .appearance (@appearance: normal) 
+        when not (@appearance = null) 
+    {
+        -webkit-appearance: @appearance;
+           -moz-appearance: @appearance;
+                appearance: @appearance;
+    }
+
+    .backface (@param) 
+        when (@param = null) {}
+
+    .backface (@visibility: hidden) 
+        when not (@visibility = null) 
+    {
+        -webkit-backface-visibility: @visibility;
+           -moz-backface-visibility: @visibility;
+                backface-visibility: @visibility;
+    }
+
+    .box-sizing(@param) 
+        when (@param = null) {}
+
+    .box-sizing (@box-model: content-box) 
+        when not (@box-model = null) 
+    {
+        -webkit-box-sizing: @box-model;    // Safari 5
+           -moz-box-sizing: @box-model;    // Firefox 19
+                box-sizing: @box-model;    // IE 8+
+    }
+
+        .display (@param) 
+            when (@param = null) {}
+
+    .display (@display: none, @query: 0) 
+        when not (@display = null) and (@query = 0) 
+    {
+        display: @display;
+    }
+
+    .display (@display: none, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .display(@display);
+        } 
+    }
+        
+    .opacity (@param) 
+        when (@param = null) {}
+
+    .opacity (@opacity: 0, @query: 0) 
+        when not (@opacity = null) and (@query = 0) 
+    {
+        @filter: @opacity * 100;
+        opacity: @opacity;
+        filter: ~"alpha(opacity=@{filter})";
+    }
+
+    .opacity (@opacity: 0, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .opacity(@opacity);
+        }
+    }
+
+    .overflow (@param) 
+        when (@param = null) {}
+
+    .overflow (@x: visible, @y: visible) 
+        when not (@x = null) 
+    {
+        overflow-x: @x;
+        overflow-y: @y;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .placeholder (@param) 
+        when (@param = null) {}
+
+    .placeholder (@color: gray) 
+        when not (@color = null) 
+    {
+        &:-moz-placeholder            { color: @color; } // Firefox 4-18
+        &::-moz-placeholder           { color: @color; } // Firefox 19+
+        &:-ms-input-placeholder       { color: @color; } // IE 10+
+        &::-webkit-input-placeholder  { color: @color; } // Chrome, Safari
+    }
+
+    .shadow (@param) 
+        when (@param = null) {}
+
+    .shadow (@spread: 0 0, @color: gray, @alpha: .5) 
+        when not (@spread = null) 
+    {
+        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+        -webkit-box-shadow: @spread @hsla;     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
+    }
+
+    .shadow {
+        .inset (@param) 
+            when (@param = null) {}
+    }
+
+    .shadow {
+        .inset (@spread: 0 0, @color: gray, @alpha: .5) 
+            when not (@spread = null) 
+        {
+            @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+            -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
+                    box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+        }
+    }
+
+    .shadow-multi (@param) 
+        when (@param = null) {}
+
+    .shadow-multi (@shadows: none) 
+        when not (@shadows = null) 
+    {
+        -webkit-box-shadow: @shadows;
+                box-shadow: @shadows;
+    }
+
+    .tap-highlight (@param) 
+        when (@param = null) {}
+
+    .tap-highlight (@color: gray) 
+        when not (@color = null) 
+    {
+        -webkit-tap-highlight-color: @color;
+           -moz-tap-highlight-color: @color;
+                tap-highlight-color: @color;
+    }
+
+    .user-select (@param) 
+        when (@param = null) {}
+
+    .user-select (@select: none) 
+        when not (@select = null) 
+    {
+        -webkit-user-select: @select;
+           -moz-user-select: @select;
+            -ms-user-select: @select;
+    }

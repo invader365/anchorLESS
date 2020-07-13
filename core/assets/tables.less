@@ -1,6 +1,17 @@
 //  Tables
 
     .table {
+        .border      (@var) when (@var = skip) {}
+        .border-outer(@var) when (@var = skip) {}
+        .color       (@var) when (@var = skip) {}
+        .font        (@var) when (@var = skip) {}
+        .head-color  (@var) when (@var = skip) {}
+        .head-font   (@var) when (@var = skip) {}
+        .padding     (@var) when (@var = skip) {}
+        .rounded     (@var) when (@var = skip) {}
+    }
+
+    .table {
         .border (@width: 0, @style: none, @color: none) when not (@width = skip) {
             & tr th,
             & tr td             { border-width: @width; border-style: @style; border-color: @color; }

@@ -1,10 +1,10 @@
-- var page = { 'root': '../', 'title': 'Reference' }
+- var page = { 'root': '', 'title': 'Reference' }
 
 doctype html
 html(lang="es")
     head
         include includes/head
-        script(src='../js/libs/jquery-1.11.1.min.js')
+        script(src=page.root + 'js/libs/jquery-1.11.1.min.js')
     body.uno.l-right-top-nav.reference
         include includes/header_pages
         include includes/nav
@@ -1239,7 +1239,7 @@ html(lang="es")
                                             td @svg-grayscale-ie10
                                             td Grayscale filter for ie10
         include includes/footer
-        script(src='../js/scripts.js')
+        script(src=page.root + 'js/scripts.js')
         script.
             function active_tab (name) {
                 $('.tabset > .summary').removeClass('active');
