@@ -1,25 +1,22 @@
-@import 'https://raw.githubusercontent.com/invader365/anchorLESS/master/anchor.less';
-
-@font-family: 'Open Sans', Helvetica, sans-serif;
-@font-mono: "Courier New", Courier, monospace;
+@import 'anchorless/anchor.less';
 
 body {
     .spacing(0);
     .color(@hex2, @hexe);
-    .font(normal 14px, @font-family);
+    .font(normal 14px, Helvetica);
 
     pre {
         .box-sizing(border-box);
-        .width(100%);
+        .size(100%, _);
         .spacing(0, 0 20px);
         .rounded(4px);
         .border(1px, solid, @hexb);
         .overflow(auto, hidden);
-        .font(normal 13px @d 1.2em, @font-mono);
+        .font(normal 13px @d 1.2em, @font-monospace);
         .color(#4d4d4c);
         background: linear-gradient(180deg, @hexd 0, @hexd 16px, @hexe 0);
         .back.size(32px 32px);
-        background-origin: content-box;
+        .back.origin(content-box);
         
         code {
             padding: 10px;
@@ -53,8 +50,8 @@ body {
     section {
         .box-sizing(border-box);
         .spacing(0 auto, 20px);
-        .width(100%);
-        .width(940px, 980px);
+        .size(100%, _);
+        .size(940px, _, 980px);
     }
 
     footer {

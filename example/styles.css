@@ -1,9 +1,8 @@
 body {
   margin: 0;
-  padding: 0;
   color: #222;
   background-color: #eee;
-  font: normal 14px 'Open Sans', Helvetica, sans-serif;
+  font: normal 14px Helvetica;
 }
 body pre {
   -webkit-box-sizing: border-box;
@@ -15,18 +14,18 @@ body pre {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #bbb;
+  border: 1px solid #bbb;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  font: normal 13px / 1.2em "Courier New", Courier, monospace;
+  font: normal 13px / 1.2em 'Menlo, Monaco, Consolas, monospace';
   color: #4d4d4c;
   background: linear-gradient(180deg, #ddd 0, #ddd 16px, #eee 0);
   -webkit-background-size: 32px 32px;
   -moz-background-size: 32px 32px;
   background-size: 32px 32px;
+  -webkit-background-origin: content-box;
+  -moz-background-origin: content-box;
   background-origin: content-box;
 }
 body pre code {

@@ -79,7 +79,7 @@ CSS output:
 ```
   npm install
 ```
-2. Run gulp example
+2. Run npm example
 ```
   npm start
 ```
