@@ -27,6 +27,7 @@
     "@angular/cli": "^10.0.1",
     "browser-sync": "^2.18.12",
     "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
     "gulp-jade": "^1.1.0",
     "gulp-less": "^3.3.0"
   }
