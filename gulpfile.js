@@ -61,6 +61,6 @@ function watchFileChanges(base, styles, stylesSrc, stylesDest, views) {
     }
 }
 
-exports.anchorless = concatCore
-exports.example    = parallel(startServer(dir.example), watchFileChanges(dir.example, dir.example, 'styles.less', '', './'))
-exports.default    = parallel(startServer(dir.public), watchFileChanges(dir.public, dir.styles, 'custom.less', 'css/', dir.views))
+exports.anchor  = concatCore
+exports.example = parallel(startServer(dir.example), watchFileChanges(dir.example, dir.example, 'styles.less', '', './'))
+exports.default = parallel(startServer(dir.public), watchFileChanges(dir.public, dir.styles, 'custom.less', 'css/', dir.views))

@@ -15,19 +15,21 @@ Features:
 
 Mixins list:
 
-00. .align (top, right, bottom, left, query);
+00. .align (top, right, bottom, left, [min-width-query]);
 00. .back (color, image, repeat, position, [min-width-query, max-width-query]);
 00. .border (width, style, color, [min-width-query, max-width-query]);
 00. .color (color, back-color, border-color, [min-width-query, max-width-query]);
-00. .font (font, family);
-00. .gradient (start, stop, degrees, image);
-00. .opacity (opacity, query);
+00. .font (font, family, [min-width-query, max-width-query]);
+00. .gradient.linear (start, stop, degrees, [min-width-query, max-width-query]);
+00. .gradient.radial (start, stop, [min-width-query, max-width-query]);
+00. .opacity (opacity, [min-width-query]);
 00. .pseudo (content, width, height)
 00. .rounded (top-left, top-right, bottom-right, bottom-left, [min-width-query, max-width-query]);
 00. .shadow (spread, color, alpha, offset);
+00. .shadow.inset (spread, color, alpha, offset);
 00. .size (width, height, [min-width-query, max-width-query]);
 00. .spacing (width, height, [min-width-query, max-width-query]);
-00. .transition (property, durations, function, delay);
+00. .transition (property, durations, function, delay, [min-width-query, max-width-query]);
 00. **[...](core/README.md)**
 
 See the **[full list](http://invader365.github.io/anchorLESS/reference.html)**

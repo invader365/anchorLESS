@@ -1,91 +1,148 @@
 //
-//  Animation and transitions
+//  Animation and Transition
 
-    .animation (@param) 
-        when (@param = null) {}
+//
+// .animation(name, duration, ease, delay, iteration, direction, [min-width-query, max-width-query])
 
-    .animation (@name: none, @duration: 0, @ease: ease, @delay: 0, @iteration: 1, @direction: normal) 
-        when not (@name = null) {
-        -webkit-animation: @name @duration @ease @delay @iteration @direction;    // Safari, Chrome
-            -moz-animation: @name @duration @ease @delay @iteration @direction;
-            -ms-animation: @name @duration @ease @delay @iteration @direction;
-                animation: @name @duration @ease @delay @iteration @direction;
+.animation(@name) 
+    when (@name=null) {}
+
+.animation(@name: none, @duration: 0, @ease: ease, @delay: 0, @iteration: 1, @direction: normal, @query-min:_, @query-max:_) 
+    when not (@name=null) and (@name=_) and (@query-min=_) and (@query-max=_)
+{
+    .animation(none, 0, ease, 0, 1, normal)
+}
+
+.animation(@name: none, @duration: 0, @ease: ease, @delay: 0, @iteration: 1, @direction: normal, @query-min:_, @query-max:_) 
+    when not (@name=null) and not (@name=_) and (@query-min=_) and (@query-max=_)
+{
+    -webkit-animation: @name @duration @ease @delay @iteration @direction;  // Safari, Chrome
+       -moz-animation: @name @duration @ease @delay @iteration @direction;
+        -ms-animation: @name @duration @ease @delay @iteration @direction;
+            animation: @name @duration @ease @delay @iteration @direction;
+}
+
+.animation(@name:_, @duration:_, @ease, @delay, @iteration, @direction, @query-min:_, @query-max:_)
+    when (@query-min=_) and not (@query-max=_)
+{
+    @media all and (max-width: @query-max) {
+        .animation(@name, @duration, @ease, @delay, @iteration, @direction)
+    }
+}
+
+.animation(@name:_, @duration:_, @ease, @delay, @iteration, @direction, @query-min:_, @query-max:_)
+    when not (@query-min=_) and (@query-max=_)
+{
+    @media all and (min-width: @query-min) {
+        .animation(@name, @duration, @ease, @delay, @iteration, @direction)
+    }
+}
+
+.animation(@name:_, @duration:_, @ease, @delay, @iteration, @direction, @query-min:_, @query-max:_)
+    when not (@query-min=_) and not (@query-max=_)
+{
+    @media all and (min-width: @query-min) and (max-width: @query-max) {
+        .animation(@name, @duration, @ease, @delay, @iteration, @direction)
+    }
+}
+
+.animation {
+    .delay(@delay) {
+        -webkit-animation-delay: @delay;
+           -moz-animation-delay: @delay;
+             -o-animation-delay: @delay;
+                animation-delay: @delay;
     }
 
-    .animation {
-        .delay (@delay) {
-            -webkit-animation-delay: @delay;
-                -moz-animation-delay: @delay;
-                    -o-animation-delay: @delay;
-                    animation-delay: @delay;
-        }
-
-        .direction (@direction) {
-            -webkit-animation-direction: @direction;
-                -moz-animation-direction: @direction;
-                    -o-animation-direction: @direction;
-                    animation-direction: @direction;
-        }
-
-        .duration (@duration) {
-            -webkit-animation-duration: @duration;
-                -moz-animation-duration: @duration;
-                    -o-animation-duration: @duration;
-                    animation-duration: @duration;
-        }
-
-        .ease (@ease) {
-            -webkit-animation-timing-function: @ease;
-                -moz-animation-timing-function: @ease;
-                    -o-animation-timing-function: @ease;
-                    animation-timing-function: @ease;
-        }
-
-        .fill-mode (@fill-mode) {
-            -webkit-animation-fill-mode: @fill-mode;
-                -moz-animation-fill-mode: @fill-mode;
-                    -o-animation-fill-mode: @fill-mode;
-                    animation-fill-mode: @fill-mode;
-        }
-
-        .iteration (@iteration) {
-            -webkit-animation-iteration-count: @iteration;
-                -moz-animation-iteration-count: @iteration;
-                    -o-animation-iteration-count: @iteration;
-                    animation-iteration-count: @iteration;
-        }
-
-        .name (@name) {
-            -webkit-animation-name: @name;
-                -moz-animation-name: @name;
-                    -o-animation-name: @name;
-                    animation-name: @name;
-        }
-
-        .play-state (@play-state) {
-            -webkit-animation-play-state: @play-state;
-                -moz-animation-play-state: @play-state;
-                    -o-animation-play-state: @play-state;
-                    animation-play-state: @play-state;
-        }
+    .direction(@direction) {
+        -webkit-animation-direction: @direction;
+           -moz-animation-direction: @direction;
+             -o-animation-direction: @direction;
+                animation-direction: @direction;
     }
 
-    .transition (@param) 
-        when (@param = null) {}
-
-    .transition (@property: all, @duration: 0s, @function: ease, @delay: 0s) 
-        when not (@property = null) 
-    {
-        -webkit-transition: @property @duration @function @delay;
-                transition: @property @duration @function @delay;
+    .duration(@duration) {
+        -webkit-animation-duration: @duration;
+           -moz-animation-duration: @duration;
+             -o-animation-duration: @duration;
+                animation-duration: @duration;
     }
 
-    .transition-multi (@param) 
-        when (@param = null) {}
-
-    .transition-multi (@transitions: all 0s ease 0s) 
-        when not (@transitions = null) 
-    {
-        -webkit-transition: @transitions;
-                transition: @transitions;
+    .ease(@ease) {
+        -webkit-animation-timing-function: @ease;
+           -moz-animation-timing-function: @ease;
+             -o-animation-timing-function: @ease;
+                animation-timing-function: @ease;
     }
+
+    .fill-mode(@fill-mode) {
+        -webkit-animation-fill-mode: @fill-mode;
+           -moz-animation-fill-mode: @fill-mode;
+             -o-animation-fill-mode: @fill-mode;
+                animation-fill-mode: @fill-mode;
+    }
+
+    .iteration(@iteration) {
+        -webkit-animation-iteration-count: @iteration;
+           -moz-animation-iteration-count: @iteration;
+             -o-animation-iteration-count: @iteration;
+                animation-iteration-count: @iteration;
+    }
+
+    .name(@name) {
+        -webkit-animation-name: @name;
+           -moz-animation-name: @name;
+             -o-animation-name: @name;
+                animation-name: @name;
+    }
+
+    .play-state(@play-state) {
+        -webkit-animation-play-state: @play-state;
+           -moz-animation-play-state: @play-state;
+             -o-animation-play-state: @play-state;
+                animation-play-state: @play-state;
+    }
+}
+
+//
+// .transition(property, duration, function, delay, [min-width-query, max-width-query])
+
+.transition(@property) 
+    when (@property=null) {}
+
+.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @query-min:_, @query-max:_) 
+    when not (@property=null) and (@property=_) and (@query-min=_) and (@query-max=_)
+{
+    .transition(@property, @duration, @function, @delay);
+}
+
+.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @query-min:_, @query-max:_) 
+    when not (@property=null) and (@property=_) and (@query-min=_) and (@query-max=_)
+{
+    -webkit-transition: @property @duration @function @delay;
+            transition: @property @duration @function @delay;
+}
+
+.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @query-min:_, @query-max:_)
+    when (@query-min=_) and not (@query-max=_)
+{
+    @media all and (min-width: @query-max) {
+        .transition(@property, @duration, @function, @delay);
+    }
+}
+
+.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @query-min:_, @query-max:_)
+    when not (@query-min=_) and (@query-max=_)
+{
+    @media all and (min-width: @query-min) {
+        .transition(@property, @duration, @function, @delay);
+    }
+}
+
+.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @query-min:_, @query-max:_)
+    when not (@query-min=_) and not (@query-max=_)
+{
+    @media all and (min-width: @query-min) {
+        .transition(@property, @duration, @function, @delay);
+    }
+}

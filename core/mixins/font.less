@@ -1,102 +1,132 @@
 //
-//  Font mixins    
+//  Font mixins
+
+//
+// .font(font, family, [min-width, max-width])
     
-    .font (@param) 
-        when (@param = null) {}
+.font(@font)
+    when (@font= null) {}
 
-    .font (@font: normal 1em, @family: inherit) 
-        when not (@font = null) and (@family = inherit) 
-    {
-        font: @font a;
-        font-family: inherit;           // inherit is not valid on shorthand
+.font(@font: normal 1em, @family: inherit, @query-min:_, @query-max:_) 
+    when not (@font= null) and (@family = inherit) and (@query-min=_) and (@query-max=_)
+{
+    font: @font a; // inherit is not a valid family value on font shorthand
+    font-family: inherit;
+}
+
+.font(@font: normal 1em, @family: inherit, @query-min:_, @query-max:_) 
+    when not (@font= null) and not (@family = inherit) and (@query-min=_) and (@query-max=_)
+{
+    font: @font @family;
+}
+
+.font(@font:_, @family:_, @query-min:_, @query-max:_)
+    when (@query-min=_) and not (@query-max=_) 
+{
+    @media all and (max-width: @query-max) {
+        .font(@font, @family);
     }
+}
 
-    .font (@font: normal 1em, @family: inherit) 
-        when not (@font = null) and not (@family = inherit) 
-    {
-        font: @font @family;
+.font(@font:_, @family:_, @query-min:_, @query-max:_)
+    when not (@query-min=_) and (@query-max=_) 
+{
+    @media all and (min-width: @query-min) {
+        .font(@font, @family);
     }
+}
 
-    .font-face (@param) 
-        when (@param = null) {}
-
-    .font-face (@name: a, @path: '/') 
-        when not (@name = null) 
-    {
-        @font-face {
-            font-family: @name;
-            src: url('@{path}.eot');    // IE9
-            src: url('@{path}.eot?#iefix') format('embedded-opentype'),     
-                 url("@{path}.woff") format("woff"),
-                 url("@{path}.ttf") format("truetype"),
-                 url('@{path}.svg#@{name}') format('svg');
-        }
+.font(@font:_, @family:_, @query-min:_, @query-max:_) 
+    when not (@query-min=_) and not (@query-max=_) 
+{
+    @media all and (min-width: @query-min) and (max-width: @query-max) {
+        .font(@font, @family);
     }
+}
 
-    .font-size (@param) 
-        when (@param = null) {}
+.font-face (@param) 
+    when (@param= null) {}
 
-    .font-size (@size: 1em, @query: 0) 
-        when not (@size = null) and (@query = 0) 
-    {
-        font-size: @size;
+.font-face (@name: a, @path: '/') 
+    when not (@name= null) 
+{
+    @font-face {
+        font-family: @name;
+        src: url('@{path}.eot');    // IE9
+        src: url('@{path}.eot?#iefix') format('embedded-opentype'),     
+                url("@{path}.woff") format("woff"),
+                url("@{path}.ttf") format("truetype"),
+                url('@{path}.svg#@{name}') format('svg');
     }
+}
 
-    .font-size (@font: none, @query: 0) 
-        when (@query > 0) 
-    {
-        @media all and (min-width: @query) {
-            .font-size(@font);
-        } 
+.font-size (@param) 
+    when (@param= null) {}
+
+.font-size (@size: 1em, @query: 0) 
+    when not (@size= null) and (@query = 0) 
+{
+    font-size: @size;
+}
+
+.font-size (@font: none, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .font-size(@font);
+    } 
+}
+
+.indent (@param) 
+    when (@param= null) {}
+
+.indent (@indent: 0, @query: 0) 
+    when not (@indent= null) and (@query = 0) 
+{
+    text-indent: @indent;
+}
+
+.indent (@indent: 0, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .indent(@indent);
     }
+}
 
-    .indent (@param) 
-        when (@param = null) {}
+.text-align (@param) 
+    when (@param= null) {}
 
-    .indent (@indent: 0, @query: 0) 
-        when not (@indent = null) and (@query = 0) 
-    {
-        text-indent: @indent;
+.text-align (@align: center, @query: 0) 
+    when not (@align= null) and (@query = 0) 
+{
+    text-align: @align;
+}
+
+.text-align (@align: center, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .text-align(@align);
     }
+}
 
-    .indent (@indent: 0, @query: 0) 
-        when (@query > 0) 
-    {
-        @media all and (min-width: @query) {
-            .indent(@indent);
-        }
+//
+// text-shadow(spread, color, alpha, [min-width-query])
+
+.text-shadow (@param) 
+    when (@param= null) {}
+
+.text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) 
+    when not (@spread= null) and (@query = 0) {
+        
+    text-shadow: @spread hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
+}
+
+.text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .text-shadow(@shadow, @color, @alpha);
     }
-
-    .text-align (@param) 
-        when (@param = null) {}
-
-    .text-align (@align: center, @query: 0) 
-        when not (@align = null) and (@query = 0) 
-    {
-        text-align: @align;
-    }
-
-    .text-align (@align: center, @query: 0) 
-        when (@query > 0) 
-    {
-        @media all and (min-width: @query) {
-            .text-align(@align);
-        }
-    }
-
-    .text-shadow (@param) 
-        when (@param = null) {}
-
-    .text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) 
-        when not (@spread = null) and (@query = 0) {
-            
-        text-shadow: @spread hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
-    }
-
-    .text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) 
-        when (@query > 0) 
-    {
-        @media all and (min-width: @query) {
-            .text-shadow(@shadow, @color, @alpha);
-        }
-    }
+}

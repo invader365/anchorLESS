@@ -1,34 +1,41 @@
-.min-size (@min-width) 
-    when (@min-width = null) {}
+//
+//  .min-size(min-width, min-height, [min-width, max-width])
 
 .min-size (@min-width) 
-    when not (@min-width = null) 
+    when (@min-width= null) {}
+
+.min-size (@min-width) 
+    when not (@min-width= null) 
 {
     min-width: @min-width;
     min-height: @min-width;
 }
 
 .min-size (@min-width:_, @min-height:_, @query-min:_, @query-max:_) 
-    when not (@min-width = null) and (@min-width=_) and (@min-height=_) and (@query-min=_) and (@query-max=_)
+    when not (@min-width= null) and (@min-width=_) and (@min-height=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     min-width: auto;
     min-height: auto;
 }
 
 .min-size (@min-width:_, @min-height:_, @query-min:_, @query-max:_) 
-    when not (@min-width = null) and (@min-width=_) and not (@min-height=_) and (@query-min=_) and (@query-max=_)
+    when not (@min-width= null) and (@min-width=_) and not (@min-height=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     min-height: @min-height;
 }
 
 .min-size (@min-width:_, @min-height:_, @query-min:_, @query-max:_)
-    when not (@min-width = null) and not (@min-width=_) and (@min-height=_) and (@query-min=_) and (@query-max=_)
+    when not (@min-width= null) and not (@min-width=_) and (@min-height=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     min-width: @min-width;
 }
 
 .min-size (@min-width:_, @min-height:_, @query-min:_, @query-max:_)
-    when not (@min-width = null) and not (@min-width=_) and not (@min-height=_) and (@query-min=_) and (@query-max=_)
+    when not (@min-width= null) and not (@min-width=_) and not (@min-height=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     min-width: @min-width;
     min-height: @min-height;
@@ -66,40 +73,44 @@
 // .size(10px, 20px)            // custom propertie values
 // .size(10px, 20px, 570px)     // custom propertie values + min-width query
 // .size(10px, 20px, _, 1200px) // custom propertie values + max-width query
-// .size(10px, 20px, 570px, 1200px) // custom propertie values + min and max width queries
+// .size(10px, 20px, 570px, 1200px) // custom propertie values + min/max-width queries
 // ----------------------------------------------------------------
 
 .size (@width) 
-    when (@width = null) {}
+    when (@width= null) {}
 
 .size (@width)
-    when not (@width = null)
+    when not (@width= null)
 {
     width: @width;
     height: @width;
 }
 
 .size (@width:_, @height:_, @query-min:_, @query-max:_)
-    when not (@width = null) and (@width=_) and (@height=_) and (@query-min=_) and (@query-max=_)
+    when not (@width= null) and (@width=_) and (@height=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     width: auto;
     height: auto;
 }
 
 .size (@width:_, @height:_, @query-min:_, @query-max:_)
-    when not (@width = null) and (@width=_) and not (@height=_) and (@query-min=_) and (@query-max=_)
+    when not (@width= null) and (@width=_) and not (@height=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     height: @height;
 }
 
 .size (@width:_, @height:_, @query-min:_, @query-max:_)
-    when not (@width = null) and not (@width=_) and (@height=_) and (@query-min=_) and (@query-max=_)
+    when not (@width= null) and not (@width=_) and (@height=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     width: @width;
 }
 
 .size (@width:_, @height:_, @query-min:_, @query-max:_)
-    when not (@width = null) and not (@width=_) and not (@height=_) and (@query-min=_) and (@query-max=_)
+    when not (@width= null) and not (@width=_) and not (@height=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     width: @width;
     height: @height;
@@ -129,38 +140,44 @@
     }
 }
 
-// spacing
-.spacing (@margin:null) 
-    when (@margin = null) {}
+//
+// .spacing(margin, padding, [min-width, max-width])
 
-.min-size (@min-width) 
-    when not (@min-width = null) 
+.spacing (@margin:null) 
+    when (@margin= null) {}
+
+.spacing (@min-width) 
+    when not (@min-width= null) 
 {
     margin: @margin;
     padding: @padding;
 }
 
 .spacing (@margin:_, @padding:_, @query-min:_, @query-max:_)
-    when not (@margin = null) and (@margin=_) and (@padding=_) and (@query-min=_) and (@query-max=_)
+    when not (@margin= null) and (@margin=_) and (@padding=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     margin: auto;
     padding: auto;
 }
 
 .spacing (@margin:_, @padding:_, @query-min:_, @query-max:_)
-    when not (@margin = null) and (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_)
+    when not (@margin= null) and (@margin=_) and not (@padding=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     padding: @padding;
 }
 
 .spacing (@margin:_, @padding:_, @query-min:_, @query-max:_)
-    when not (@margin = null) and not (@margin=_) and (@padding=_) and (@query-min=_) and (@query-max=_)
+    when not (@margin= null) and not (@margin=_) and (@padding=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     margin: @margin;
 }
 
 .spacing (@margin:_, @padding:_, @query-min:_, @query-max:_)
-    when not (@margin = null) and not (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_)
+    when not (@margin= null) and not (@margin=_) and not (@padding=_) 
+         and (@query-min=_) and (@query-max=_)
 {
     margin: @margin;
     padding: @padding;

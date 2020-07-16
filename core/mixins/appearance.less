@@ -1,0 +1,294 @@
+//
+// Appearance
+
+//
+//.appearance(@appearance, [min-width-query, max-width-query])
+
+.appearance(@appearance) 
+    when (@appearance=null) {}
+
+.appearance(@appearance:_, @query-min:_, @query-max:_)
+    when not (@appearance=null) and (@appearance= _) and (@query-min=_) and (@query-max=_)
+{
+    .appearance(normal)
+}
+
+.appearance(@appearance:_, @query-min:_, @query-max:_)
+    when not (@appearance=null) and not (@appearance= _) and (@query-min=_) and (@query-max=_)
+{
+    -webkit-appearance: @appearance;
+       -moz-appearance: @appearance;
+            appearance: @appearance;
+}
+
+.appearance(@appearance:_, @query-min:_, @query-max:_)
+    when (@query-min=_) and not (@query-max=_)
+{
+    @media all and (max-width: @query-max) {
+        .appearance(@appearance)
+    }
+}
+
+.appearance(@appearance:_, @query-min:_, @query-max:_)
+    when not (@query-min=_) and (@query-max=_)
+{
+    @media all and (min-width: @query-min) {
+        .appearance(@appearance)
+    }
+}
+
+.appearance(@appearance:_, @query-min:_, @query-max:_)
+    when not (@query-min=_) and not (@query-max=_)
+{
+    @media all and (min-width: @query-min) and (max-width: @query-max) {
+        .appearance(@appearance)
+    }
+}
+
+//
+// .backface (@visibility, [min-width-query, max-width-query])
+
+.backface(@visibility) 
+    when (@visibility=null) {}
+
+.backface(@visibility:_, @query-min:_, @query-max:_)
+    when not (@visibility=null) and (@visibility=_) and (@query-min=_) and (@query-max=_)
+{
+    .backface(visible)
+}
+
+.backface(@visibility:_, @query-min:_, @query-max:_)
+    when not (@visibility=null) and not (@visibility=_) and (@query-min=_) and (@query-max=_)
+{
+    -webkit-backface-visibility: @visibility;
+       -moz-backface-visibility: @visibility;
+            backface-visibility: @visibility;
+}
+
+.backface(@visibility:_, @query-min:_, @query-max:_)
+    when (@query-min=_) and not (@query-max=_)
+{
+    @media all and (max-width: @query-max) {
+        .backface(@visibility)
+    }
+}
+
+.backface(@visibility:_, @query-min:_, @query-max:_)
+    when not (@query-min=_) and (@query-max=_)
+{
+    @media all and (min-width: @query-min) {
+        .backface(@visibility)
+    }
+}
+
+.backface(@visibility:_, @query-min:_, @query-max:_)
+    when not (@query-min=_) and not (@query-max=_)
+{
+    @media all and (min-width: @query-min) and (max-width: @query-max) {
+        .backface(@visibility)
+    }
+}
+
+//
+// .box-sizing (@box-model, [min-width-query, max-width-query])
+
+.box-sizing(@box-model) 
+    when (@box-model=null) {}
+
+.box-sizing (@box-model:_, @query-min:_, @query-max:_)
+    when not (@box-model=null) and (@box-model=_) and (@query-min=_) and (@query-max=_)
+{
+    .box-sizing(content-box)
+}
+
+.box-sizing (@box-model:_, @query-min:_, @query-max:_)
+    when not (@box-model=null) and not (@box-model=_) and (@query-min=_) and (@query-max=_)
+{
+    -webkit-box-sizing: @box-model;    // Safari 5
+       -moz-box-sizing: @box-model;    // Firefox 19
+            box-sizing: @box-model;    // IE 8+
+}
+
+.box-sizing(@box-model:_, @query-min:_, @query-max:_)
+    when (@query-min=_) and not (@query-max=_)
+{
+    @media all and (max-width: @query-max) {
+        .box-sizing(@box-model)
+    }
+}
+
+.box-sizing(@box-model:_, @query-min:_, @query-max:_)
+    when not (@query-min=_) and (@query-max=_)
+{
+    @media all and (min-width: @query-min) {
+        .box-sizing(@box-model)
+    }
+}
+
+.box-sizing(@box-model:_, @query-min:_, @query-max:_)
+    when not (@query-min=_) and not (@query-max=_)
+{
+    @media all and (min-width: @query-min) and (max-width: @query-max) {
+        .box-sizing(@box-model)
+    }
+}
+
+//
+// .display(display, [min-width-query, max-width-query])
+
+.display (@param) 
+    when (@param=null) {}
+
+.display (@display:_, @query-min:_, @query-max:_) 
+    when not (@display=null) and (@display=_) and (@query-min=_) and (@query-max=_)
+{
+    .display(none);
+}
+
+.display (@display:_, @query-min:_, @query-max:_) 
+    when not (@display=null) and not (@display=_) and (@query-min=_) and (@query-max=_)
+{
+    display: @display;
+}
+
+.display(@display:_, @query-min:_, @query-max:_)
+    when (@query-min=_) and not (@query-max=_)
+{
+    @media all and (max-width: @query-max) {
+        .display(@display)
+    }
+}
+
+.display(@display:_, @query-min:_, @query-max:_)
+    when not (@query-min=_) and (@query-max=_)
+{
+    @media all and (min-width: @query-min) {
+        .display(@display)
+    }
+}
+
+.display(@display:_, @query-min:_, @query-max:_)
+    when not (@query-min=_) and not (@query-max=_)
+{
+    @media all and (min-width: @query-min) and (max-width: @query-max) {
+        .display(@display)
+    }
+}
+
+//
+// .opacity(opacity, min-width-query)
+    
+.opacity (@param) 
+    when (@param=null) {}
+
+.opacity (@opacity: 0, @query: 0) 
+    when not (@opacity=null) and (@query = 0) 
+{
+    @filter: @opacity * 100;
+    opacity: @opacity;
+    filter: ~"alpha(opacity=@{filter})";
+}
+
+.opacity (@opacity: 0, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .opacity(@opacity);
+    }
+}
+
+//
+// .overflow(overflow)
+
+.overflow (@x) 
+    when (@x=null) {}
+
+.overflow (@x: visible, @y: visible) 
+    when not (@x=null) 
+{
+    overflow-x: @x;
+    overflow-y: @y;
+    -webkit-overflow-scrolling: touch;
+}
+
+//
+// .placeholder(color)
+
+.placeholder (@param) 
+    when (@param=null) {}
+
+.placeholder (@color: gray) 
+    when not (@color=null) 
+{
+    &:-moz-placeholder            { color: @color; } // Firefox 4-18
+    &::-moz-placeholder           { color: @color; } // Firefox 19+
+    &:-ms-input-placeholder       { color: @color; } // IE 10+
+    &::-webkit-input-placeholder  { color: @color; } // Chrome, Safari
+}
+
+//
+// .shadow(spread, color, alpha)
+
+.shadow (@spread) 
+    when (@spread=null) {}
+
+.shadow (@spread: 0 0, @color: gray, @alpha: .5) 
+    when not (@spread=null) 
+{
+    @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+    -webkit-box-shadow: @spread @hsla;     // Android 2.3+, iOS 4.0.2-4.2
+            box-shadow: @spread @hsla;     // Chrome 6+, Firefox 4+, IE 9
+}
+
+.shadow {
+    .inset(@spread) 
+        when (@spread=null) 
+    {}
+    .inset(@spread: 0 0, @color: gray, @alpha: .5) 
+        when not (@spread=null) 
+    {
+        @hsla: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+        -webkit-box-shadow: @spread @hsla inset;     // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @hsla inset;     // Chrome 6+, Firefox 4+, IE 9
+    }
+}
+
+//
+// .tap-highlight(color)
+
+.tap-highlight(@color) 
+    when (@color=null) {}
+
+.tap-highlight(@color:_) 
+    when not (@color=null) and (@color=_)
+{
+    .tap-highlight(none)
+}
+
+.tap-highlight(@color: gray) 
+    when not (@color=null) and not (@color=_)
+{
+    -webkit-tap-highlight-color: @color;
+       -moz-tap-highlight-color: @color;
+            tap-highlight-color: @color;
+}
+
+//
+// .user-select(select)
+
+.user-select(@select) 
+    when (@select=null) {}
+
+.user-select(@select:_) 
+    when not (@select=null) and (@select=_)
+{
+    .user-select(none)
+}
+
+.user-select(@select:_)
+    when not (@select=null) and not (@select=_)
+{
+    -webkit-user-select: @select;
+       -moz-user-select: @select;
+        -ms-user-select: @select;
+}
