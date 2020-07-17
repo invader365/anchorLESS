@@ -10,26 +10,27 @@ Features:
 - Seamless integration with html5 frameworks.
 - Faster performance (Less.js build-in functions).
 - The most extensive (and growing) LESS mixins library.
+- A single 'anchor.less' file, no other dependencies.
 
 ## Library
 
-Mixins list:
+Common mixins:
 
-00. .align (top, right, bottom, left, [min-width-query]);
-00. .back (color, image, repeat, position, [min-width-query, max-width-query]);
-00. .border (width, style, color, [min-width-query, max-width-query]);
-00. .color (color, back-color, border-color, [min-width-query, max-width-query]);
-00. .font (font, family, [min-width-query, max-width-query]);
-00. .gradient.linear (start, stop, degrees, [min-width-query, max-width-query]);
-00. .gradient.radial (start, stop, [min-width-query, max-width-query]);
-00. .opacity (opacity, [min-width-query]);
-00. .pseudo (content, width, height)
-00. .rounded (top-left, top-right, bottom-right, bottom-left, [min-width-query, max-width-query]);
-00. .shadow (spread, color, alpha, offset);
-00. .shadow.inset (spread, color, alpha, offset);
-00. .size (width, height, [min-width-query, max-width-query]);
-00. .spacing (width, height, [min-width-query, max-width-query]);
-00. .transition (property, durations, function, delay, [min-width-query, max-width-query]);
+00. .align(top, right, bottom, left, [min-width-query]);
+00. .back(color, image, repeat, position, [min-width-query, max-width-query]);
+00. .border(width, style, color, [min-width-query, max-width-query]);
+00. .color(color, back-color, border-color, [min-width-query, max-width-query]);
+00. .font(font, family, [min-width-query, max-width-query]);
+00. .gradient.linear(start, stop, degrees, [min-width-query, max-width-query]);
+00. .gradient.radial(start, stop, [min-width-query, max-width-query]);
+00. .opacity(opacity, [min-width-query, max-width-query]);
+00. .pseudo(content, width, height)
+00. .rounded(top-left, top-right, bottom-right, bottom-left, [min-width-query, max-width-query]);
+00. .shadow(spread, color, alpha, [min-width-query, max-width-query]);
+00. .shadow.inset(spread, color, alpha, [min-width-query, max-width-query]);
+00. .size(width, height, [min-width-query, max-width-query]);
+00. .spacing(margin, padding, [min-width-query, max-width-query]);
+00. .transition(property, durations, function, delay, [min-width-query, max-width-query]);
 00. **[...](core/README.md)**
 
 See the **[full list](http://invader365.github.io/anchorLESS/reference.html)**
@@ -44,18 +45,18 @@ Example:
 ```css
       #button {
         .border(0 1px 2px, solid, #dcdcdc);
-        .image('../images/logo.png');
+        .back.image('../image.png');
         .gradient.to-bottom(#ededed, #dfdfdf);
-        .padding(0.5em);
+        .spacing(_, 0.5em);
         .rounded(5px);
-        .width(33%);
-        .width(25%, 640px);
+        .size(33%, _);
+        .size(25%, _, 640px);
       }
 ```
 CSS output:
 ```css
       #button {
-        background-image: url('../images/logo.png');
+        background-image: url('../images.png');
         background: #ededed none repeat-x center;
         background-image: -webkit-linear-gradient(180deg, #ededed, #dfdfdf);
         background-image: -moz-linear-gradient(180deg, #ededed, #dfdfdf);
@@ -76,12 +77,12 @@ CSS output:
         }
       }
 ```
-##Example
+## Example
 1. Install npm modules
 ```
   npm install
 ```
-2. Run npm example
+2. Run npm
 ```
   npm start
 ```

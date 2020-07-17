@@ -1,63 +1,84 @@
 //  Helpers
 
-    .block () {
-        display: block;
-        position: relative;
-        float: left;
-    }
+.block () {
+    display: block;
+    position: relative;
+    float: left;
+}
 
-    .clearfix () {
-        &:after { 
-            content: ''; 
-            display: table; 
-            clear: both; 
-        }
+.clearfix () {
+    &:after { 
+        content: ''; 
+        display: table; 
+        clear: both; 
     }
+}
 
-    .ellipsis () { 
-        text-overflow: ellipsis;    // IE8 rendering issue
-        white-space: nowrap; 
-        overflow: hidden; 
-    }
+.ellipsis () { 
+    text-overflow: ellipsis;    // IE8 rendering issue
+    white-space: nowrap; 
+    overflow: hidden; 
+}
 
-    .hide-text () { 
-        text-indent: -9999px; 
-        text-align: left;
-        overflow: hidden; 
-    }
+.hide-text () { 
+    text-indent: -9999px; 
+    text-align: left;
+    overflow: hidden; 
+}
 
-    .hyphens () {
-        -webkit-hyphens: auto;
-           -moz-hyphens: auto;
-                hyphens: auto;
-    }
+.hyphens () {
+    -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+            hyphens: auto;
+}
 
-    .inline () {
-        display: inline;
-        float: none;
-    }
+.inline () {
+    display: inline;
+    float: none;
+}
 
-    .inline-block () {
-        display: inline-block;
-        position: relative;
-        float: none;
-    }
+.inline-block () {
+    display: inline-block;
+    position: relative;
+    float: none;
+}
 
-    .line-break () {  
-        margin-left: 0; 
-        clear: left; 
-    }
-    
-    .nowrap () {
-        white-space: nowrap;
-    }
+.line-break () {  
+    margin-left: 0; 
+    clear: left; 
+}
 
-    .word-break () {
-        -ms-word-break: break-all;
-            word-break: break-all;
-            word-break: break-word;
-    }
-    
-    .wrap () {
-        white-space: normal; // validate
-    }
+.nowrap () {
+    white-space: nowrap;
+}
+
+.noselect () {
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+}
+
+.noselect() {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    -webkit-touch-callout: none;
+    -ms-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.word-break () {
+    -ms-word-break: break-all;
+        word-break: break-all;
+        word-break: break-word;
+}
+
+.wrap () {
+    white-space: normal; // validate
+}

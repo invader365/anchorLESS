@@ -2,449 +2,735 @@
 //  Background and Color
 
 //
-// .back(color, image-url, repeat, position, [min-width-query, max-width-query])
+// .back(color, path, repeat, position, [min-width-query, max-width-query])
 
 .back(@param) 
     when (@param=null) {}
 
-.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query-min:_, @query-max:_) 
-    when not (@color=null) and (@image= none) and (@query-min=_) and (@query-max=_) 
+.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @min-width-query:_, @max-width-query:_) 
+    when not (@color=null) and (@image= none) and (@min-width-query=_) and (@max-width-query=_) 
 {
     background: @color @image @repeat @position;
 }
 
-.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query-min:_, @query-max:_) 
-    when not (@color=null) and not (@image= none) and (@query-min=_) and (@query-max=_) 
+.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @min-width-query:_, @max-width-query:_) 
+    when not (@color=null) and not (@image= none) and (@min-width-query=_) and (@max-width-query=_) 
 {
     background: @color url('@{image}') @repeat @position; 
 }
 
-.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query-min:_, @query-max:_) 
-    when (@query-min=_) and not (@query-max=_) 
+.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @min-width-query:_, @max-width-query:_) 
+    when (@min-width-query=_) and not (@max-width-query=_) 
 { 
-    @media all and (max-width: @query-max) {
+    @media all and (max-width: @max-width-query) {
         .back(@color, @image, @repeat, @position);
     }
 }
 
-.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query-min:_, @query-max:_)
-    when not (@query-min=_) and (@query-max=_) 
+.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and (@max-width-query=_) 
 { 
-    @media all and (min-width: @query-min) {
+    @media all and (min-width: @min-width-query) {
         .back(@color, @image, @repeat, @position);
     }
 }
 
-.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @query-min:_, @query-max:_) 
-    when not (@query-min=_) and not (@query-max=_) 
+.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @min-width-query:_, @max-width-query:_) 
+    when not (@min-width-query=_) and not (@max-width-query=_) 
 { 
-    @media all and (min-width: @query-min) and (max-width: @query-max) {
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
         .back(@color, @image, @repeat, @position);
     }
 }
+
+//
+// .back.attach(attachment, [min-width-query, max-width-query])
+// .back.attach(attachment, [min-width-query, max-width-query])
+// .back.attach(attachment, [min-width-query, max-width-query])
+// .back.attach(attachment, [min-width-query, max-width-query])
+// .back.attach(attachment, [min-width-query, max-width-query])
+// .back.attach(attachment, [min-width-query, max-width-query])
+// .back.attach(attachment, [min-width-query, max-width-query])
+// .back.attach(attachment, [min-width-query, max-width-query])
+// .back.attach(attachment, [min-width-query, max-width-query])
 
 .back {
     .attach(@attachment) 
-        when (@attachment=null)  
-    {}
-    .attach(@attachment: scroll) when not (@attachment=null)  { 
+        when (@attachment=null) {}
+
+    .attach(@attachment:_, @min-width-query:_, @max-width-query:_) 
+        when not (@attachment=null) and (@attachment=_) and (@min-width-query=_) and (@max-width-query=_)
+    { 
+        .back.attach(scroll); 
+    }
+
+    .attach(@attachment:_, @min-width-query:_, @max-width-query:_) 
+        when not (@attachment=null) and not (@attachment=_) and (@min-width-query=_) and (@max-width-query=_)
+    { 
         background-attachment: @attachment; 
     }
+
+    .attach(@attachment:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .attach(@attachment);
+        } 
+    }
+
+    .attach(@attachment:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .attach(@attachment);
+        } 
+    }
+
+    .attach(@attachment:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .attach(@attachment);
+        } 
+    }
+
     .color(@color) 
-        when (@color=null)  
-    {}
-    .color (@color: transparent) when not (@color=null) {
+        when (@color=null) {}
+
+    .color(@color:_, @min-width-query:_, @max-width-query:_) 
+        when not (@color=null) and (@color=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        .back.color(transparent); 
+    }
+
+    .color(@color:_, @min-width-query:_, @max-width-query:_) 
+        when not (@color=null) and not (@color=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
         background-color: @color; 
     }
+
+    .color(@color:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .back.color(@color);
+        } 
+    }
+
+    .color(@color:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .back.color(@color);
+        } 
+    }
+
+    .color(@color:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .back.color(@color);
+        } 
+    }
+
     .clip(@clip) 
-        when (@clip=null)  
-    {}
-    .clip (@clip: border) when not (@clip=null) {
+        when (@clip=null) {}
+
+    .clip (@clip:_, @min-width-query:_, @max-width-query:_) 
+        when not (@clip=null) and (@clip=_) 
+    {
+        .back.clip(border)
+    }
+
+    .clip (@clip:_, @min-width-query:_, @max-width-query:_) 
+        when not (@clip=null) and not (@clip=_) 
+    {
         -webkit-background-clip: @clip;           // Safari 4? Chrome 6?
            -moz-background-clip: @clip;           // Firefox 3.6
                 background-clip: ~'@{clip}-box';  // Firefox 4, Safari 5, Opera 10, IE9
     }
+
+    .clip(@clip:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .back.clip(@clip);
+        } 
+    }
+
+    .clip(@clip:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .back.clip(@clip);
+        } 
+    }
+
+    .clip(@clip:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .back.clip(@clip);
+        } 
+    }
+
+    .image(@path) 
+        when (@path=null) {}
+
+    .image(@path:none, @min-width-query:_, @max-width-query:_)
+        when not (@path=null) and (@path=none) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        background-image: none; 
+    }
+
+    .image(@path:none, @min-width-query:_, @max-width-query:_)
+        when not (@path=null) and not (@path=none) and (@min-width-query=_) and (@max-width-query=_)
+    { 
+        background-image: url('@{path}'); 
+    }
+
+    .image(@path:none, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .back.image(@path);
+        } 
+    }
+
+    .image(@path:none, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .back.image(@path);
+        } 
+    }
+
+    .image(@path:none, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .back.image(@path);
+        } 
+    }
+
     .origin(@origin) 
-        when (@origin=null)  
-    {}
+        when (@origin=null) {}
+
     .origin (@origin) {    
         -webkit-background-origin: @origin;  // Safari 4? Chrome 6?
            -moz-background-origin: @origin;  // Firefox 3.6
                 background-origin: @origin;  // Firefox 4, Safari 5, Opera 10, IE9
     }
+
+    .image(@path:none, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .back.image(@path);
+        } 
+    }
+
+    .image(@path:none, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .back.image(@path);
+        } 
+    }
+
+    .image(@path:none, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .back.image(@path);
+        } 
+    }
+
     .position(@position) 
-        when (@position=null)  
-    {}
-    .position (@position: 0 0) when not (@position=null) { 
+        when (@position=null) {}
+
+    .position(@position:_, @min-width-query:_, @max-width-query:_) 
+        when not (@position=null) and (@position=_) and (@min-width-query=_) and (@max-width-query=_)
+    { 
+        .back.position:(0 0);
+    }
+
+    .position(@position:_, @min-width-query:_, @max-width-query:_) 
+        when not (@position=null) and not (@position=_) and (@min-width-query=_) and (@max-width-query=_)
+    { 
         background-position: @position;
     }
+
+    .position(@position:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .back.position(@position);
+        } 
+    }
+
+    .position(@position:none, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .back.position(@position);
+        } 
+    }
+
+    .position(@position:none, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .back.position(@position);
+        } 
+    }
+
     .repeat(@repeat) 
-        when (@repeat=null)  
-    {}
-    .repeat (@repeat: repeat) when not (@repeat=null) { 
+        when (@repeat=null) {}
+
+    .repeat(@repeat:_, @min-width-query:_, @max-width-query:_)
+        when not (@repeat=null) and (@repeat=_) and (@min-width-query=_) and (@max-width-query=_)
+    { 
+        .back.repeat(@repeat); 
+    }
+
+    .repeat(@repeat:_, @min-width-query:_, @max-width-query:_) 
+        when not (@repeat=null) and not (@repeat=_) and (@min-width-query=_) and (@max-width-query=_)
+    { 
         background-repeat: @repeat; 
     }
+
+    .repeat(@repeat:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .back.repeat(@repeat);
+        } 
+    }
+
+    .repeat(@repeat:none, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .back.repeat(@repeat);
+        } 
+    }
+
+    .repeat(@repeat:none, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .back.repeat(@repeat);
+        } 
+    }
+
     .size(@size) 
-        when (@size=null)  
-    {}
-    .size (@size: auto) when not (@size=null) { 
+        when (@size=null) {}
+
+    .size (@size:_, @min-width-query:_, @max-width-query:_)
+        when not (@size=null) and (@size=_) and (@min-width-query=_) and (@max-width-query=_)
+    { 
+        .back.size(auto);
+    }
+
+    .size (@size:_, @min-width-query:_, @max-width-query:_)
+        when not (@size=null) and not (@size=_) and (@min-width-query=_) and (@max-width-query=_)
+    { 
         -webkit-background-size: @size;  // Safari 3.0+, Chrome 1.0+
            -moz-background-size: @size;  // Firefox 3.6
                 background-size: @size;  // IE 9+
     }
-}
 
-.back {
-    .image (@param) 
-        when (@param=null) {}
-
-    .image (@image-url: none, @query-min:_, @query-max:_)
-        when not (@image-url=null) and (@image-url= none) and (@query-min=_) and (@query-max=_)
+    .size(@size:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_)
     {
-        background-image: @image-url; 
-    }
-
-    .image (@image-url: none, @query-min:_, @query-max:_)
-        when not (@image-url=null) and not (@image-url= none) and (@query-min=_) and (@query-max=_)
-    { 
-        background-image: url('@{image-url}'); 
-    }
-
-    .image (@image-url: none, @query-min:_, @query-max:_)
-        when (@query-min=_) and not (@query-max=_)
-    {
-        @media all and (max-width: @query-max) {
-            .image(@image-url);
+        @media all and (max-width: @max-width-query) {
+            .back.size(@size);
         } 
     }
 
-    .image (@image-url: none, @query-min:_, @query-max:_)
-        when not (@query-min=_) and (@query-max=_)
+    .size(@size:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_)
     {
-        @media all and (min-width: @query-min) {
-            .image(@image-url);
+        @media all and (min-width: @min-width-query) {
+            .back.size(@size);
         } 
     }
 
-    .image (@image-url: none, @query-min:_, @query-max:_)
-    when not (@query-min=_) and not (@query-max=_)
+    .size(@size:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
     {
-        @media all and (min-width: @query-min) and (max-width: @query-max) {
-            .image(@image-url);
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .back.size(@size);
         } 
     }
 }
 
 //
-// .color(color, background-color, border-color, [query-min, query-max])
+// .color(color, background-color, border-color, [min-width-query, max-width-query])
 
 .color (@param) 
     when (@param=null) {}
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when not (@color=null) and (@color=_) and (@back-color=_) and (@border-color=_) and (@query-min=_) and (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when not (@color=null) and (@color=_) and (@back-color=_) and (@border-color=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     color: inherit; 
     background-color: transparent;
     border-color: inherit;
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when not (@color=null) and (@color=_) and (@back-color=_) and not (@border-color=_) and (@query-min=_) and (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when not (@color=null) and (@color=_) and (@back-color=_) and not (@border-color=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     border-color: @border-color;
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when not (@color=null) and (@color=_) and not (@back-color=_) and (@border-color=_) and (@query-min=_) and (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when not (@color=null) and (@color=_) and not (@back-color=_) and (@border-color=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     background-color: @background-color;
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when not (@color=null) and not (@color=_) and (@back-color=_) and (@border-color=_) and (@query-min=_) and (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when not (@color=null) and not (@color=_) and (@back-color=_) and (@border-color=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     color: @color;
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when not (@color=null) and (@color=_) and not (@back-color=_) and not (@border-color=_) and (@query-min=_) and (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when not (@color=null) and (@color=_) and not (@back-color=_) and not (@border-color=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     background-color: @back-color;
     border-color: @border-color;
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when not (@color=null) and not (@color=_) and (@back-color=_) and not (@border-color=_) and (@query-min=_) and (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when not (@color=null) and not (@color=_) and (@back-color=_) and not (@border-color=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     color: @color;
     border-color: @border-color;
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when not (@color=null) and not (@color=_) and not (@back-color=_) and (@border-color=_) and (@query-min=_) and (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when not (@color=null) and not (@color=_) and not (@back-color=_) and (@border-color=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     color: @color;
     background-color: @back-color;
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_) 
-    when not (@color=null) and not (@color=_) and not (@back-color=_) and not (@border-color=_) and (@query-min=_) and (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_) 
+    when not (@color=null) and not (@color=_) and not (@back-color=_) and not (@border-color=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     color: @color; 
     background-color: @back-color;
     border-color: @border-color;
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when (@query-min=_) and not (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when (@min-width-query=_) and not (@max-width-query=_)
 {
-    @media all and (max-width: @query-max) {
+    @media all and (max-width: @max-width-query) {
         .color(@color, @back-color, @border-color)
     }
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when not (@query-min=_) and (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and (@max-width-query=_)
 {
-    @media all and (min-width: @query-min) {
+    @media all and (min-width: @min-width-query) {
         .color(@color, @back-color, @border-color)
     }
 }
 
-.color (@color:_, @back-color:_, @border-color:_, @query-min:_, @query-max:_)
-    when not (@query-min=_) and not (@query-max=_)
+.color (@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and not (@max-width-query=_)
 {
-    @media all and (min-width: @query-min) and (max-width: @query-max) {
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
         .color(@color, @back-color, @border-color)
     }
 }
 
 //
-// .gradient(start, stop, degrees, [query-min, query-max])
-// .gradient.linear(start, stop, degrees, [query-min, query-max])
-// .gradient.to-top(start, stop, [query-min, query-max])
-// .gradient.to-bottom(start, stop, [query-min, query-max])
-// .gradient.to-left(start, stop, [query-min, query-max])
-// .gradient.to-right(start, stop, [query-min, query-max])
-// .gradient.radial(inner, outer, [query-min, query-max])
+// .gradient(start, stop, degrees, [min-width-query, max-width-query])
 
 .gradient (@param) 
     when (@param=null) {}
 
-.gradient (@start: transparent, @stop: gray, @degrees: 180deg, @query-min:_, @query-max:_)
-    when not (@start=null) and (@query-min=_) and (@query-max=_) 
+.gradient (@start: transparent, @stop: gray, @degrees: 180deg, @min-width-query:_, @max-width-query:_)
+    when not (@start=null) and (@min-width-query=_) and (@max-width-query=_) 
 {
     .gradient.linear(@start, @stop, @degrees);
 }
 
-.gradient (@start:_, @stop:_, @degrees:_, @query-min:_, @query-max:_)
-    when (@query-min=_) and not (@query-max=_) 
+.gradient (@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
+    when (@min-width-query=_) and not (@max-width-query=_) 
 {
-    @media all and (max-width: @query-max) {
+    @media all and (max-width: @max-width-query) {
         .gradient.linear(@start, @stop, @degrees)
     }
 }
 
-.gradient (@start:_, @stop:_, @degrees:_, @query-min:_, @query-max:_)
-    when not (@query-min=_) and (@query-max=_) 
+.gradient (@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and (@max-width-query=_) 
 {
-    @media all and (min-width: @query-min) {
+    @media all and (min-width: @min-width-query) {
         .gradient.linear(@start, @stop, @degrees)
     }
 }
 
-.gradient (@start:_, @stop:_, @degrees:_, @query-min:_, @query-max:_)
-    when not (@query-min=_) and not (@query-max=_)
+.gradient (@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and not (@max-width-query=_)
 {
-    @media all and (min-width: @query-min) and (max-width: @query-max) {
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
         .gradient.linear(@start, @stop, @degrees)
     }
 }
+
+//
+// .gradient.linear(start, stop, degrees, [min-width-query, max-width-query])
+// .gradient.to-top(start, stop, [min-width-query, max-width-query])
+// .gradient.to-bottom(start, stop, [min-width-query, max-width-query])
+// .gradient.to-left(start, stop, [min-width-query, max-width-query])
+// .gradient.to-right(start, stop, [min-width-query, max-width-query])
+// .gradient.radial(inner, outer, [min-width-query, max-width-query])
 
 .gradient {
     .linear (@start) 
-        when (@start=null) 
-    {}
-    .linear(@start: transparent, @stop: gray, @degrees: 180deg, @query-min:_, @query-max:_) 
-        when not (@start=null) and (@query-min=_) and (@query-max=_)
+        when (@start=null) {}
+
+    .linear (@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
+        when not (@start=null) and (@start=_) and (@min-width-query=_)  and (@max-width-query=_) 
+    {
+        .gradient.linear(transparent, black, 180deg)
+    }
+
+    .linear(@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_) 
+        when not (@start=null) and not (@start=_) and not (@stop=_) and (@min-width-query=_) and (@max-width-query=_)
     {
         background-image: -webkit-linear-gradient(@degrees, @start, @stop);  // Safari 5.1+, Chrome 10+
         background-image:   -moz-linear-gradient(@degrees, @start, @stop);   // Firefox 3.6+
         background-image:         linear-gradient(@degrees, @start, @stop);  // IE10
     }
-    .linear (@start:_, @stop:_, @degrees:_, @query-min:_, @query-max:_)
-        when (@query-min=_) and not (@query-max=_) 
+
+    .linear (@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
     {
-        @media all and (max-width: @query-max) {
+        @media all and (max-width: @max-width-query) {
             .gradient.linear(@start, @stop, @degrees)
         }
     }
-    .linear (@start:_, @stop:_, @degrees:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and (@query-max=_)
+
+    .linear (@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_)
     {
-        @media all and (min-width: @query-min) {
+        @media all and (min-width: @min-width-query) {
             .gradient.linear(@start, @stop, @degrees)
         }
     }
-    .linear (@start:_, @stop:_, @degrees:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and not (@query-max=_)
+
+    .linear (@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
     {
-        @media all and (min-width: @query-min) and (max-width: @query-max) {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
             .gradient.linear(@start, @stop, @degrees)
         }
     }
+
     .to-bottom (@inner) 
-        when (@inner=null) 
-    {}
-    .to-bottom(@start: transparent, @stop: gray, @query-min:_, @query-max:_)
-        when not (@start=null) and (@query-min=_) and (@query-max=_)
+        when (@inner=null) {}
+
+    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@start=null) and (@start=_) and (@stop=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        .gradient.to-bottom(white, black);
+    }
+
+    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@start=null) and not (@start=_) and not (@stop=_) and (@min-width-query=_) and (@max-width-query=_)
     {
         .gradient.linear(@start, @stop, 180deg);
     }
-    .to-bottom(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when (@query-min=_) and not (@query-max=_) 
+    
+    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
     {
-        @media all and (max-width: @query-max) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (max-width: @max-width-query) {
+            .gradient.to-bottom(@start, @stop)
         }
     }
-    .to-bottom(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and (@query-max=_) 
+    
+    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
     {
-        @media all and (min-width: @query-min) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (min-width: @min-width-query) {
+            .gradient.to-bottom(@start, @stop)
         }
     }
-    .to-bottom(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and not (@query-max=_)
+    
+    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
     {
-        @media all and (min-width: @query-min) and (max-width: @query-max) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .gradient.to-bottom(@start, @stop)
         }
     }
+   
     .to-right(@inner) 
-        when (@inner=null) 
-    {}
-    .to-right(@start: transparent, @stop: gray, @query-min:_, @query-max:_)
-        when not (@start=null) and (@query-min=_) and (@query-max=_)
+        when (@inner=null) {}
+
+    .to-right(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@start=null) and not (@start=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        .gradient.to-right(white, black);
+    }
+
+    .to-right(@start: transparent, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@start=null) and not (@start=_) and (@min-width-query=_) and (@max-width-query=_)
     {
         .gradient.linear(@start, @stop, 270deg);
     }
-    .to-right(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when (@query-min=_) and not (@query-max=_) 
+
+    .to-right(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
     {
-        @media all and (max-width: @query-max) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (max-width: @max-width-query) {
+            .gradient.to-right(@start, @stop)
         }
     }
-    .to-right(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and (@query-max=_) 
+
+    .to-right(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
     {
-        @media all and (min-width: @query-min) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (min-width: @min-width-query) {
+            .gradient.to-right(@start, @stop)
         }
     }
-    .to-right(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and not (@query-max=_)
+
+    .to-right(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
     {
-        @media all and (min-width: @query-min) and (max-width: @query-max) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .gradient.to-right(@start, @stop)
         }
     }
+
     .to-top(@inner) 
-        when (@inner=null) 
-    {}
-    .to-top(@start: transparent, @stop: gray, @query-min:_, @query-max:_)
-        when not (@start=null) and (@query-min=_) and (@query-max=_)
+        when (@inner=null) {}
+
+    .to-top(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@start=null) and (@start=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        .gradient.to-top(transparent, black, 0deg);
+    }
+
+    .to-top(@start: transparent, @stop: gray, @min-width-query:_, @max-width-query:_)
+        when not (@start=null) and not (@start=_) and (@min-width-query=_) and (@max-width-query=_)
     {
         .gradient.linear(@start, @stop, 0deg);
     }
-    .to-top(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when (@query-min=_) and not (@query-max=_) 
+
+    .to-top(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
     {
-        @media all and (max-width: @query-max) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (max-width: @max-width-query) {
+            .gradient.to-top(@start, @stop)
         }
     }
-    .to-top(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and (@query-max=_) 
+
+    .to-top(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
     {
-        @media all and (min-width: @query-min) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (min-width: @min-width-query) {
+            .gradient.to-top(@start, @stop)
         }
     }
-    .to-top(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and not (@query-max=_)
+
+    .to-top(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
     {
-        @media all and (min-width: @query-min) and (max-width: @query-max) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .gradient.to-top(@start, @stop)
         }
     }
+
     .to-left(@inner) 
-        when (@inner=null) 
-    {}
-    .to-left(@start: transparent, @stop: gray, @query-min:_, @query-max:_)
-        when not (@start=null) and (@query-min=_) and (@query-max=_)
+        when (@inner=null) {}
+
+    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@start=null) and (@start=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        .gradient.to-left(white, black);
+    }
+
+    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@start=null) and not (@start=_) and (@min-width-query=_) and (@max-width-query=_)
     {
         .gradient.linear(@start, @stop, 90deg);
     }
-    .to-left(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when (@query-min=_) and not (@query-max=_) 
+
+    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
     {
-        @media all and (max-width: @query-max) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (max-width: @max-width-query) {
+            .gradient.to-left(@start, @stop)
         }
     }
-    .to-left(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and (@query-max=_) 
+
+    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
     {
-        @media all and (min-width: @query-min) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (min-width: @min-width-query) {
+            .gradient.to-left(@start, @stop)
         }
     }
-    .to-left(@start:_, @stop:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and not (@query-max=_)
+
+    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
     {
-        @media all and (min-width: @query-min) and (max-width: @query-max) {
-            .gradient.linear(@start, @stop, @degrees)
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .gradient.to-left(@start, @stop)
         }
     }
+
     .radial (@inner) 
-        when (@inner=null) 
-    {}
-    .radial(@inner:_, @outer:_) 
-        when not (@inner=null) and (@inner=_)
+        when (@inner=null) {}
+
+    .radial(@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
+        when not (@inner=null) and (@inner=_) and (@min-width-query=_) and (@max-width-query=_) 
     {
         .radial(white, black)
     }
-    .radial(@inner:_, @outer:_) 
-        when not (@inner=null) and not (@inner=_)
+
+    .radial(@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
+        when not (@inner=null) and not (@inner=_) and (@min-width-query=_) and (@max-width-query=_) 
     {
         background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer)); // Chrome, Safari 4+
         background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);  // Safari 5.1+, Chrome 10+
         background-image:    -moz-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Firefox 3.6+
         background-image:         radial-gradient(ellipse at center, @inner 0%, @outer 100%);
     }
-    .radial (@inner:_, @outer:_, @query-min:_, @query-max:_)
-        when (@query-min=_) and not (@query-max=_) 
+
+    .radial (@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
     {
-        @media all and (max-width: @query-max) {
+        @media all and (max-width: @max-width-query) {
             .gradient.radial(@inner, @outer)
         }
     }
 
-    .radial (@inner:_, @outer:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and (@query-max=_) 
+    .radial (@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
     {
-        @media all and (min-width: @query-min) {
+        @media all and (min-width: @min-width-query) {
             .gradient.radial(@inner, @outer)
         }
     }
-    .radial (@inner:_, @outer:_, @query-min:_, @query-max:_)
-        when not (@query-min=_) and not (@query-max=_)
+
+    .radial (@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and not (@max-width-query=_)
     {
-        @media all and (min-width: @query-min) and (max-width: @query-max) {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
             .gradient.radial(@inner, @outer)
         }
     }

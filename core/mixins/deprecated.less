@@ -302,7 +302,7 @@
 }
 
 //
-//  Replacement for next release
+//  Deprecated
 
 .rgba (@param) 
     when (@param= null) {}
@@ -441,6 +441,43 @@
 {
     -webkit-transition: @transitions;
             transition: @transitions;
+}
+
+//
+// Deprecated: non standar property
+
+.tap-highlight(@color) 
+    when (@color=null) {}
+
+.tap-highlight(@color:_) 
+    when not (@color=null) and (@color=_)
+{
+    .tap-highlight(none)
+}
+
+.tap-highlight(@color: gray) 
+    when not (@color=null) and not (@color=_)
+{
+    -webkit-tap-highlight-color: @color;
+       -moz-tap-highlight-color: @color;
+            tap-highlight-color: @color;
+}
+
+//
+// Use .noselect() helper
+
+.user-select(@select:_) 
+    when not (@select=null) and (@select=_)
+{
+    .user-select(none)
+}
+
+.user-select(@select:_)
+    when not (@select=null) and not (@select=_)
+{
+    -webkit-user-select: @select;
+       -moz-user-select: @select;
+        -ms-user-select: @select;
 }
 
 //
