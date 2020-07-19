@@ -5,145 +5,303 @@
 // .border(@width, @style, @color, [@min-width-query, @max-width-query])
 
 .border(@width) 
-    when (@width = null) {}
+    when (@width=null) {}
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_)
-    when not (@width = null) and (@width=_) and (@style=_) and (@color=_) 
-         and (@query-min=_) and (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_)
+    when not (@width=null) and (@width=_) and (@style=_) and (@color=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
     border: medium none inherit;
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_) 
-    when not (@width = null) and (@width=_) and (@style=_) and not (@color=_) 
-         and (@query-min=_) and (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
+    when not (@width=null) and (@width=_) and (@style=_) and not (@color=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
     border-color: @color;
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_) 
-    when not (@width = null) and (@width=_) and not (@style=_) and (@color=_) 
-         and (@query-min=_) and (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
+    when not (@width=null) and (@width=_) and not (@style=_) and (@color=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
     border-style: @style;
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_) 
-    when not (@width = null) and not (@width=_) and (@style=_) and (@color=_) 
-         and (@query-min=_) and (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
+    when not (@width=null) and not (@width=_) and (@style=_) and (@color=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
     border-width: @width;
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_) 
-    when not (@width = null) and not (@width=_) and (@style=_) and not (@color=_) 
-         and (@query-min=_) and (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
+    when not (@width=null) and not (@width=_) and (@style=_) and not (@color=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
     border-width: @width;
     border-color: @color;
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_)
-    when not (@width = null) and not (@width=_) and not (@style=_) and (@color=_) 
-         and (@query-min=_) and (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_)
+    when not (@width=null) and not (@width=_) and not (@style=_) and (@color=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
     border-width: @width;
     border-style: @style;
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_)
-    when not (@width = null) and (@width=_) and not (@style=_) and not (@color=_) 
-         and (@query-min=_) and (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_)
+    when not (@width=null) and (@width=_) and not (@style=_) and not (@color=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
     border-style: @style;
     border-color: @color;
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_)
-    when not (@width = null) and not (@width=_) and not (@style=_) and not (@color=_) 
-         and (@query-min=_) and (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_)
+    when not (@width=null) and not (@width=_) and not (@style=_) and not (@color=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
     border: @width @style @color;
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_) 
-    when (@query-min=_) and not (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
+    when (@min-width-query=_) and not (@max-width-query=_)
 {
-    @media all and (max-width: @query-max) {
+    @media all and (max-width: @max-width-query) {
         .border(@width, @style, @color);
     }
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_) 
-    when not (@query-min=_) and (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
+    when not (@min-width-query=_) and (@max-width-query=_)
 {
-    @media all and (min-width: @query-min) {
+    @media all and (min-width: @min-width-query) {
         .border(@width, @style, @color);
     }
 }
 
-.border(@width:_, @style:_, @color:_, @query-min:_, @query-max:_) 
-    when not (@query-min=_) and not (@query-max=_)
+.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
+    when not (@min-width-query=_) and not (@max-width-query=_)
 {
-    @media all and (min-width: @query-min) and (max-width: @query-max) {
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
         .border(@width, @style, @color);
     }
 }
 
 //
-// .rounded(top-left, top-right, bottom-right, bottom-left, [@min-width-query, @max-width-query])
+// .rounded.top-left(@radius, [@min-width-query, @max-width-query])
+// .rounded.top-right(@radius, [@min-width-query, @max-width-query])
+// .rounded.bottom-right(@radius, [@min-width-query, @max-width-query])
+// .rounded.bottom-left(@radius, [@min-width-query, @max-width-query])
+
+.rounded {
+    .top-left(@radius) 
+        when (@radius=null) {}
+
+    .top-left(@radius:_) 
+        when not (@radius=null) and (@radius=_) 
+    {
+        .rounded.top-left(0)
+    }
+
+    .top-left(@radius:_) 
+        when not (@radius=null) and not (@radius=_)
+    {
+        -webkit-border-top-left-radius: @radius;
+            -moz-border-radius-topleft: @radius;
+                border-top-left-radius: @radius;
+    }
+
+    .top-left(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .rounded.top-left(@radius);
+        }
+    }
+    
+    .top-left(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .rounded.top-left(@radius);
+        }
+    }
+    
+    .top-left(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .rounded.top-left(@radius);
+        }
+    }
+
+    .top-right(@radius) 
+        when (@radius=null) {}
+
+    .top-right(@radius:_) 
+        when not (@radius=null) and (@radius=_) 
+    {
+        .rounded.top-right(0)
+    }
+
+    .top-right(@radius: 0) 
+        when not (@radius=null) and not (@radius=_)
+    {
+        -webkit-border-top-right-radius: @radius;
+            -moz-border-radius-topright: @radius;
+                border-top-right-radius: @radius;
+    }
+
+    .top-right(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .rounded.top-right(@radius);
+        }
+    }
+    
+    .top-right(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .rounded.top-right(@radius);
+        }
+    }
+    
+    .top-right(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .rounded.top-right(@radius);
+        }
+    }
+    .bottom-right(@radius) 
+        when (@radius=null) {}
+
+    .bottom-right(@radius:_) 
+        when not (@radius=null) and (@radius=_) 
+    {
+        .rounded.bottom-right(0)
+    }
+
+    .bottom-right (@radius: 0) 
+        when not (@radius=null) and not (@radius=_)
+    {
+        -webkit-border-bottom-right-radius: @radius;
+            -moz-border-radius-bottomright: @radius;
+                border-bottom-right-radius: @radius;
+    }
+
+    .bottom-right(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .rounded.bottom-right(@radius);
+        }
+    }
+    
+    .bottom-right(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .rounded.bottom-right(@radius);
+        }
+    }
+    
+    .bottom-right(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .rounded.bottom-right(@radius);
+        }
+    }
+    .bottom-left(@radius) 
+        when (@radius=null) {}
+
+    .bottom-left(@radius:_) 
+        when not (@radius=null) and (@radius=_) 
+    {
+        .rounded.bottom-left(0)
+    }
+
+    .bottom-left (@radius: 0) 
+        when not (@radius=null) and not (@radius=_)
+    {
+        -webkit-border-bottom-left-radius: @radius;
+            -moz-border-radius-bottomleft: @radius;
+                border-bottom-left-radius: @radius;
+    }
+
+    .bottom-left(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (max-width: @max-width-query) {
+            .rounded.bottom-left(@radius);
+        }
+    }
+    
+    .bottom-left(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) {
+            .rounded.bottom-left(@radius);
+        }
+    }
+    
+    .bottom-left(@radius:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .rounded.bottom-left(@radius);
+        }
+    }
+}
+
+//
+// .rounded(@top-left, @top-right, @bottom-right, @bottom-left, [@min-width-query, @max-width-query])
 
 .rounded(@top-left) 
-    when (@top-left = null) {}
+    when (@top-left=null) {}
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_) 
-    when not (@top-left = null) and (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_) 
+    when not (@top-left=null) and (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     -webkit-border-radius: 0;
        -moz-border-radius: 0;
             border-radius: 0;
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_) 
-    when not (@top-left = null) and not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_) 
+    when not (@top-left=null) and not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     -webkit-border-radius: @top-left @top-right @bottom-right @bottom-left;
        -moz-border-radius: @top-left @top-right @bottom-right @bottom-left;
             border-radius: @top-left @top-right @bottom-right @bottom-left;
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-bottom-left-radius: @bottom-left;
-       -moz-border-radius-bottom-left: @bottom-left;
-            border-bottom-left-radius: @bottom-left;
+    .rounded.bottom-left(@bottom-left)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-bottom-right-radius: @bottom-right;
-       -moz-border-radius-bottom-right: @bottom-right;
-            border-bottom-right-radius: @bottom-right;
+    .rounded.bottom-right(@bottom-right)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-right-radius: @top-right;
-       -moz-border-radius-top-right: @top-right;
-            border-top-right-radius: @top-right;
+    .rounded.top-right(@top-right)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     // Missing top-left properties for the first parameter
     -webkit-border-radius: @top-left;
@@ -151,172 +309,102 @@
             border-radius: @top-left;
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-bottom-right-radius: @bottom-right;
-       -moz-border-radius-bottom-right: @bottom-right;
-            border-bottom-right-radius: @bottom-right;
-
-    -webkit-border-bottom-left-radius: @bottom-left;
-       -moz-border-radius-bottom-left: @bottom-left;
-            border-bottom-left-radius: @bottom-left;
+    .rounded.bottom-right(@bottom-right);
+    .rounded.bottom-left(@bottom-left)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-right-radius: @top-right;
-       -moz-border-radius-top-right: @top-right;
-            border-top-right-radius: @top-right;
-            
-    -webkit-border-bottom-right-radius: @bottom-right;
-       -moz-border-radius-bottom-right: @bottom-right;
-            border-bottom-right-radius: @bottom-right;
+    .rounded.top-right(@top-right);
+    .rounded.bottom-right(@bottom-right)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-left-radius: @top-left;
-       -moz-border-radius-top-left: @top-left;
-            border-top-left-radius: @top-left;
-            
-    -webkit-border-top-right-radius: @top-right;
-       -moz-border-radius-top-right: @top-right;
-            border-top-right-radius: @top-right;
+    .rounded.top-left(@top-left);
+    .rounded.top-right(@top-right)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-left-radius: @top-left;
-       -moz-border-radius-top-left: @top-left;
-            border-top-left-radius: @top-left;
-            
-    -webkit-border-bottom-left-radius: @bottom-left;
-       -moz-border-radius-bottom-left: @bottom-left;
-            border-bottom-left-radius: @bottom-left;
+    .rounded.top-left(@top-left);
+    .rounded.bottom-left(@bottom-left)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-left-radius: @top-left;
-       -moz-border-radius-top-left: @top-left;
-            border-top-left-radius: @top-left;
-            
-    -webkit-border-bottom-right-radius: @bottom-right;
-       -moz-border-radius-bottom-right: @bottom-right;
-            border-bottom-right-radius: @bottom-right;
+    .rounded.top-left(@top-left);
+    .rounded.bottom-right(@bottom-right)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-right-radius: @top-right;
-       -moz-border-radius-top-right: @top-right;
-            border-top-right-radius: @top-right;
-
-    -webkit-border-bottom-left-radius: @bottom-left;
-       -moz-border-radius-bottom-left: @bottom-left;
-            border-bottom-left-radius: @bottom-left;
+    .rounded.top-right(@top-right);
+    .rounded.bottom-left(@bottom-left)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-left-radius: @top-left;
-       -moz-border-radius-top-left: @top-left;
-            border-top-left-radius: @top-left;
-            
-    -webkit-border-top-right-radius: @top-right;
-       -moz-border-radius-top-right: @top-right;
-            border-top-right-radius: @top-right;
-            
-    -webkit-border-bottom-left-radius: @bottom-left;
-       -moz-border-radius-bottom-left: @bottom-left;
-            border-bottom-left-radius: @bottom-left;
+    .rounded.top-left(@top-left);
+    .rounded.top-right(@top-right);
+    .rounded.bottom-left(@bottom-left)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-left-radius: @top-left;
-       -moz-border-radius-top-left: @top-left;
-            border-top-left-radius: @top-left;
-            
-    -webkit-border-bottom-right-radius: @bottom-right;
-       -moz-border-radius-bottom-right: @bottom-right;
-            border-bottom-right-radius: @bottom-right;
-            
-    -webkit-border-bottom-left-radius: @bottom-left;
-       -moz-border-radius-bottom-left: @bottom-left;
-            border-bottom-left-radius: @bottom-left;
+    .rounded.top-left(@top-left);
+    .rounded.bottom-right(@bottom-right);
+    .rounded.bottom-left(@bottom-left)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-left-radius: @top-left;
-       -moz-border-radius-top-left: @top-left;
-            border-top-left-radius: @top-left;
-            
-    -webkit-border-top-right-radius: @top-right;
-       -moz-border-radius-top-right: @top-right;
-            border-top-right-radius: @top-right;
-            
-    -webkit-border-bottom-right-radius: @bottom-right;
-       -moz-border-radius-bottom-right: @bottom-right;
-            border-bottom-right-radius: @bottom-right;
+    .rounded.top-left(@top-left);
+    .rounded.top-right(@top-right);
+    .rounded.bottom-right(@bottom-right)
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@top-left = null) and (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) 
-         and (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@top-left=null) and (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) 
+         and (@min-width-query=_) and (@max-width-query=_)
 {
-    -webkit-border-top-right-radius: @top-right;
-       -moz-border-radius-top-right: @top-right;
-            border-top-right-radius: @top-right;
-            
-    -webkit-border-bottom-right-radius: @bottom-right;
-       -moz-border-radius-bottom-right: @bottom-right;
-            border-bottom-right-radius: @bottom-right;
-            
-    -webkit-border-bottom-left-radius: @bottom-left;
-       -moz-border-radius-bottom-left: @bottom-left;
-            border-bottom-left-radius: @bottom-left;
+    .rounded.top-right(@top-right);
+    .rounded.bottom-right(@bottom-right);
+    .rounded.bottom-left(@bottom-left);
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when (@query-min=_) and not (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when (@min-width-query=_) and not (@max-width-query=_)
 {
-    @media all and (max-width: @query-max) {
+    @media all and (max-width: @max-width-query) {
         .rounded(@top-left, @top-right, @bottom-right, @bottom-left)
     }
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@query-min=_) and (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and (@max-width-query=_)
 {
-    @media all and (min-width: @query-min) {
+    @media all and (min-width: @min-width-query) {
         .rounded(@top-left, @top-right, @bottom-right, @bottom-left)
     }
 }
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @query-min:_, @query-max:_)
-    when not (@query-min=_) and not (@query-max=_)
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and not (@max-width-query=_)
 {
-    @media all and (min-width: @query-min) and (max-width: @query-max) {
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
         .rounded(@top-left, @top-right, @bottom-right, @bottom-left)
     }
 }

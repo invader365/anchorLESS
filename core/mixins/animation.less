@@ -2,7 +2,7 @@
 //  Animation and Transition
 
 //
-// .animation(name, duration, ease, delay, iteration, direction, [min-width-query, max-width-query])
+// .animation(@name, @duration, @ease, @delay, @iteration, @direction, [@min-width-query, @max-width-query])
 
 .animation(@name) 
     when (@name=null) {}
@@ -45,6 +45,16 @@
         .animation(@name, @duration, @ease, @delay, @iteration, @direction)
     }
 }
+
+//
+// .animation.delay(@delay)
+// .animation.direction(@direction)
+// .animation.duration(@duration)
+// .animation.ease(@ease)
+// .animation.fill-mode(@fill-mode)
+// .animation.iteration(@iteration)
+// .animation.name(@name)
+// .animation.play-state(@play-state)
 
 .animation {
     .delay(@delay) {
@@ -105,7 +115,7 @@
 }
 
 //
-// .transition(property, duration, function, delay, [min-width-query, max-width-query])
+// .transition(@property, @duration, @function, @delay, [@min-width-query, @max-width-query])
 
 .transition(@property) 
     when (@property=null) {}

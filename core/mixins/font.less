@@ -3,126 +3,159 @@
 
 //
 // .font(@font, @family, [@min-width, @max-width])
-    
-.font(@font)
-    when (@font=null) {}
+// .font([@style, @weight], @size, @family, [@min-width, @max-width])
 
-.font(@font:_, @family:_, @min-width-query:_, @max-width-query:_) 
-    when not (@font=null) and (@font=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_)
+.font(@size)
+when (@size=null) {}
+
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
+    when not (@size=null) and (@size=_) and (@weight=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    font: normal 1em a;
+    font: 1em @font-sans-serif;
 }
 
-.font(@font:_, @family:_, @min-width-query:_, @max-width-query:_) 
-    when not (@font=null) and not (@font=_) and (@family=inherit) and (@min-width-query=_) and (@max-width-query=_)
-{
-    font: @font a; // inherit is not a valid family value on font shorthand
-    font-family: inherit;
-}
-
-.font(@font:_, @family:_, @min-width-query:_, @max-width-query:_) 
-    when not (@font=null) and (@font=_) and not (@family=_) and not (@family=inherit) and (@min-width-query=_) and (@max-width-query=_)
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
+    when not (@size=null) and (@size=_) and (@weight=_) and not (@family=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     font-family: @family;
 }
 
-.font(@font:_, @family:_, @min-width-query:_, @max-width-query:_) 
-    when not (@font=null) and not (@font=_) and not (@family=_) and not (@family=inherit) and (@min-width-query=_) and (@max-width-query=_)
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
+    when not (@size=null) and (@size=_) and not (@weight=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    font: @font @family;
+    font-weight: @weight;
 }
 
-.font(@font:_, @family:_, @min-width-query:_, @max-width-query:_)
-    when (@min-width-query=_) and not (@max-width-query=_) 
-{
-    @media all and (max-width: @max-width-query) {
-        .font(@font, @family);
-    }
-}
-
-.font(@font:_, @family:_, @min-width-query:_, @max-width-query:_)
-    when not (@min-width-query=_) and (@max-width-query=_) 
-{
-    @media all and (min-width: @min-width-query) {
-        .font(@font, @family);
-    }
-}
-
-.font(@font:_, @family:_, @min-width-query:_, @max-width-query:_) 
-    when not (@min-width-query=_) and not (@max-width-query=_) 
-{
-    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-        .font(@font, @family);
-    }
-}
-
-//
-// .font-face(@name, @path, @file-name, [@min-width, @max-width])
-
-.font-face (@name) 
-    when (@name=null) {}
-
-.font-face (@name: a, @path: '/', @file-name:_) 
-    when not (@name=null) 
-{
-    @font-face {
-        font-family: @name;
-        src: url('@{path}.eot');    // IE9
-        src: url('@{path}.eot?#iefix') format('embedded-opentype'),     
-                url("@{path}.woff") format("woff"),
-                url("@{path}.ttf") format("truetype"),
-                url('@{path}.svg#@{name}') format('svg');
-    }
-}
-
-.font-size (@param) 
-    when (@param=null) {}
-
-.font-size (@size: 1em, @query: 0) 
-    when not (@size=null) and (@query=0) 
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
+    when not (@size=null) and not (@size=_) and (@weight=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_)
 {
     font-size: @size;
 }
 
-.font-size (@font: none, @query: 0) 
-    when (@query > 0) 
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
+    when not (@size=null) and not (@size=_) and (@weight=_) and not (@family=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    @media all and (min-width: @query) {
-        .font-size(@font);
-    } 
+    font: @size @family;
 }
 
-.indent (@param) 
-    when (@param=null) {}
-
-.indent (@indent: 0, @query: 0) 
-    when not (@indent=null) and (@query=0) 
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
+    when not (@size=null) and (@size=_) and not (@weight=_) and not (@family=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    text-indent: @indent;
+    font-weight: @weight;
+    font-family: @family;
 }
 
-.indent (@indent: 0, @query: 0) 
-    when (@query > 0) 
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
+    when not (@size=null) and not (@size=_) and not (@weight=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    @media all and (min-width: @query) {
-        .indent(@indent);
+    font-size: @size;
+    font-weight: @weight;
+}
+
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
+    when not (@size=null) and not (@size=_) and not (@weight=_) and not (@family=_) and (@min-width-query=_) and (@max-width-query=_)
+{
+    font: @weight @size @family;
+}
+
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_)
+    when (@min-width-query=_) and not (@max-width-query=_) 
+{
+    @media all and (max-width: @max-width-query) {
+        .font(@size, @weight, @family)
     }
 }
 
-.text-align (@param) 
-    when (@param=null) {}
-
-.text-align (@align: center, @query: 0) 
-    when not (@align=null) and (@query=0) 
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and (@max-width-query=_) 
 {
-    text-align: @align;
+    @media all and (min-width: @min-width-query) {
+        .font(@size, @weight, @family)
+    }
 }
 
-.text-align (@align: center, @query: 0) 
-    when (@query > 0) 
+.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
+    when not (@min-width-query=_) and not (@max-width-query=_) 
 {
-    @media all and (min-width: @query) {
-        .text-align(@align);
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+        .font(@size, @weight, @family)
+    }
+}
+
+//
+// .font-face(@font-family, @file-path, @font-weight, @font-style)
+//   @font-family, // font family name ie. Arial
+//   @file-path,   // absolute/relative URL to font files ie. '../fonts/Arial-Regular'
+//   @font-weight, // light/normal/bold/inherit | 300/400/700
+//   @font-style   // italic/normal/inherit
+
+.font-face (@name) 
+    when (@name=null) {}
+
+.font-face (@font-family, @file-path, @font-weight:400, @font-style:normal) 
+    when not (@name=null) 
+{
+    @font-face {
+        font-family: @font-family;
+        src: url('@{file-path}.eot');  // IE9
+        src: url('@{file-path}.eot?#iefix') format('embedded-opentype'),     
+             url('@{file-path}.woff') format('woff'),
+             url('@{file-path}.ttf') format('truetype'),
+             url('@{file-path}.svg#@{name}') format('svg');
+        font-weight: @font-weight;
+        font-style: @font-style;
+    }
+}
+
+//
+// .text.align(@line, @color, @styl)
+// .text.decoration(@line, @color, @styl)
+// .text.indent(@indent)
+// .text.transform(@transform)
+
+.text {
+    .align (@align) 
+        when (@align=null) {}
+
+    .align(@align:_) 
+        when not (@align=null) and (@line=_)
+    {
+
+    }
+
+    .decoration (@line) 
+        when (@line=null) {}
+
+    .decoration(@line:_, @color:_, @style:_) 
+        when not (@line=null) and (@line=_)
+    {
+
+    }
+
+    .indent (@indent) 
+        when (@indent=null) {}
+    
+    .indent (@indent: 0, @query: 0) 
+        when not (@indent=null) and (@query=0) 
+    {
+        text-indent: @indent;
+    }
+    
+    .indent (@indent: 0, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .indent(@indent);
+        }
+    }
+
+    .transform (@transform) 
+        when (@transform=null) {}
+
+    .transform(@transform:_)
+        when not (@transform=null) and (@line=_)
+    {
+
     }
 }
 

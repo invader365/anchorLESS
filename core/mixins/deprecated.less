@@ -2,7 +2,7 @@
 // Deprecated mixins won´t be available as of v2+
 
 //
-//  Instead use .position(absolute, top, right, bottom, left)
+//  Use .position(absolute, top, right, bottom, left)
 
 .absolute {
     .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
@@ -43,7 +43,7 @@
 }
 
 //
-//  Instead use .back.clip(@back-clip)
+//  Use .back.clip(@back-clip)
 
 .background-clip (@clip: border) 
     when not (@clip = null)
@@ -54,7 +54,7 @@
 }
 
 //
-//  Instead use .back.origin(@back-origin)
+//  Use .back.origin(@back-origin)
 
 .background-origin (@orign: padding-box) 
     when not (@orign = null) 
@@ -65,7 +65,7 @@
 }
 
 //
-//  Instead use .back.size(@back-size)
+//  Use .back.size(@back-size)
 
 .background-size (@back-size: auto) 
     when not (@back-size = null) 
@@ -76,7 +76,7 @@
 }
 
 //
-//  Instead use
+//  Use
 // .border(@width, @style, @color [@min-width-query, @max-width-query])
 // .border(@width, _, _, [@min-width-query, @max-width-query])
 // .border(_, @style, _, [@min-width-query, @max-width-query])
@@ -106,7 +106,7 @@
 }
 
 //
-//  Instead use .position(fixed, top, right, bottom, left)
+//  Use .position(fixed, top, right, bottom, left)
 
 .fixed {
     .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
@@ -147,7 +147,27 @@
 }
 
 //
-// Renamed. Instead use .gradient.linear(@start, @stop, @degrees, [@image])
+// .font-size(@size, [@min-width, @max-width])
+
+.font-size (@param) 
+    when (@param=null) {}
+
+.font-size (@size: 1em, @query: 0) 
+    when not (@size=null) and (@query=0) 
+{
+    font-size: @size;
+}
+
+.font-size (@font: none, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .font-size(@font);
+    } 
+}
+
+//
+// Renamed. Use .gradient.linear(@start, @stop, @degrees, [@image])
 
 .gradient {
     .directional(@start: transparent, @stop: gray, @degrees: 180deg, @image: none) 
@@ -161,7 +181,7 @@
 }
 
 //
-// Instead use .size(_, @height, [@min-width-query, @max-width-query])
+// Use .size(_, @height, [@min-width-query, @max-width-query])
 
 .height (@height: auto, @query: 0) 
     when not (@height = null) and (@query = 0) 
@@ -178,7 +198,7 @@
 }
 
 //
-// Instead use .back.image(@image-url, [@min-width-query, @max-width-query])
+// Use .back.image(@image-url, [@min-width-query, @max-width-query])
 
 .image (@image-url: none) 
     when not (@image-url = null) and (@image-url = none) 
@@ -193,7 +213,27 @@
 }
 
 //
-// Instead use .spacing(@margin, _, [@min-width-query, @max-width-query])
+// Use .text.indent(@size, [@min-width, @max-width])
+
+.indent (@param) 
+    when (@param=null) {}
+
+.indent (@indent: 0, @query: 0) 
+    when not (@indent=null) and (@query=0) 
+{
+    text-indent: @indent;
+}
+
+.indent (@indent: 0, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .indent(@indent);
+    }
+}
+
+//
+// Use .spacing(@margin, _, [@min-width-query, @max-width-query])
 
 .margin (@margin: none, @query: 0) 
     when not (@margin = null) and (@query = 0) 
@@ -210,7 +250,7 @@
 }
 
 //
-// Instead use .min-size(_, @max-width,[@min-width-query, @max-width-query])
+// Use .min-size(_, @max-width,[@min-width-query, @max-width-query])
 
 .max-width (@width: 0, @query: 0) 
     when not (@width = null) and (@query = 0) 
@@ -227,7 +267,7 @@
 }
 
 //
-// Instead use .min-size(@min-width, _, [@min-width-query, @max-width-query])
+// Use .min-size(@min-width, _, [@min-width-query, @max-width-query])
 
 .min-width (@width: 0, @query: 0) 
     when not (@width = null) and (@query = 0) 
@@ -244,7 +284,7 @@
 }
 
 //
-// Instead use .spacing(_,@padding, [@min-width-query, @max-width-query])
+// Use .spacing(_,@padding, [@min-width-query, @max-width-query])
 
 .padding (@padding: 0, @query: 0) 
     when not (@padding = null) and (@query = 0) 
@@ -261,7 +301,7 @@
 }
 
 //
-//  Instead use .position(relative, top, right, bottom, left)
+//  Use .position(relative, top, right, bottom, left)
 
 .relative {
     .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
@@ -315,7 +355,7 @@
 }
 
 //
-// Instead use
+// Use
 // .rounded(@top-left, @top-right, @bottom-right, @bottom-left, [@query-min, @query-max])
 // ie:
 // .rounded(@top-left, @top-right, _, _, [@query-min, @query-max])   // rounded top side
@@ -361,7 +401,7 @@
 }
 
 //
-// Instead use .shadow(spread, color, alpha)
+// Use .shadow(spread, color, alpha)
 
 .shadow-multi (@param) 
     when (@param=null) {}
@@ -374,7 +414,7 @@
 }
 
 //
-// Instead use .min-size(@min-width, @max-width, [@min-width-query, @max-width-query])
+// Use .min-size(@min-width, @max-width, [@min-width-query, @max-width-query])
 
 .size-min (@min-width: auto, @min-height: auto, @query: 0) 
     when not (@min-width = null) and (@query = 0) 
@@ -392,7 +432,7 @@
 }
 
 //
-// Instead use .size(@size)
+// Use .size(@size)
 
 .square (@size: auto, @query: 0) 
     when not (@size = null) and (@query = 0) 
@@ -431,7 +471,31 @@
 }
 
 //
-// Instead use .transition(@property, duration, function, delay, [@min-width-query, @max-width-query])
+// Use text helper
+// .text.left()
+// .text.center()
+// .text.right()
+// .text.justify()
+
+.text-align (@param) 
+    when (@param=null) {}
+
+.text-align (@align: center, @query: 0) 
+    when not (@align=null) and (@query=0) 
+{
+    text-align: @align;
+}
+
+.text-align (@align: center, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .text-align(@align);
+    }
+}
+
+//
+// Use .transition(@property, duration, function, delay, [@min-width-query, @max-width-query])
 
 .transition-multi (@param) 
     when (@param= null) {}
@@ -481,7 +545,7 @@
 }
 
 //
-// Instead use .size(@width, _, [@min-width-query, @max-width-query])
+// Use .size(@width, _, [@min-width-query, @max-width-query])
 
 .width (@width: auto, @query: 0) when not (@width = null) and (@query = 0) {
     width: @width;

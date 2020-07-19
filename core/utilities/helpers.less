@@ -63,14 +63,38 @@
 
 .noselect() {
     -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 
     -webkit-touch-callout: none;
-    -ms-text-size-adjust: none;
     -webkit-text-size-adjust: none;
+        -ms-text-size-adjust: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.text {
+    .left() {
+        text-align: left;
+    }
+    .center() {
+        text-align: center;
+    }
+    .right() {
+        text-align: right;
+    }
+    .justify() {
+        text-align: justify;
+    }
+    .caps() {
+        text-transform: capitalize;
+    }
+    .lower() {
+        text-transform: lowercase;
+    }
+    .upper() {
+        text-transform: uppercase;
+    }
 }
 
 .word-break () {
