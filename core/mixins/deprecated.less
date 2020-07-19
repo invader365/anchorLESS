@@ -43,6 +43,48 @@
 }
 
 //
+//  Use .align.top-left(@top, left)
+
+.align {
+    .left-top(@left) 
+        when (@left=null) {}
+
+    .left-top(@left: auto, @top: auto) 
+        when not (@left=null) 
+    {
+        left: @left;
+        top: @top; 
+    }
+    .left-bottom(@left) 
+        when (@left=null) {}
+
+    .left-bottom (@left: auto, @bottom: auto) 
+        when not (@left=null) 
+    {
+        left: @left;
+        bottom: @bottom;
+    }
+    .right-top(@right) 
+        when (@right=null) {}
+
+    .right-top (@right: auto, @top: auto) 
+        when not (@right=null) 
+    {
+        right: @right;
+        top: @top;
+    }
+    .right-bottom(@right) 
+        when (@right=null) {}
+
+    .right-bottom (@right: auto, @bottom: auto) 
+        when not (@right=null) 
+    {
+        right: @right; 
+        bottom: @bottom;
+    }
+}
+
+//
 //  Use .back.clip(@back-clip)
 
 .background-clip (@clip: border) 
@@ -103,6 +145,25 @@
             .border.min(@border, @query);
         }
     }
+}
+
+//
+// Deprecated
+
+.columns (@var) 
+    when (@var=null) {}
+    
+.columns (@count: auto, @gap: normal, @width: auto) 
+    when not (@count=null)    {
+    -webkit-column-count: @count;
+        -moz-column-count: @count;
+            column-count: @count;
+    -webkit-column-gap: @gap;
+        -moz-column-gap: @gap;
+            column-gap: @gap;
+    -webkit-column-width: @width;
+        -moz-column-width: @width;
+            column-width: @width;
 }
 
 //
@@ -491,6 +552,26 @@
 {
     @media all and (min-width: @query) {
         .text-align(@align);
+    }
+}
+
+//
+// .text.shadow(@spread, @color, @alpha, [@min-width-query, @max-width-query])
+
+.text-shadow (@param) 
+    when (@param=null) {}
+
+.text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) 
+    when not (@spread=null) and (@query=0) {
+        
+    text-shadow: @spread hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
+}
+
+.text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .text-shadow(@shadow, @color, @alpha);
     }
 }
 

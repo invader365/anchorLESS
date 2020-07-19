@@ -6,7 +6,7 @@ Anchor less is a collection of less Mixins, Assets and Utilities to write better
 
 Features:
 
-- Responsive mixins (mobile-first approach), assets and utilities.
+- Responsive mixins, assets and utilities.
 - Seamless integration with html5 frameworks.
 - Faster performance (Less.js build-in functions).
 - The most extensive (and growing) LESS mixins library.
@@ -16,7 +16,7 @@ Features:
 
 Common mixins:
 
-00. .align(top, right, bottom, left, [min-width-query]);
+00. .align(top, right, bottom, left, [min-width-query, max-width-query]);
 00. .back(color, image, repeat, position, [min-width-query, max-width-query]);
 00. .border(width, style, color, [min-width-query, max-width-query]);
 00. .color(color, back-color, border-color, [min-width-query, max-width-query]);
@@ -31,7 +31,6 @@ Common mixins:
 00. .size(width, height, [min-width-query, max-width-query]);
 00. .spacing(margin, padding, [min-width-query, max-width-query]);
 00. .transition(property, durations, function, delay, [min-width-query, max-width-query]);
-00. **[...](core/README.md)**
 
 See the **[full list](http://invader365.github.io/anchorLESS/reference.html)**
 

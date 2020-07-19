@@ -11,7 +11,7 @@ when (@size=null) {}
 .font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
     when not (@size=null) and (@size=_) and (@weight=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_)
 {
-    font: 1em @font-sans-serif;
+    font: medium @font-sans-serif;
 }
 
 .font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) 
@@ -89,11 +89,11 @@ when (@size=null) {}
 //   @font-weight, // light/normal/bold/inherit | 300/400/700
 //   @font-style   // italic/normal/inherit
 
-.font-face (@name) 
-    when (@name=null) {}
+.font-face (@font-family) 
+    when (@font-family=null) {}
 
 .font-face (@font-family, @file-path, @font-weight:400, @font-style:normal) 
-    when not (@name=null) 
+    when not (@font-family=null) 
 {
     @font-face {
         font-family: @font-family;
@@ -108,73 +108,281 @@ when (@size=null) {}
 }
 
 //
-// .text.align(@line, @color, @styl)
-// .text.decoration(@line, @color, @styl)
-// .text.indent(@indent)
-// .text.transform(@transform)
+// .text.align(@align, [@min-width-query, @max-width-query])
+// .text.decoration(@line, @color, @style, [@min-width-query, @max-width-query])
+// .text.indent(@indent, [@min-width-query, @max-width-query])
+// .text-shadow(@spread, @color, @alpha, [@min-width-query, @max-width-query])
+// .text.transform(@transform, [@min-width-query, @max-width-query])
 
 .text {
     .align (@align) 
         when (@align=null) {}
 
-    .align(@align:_) 
-        when not (@align=null) and (@line=_)
+    .align(@align:_, @min-width-query:_, @max-width-query:_) 
+        when not (@align=null) and (@align=_) and (@min-width-query=_) and (@max-width-query=_)
     {
-
+        text-align: left;
     }
 
-    .decoration (@line) 
+    .align(@align:_, @min-width-query:_, @max-width-query:_) 
+        when not (@align=null) and not (@align=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        text-align: @align;
+    }
+
+    .align(@align:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
+    {
+        @media all and (max-width: @max-width-query) {
+            .text.align(@align)
+        }
+    }
+    
+    .align(@align:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) {
+            .text.align(@align)
+        }
+    }
+    
+    .align(@align:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and not (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .text.align(@align)
+        }
+    }
+
+    .decoration(@line) 
         when (@line=null) {}
 
-    .decoration(@line:_, @color:_, @style:_) 
-        when not (@line=null) and (@line=_)
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) 
+        when not (@line=null) and (@line=_) and (@color=_) and (@style=_) and (@min-width-query=_) and (@max-width-query=_)
     {
-
+        text-decoration: none solid
     }
 
-    .indent (@indent) 
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) 
+        when not (@line=null) and (@line=_) and (@color=_) and not (@style=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        text-decoration-style: @style  // IE not supported
+    }
+
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) 
+        when not (@line=null) and (@line=_) and not (@color=_) and (@style=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        text-decoration-color: @color  // IE not supported
+    }
+
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) 
+        when not (@line=null) and not (@line=_) and (@color=_) and (@style=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        text-decoration: @line
+    }
+
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) 
+        when not (@line=null) and not (@line=_) and (@color=_) and not (@style=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        text-decoration: @line @style
+    }
+
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) 
+        when not (@line=null) and (@line=_) and not (@color=_) and not (@style=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        text-decoration-color: @color;  // IE not supported
+        text-decoration-style: @style   // IE not supported
+    }
+
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) 
+        when not (@line=null) and not (@line=_) and not (@color=_) and (@style=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        text-decoration: @line @color
+    }
+
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) 
+        when not (@line=null) and not (@line=_) and not (@color=_) and not (@style=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        text-decoration: @line @color @style
+    }
+
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
+    {
+        @media all and (max-width: @max-width-query) {
+            .text.decoration(@line, @color, @style)
+        }
+    }
+    
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) {
+            .text.decoration(@line, @color, @style)
+        }
+    }
+    
+    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and not (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .text.decoration(@line, @color, @style)
+        }
+    }
+
+    .indent(@indent) 
         when (@indent=null) {}
     
-    .indent (@indent: 0, @query: 0) 
-        when not (@indent=null) and (@query=0) 
+    .indent (@indent:_, @min-width-query:_, @max-width-query:_)
+        when not (@indent=null) and (@indent=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        text-indent: 0;
+    }
+    
+    .indent (@indent:_, @min-width-query:_, @max-width-query:_)
+        when not (@indent=null) and not (@indent=_) and (@min-width-query=_) and (@max-width-query=_)
     {
         text-indent: @indent;
     }
-    
-    .indent (@indent: 0, @query: 0) 
-        when (@query > 0) 
+
+    .indent(@indent:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
     {
-        @media all and (min-width: @query) {
-            .indent(@indent);
+        @media all and (max-width: @max-width-query) {
+            .text.indent(@indent)
+        }
+    }
+    
+    .indent(@indent:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) {
+            .text.indent(@indent)
+        }
+    }
+    
+    .indent(@indent:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and not (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .text.indent(@indent)
+        }
+    }
+
+    .shadow (@spread) 
+        when (@spread=null) {}
+    
+    .shadow (@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) 
+        when not (@spread=null) and (@spread=_) and (@color=_) and (@alpha=_) and (@min-width-query=_) and (@max-width-query=_)
+    {        
+        text-shadow: none;
+    }
+    
+    .shadow (@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) 
+        when not (@spread=null) and not (@spread=_) and (@color=_) and (@alpha=_) and (@min-width-query=_) and (@max-width-query=_)
+    {        
+        text-shadow: @spread black;
+    }
+    
+    .shadow (@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) 
+        when not (@spread=null) and (@spread=_) and not (@color=_) and (@alpha=_) and (@min-width-query=_) and (@max-width-query=_)
+    {        
+        text-shadow: 0 0 @color;
+    }
+    
+    .shadow (@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) 
+        when not (@spread=null) and (@spread=_) and (@color=_) and not (@alpha=_) and (@min-width-query=_) and (@max-width-query=_)
+    {        
+        .text.shadow(0 0, black, @alpha)
+    }
+    
+    .shadow (@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) 
+        when not (@spread=null) and not (@spread=_) and not (@color=_) and (@alpha=_) and (@min-width-query=_) and (@max-width-query=_)
+    {        
+        text-shadow: @spread @color;
+    }
+    
+    .shadow (@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) 
+        when not (@spread=null) and (@spread=_) and not (@color=_) and not (@alpha=_) and (@min-width-query=_) and (@max-width-query=_)
+    {
+        @rgba: fade(@color, @alpha/1);
+        text-shadow: 0 0 @rgba;
+    }
+    
+    .shadow (@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) 
+        when not (@spread=null) and not (@spread=_) and (@color=_) and not (@alpha=_) and (@min-width-query=_) and (@max-width-query=_)
+    {        
+        @rgba: fade(black, @alpha/1);
+        text-shadow: @spread @rgba;
+    }
+    
+    .shadow (@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) 
+        when not (@spread=null) and not (@spread=_) and not (@color=_) and not (@alpha=_) and (@min-width-query=_) and (@max-width-query=_)
+    {        
+        @rgba: fade(@color, @alpha/1);
+        text-shadow: @spread @rgba;
+    }
+
+    .shadow(@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
+    {
+        @media all and (max-width: @max-width-query) {
+            .text.shadow(@spread, @color, @alpha)
+        }
+    }
+    
+    .shadow(@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) {
+            .text.shadow(@spread, @color, @alpha)
+        }
+    }
+    
+    .shadow(@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and not (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .text.shadow(@spread, @color, @alpha)
         }
     }
 
     .transform (@transform) 
         when (@transform=null) {}
 
-    .transform(@transform:_)
-        when not (@transform=null) and (@line=_)
+    .transform(@transform:_, @min-width-query:_, @max-width-query:_)
+        when not (@transform=null) and (@transform=_)
     {
-
+        text-transform: none;
     }
-}
 
-//
-// text-shadow(spread, color, alpha, [min-width-query])
+    .transform(@transform:_, @min-width-query:_, @max-width-query:_)
+        when not (@transform=null) and not (@transform=_)
+    {
+        text-transform: @transform;
+    }
 
-.text-shadow (@param) 
-    when (@param=null) {}
-
-.text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) 
-    when not (@spread=null) and (@query=0) {
-        
-    text-shadow: @spread hsla(hue(@color), saturation(@color), lightness(@color), @alpha); 
-}
-
-.text-shadow (@spread: 0 0, @color: #fff, @alpha: .5, @query: 0) 
-    when (@query > 0) 
-{
-    @media all and (min-width: @query) {
-        .text-shadow(@shadow, @color, @alpha);
+    .transform(@transform:_, @min-width-query:_, @max-width-query:_)
+        when (@min-width-query=_) and not (@max-width-query=_) 
+    {
+        @media all and (max-width: @max-width-query) {
+            .text.transform(@transform)
+        }
+    }
+    
+    .transform(@transform:_, @min-width-query:_, @max-width-query:_)
+        when not (@min-width-query=_) and (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) {
+            .text.transform(@transform)
+        }
+    }
+    
+    .transform(@transform:_, @min-width-query:_, @max-width-query:_) 
+        when not (@min-width-query=_) and not (@max-width-query=_) 
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .text.transform(@transform)
+        }
     }
 }
