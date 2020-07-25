@@ -1,0 +1,148 @@
+//
+//  Box-model properties
+
+.display(@display)
+    when (@display=null) {}
+    
+.display(@display:_, @size:_)
+    when not (@display=null) and not (@size=_) 
+{
+    .display(@display, @size, @size);
+}
+
+.display(@display:_, @width:_, @height:_, @min-width-query:_, @max-width-query:_) {
+    & when not (@display=null) and (@display=_) and (@width=_) and (@height=_) and (@min-width-query=_) and (@max-width-query=_) {
+        .display(initial, auto, auto);
+    }
+
+    & when not (@display=null) and not (@display=_) and (@min-width-query=_) and (@max-width-query=_) {
+        display: @display;
+    }
+
+    & when not (@display=null) and not (@width=_) and (@min-width-query=_) and (@max-width-query=_) {
+        width: @width;
+    }
+
+    & when not (@display=null) and not (@height=_) and (@min-width-query=_) and (@max-width-query=_) {
+        height: @height;
+    }
+
+    & when not (@min-width-query=_), not (@max-width-query=_) {
+        .mixins(
+            @min-max: @min-width-query, @max-width-query;
+            @display: @display, @width, @height;
+        );
+    }
+}
+
+//
+//  .min-size(@min-width, @min-height, [@min-width, @max-width])
+//  .mixins(
+//    @min-size: min-width, min-height; [@min-width; @max-width]
+//  );
+
+.min-size (@min-size) {
+    & when (@min-size=null) {}
+    
+    & when not (@min-size=null) and not (@min-size=_) {
+      .min-size(@min-size, @min-size)
+    }
+}
+
+.min-size(@min-width:_, @min-height:_, @query-min:_, @query-max:_) {
+    & when not (@min-width=null) and (@min-width=_) and (@min-height=_) and (@query-min=_) and (@query-max=_) {
+        .min-size(auto, auto);
+    }
+
+    & when not (@min-width=null) and not (@min-height=_) and (@query-min=_) and (@query-max=_) {
+        min-height: @min-height;
+    }
+
+    & when not (@min-width=null) and not (@min-width=_) and (@query-min=_) and (@query-max=_) {
+        min-width: @min-width;
+    }
+
+    & when not (@query-min=_), not (@query-max=_) {
+        .mixins(
+            @min-max: @query-min, @query-max;
+            @min-size: @min-width, @min-height;
+        );
+    }
+}
+
+//
+// Size combination values
+// 
+// .size()                      // default value
+// .size(10px)                  // duplicate value
+// .size(10px, 20px)            // custom propertie values
+// .size(10px, 20px, 570px)     // custom propertie values + min-width query
+// .size(10px, 20px, _, 1200px) // custom propertie values + max-width query
+// .size(10px, 20px, 570px, 1200px) // custom propertie values + min/max-width queries
+// ----------------------------------------------------------------
+
+.size (@size) {
+    & when (@size=null) {}
+    
+    & when not (@size=null) and not (@size=_) {
+      .size(@size, @size)
+    }
+}
+
+.size(@width:_, @height:_, @query-min:_, @query-max:_) {
+    & when not (@width=null) and (@width=_) and (@height=_) and (@query-min=_) and (@query-max=_) {
+        .size(auto, auto);
+    }
+  
+    & when not (@width=null) and not (@width=_) and (@query-min=_) and (@query-max=_) {
+        width: @width;
+    }
+  
+    & when not (@width=null) and not (@height=_) and (@query-min=_) and (@query-max=_) {
+        height: @height;
+    }
+
+    & when not (@query-min=_), not (@query-max=_) {
+        .mixins(
+            @min-max: @query-min, @query-max;
+            @size: @width, @height;
+        );
+    }
+}
+
+//
+// .spacing(margin, padding, [min-width, max-width])
+
+.spacing (@spacing) {
+    & when (@spacing=null) {}
+    
+    & when not (@spacing=null) and not (@spacing=_) {
+      .spacing(@spacing, @spacing)
+    }
+}
+
+.spacing (@margin:_, @padding:_, @query-min:_, @query-max:_) {
+    & when not (@margin=null) and (@margin=_) and (@padding=_) and (@query-min=_) and (@query-max=_) {
+        .spacing(auto, auto)
+    }
+
+    & when not (@margin=null) and not (@margin=_) and (@padding=_) and (@query-min=_) and (@query-max=_) {
+        margin: @margin;
+    }
+
+    & when not (@margin=null) and (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_) {
+        padding: @padding;
+    }
+
+    & when not (@margin=null) and not (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_) {
+        margin: @margin;
+        padding: @padding;
+    }
+
+    & when not (@query-min=_), not (@query-max=_) {
+        .mixins(
+            @min-max: @query-min, @query-max;
+            @spacing: @margin, @padding;
+        );
+    }
+}

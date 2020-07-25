@@ -1,12 +1,24 @@
 //  Helpers
 
-.block () {
+.block() {
     display: block;
     position: relative;
     float: left;
 }
 
-.clearfix () {
+.border-box() {
+    -webkit-box-sizing: border-box;    // Safari 5
+       -moz-box-sizing: border-box;    // Firefox 19
+            box-sizing: border-box;    // IE 8+
+}
+
+.content-box() {
+    -webkit-box-sizing: content-box;    // Safari 5
+       -moz-box-sizing: content-box;    // Firefox 19
+            box-sizing: content-box;    // IE 8+
+}
+
+.clearfix() {
     &:after { 
         content: ''; 
         display: table; 
@@ -14,45 +26,45 @@
     }
 }
 
-.ellipsis () { 
+.ellipsis() { 
     text-overflow: ellipsis;    // IE8 rendering issue
     white-space: nowrap; 
     overflow: hidden; 
 }
 
-.hide-text () { 
+.hide-text() { 
     text-indent: -9999px; 
     text-align: left;
     overflow: hidden; 
 }
 
-.hyphens () {
+.hyphens() {
     -webkit-hyphens: auto;
         -moz-hyphens: auto;
             hyphens: auto;
 }
 
-.inline () {
+.inline() {
     display: inline;
     float: none;
 }
 
-.inline-block () {
+.inline-block() {
     display: inline-block;
     position: relative;
     float: none;
 }
 
-.line-break () {  
+.line-break() {  
     margin-left: 0; 
     clear: left; 
 }
 
-.nowrap () {
+.nowrap() {
     white-space: nowrap;
 }
 
-.noselect () {
+.noselect() {
     -webkit-touch-callout: none;
       -webkit-user-select: none;
        -khtml-user-select: none;
@@ -97,12 +109,12 @@
     }
 }
 
-.word-break () {
+.word-break() {
     -ms-word-break: break-all;
         word-break: break-all;
         word-break: break-word;
 }
 
-.wrap () {
+.wrap() {
     white-space: normal; // validate
 }

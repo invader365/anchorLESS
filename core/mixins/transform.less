@@ -1,5 +1,49 @@
 //
-//  Transform mixins
+//  Transform properties
+
+//
+// .backface(@visibility, [@min-width-query, @max-width-query])
+
+.backface(@visibility) 
+    when (@visibility=null) {}
+
+.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
+    when not (@visibility=null) and (@visibility=_) and (@min-width-query=_) and (@max-width-query=_)
+{
+    .backface(visible)
+}
+
+.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
+    when not (@visibility=null) and not (@visibility=_) and (@min-width-query=_) and (@max-width-query=_)
+{
+    -webkit-backface-visibility: @visibility;
+       -moz-backface-visibility: @visibility;
+            backface-visibility: @visibility;
+}
+
+.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
+    when (@min-width-query=_) and not (@max-width-query=_)
+{
+    @media all and (max-width: @max-width-query) {
+        .backface(@visibility)
+    }
+}
+
+.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and (@max-width-query=_)
+{
+    @media all and (min-width: @min-width-query) {
+        .backface(@visibility)
+    }
+}
+
+.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and not (@max-width-query=_)
+{
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+        .backface(@visibility)
+    }
+}
 
 .perspective (@param) 
     when (@param = null) {}

@@ -4,301 +4,153 @@
 //
 // .align(@top, @right, @bottom, @left, [@min-width-query, @max-width-query]) 
 
-.align(@top) 
-    when (@top=null) {}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and (@top=_) and (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    top: auto; 
-    right: auto;
-    bottom: auto;
-    left: auto;
+.align(@align)
+    when (@align=null) {}
+    
+.align(@align)
+    when not (@align=null) and not (@align=_) {
+    .align(@align, @align, @align, @align);
 }
 
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and not (@top=_) and (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    top: @top;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and (@top=_) and not (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    right: @right;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and (@top=_) and (@right=_) and not (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    bottom: @bottom;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and (@top=_) and (@right=_) and (@bottom=_) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    left: @left;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and not (@top=_) and not (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    top: @top; 
-    right: @right;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and not (@top=_) and (@right=_) and not (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    top: @top; 
-    bottom: @bottom;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and not (@top=_) and (@right=_) and (@bottom=_) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    top: @top; 
-    left: @left;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and (@top=_) and not (@right=_) and not (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    right: @right;
-    bottom: @bottom;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and (@top=_) and not (@right=_) and (@bottom=_) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    right: @right;
-    left: @left;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and (@top=_) and (@right=_) and not (@bottom=_) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    bottom: @bottom;
-    left: @left;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_)
-    when not (@top=null) and not (@top=_) and not (@right=_) and (@bottom=_) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    top: @top; 
-    right: @right;
-    left: @left;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and not (@top=_) and (@right=_) and not (@bottom=_) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    top: @top; 
-    bottom: @bottom;
-    left: @left;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and (@top=_) and not (@right=_) and not (@bottom=_) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    right: @right;
-    bottom: @bottom;
-    left: @left;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@top=null) and not (@top=_) and not (@right=_) and not (@bottom=_) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    top: @top; 
-    right: @right;
-    bottom: @bottom;
-    left: @left;
-}
-
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (max-width: @max-width-query) {
-        .align(@top, @right, @bottom, @left);
+.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) {
+    & when not (@top=null) and (@top=_) and (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
+        .align(static, auto, auto, auto, auto);
     }
-}
 
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@min-width-query=_) and (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) {
-        .align(@top, @right, @bottom, @left);
+    & when not (@top=null) and not (@top=_) and (@min-width-query=_) and (@max-width-query=_) {
+        top: @top;
     }
-}
 
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) 
-    when not (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-        .align(@top, @right, @bottom, @left);
+    & when not (@top=null) and not (@right=_) and (@min-width-query=_) and (@max-width-query=_) {
+        right: @right;
+    }
+
+    & when not (@top=null) and not (@bottom=_) and (@min-width-query=_) and (@max-width-query=_) {
+        bottom: @bottom;
+    }
+
+    & when not (@top=null) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
+        left: @left;
+    }
+
+    & when not (@min-width-query=_), not (@max-width-query=_) {
+        .mixins(
+            @min-max: @min-width-query, @max-width-query;
+            @align: @top, @right, @bottom, @left;
+        );
     }
 }
 
 //
-// .float(float, [min-width-query]) 
+// .float(@float, [@min-width-query, @max-width-query]) 
 
-.float (@var) 
-    when (@var=null) {}
+.float(@float)
+    when (@float=null) {}
 
-.float (@float: none, @query: 0) 
-    when not (@float=null) and (@query = 0)   
-{
-    float: @float;
-}
-
-.float (@float: none, @query: 0) 
-    when (@query > 0)   
-{
-    @media all and (min-width: @query) {
-        .float(@float);
-    } 
+.float (@float: none, @min-width-query:_, @max-width-query:_) {
+    & when not (@float=null) and (@float=_) and (@min-width-query=_) and (@max-width-query=_) {
+        .float(none);
+    }
+ 
+    & when not (@float=null) and not (@float=_) and (@min-width-query=_) and (@max-width-query=_) {
+        float: @float;
+    }
+ 
+    & when (@min-width-query=_) and not (@max-width-query=_) {
+        @media all and (max-width: @max-width-query) {
+            .float(@float);
+        }
+    }
+ 
+    & when not (@min-width-query=_) and (@max-width-query=_) {
+        @media all and (min-width: @min-width-query) {
+            .float(@float);
+        }
+    }
+ 
+    & when not (@min-width-query=_) and not (@max-width-query=_) {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .float(@float);
+        }
+    }
 }
 
 //
 // .index(index, [min-width-query]) 
 
-.index (@var) 
-    when (@var=null) {}
+.index (@index) 
+    when (@index=null) {}
 
-.index (@index: 0, @query: 0) 
-    when not (@index=null) and (@query = 0)   
-{
-    z-index: @index;
-}
-
-.index (@index: 0, @query: 0) 
-    when (@query > 0)   
-{
-    @media all and (min-width: @query) {
-        .index(@index);
+.index(@index:_, @min-width-query:_, @max-width-query:_) {
+    & when not (@index=null) and (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
+        .index(0);
     }
-}
 
-//
-// .position(position, [min-width-query]) 
-// .position.align(position, top, right, bottom, left, [min-width-query]) 
-
-.relative(@min-width-query:_, @max-width-query:_)
-    when (@min-width-query=_) and (@max-width-query=_)
-{
-    position: relative;
-}
-
-.relative(@min-width-query:_, @max-width-query:_) 
-    when (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (max-width: @max-width-query) {
-        position: relative;
+    & when not (@index=null) and not (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
+        z-index: @index;
     }
-}
 
-.relative(@min-width-query:_, @max-width-query:_) 
-    when not (@min-width-query=_) and (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) {
-        position: relative;
-    }
-}
-
-.relative(@min-width-query:_, @max-width-query:_) 
-    when not (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-        position: relative;
-    }
-}
-
-.relative {
-    .align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @min-width-query:_) {
-        .relative();
-        .align(@top, @right, @bottom, @left, @min-width-query, @min-width-query);
-    }
-}
-
-//
-// .position(position, [min-width-query]) 
-// .position.align(position, top, right, bottom, left, [min-width-query]) 
-
-.position (@var) 
-    when (@var=null) {}
-
-.position (@position: static, @query: 0)
-    when not (@position=null) and (@query = 0)
-{
-    position: @position;
-}
-
-.position (@position: absolute, @query: 0) 
-    when (@query > 0)   
-{
-    @media all and (min-width: @query) {
-        .position(@position);
-    }
-}
-
-.position {
-    .align(@position) 
-        when (@position=null) 
-    {}
-    .align(@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
-        when not (@position=null) and (@query = 0) 
-    {
-        position: @position;
-        top: @top; 
-        right: @right;
-        bottom: @bottom;
-        left: @left;
-    }
-    .align(@position: relative, @top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
-        when (@query > 0) 
-    {
-        @media all and (min-width: @query) {
-            .position.align(@position, @top, @right, @bottom, @left);
+    & when (@min-width-query=_) and not (@max-width-query=_) {
+        @media all and (max-width: @max-width-query) {
+            .index(@index);
         }
     }
-    .left-top (@position) 
-        when (@position=null) 
-    {}
-    .left-top (@position: relative, @left: auto, @top: auto) 
-        when not (@position=null) 
-    {
-        position: @position;
-        left: @left;
-        top: @top; 
+
+    & when not (@min-width-query=_) and (@max-width-query=_) {
+        @media all and (min-width: @min-width-query) {
+            .index(@index);
+        }
     }
-    .left-bottom (@position) 
-        when (@position=null) 
-    {}
-    .left-bottom (@position: relative, @left: auto, @bottom: auto) 
-        when not (@position=null) 
+
+    & when not (@min-width-query=_) and not (@max-width-query=_)
     {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .index(@index);
+        }
+    }
+}
+
+//
+// .position(position, [min-width-query]) 
+// .position.align(position, top, right, bottom, left, [min-width-query]) 
+
+.position(@position)
+    when (@position=null) {}
+    
+.position(@position:_, @align:_)
+    when not (@position=null) and not (@align=_) {
+    .position(@position, @align, @align, @align, @align);
+}
+
+.position(@position:_, @top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) {
+    & when not (@position=null) and (@position=_) and (@top=_) and (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
+        .position(static, auto, auto, auto, auto);
+    }
+
+    & when not (@position=null) and not (@position=_) and (@min-width-query=_) and (@max-width-query=_) {
         position: @position;
-        left: @left;
+    }
+
+    & when not (@position=null) and not (@top=_) and (@min-width-query=_) and (@max-width-query=_) {
+        top: @top;
+    }
+
+    & when not (@position=null) and not (@right=_) and (@min-width-query=_) and (@max-width-query=_) {
+        right: @right;
+    }
+
+    & when not (@position=null) and not (@bottom=_) and (@min-width-query=_) and (@max-width-query=_) {
         bottom: @bottom;
     }
-    .right-top (@position) 
-        when (@position=null) 
-    {}
-    .right-top (@position: relative, @right: auto, @top: auto) 
-        when not (@position=null) 
-    {
-        position: @position;
-        right: @right;
-        top: @top; 
+
+    & when not (@position=null) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
+        left: @left;
     }
-    .right-bottom (@position) 
-        when (@position=null) 
-    {}
-    .right-bottom (@position: relative, @right: auto, @bottom: auto) 
-        when not (@position=null) 
-    {
-        position: @position;
-        right: @right;
-        bottom: @bottom;
+
+    & when not (@min-width-query=_), not (@max-width-query=_) {
+        .mixins(
+            @min-max: @min-width-query, @max-width-query;
+            @position: @position, @top, @right, @bottom, @left;
+        );
     }
 }

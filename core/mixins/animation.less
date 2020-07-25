@@ -7,42 +7,23 @@
 .animation(@name) 
     when (@name=null) {}
 
-.animation(@name:_, @duration:0, @ease:ease, @delay:0, @iteration:1, @direction:normal, @min-width-query:_, @max-width-query:_) 
-    when not (@name=null) and (@name=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    .animation(none, 0, ease, 0, 1, normal)
-}
-
-.animation(@name:_, @duration:0, @ease:ease, @delay:0, @iteration:1, @direction:normal, @min-width-query:_, @max-width-query:_) 
-    when not (@name=null) and not (@name=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    -webkit-animation: @name @duration @ease @delay @iteration @direction;  // Safari, Chrome
-       -moz-animation: @name @duration @ease @delay @iteration @direction;
-        -ms-animation: @name @duration @ease @delay @iteration @direction;
-            animation: @name @duration @ease @delay @iteration @direction;
-}
-
-.animation(@name:_, @duration:0, @ease:ease, @delay:0, @iteration:1, @direction:normal, @min-width-query:_, @max-width-query:_)
-    when (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (max-width: @max-width-query) {
-        .animation(@name, @duration, @ease, @delay, @iteration, @direction)
+.animation(@name:_, @duration:0, @ease:ease, @delay:0, @iteration:1, @direction:normal, @min-width-query:_, @max-width-query:_) {
+    & when not (@name=null) and (@name=_) and (@min-width-query=_) and (@max-width-query=_) {
+        .animation(none, 0, ease, 0, 1, normal)
     }
-}
 
-.animation(@name:_, @duration:0, @ease:ease, @delay:0, @iteration:1, @direction:normal, @min-width-query:_, @max-width-query:_)
-    when not (@min-width-query=_) and (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) {
-        .animation(@name, @duration, @ease, @delay, @iteration, @direction)
+    & when not (@name=null) and not (@name=_) and (@min-width-query=_) and (@max-width-query=_) {
+        -webkit-animation: @name @duration @ease @delay @iteration @direction;  // Safari, Chrome
+           -moz-animation: @name @duration @ease @delay @iteration @direction;
+            -ms-animation: @name @duration @ease @delay @iteration @direction;
+                animation: @name @duration @ease @delay @iteration @direction;
     }
-}
 
-.animation(@name:_, @duration:0, @ease:ease, @delay:0, @iteration:1, @direction:normal, @min-width-query:_, @max-width-query:_)
-    when not (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-        .animation(@name, @duration, @ease, @delay, @iteration, @direction)
+    & when not (@min-width-query=_), not (@max-width-query=_) {
+        .mixins(
+            @min-max: @min-width-query, @max-width-query;
+            @animation: @name, @duration, @ease, @delay, @iteration, @direction;
+        );
     }
 }
 
@@ -120,39 +101,20 @@
 .transition(@property) 
     when (@property=null) {}
 
-.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @min-width-query:_, @max-width-query:_) 
-    when not (@property=null) and (@property=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    .transition(all, 0s, ease, 0s);
-}
-
-.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @min-width-query:_, @max-width-query:_) 
-    when not (@property=null) and (@property=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    -webkit-transition: @property @duration @function @delay;
-            transition: @property @duration @function @delay;
-}
-
-.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @min-width-query:_, @max-width-query:_)
-    when (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (min-width: @max-width-query) {
-        .transition(@property, @duration, @function, @delay);
+.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @min-width-query:_, @max-width-query:_) {
+    & when not (@property=null) and (@property=_) and (@min-width-query=_) and (@max-width-query=_) {
+        .transition(all, 0s, ease, 0s);
     }
-}
 
-.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @min-width-query:_, @max-width-query:_)
-    when not (@min-width-query=_) and (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) {
-        .transition(@property, @duration, @function, @delay);
+    & when not (@property=null) and (@property=_) and (@min-width-query=_) and (@max-width-query=_) {
+        -webkit-transition: @property @duration @function @delay;
+                transition: @property @duration @function @delay;
     }
-}
 
-.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @min-width-query:_, @max-width-query:_)
-    when not (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) {
-        .transition(@property, @duration, @function, @delay);
+    & when not (@min-width-query=_), not (@max-width-query=_) {
+        .mixins(
+            @min-max: @min-width-query, @max-width-query;
+            @transition: @property, @duration, @function, @delay;
+        );
     }
 }

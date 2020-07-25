@@ -1,0 +1,178 @@
+//
+// Miscellaneous
+
+//
+//.appearance(@appearance, [@min-width-query, @max-width-query])
+
+.appearance(@appearance) 
+    when (@appearance=null) {}
+
+.appearance(@appearance:_, @min-width-query:_, @max-width-query:_) {
+    & when not (@appearance=null) and (@appearance= _) and (@min-width-query=_) and (@max-width-query=_) {
+        .appearance(normal)
+    }
+
+    & when not (@appearance=null) and not (@appearance= _) and (@min-width-query=_) and (@max-width-query=_) {
+        -webkit-appearance: @appearance;
+           -moz-appearance: @appearance;
+                appearance: @appearance;
+    }
+
+    & when not (@min-width-query=_), not (@max-width-query=_) {
+        .mixins(
+            @min-max: @min-width-query, @max-width-query;
+            @animation: @appearance;
+        );
+    }
+}
+
+//
+// .opacity(@opacity, [@min-width-query, @max-width-query])
+    
+.opacity(@opacity) 
+    when (@opacity=null) {}
+
+.opacity(@opacity:_, @min-with-query:_, @max-with-query:_)
+    when not (@opacity=null) and (@opacity=_) and (@min-with-query=_) and (@max-with-query=_) 
+{
+    opacity: 0;
+    filter: ~"alpha(opacity=0)";
+}
+
+.opacity(@opacity:_, @min-with-query:_, @max-with-query:_)
+    when not (@opacity=null) and not (@opacity=_) and (@min-with-query=_) and (@max-with-query=_) 
+{
+    @filter: @opacity * 100;
+    opacity: @opacity;
+    filter: ~"alpha(opacity=@{filter})";
+}
+
+.opacity(@opacity:_, @min-width-query:_, @max-width-query:_)
+    when (@min-width-query=_) and not (@max-width-query=_)
+{
+    @media all and (max-width: @max-width-query) {
+        .opacity(@opacity)
+    }
+}
+
+.opacity(@opacity:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and (@max-width-query=_)
+{
+    @media all and (min-width: @min-width-query) {
+        .opacity(@opacity)
+    }
+}
+
+.opacity(@opacity:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and not (@max-width-query=_)
+{
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+        .opacity(@opacity)
+    }
+}
+
+//
+// .overflow(@overflow-x, @overflow-y, [@min-width-query, @max-width-query])
+
+.overflow(@overflow-x)
+    when (@overflow-x=null) {}
+
+.overflow(@overflow-x:_, @overflow-y:_, @min-width-query:_, @max-width-query:_)
+    when not (@overflow-x=null) and (@overflow-x=_) and (@overflow-y=_) and (@min-width-query=_) and (@max-width-query=_)
+{
+    overflow: visible;
+    -webkit-overflow-scrolling: touch;
+}
+
+.overflow(@overflow-x:_, @overflow-y:_, @min-width-query:_, @max-width-query:_)
+    when not (@overflow-x=null) and not (@overflow-x=_) and not (@overflow-y=_) and (@min-width-query=_) and (@max-width-query=_)
+{
+    overflow-x: @overflow-x;
+    overflow-y: @overflow-y;
+    -webkit-overflow-scrolling: touch;
+}
+
+.overflow(@overflow-x:_, @overflow-y:_, @min-width-query:_, @max-width-query:_)
+    when not (@overflow-x=null) and (@overflow-x=_) and not (@overflow-y=_) and (@min-width-query=_) and (@max-width-query=_)
+{
+    overflow-y: @overflow-y;
+    -webkit-overflow-scrolling: touch;
+}
+
+.overflow(@overflow-x:_, @overflow-y:_, @min-width-query:_, @max-width-query:_) 
+    when not (@overflow-x=null) and not (@overflow-x=_) and (@overflow-y=_) and (@min-width-query=_) and (@max-width-query=_)
+{
+    overflow-x: @overflow-x;
+    -webkit-overflow-scrolling: touch;
+}
+
+.overflow(@overflow-x:_, @overflow-y:_, @min-width-query:_, @max-width-query:_)
+    when (@min-width-query=_) and not (@max-width-query=_)
+{
+    @media all and (max-width: @max-width-query) {
+        .overflow(@overflow-x, @overflow-y)
+    }
+}
+
+.overflow(@overflow-x:_, @overflow-y:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and (@max-width-query=_)
+{
+    @media all and (min-width: @min-width-query) {
+        .overflow(@overflow-x, @overflow-y)
+    }
+}
+
+.overflow(@overflow-x:_, @overflow-y:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and not (@max-width-query=_)
+{
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+        .overflow(@overflow-x, @overflow-y)
+    }
+}
+
+//
+// .placeholder(@property, @value, [@min-width-query, @max-width-query])
+
+.placeholder(@property) 
+    when (@property=null) {}
+
+.placeholder(@property:_, @value:_, @min-width-query:_, @max-width-query:_)
+    when not (@property=_) and not (@property=_) and not (@value=_) and (@min-width-query=_) and (@max-width-query=_)
+{
+    &::-webkit-input-placeholder {  // Chrome, Safari, Edge
+        @{property}: @value;
+    }
+    &:-ms-input-placeholder {       // IE 10+
+        @{property}: @value;
+    }
+    &::-moz-placeholder {           // Firefox 19+
+        @{property}: @value;
+    } 
+    &::placeholder {
+        @{property}: @value;
+    } 
+}
+
+.placeholder(@property:_, @value:_, @min-width-query:_, @max-width-query:_)
+    when (@min-width-query=_) and not (@max-width-query=_)
+{
+    @media all and (max-width: @max-width-query) {
+        .placeholder(@property, @value)
+    }
+}
+
+.placeholder(@property:_, @value:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and (@max-width-query=_)
+{
+    @media all and (min-width: @min-width-query) {
+        .placeholder(@property, @value)
+    }
+}
+
+.placeholder(@property:_, @value:_, @min-width-query:_, @max-width-query:_)
+    when not (@min-width-query=_) and not (@max-width-query=_)
+{
+    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+        .placeholder(@property, @value)
+    }
+}
