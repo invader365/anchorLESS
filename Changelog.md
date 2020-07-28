@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [1.3.0] - 2020-07
+ - Added 'declaration' mixin to input custom css declaration
  - Added single mixins block to output media queries
  - New writting anchorless writting format
  - Rewritten spacing code structure

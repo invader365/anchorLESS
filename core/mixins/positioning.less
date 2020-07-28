@@ -13,9 +13,6 @@
 }
 
 .align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@top=null) and (@top=_) and (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .align(static, auto, auto, auto, auto);
-    }
 
     & when not (@top=null) and not (@top=_) and (@min-width-query=_) and (@max-width-query=_) {
         top: @top;
@@ -55,102 +52,77 @@
     & when not (@float=null) and not (@float=_) and (@min-width-query=_) and (@max-width-query=_) {
         float: @float;
     }
- 
-    & when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .float(@float);
-        }
-    }
- 
-    & when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .float(@float);
-        }
-    }
- 
-    & when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .float(@float);
-        }
-    }
-}
 
-//
-// .index(index, [min-width-query]) 
-
-.index (@index) 
-    when (@index=null) {}
-
-.index(@index:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@index=null) and (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .index(0);
-    }
-
-    & when not (@index=null) and not (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
-        z-index: @index;
-    }
-
-    & when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .index(@index);
-        }
-    }
-
-    & when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .index(@index);
-        }
-    }
-
-    & when not (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .index(@index);
-        }
+    & when not (@min-width-query=_), not (@max-width-query=_) {
+        .mixins(
+            @min-max: @min-width-query, @max-width-query;
+            @floag: @float;
+        );
     }
 }
 
 //
 // .position(position, [min-width-query]) 
 // .position.align(position, top, right, bottom, left, [min-width-query]) 
-
-.position(@position)
-    when (@position=null) {}
     
 .position(@position:_, @align:_)
     when not (@position=null) and not (@align=_) {
     .position(@position, @align, @align, @align, @align);
 }
 
-.position(@position:_, @top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@position=null) and (@position=_) and (@top=_) and (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .position(static, auto, auto, auto, auto);
-    }
+.position(@position:_, @top:_, @right:_, @bottom:_, @left:_, @min-width:_, @max-width:_) {
 
-    & when not (@position=null) and not (@position=_) and (@min-width-query=_) and (@max-width-query=_) {
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+    
+    & when (@position=null) {}
+
+    & when not (@position=null) and not (@position=_) and (@query=_) {
         position: @position;
     }
 
-    & when not (@position=null) and not (@top=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@position=null) and not (@top=_) and (@query=_) {
         top: @top;
     }
 
-    & when not (@position=null) and not (@right=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@position=null) and not (@right=_) and (@query=_) {
         right: @right;
     }
 
-    & when not (@position=null) and not (@bottom=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@position=null) and not (@bottom=_) and (@query=_) {
         bottom: @bottom;
     }
 
-    & when not (@position=null) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@position=null) and not (@left=_) and (@query=_) {
         left: @left;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @min-max: @query;
+            @position: @position, @top, @right, @bottom, @left;
+        );
+    }
+}
+
+//
+// @zindex: z-index;
+
+.zindex(@index) 
+    when (@index=null) {}
+
+.zindex(@index:_, @min-width-query:_, @max-width-query:_) {
+    & when not (@index=null) and (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
+        z-index: 0;
+    }
+
+    & when not (@index=null) and not (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
+        z-index: @index;
     }
 
     & when not (@min-width-query=_), not (@max-width-query=_) {
         .mixins(
             @min-max: @min-width-query, @max-width-query;
-            @position: @position, @top, @right, @bottom, @left;
+            @index: @index;
         );
     }
 }

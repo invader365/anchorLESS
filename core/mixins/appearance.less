@@ -1,666 +1,141 @@
 //
-//  Background and Color
+//  Visual appearance properties
 
 //
-// @back: background-color, background-image, background-repeat, background-position;
+//  .back(color, image, repeat, position/backsize, repeat, origin, clip, attachment, [min-width, max-width]);
+//   ------------------------------------------------------
+//   background-color     |  -color-/transparent/initial/inherit
+//   background-image     |  none/url/initial/inherit
+//   background-repeat    |  repeat/repeat-x/repeat-y/no-repeat/initial/inherit
+//   background-position  |  center/left top/xpos ypos/initial/inherit
 
-.back(@color) 
-    when (@color=null) {}
+.back(@color:_, @image:_, @position-s-backsize:_, @repeat:_, @origin:_, @clip:_, @attachment:_, @min-width:_, @max-width:_) {
+    
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
 
-.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @min-width-query:_, @max-width-query:_) {
-    & when not (@color=null) and (@image=none) and (@min-width-query=_) and (@max-width-query=_) {
-        background: @color @image @repeat @position;
+    @1: if((not (@color=_)); if((isstring(@color)); url('@{color}'); @color));
+    @2: if((not (@image=_)); @1 if((isstring(@image)); url('@{image}'); @image); @1);
+    @3: if((not (@position-s-backsize=_)); @2 @position-s-backsize; @2);
+    @4: if((not (@repeat=_)); @3 @repeat; @3);
+    @5: if((not (@origin=_)); @4 @origin; @4);
+    @6: if((not (@clip=_)); @5 @clip; @5);
+    @args: if((not (@attachment=_)); @6 @attachment; @6);
+
+    & when not (@color=_) and (@query=_) {
+        background: @args;
     }
 
-    & when not (@color=null) and not (@image=none) and (@min-width-query=_) and (@max-width-query=_) {
-        background: @color url('@{image}') @repeat @position; 
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
+    & when not (@query=_) {
         .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @back: @color, @image, @repeat, @position;
+            @query; 
+            @back: @color, @image, @position-s-backsize, @repeat, @origin, @clip, @attachment;
         );
     }
 }
 
 //
-// .back.attach(@attachment, [@min-width-query, @max-width-query])
-// .back.color(@color, [@min-width-query, @max-width-query])
-// .back.clip(@clip, [@min-width-query, @max-width-query])
-// .back.image(@path, [@min-width-query, @max-width-query])
-// .back.origin(@origin, [@min-width-query, @max-width-query])
-// .back.position(@position, [@min-width-query, @max-width-query])
-// .back.repeat(@repeat, [@min-width-query, @max-width-query])
-// .back.size(@size, [@min-width-query, @max-width-query])
+//  .color(color, background-color, border-color, [min-width, max-width]);
+//   ------------------------------------------------------
+//   color             |  -color-/initial/inherit
+//   background-color  |  -color-/transparent/initial/inherit
+//   border-color      |  -color-/transparent/initial/inherit
 
-.back {
-    .attach(@attachment) 
-        when (@attachment=null) {}
+.color(@color:_, @back-color:_, @border-color:_, @min-width:_, @max-width:_) {
+    
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
 
-    .attach(@attachment:_, @min-width-query:_, @max-width-query:_) 
-        when not (@attachment=null) and (@attachment=_) and (@min-width-query=_) and (@max-width-query=_) { 
-        .back.attach(scroll); 
-    }
-
-    .attach(@attachment:_, @min-width-query:_, @max-width-query:_) 
-        when not (@attachment=null) and not (@attachment=_) and (@min-width-query=_) and (@max-width-query=_) { 
-        background-attachment: @attachment; 
-    }
-
-    .attach(@attachment:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .back.attach(@attachment);
-        } 
-    }
-
-    .attach(@attachment:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .back.attach(@attachment);
-        } 
-    }
-
-    .attach(@attachment:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .back.attach(@attachment);
-        } 
-    }
-
-    .color(@color) 
-        when (@color=null) {}
-
-    .color(@color:_, @min-width-query:_, @max-width-query:_) 
-        when not (@color=null) and (@color=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .back.color(transparent); 
-    }
-
-    .color(@color:_, @min-width-query:_, @max-width-query:_) 
-        when not (@color=null) and not (@color=_) and (@min-width-query=_) and (@max-width-query=_) {
-        background-color: @color; 
-    }
-
-    .color(@color:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .back.color(@color);
-        } 
-    }
-
-    .color(@color:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .back.color(@color);
-        } 
-    }
-
-    .color(@color:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .back.color(@color);
-        } 
-    }
-
-    .clip(@clip) 
-        when (@clip=null) {}
-
-    .clip (@clip:_, @min-width-query:_, @max-width-query:_) 
-        when not (@clip=null) and (@clip=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .back.clip(border)
-    }
-
-    .clip (@clip:_, @min-width-query:_, @max-width-query:_) 
-        when not (@clip=null) and not (@clip=_) and (@min-width-query=_) and (@max-width-query=_) {
-        -webkit-background-clip: @clip;           // Safari 4? Chrome 6?
-           -moz-background-clip: @clip;           // Firefox 3.6
-                background-clip: ~'@{clip}-box';  // Firefox 4, Safari 5, Opera 10, IE9
-    }
-
-    .clip(@clip:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .back.clip(@clip);
-        } 
-    }
-
-    .clip(@clip:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .back.clip(@clip);
-        } 
-    }
-
-    .clip(@clip:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .back.clip(@clip);
-        } 
-    }
-
-    .image(@path) 
-        when (@path=null) {}
-
-    .image(@path:none, @min-width-query:_, @max-width-query:_)
-        when not (@path=null) and (@path=none) and (@min-width-query=_) and (@max-width-query=_) {
-        background-image: none; 
-    }
-
-    .image(@path:none, @min-width-query:_, @max-width-query:_)
-        when not (@path=null) and not (@path=none) and (@min-width-query=_) and (@max-width-query=_) { 
-        background-image: url('@{path}'); 
-    }
-
-    .image(@path:none, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .back.image(@path);
-        } 
-    }
-
-    .image(@path:none, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .back.image(@path);
-        } 
-    }
-
-    .image(@path:none, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .back.image(@path);
-        } 
-    }
-
-    .origin(@origin) 
-        when (@origin=null) {}
-
-    .origin(@origin:_, @min-width-query:_, @max-width-query:_)
-        when not (@origin=null) and (@origin=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .back.origin(padding-box); 
-    }
-
-    .origin (@origin:_, @min-width-query:_, @max-width-query:_)
-        when not (@origin=null) and not (@origin=_) and (@min-width-query=_) and (@max-width-query=_) {    
-        -webkit-background-origin: @origin;  // Safari 4? Chrome 6?
-           -moz-background-origin: @origin;  // Firefox 3.6
-                background-origin: @origin;  // Firefox 4, Safari 5, Opera 10, IE9
-    }
-
-    .origin(@origin:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .back.origin(@origin);
-        } 
-    }
-
-    .origin(@origin:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .back.origin(@origin);
-        } 
-    }
-
-    .origin(@origin:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .back.origin(@origin);
-        } 
-    }
-
-    .position(@position) 
-        when (@position=null) {}
-
-    .position(@position:_, @min-width-query:_, @max-width-query:_) 
-        when not (@position=null) and (@position=_) and (@min-width-query=_) and (@max-width-query=_) { 
-        .back.position(0 0);
-    }
-
-    .position(@position:_, @min-width-query:_, @max-width-query:_) 
-        when not (@position=null) and not (@position=_) and (@min-width-query=_) and (@max-width-query=_) { 
-        background-position: @position;
-    }
-
-    .position(@position:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .back.position(@position);
-        } 
-    }
-
-    .position(@position:none, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .back.position(@position);
-        } 
-    }
-
-    .position(@position:none, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .back.position(@position);
-        } 
-    }
-
-    .repeat(@repeat) 
-        when (@repeat=null) {}
-
-    .repeat(@repeat:_, @min-width-query:_, @max-width-query:_)
-        when not (@repeat=null) and (@repeat=_) and (@min-width-query=_) and (@max-width-query=_) { 
-        .back.repeat(repeat); 
-    }
-
-    .repeat(@repeat:_, @min-width-query:_, @max-width-query:_) 
-        when not (@repeat=null) and not (@repeat=_) and (@min-width-query=_) and (@max-width-query=_) { 
-        background-repeat: @repeat; 
-    }
-
-    .repeat(@repeat:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .back.repeat(@repeat);
-        } 
-    }
-
-    .repeat(@repeat:none, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .back.repeat(@repeat);
-        } 
-    }
-
-    .repeat(@repeat:none, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .back.repeat(@repeat);
-        } 
-    }
-
-    .size(@size) 
-        when (@size=null) {}
-
-    .size(@size:_, @min-width-query:_, @max-width-query:_)
-        when not (@size=null) and (@size=_) and (@min-width-query=_) and (@max-width-query=_) { 
-        .back.size(auto);
-    }
-
-    .size(@size:_, @min-width-query:_, @max-width-query:_)
-        when not (@size=null) and not (@size=_) and (@min-width-query=_) and (@max-width-query=_) { 
-        -webkit-background-size: @size;  // Safari 3.0+, Chrome 1.0+
-           -moz-background-size: @size;  // Firefox 3.6
-                background-size: @size;  // IE 9+
-    }
-
-    .size(@size:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .back.size(@size);
-        } 
-    }
-
-    .size(@size:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .back.size(@size);
-        } 
-    }
-
-    .size(@size:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .back.size(@size);
-        } 
-    }
-}
-
-//
-// .color(@color, @background-color, @border-color, [@min-width-query, @max-width-query])
-
-.color(@color) 
-    when (@color=null) {}
-
-.color(@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@color=null) and (@color=_) and (@back-color=_) and (@border-color=_) and (@min-width-query=_) and (@max-width-query=_) {
-        color: inherit; 
-        background-color: transparent;
-        border-color: inherit;
-    }
-
-    & when not (@color=null) and not (@color=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@color=_) and (@query=_) {
         color: @color;
     }
 
-    & when not (@color=null) and not (@back-color=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@back-color=_) and (@query=_) {
         background-color: @back-color;
     }
 
-    & when not (@color=null) and not (@border-color=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@border-color=_) and (@query=_) {
         border-color: @border-color;
     }
 
-    & when not (@min-width-query=_), not (@max-width-query=_) {
+    & when not (@query=_) {
         .mixins(
-            @min-max: @min-width-query, @max-width-query;
+            @query; 
             @color: @color, @back-color, @border-color;
         );
     }
 }
 
 //
-// .gradient(@start, @stop, @degrees, [@min-width-query, @max-width-query])
+//  .gradient(gradient, start, stop1, stop2, stop3, [min-width, max-width])
+//   ------------------------------------------------------
+//   gradient         |  linear/-angle-/to-top/to-bottom/to-right/to-left  radial/ellipse/circle
+//   start/stop       |  color + [position]
 
-.gradient(@start) 
-    when (@start=null) {}
+.gradient(@grad:_, @start:_, @stop1:_, @stop2:_, @stop3:_, @min-width:_, @max-width:_) {
+    
+    @mode: if((@grad=radial) or (@grad=ellipse) or (@grad=circle); radial; linear);
+    
+    @a0: if((@grad=_) or (@grad=linear); 180deg; @grad);
+    @a1: if((@a0=to-left);   270deg; @a0);
+    @a2: if((@a1=to-bottom); 180deg; @a1);
+    @a3: if((@a2=to-right);   90deg; @a2);
+    @angle: if((@a3=to-top);   0deg; @a3);
+    
+    @shape: if((@grad=radial); circle; ellipse);
 
-.gradient(@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@start=null) and (@start=_) and (@stop=_) and (@degrees=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient(white, black, 180deg);
+    @s1: if(not (@stop1=_); @stop1);
+    @s2: if(not (@stop2=_); @s1, @stop2; @s1);
+    @stops: if(not (@stop3=_); @s2, @stop3; @s2);
+
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when (iscolor(extract(@grad, 1))) and (iscolor(extract(@start, 1))) and (@stop1=_) and (@query=_) {
+        .gradient(linear, @grad, @start);
     }
 
-    & when not (@start=null) and not (@start=_) and (@stop=_) and (@degrees=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient(@start, black, 180deg);
+    & when not (@grad=_) and not (@mode=radial) and not (@start=_) and not (@stop1=_) and (@query=_) {
+        background-image: -webkit-linear-gradient(@angle, @start, @stops);  // Safari 5.1+, Chrome 10+
+        background-image:    -moz-linear-gradient(@angle, @start, @stops);  // Firefox 3.6+
+        background-image:         linear-gradient(@angle, @start, @stops);  // IE10
+    }
+    
+    & when not (@grad=_) and (@mode=radial) and not (@start=_) and not (@stop1=_) and (@query=_) {
+        background-image: -webkit-radial-gradient(center, @shape, @start, @stops);  // Safari 5.1+, Chrome 10+
+        background-image:    -moz-radial-gradient(center, @shape, @start, @stops);   // Firefox 3.6+
+        background-image:       radial-gradient(@shape at center, @start, @stops);
     }
 
-    & when not (@start=null)  and (@start=_) and not (@stop=_) and (@degrees=_)and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient(white, @stop, 180deg);
-    }
-
-    & when not (@start=null) and (@start=_) and (@stop=_) and not (@degrees=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient(white, black, @degrees);
-    }
-
-    & when not (@start=null) and not (@start=_) and not (@stop=_) and not (@degrees= 180deg) and (@min-width-query=_) and (@max-width-query=_) {
-        background-image: -webkit-linear-gradient(@degrees, @start, @stop);  // Safari 5.1+, Chrome 10+
-        background-image:   -moz-linear-gradient(@degrees, @start, @stop);   // Firefox 3.6+
-        background-image:         linear-gradient(@degrees, @start, @stop);  // IE10
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
+    & when not (@query=_) {
         .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @gradient: @start, @stop, @degrees;
+            @query; 
+            @gradient: @grad, @start, @stop1, @stop2, @stop3
         );
     }
 }
 
 //
-// .gradient.linear(start, stop, degrees, [@min-width-query, @max-width-query])
-// .gradient.to-top(start, stop, [@min-width-query, @max-width-query])
-// .gradient.to-bottom(start, stop, [@min-width-query, @max-width-query])
-// .gradient.to-left(start, stop, [@min-width-query, @max-width-query])
-// .gradient.to-right(start, stop, [@min-width-query, @max-width-query])
-// .gradient.radial(inner, outer, [@min-width-query, @max-width-query])
+//  .shadow(spread, color, alpha, inset)
+//   ------------------------------------------------------
+//   spread     |  none/h-offset v-offset blur/inset/initial/inherit
+//   color      |  -color-/transparent/initial/inherit
+//   alpha      |  percentage [0-100%]
+//   inset      |  inner shadow
 
-.gradient {
-    .linear(@start) 
-        when (@start=null) {}
-
-    .linear(@start:_, @stop:_, @degrees:180deg, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and (@start=_) and (@stop=_) and (@min-width-query=_)  and (@max-width-query=_) 
-    {
-        .gradient.linear(white, black, 180deg)
-    }
-
-    .linear(@start:_, @stop:_, @degrees:180deg, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and (@start=_) and not (@stop=_) and (@min-width-query=_)  and (@max-width-query=_) 
-    {
-        .gradient.linear(white, @stop, @degrees)
-    }
-
-    .linear(@start, @stop, @degrees:180deg, @min-width-query:_, @max-width-query:_) 
-        when not (@start=null) and not (@start=_) and (@stop=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient.linear(@start, black, @degrees)
-    }
-
-    .linear(@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_) 
-        when not (@start=null) and not (@start=_) and not (@stop=_) and (@min-width-query=_) and (@max-width-query=_) {
-        background-image: -webkit-linear-gradient(@degrees, @start, @stop);  // Safari 5.1+, Chrome 10+
-        background-image:   -moz-linear-gradient(@degrees, @start, @stop);   // Firefox 3.6+
-        background-image:         linear-gradient(@degrees, @start, @stop);  // IE10
-    }
-
-    .linear(@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) 
-    {
-        @media all and (max-width: @max-width-query) {
-            .gradient.linear(@start, @stop, @degrees)
-        }
-    }
-
-    .linear(@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .gradient.linear(@start, @stop, @degrees)
-        }
-    }
-
-    .linear(@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .gradient.linear(@start, @stop, @degrees)
-        }
-    }
-
-    .to-bottom (@inner) 
-        when (@inner=null) {}
-
-    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and (@start=_) and (@stop=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient.to-bottom(white, black);
-    }
-
-    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and not (@start=_) and not (@stop=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient.linear(@start, @stop, 180deg);
-    }
+.shadow(@spread:_, @color:_, @alpha:_, @inset:_, @min-width:_, @max-width:_) {
     
-    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) 
-    {
-        @media all and (max-width: @max-width-query) {
-            .gradient.to-bottom(@start, @stop)
-        }
-    }
-    
-    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) 
-    {
-        @media all and (min-width: @min-width-query) {
-            .gradient.to-bottom(@start, @stop)
-        }
-    }
-    
-    .to-bottom(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .gradient.to-bottom(@start, @stop)
-        }
-    }
-   
-    .to-right(@inner) 
-        when (@inner=null) {}
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
 
-    .to-right(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and not (@start=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient.to-right(white, black);
+    & when not (@spread=_) and not (@color=_) and (@query=_) {
+        @amount: if(not (@alpha=_); @alpha/1; 100%);
+        @rgba: fade(@color, @amount);
+        @mode: if(not (@inset=_); @rgba, inset; @rgba);
+
+        -webkit-box-shadow: @spread @mode;  // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @mode;  // Chrome 6+, Firefox 4+, IE 9+
     }
 
-    .to-right(@start: transparent, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and not (@start=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient.linear(@start, @stop, 270deg);
-    }
-
-    .to-right(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) 
-    {
-        @media all and (max-width: @max-width-query) {
-            .gradient.to-right(@start, @stop)
-        }
-    }
-
-    .to-right(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) 
-    {
-        @media all and (min-width: @min-width-query) {
-            .gradient.to-right(@start, @stop)
-        }
-    }
-
-    .to-right(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .gradient.to-right(@start, @stop)
-        }
-    }
-
-    .to-top(@inner) 
-        when (@inner=null) {}
-
-    .to-top(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and (@start=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient.to-top(transparent, black, 0deg);
-    }
-
-    .to-top(@start: transparent, @stop: gray, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and not (@start=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient.linear(@start, @stop, 0deg);
-    }
-
-    .to-top(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) 
-    {
-        @media all and (max-width: @max-width-query) {
-            .gradient.to-top(@start, @stop)
-        }
-    }
-
-    .to-top(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) 
-    {
-        @media all and (min-width: @min-width-query) {
-            .gradient.to-top(@start, @stop)
-        }
-    }
-
-    .to-top(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .gradient.to-top(@start, @stop)
-        }
-    }
-
-    .to-left(@inner) 
-        when (@inner=null) {}
-
-    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and (@start=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient.to-left(white, black);
-    }
-
-    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@start=null) and not (@start=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient.linear(@start, @stop, 90deg);
-    }
-
-    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) 
-    {
-        @media all and (max-width: @max-width-query) {
-            .gradient.to-left(@start, @stop)
-        }
-    }
-
-    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) 
-    {
-        @media all and (min-width: @min-width-query) {
-            .gradient.to-left(@start, @stop)
-        }
-    }
-
-    .to-left(@start:_, @stop:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .gradient.to-left(@start, @stop)
-        }
-    }
-
-    .radial (@inner) 
-        when (@inner=null) {}
-
-    .radial(@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
-        when not (@inner=null) and (@inner=_) and (@outer=_) and (@min-width-query=_) and (@max-width-query=_) 
-    {
-        .gradient.radial(white, black)
-    }
-
-    .radial(@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
-        when not (@inner=null) and (@inner=_) and not (@outer=_) and (@min-width-query=_) and (@max-width-query=_) 
-    {
-        .gradient.radial(white, @outer)
-    }
-
-    .radial(@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
-        when not (@inner=null) and not (@inner=_) and (@outer=_) and (@min-width-query=_) and (@max-width-query=_) 
-    {
-        .gradient.radial(@inner, black)
-    }
-
-    .radial(@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
-        when not (@inner=null) and not (@inner=_) and not (@outer=_) and (@min-width-query=_) and (@max-width-query=_) 
-    {
-        background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@inner), to(@outer)); // Chrome, Safari 4+
-        background-image: -webkit-radial-gradient(center, ellipse, @inner 0%, @outer 100%);  // Safari 5.1+, Chrome 10+
-        background-image:    -moz-radial-gradient(center, ellipse, @inner 0%, @outer 100%);   // Firefox 3.6+
-        background-image:         radial-gradient(ellipse at center, @inner 0%, @outer 100%);
-    }
-
-    .radial (@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
-        when (@min-width-query=_) and not (@max-width-query=_) 
-    {
-        @media all and (max-width: @max-width-query) {
-            .gradient.radial(@inner, @outer)
-        }
-    }
-
-    .radial (@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and (@max-width-query=_) 
-    {
-        @media all and (min-width: @min-width-query) {
-            .gradient.radial(@inner, @outer)
-        }
-    }
-
-    .radial (@inner:_, @outer:_, @min-width-query:_, @max-width-query:_)
-        when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .gradient.radial(@inner, @outer)
-        }
-    }
-}
-
-//
-// .shadow(@spread, @color, [@alpha, @min-width-query, @max-width-query])
-
-.shadow(@spread) 
-    when (@spread=null) {}
-
-.shadow(@spread:_, @color:_, @alpha:_, @inset:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@spread=null) and (@spread=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .shadow(none, transparent, 100%);
-    }
-
-    & when not (@spread=null) and not (@spread=_) and (@min-width-query=_) and (@max-width-query=_) {
-        @sinset: if(not (@inset=_), inset);
-        @rgba: fade(@color, @alpha/1);
-        -webkit-box-shadow: @spread @rgba @sinset;  // Android 2.3+, iOS 4.0.2-4.2
-                box-shadow: @spread @rgba @sinset;  // Chrome 6+, Firefox 4+, IE 9+
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
+    & when not (@query=_) {
         .mixins(
-            @min-max: @min-width-query, @max-width-query;
+            @query; 
             @shadow: @spread, @color, @alpha, @inset;
         );
     }

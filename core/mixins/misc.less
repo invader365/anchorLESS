@@ -2,26 +2,25 @@
 // Miscellaneous
 
 //
-//.appearance(@appearance, [@min-width-query, @max-width-query])
+//  .declaration(property, value, [min-width, max-width]);
+//   ------------------------------------------------------
+//   property            |  property name
+//   background-color    |  -color-/transparent/initial/inherit
 
-.appearance(@appearance) 
-    when (@appearance=null) {}
+.declaration(@property:_, @value:_, @min-width:_, @max-width:_) {
+    
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
 
-.appearance(@appearance:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@appearance=null) and (@appearance= _) and (@min-width-query=_) and (@max-width-query=_) {
-        .appearance(normal)
+    & when (@property=null) {}
+
+    & when not (@property=null) and not (@property=_) and not (@value=_) and (@query=_) {
+        @{property}: @value;
     }
 
-    & when not (@appearance=null) and not (@appearance= _) and (@min-width-query=_) and (@max-width-query=_) {
-        -webkit-appearance: @appearance;
-           -moz-appearance: @appearance;
-                appearance: @appearance;
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
+    & when not (@query=_) {
         .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @animation: @appearance;
+            @min-max: @query;
+            @declaration: @property, @value;
         );
     }
 }

@@ -6,28 +6,663 @@
 //  Animation and Transition
 
 //
-// .animation(@name, @duration, @ease, @delay, @iteration, @direction, [@min-width-query, @max-width-query])
+//  .animation(name, duration, timing-function, delay, iteration-count, direction, fill-mode, play-state, [min-width, max-width]);
+//   ------------------------------------------------------
+//   name            |  name of the @keyframes animation
+//   duration        |  -time-/initial/inherit
+//   timing-function |  linear/ease/ease-in/ease-out/ease-in-out/step-start/step-end/steps(int,start/end)/initial/inherit
+//   delay           |  -time-/initial/inherit
+//   iteration-count |  -number-/infinite/initial/inherit
+//   direction       |  normal/reverse/alternate/alternate-reverse/initial/inherit
+//   fill-mode       |  none/forwards/backwards/both/initial/inherit
+//   play-state      |  paused/running/initial/inherit
 
-.animation(@name) 
-    when (@name=null) {}
 
-.animation(@name:_, @duration:0, @ease:ease, @delay:0, @iteration:1, @direction:normal, @min-width-query:_, @max-width-query:_) {
-    & when not (@name=null) and (@name=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .animation(none, 0, ease, 0, 1, normal)
+.animation(@name:_, @duration:_, @timing:_, @delay:_, @iteration:_, @direction:_, @fill-mode:_, @play-state:_, @min-width:_, @max-width:_) {
+
+    @1: if((not (@name=_)); @name);
+    @2: if((not (@duration=_)); @1 @duration; @1);
+    @3: if((not (@timing=_)); @2 @timing; @2);
+    @4: if((not (@delay=_)); @3 @delay; @3);
+    @5: if((not (@iteration=_)); @4 @iteration; @4 1); // defaults to 1
+    @6: if((not (@direction=_)); @5 @direction; @5);
+    @7: if((not (@fill-mode=_)); @6 @fill-mode; @6);
+    @args: if((not (@play-state=_)); @7 @play-state; @7);
+    
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when not (@name=_) and not (@duration=_) and (@query=_) {
+        -webkit-animation: @args;  // Safari, Chrome
+           -moz-animation: @args;
+            -ms-animation: @args;
+                animation: @args;
     }
 
-    & when not (@name=null) and not (@name=_) and (@min-width-query=_) and (@max-width-query=_) {
-        -webkit-animation: @name @duration @ease @delay @iteration @direction;  // Safari, Chrome
-           -moz-animation: @name @duration @ease @delay @iteration @direction;
-            -ms-animation: @name @duration @ease @delay @iteration @direction;
-                animation: @name @duration @ease @delay @iteration @direction;
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
+    & when not (@query=_) {
         .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @animation: @name, @duration, @ease, @delay, @iteration, @direction;
+            @query; 
+            @animation: @name, @duration, @timing, @delay, @iteration, @direction, @fill-mode, @play-state;
         );
+    }
+}
+
+//
+//  .transition(property, duration, timing-function, delay, [min-width, max-width])
+//   ------------------------------------------------------
+//   property        |  none/all/-property-/initial/inherit
+//   duration        |  -time-/initial/inherit
+//   timing-function |  linear/ease/ease-in/ease-out/ease-in-out/step-start/step-end/steps(int,start/end)/initial/inherit
+//   delay           |  -time-/initial/inherit
+
+.transition(@property:_, @duration:_, @timing:_, @delay:_, @min-width:_, @max-width:_) {
+
+    @1: if((not (@property=_)); @property);
+    @2: if((not (@duration=_)); @1 @duration; @1 0s); // defaults to 0s
+    @3: if((not (@timing=_)); @2 @timing; @2);
+    @args: if((not (@delay=_)); @3 @delay; @3);
+
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when not (@property=_) and (@query=_) {
+        -webkit-transition: @args;
+                transition: @args;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @query; 
+            @transition: @property, @duration, @timing, @delay;
+        );
+    }
+}
+
+//
+//  Visual appearance properties
+
+//
+//  .back(color, image, repeat, position/backsize, repeat, origin, clip, attachment, [min-width, max-width]);
+//   ------------------------------------------------------
+//   background-color     |  -color-/transparent/initial/inherit
+//   background-image     |  none/url/initial/inherit
+//   background-repeat    |  repeat/repeat-x/repeat-y/no-repeat/initial/inherit
+//   background-position  |  center/left top/xpos ypos/initial/inherit
+
+.back(@color:_, @image:_, @position-s-backsize:_, @repeat:_, @origin:_, @clip:_, @attachment:_, @min-width:_, @max-width:_) {
+    
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    @1: if((not (@color=_)); if((isstring(@color)); url('@{color}'); @color));
+    @2: if((not (@image=_)); @1 if((isstring(@image)); url('@{image}'); @image); @1);
+    @3: if((not (@position-s-backsize=_)); @2 @position-s-backsize; @2);
+    @4: if((not (@repeat=_)); @3 @repeat; @3);
+    @5: if((not (@origin=_)); @4 @origin; @4);
+    @6: if((not (@clip=_)); @5 @clip; @5);
+    @args: if((not (@attachment=_)); @6 @attachment; @6);
+
+    & when not (@color=_) and (@query=_) {
+        background: @args;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @query; 
+            @back: @color, @image, @position-s-backsize, @repeat, @origin, @clip, @attachment;
+        );
+    }
+}
+
+//
+//  .color(color, background-color, border-color, [min-width, max-width]);
+//   ------------------------------------------------------
+//   color             |  -color-/initial/inherit
+//   background-color  |  -color-/transparent/initial/inherit
+//   border-color      |  -color-/transparent/initial/inherit
+
+.color(@color:_, @back-color:_, @border-color:_, @min-width:_, @max-width:_) {
+    
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when not (@color=_) and (@query=_) {
+        color: @color;
+    }
+
+    & when not (@back-color=_) and (@query=_) {
+        background-color: @back-color;
+    }
+
+    & when not (@border-color=_) and (@query=_) {
+        border-color: @border-color;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @query; 
+            @color: @color, @back-color, @border-color;
+        );
+    }
+}
+
+//
+//  .gradient(gradient, start, stop1, stop2, stop3, [min-width, max-width])
+//   ------------------------------------------------------
+//   gradient         |  linear/-angle-/to-top/to-bottom/to-right/to-left  radial/ellipse/circle
+//   start/stop       |  color + [position]
+
+.gradient(@grad:_, @start:_, @stop1:_, @stop2:_, @stop3:_, @min-width:_, @max-width:_) {
+    
+    @mode: if((@grad=radial) or (@grad=ellipse) or (@grad=circle); radial; linear);
+    
+    @a0: if((@grad=_) or (@grad=linear); 180deg; @grad);
+    @a1: if((@a0=to-left);   270deg; @a0);
+    @a2: if((@a1=to-bottom); 180deg; @a1);
+    @a3: if((@a2=to-right);   90deg; @a2);
+    @angle: if((@a3=to-top);   0deg; @a3);
+    
+    @shape: if((@grad=radial); circle; ellipse);
+
+    @s1: if(not (@stop1=_); @stop1);
+    @s2: if(not (@stop2=_); @s1, @stop2; @s1);
+    @stops: if(not (@stop3=_); @s2, @stop3; @s2);
+
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when (iscolor(extract(@grad, 1))) and (iscolor(extract(@start, 1))) and (@stop1=_) and (@query=_) {
+        .gradient(linear, @grad, @start);
+    }
+
+    & when not (@grad=_) and not (@mode=radial) and not (@start=_) and not (@stop1=_) and (@query=_) {
+        background-image: -webkit-linear-gradient(@angle, @start, @stops);  // Safari 5.1+, Chrome 10+
+        background-image:    -moz-linear-gradient(@angle, @start, @stops);  // Firefox 3.6+
+        background-image:         linear-gradient(@angle, @start, @stops);  // IE10
+    }
+    
+    & when not (@grad=_) and (@mode=radial) and not (@start=_) and not (@stop1=_) and (@query=_) {
+        background-image: -webkit-radial-gradient(center, @shape, @start, @stops);  // Safari 5.1+, Chrome 10+
+        background-image:    -moz-radial-gradient(center, @shape, @start, @stops);   // Firefox 3.6+
+        background-image:       radial-gradient(@shape at center, @start, @stops);
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @query; 
+            @gradient: @grad, @start, @stop1, @stop2, @stop3
+        );
+    }
+}
+
+//
+//  .shadow(spread, color, alpha, inset)
+//   ------------------------------------------------------
+//   spread     |  none/h-offset v-offset blur/inset/initial/inherit
+//   color      |  -color-/transparent/initial/inherit
+//   alpha      |  percentage [0-100%]
+//   inset      |  inner shadow
+
+.shadow(@spread:_, @color:_, @alpha:_, @inset:_, @min-width:_, @max-width:_) {
+    
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when not (@spread=_) and not (@color=_) and (@query=_) {
+        @amount: if(not (@alpha=_); @alpha/1; 100%);
+        @rgba: fade(@color, @amount);
+        @mode: if(not (@inset=_); @rgba, inset; @rgba);
+
+        -webkit-box-shadow: @spread @mode;  // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @spread @mode;  // Chrome 6+, Firefox 4+, IE 9+
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @query; 
+            @shadow: @spread, @color, @alpha, @inset;
+        );
+    }
+}
+
+//
+//  Border mixins
+
+//
+//  .border(width, style, color, [min-width, max-width])
+//   ------------------------------------------------------
+//   width     |  medium/thin/thick/-length-/initial/inherit
+//   style     |  none/hidden/dotted/dashed/solid/double/groove/ridge/inset/outset/initial/inherit
+//   color     |  color|transparent|initial|inherit
+
+.border(@width:_, @style:_, @color:_, @min-width:_, @max-width:_) {
+
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when not (@width=_) and not (@style=_) and not (@color=_) and (@query=_) {
+        border: @width @style @color;
+    }
+
+    & when not (@width=_) and not (@style=_) and (@color=_) and (@query=_) {
+        border: @width @style;
+    }
+
+    & when (@width=_) and not (@style=_) and not (@color=_) and (@query=_) {
+        border: @style @color;
+    }
+
+    & when (@width=_) and not (@style=_) and (@color=_) and (@query=_) {
+        border: @style;
+    }
+
+    & when not (@width=_) and (@style=_) and (@color=_) and (@query=_) {
+        border-width: @width;
+    }
+
+    & when not (@width=_) and (@style=_) and not (@color=_) and (@query=_) {
+        border-width: @width;
+        border-color: @color;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @query; 
+            @border: @width, @style, @color;
+        );
+    }
+}
+
+//
+//  .rounded.top-left(@radius, [@min-width, @max-width])
+//  .rounded.top-right(@radius, [@min-width, @max-width])
+//  .rounded.bottom-right(@radius, [@min-width, @max-width])
+//  .rounded.bottom-left(@radius, [@min-width, @max-width])
+//   ------------------------------------------------------
+//   radius     |  -length [length]-/initial/inherit
+
+.rounded {
+    .top-left(@radius:_, @min-width:_, @max-width:_) {
+    
+        @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+        & when not (@radius=_) and (@query=_) {
+            -webkit-border-top-left-radius: @radius;
+                -moz-border-radius-topleft: @radius;
+                    border-top-left-radius: @radius;
+        }
+
+        & when not (@query=_) {
+            .mixins(
+                @query; 
+                @top-left: @radius;
+            );
+        }
+    }
+
+    .top-right(@radius:_, @min-width:_, @max-width:_) {
+    
+        @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+        
+        & when not (@radius=_) and (@query=_) {
+            -webkit-border-top-right-radius: @radius;
+                -moz-border-radius-topright: @radius;
+                    border-top-right-radius: @radius;
+        }
+
+        & when not (@query=_) {
+            .mixins(
+                @query; 
+                @top-right: @radius;
+            );
+        }
+    }
+
+    .bottom-right (@radius:_, @min-width:_, @max-width:_) {
+    
+        @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+        
+        & when not (@radius=_) and (@query=_) {
+            -webkit-border-bottom-right-radius: @radius;
+                -moz-border-radius-bottomright: @radius;
+                    border-bottom-right-radius: @radius;
+        }
+
+        & when not (@query=_) {
+            .mixins(
+                @query; 
+                @bottom-right: @radius;
+            );
+        }
+    }
+
+    .bottom-left (@radius:_, @min-width:_, @max-width:_) {
+    
+        @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+        
+        & when not (@radius=_) and (@query=_) {
+            -webkit-border-bottom-left-radius: @radius;
+                -moz-border-radius-bottomleft: @radius;
+                    border-bottom-left-radius: @radius;
+        }
+
+        & when not (@query=_) {
+            .mixins(
+                @query; 
+                @bottom-left: @radius;
+            );
+        }
+    }
+}
+
+//
+//  .rounded(top-left, top-right, bottom-right, bottom-left, [min-width, max-width])
+//   ------------------------------------------------------
+//   borders     |  -length-/initial/inherit
+
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width:_, @max-width:_) {
+
+    @borders: if(
+                 (@top-left=@top-right) 
+             and (@bottom-left=@bottom-right) 
+             and (@top-left=@bottom-right); 
+                  @top-left;
+                  @top-left @top-right @bottom-right @bottom-left
+             );
+    
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@query=_) {
+        -webkit-border-radius: @borders;
+           -moz-border-radius: @borders;
+                border-radius: @borders;
+    }
+    
+    & when not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@query=_) {
+        .rounded(@top-left, @top-left, @top-left, @top-left);
+    }
+
+    & when (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@query=_) {
+        .rounded.top-right(@top-right);
+    }
+
+    & when (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@query=_) {
+        .rounded.bottom-right(@bottom-right)
+    }
+
+    & when (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@query=_) {
+        .rounded.bottom-left(@bottom-left)
+    }
+
+    & when (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@query=_) {
+        .rounded.bottom-right(@bottom-right);
+        .rounded.bottom-left(@bottom-left)
+    }
+
+    & when (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@query=_) {
+        .rounded.top-right(@top-right);
+        .rounded.bottom-right(@bottom-right)
+    }
+
+    & when not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@query=_) {
+        .rounded.top-left(@top-left);
+        .rounded.top-right(@top-right)
+    }
+
+    & when not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@query=_) {
+        .rounded.top-left(@top-left);
+        .rounded.bottom-left(@bottom-left)
+    }
+
+    & when not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@query=_) {
+        .rounded.top-left(@top-left);
+        .rounded.bottom-right(@bottom-right)
+    }
+
+    & when (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@query=_) {
+        .rounded.top-right(@top-right);
+        .rounded.bottom-left(@bottom-left)
+    }
+
+    & when not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@query=_) {
+        .rounded.top-left(@top-left);
+        .rounded.top-right(@top-right);
+        .rounded.bottom-left(@bottom-left)
+    }
+
+    & when not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@query=_) {
+        .rounded.top-left(@top-left);
+        .rounded.bottom-right(@bottom-right);
+        .rounded.bottom-left(@bottom-left)
+    }
+
+    & when not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@query=_) {
+        .rounded.top-left(@top-left);
+        .rounded.top-right(@top-right);
+        .rounded.bottom-right(@bottom-right)
+    }
+
+    & when (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@query=_) {
+        .rounded.top-right(@top-right);
+        .rounded.bottom-right(@bottom-right);
+        .rounded.bottom-left(@bottom-left);
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @query; 
+            @rounded: @top-left, @top-right, @bottom-right, @bottom-left;
+        );
+    }
+}
+
+//
+//  Box-model properties
+    
+.display(@display:_, @size:_) {
+    & when not (@size=_) {
+        .display(@display, @size, @size);
+    }
+}
+
+.display(@display:_, @width:_, @height:_, @min-width:_, @max-width:_) {
+
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when not (@display=_) and (@query=_) {
+        display: @display;
+    }
+
+    & when not (@width=_) and (@query=_) {
+        width: @width;
+    }
+
+    & when not (@height=_) and (@query=_) {
+        height: @height;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @query;
+            @display: @display, @width, @height;
+        );
+    }
+}
+
+//
+//  .min-size(@min-width, @min-height, [@min-width, @max-width])
+//  .mixins(
+//    @min-size: min-width, min-height; [@min-width; @max-width]
+//  );
+
+.min-size (@min-size) {
+    & when not (@min-size=_) {
+      .min-size(@min-size, @min-size)
+    }
+}
+
+.min-size(@min-width:_, @min-height:_, @min-width-q:_, @max-width-q:_) {
+    
+    @query: if((@min-width-q=_ and @max-width-q=_); _; @min-width-q, @max-width-q);
+
+    & when not (@min-height=_) and (@query=_) {
+        min-height: @min-height;
+    }
+
+    & when not (@min-width=_) and (@query=_) {
+        min-width: @min-width;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @query;
+            @min-size: @min-width, @min-height;
+        );
+    }
+}
+
+//
+// Size combination values
+// 
+// .size()                      // default value
+// .size(10px)                  // duplicate value
+// .size(10px, 20px)            // custom propertie values
+// .size(10px, 20px, 570px)     // custom propertie values + min-width query
+// .size(10px, 20px, _, 1200px) // custom propertie values + max-width query
+// .size(10px, 20px, 570px, 1200px) // custom propertie values + min/max-width queries
+// ----------------------------------------------------------------
+
+.size (@size) {
+    & when not (@size=_) {
+      .size(@size, @size)
+    }
+}
+
+.size(@width:_, @height:_, @query-min:_, @query-max:_) {
+  
+    & when not (@width=_) and (@query-min=_) and (@query-max=_) {
+        width: @width;
+    }
+  
+    & when not (@height=_) and (@query-min=_) and (@query-max=_) {
+        height: @height;
+    }
+
+    & when not (@query-min=_), not (@query-max=_) {
+        .mixins(
+            @min-max: @query-min, @query-max;
+            @size: @width, @height;
+        );
+    }
+}
+
+//
+// .spacing(margin, padding, [min-width, max-width])
+
+.spacing (@spacing) {
+    & when not (@spacing=_) {
+      .spacing(@spacing, @spacing)
+    }
+}
+
+.spacing (@margin:_, @padding:_, @query-min:_, @query-max:_) {
+
+    & when not (@margin=_) and (@padding=_) and (@query-min=_) and (@query-max=_) {
+        margin: @margin;
+    }
+
+    & when (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_) {
+        padding: @padding;
+    }
+
+    & when not (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_) {
+        margin: @margin;
+        padding: @padding;
+    }
+
+    & when not (@query-min=_), not (@query-max=_) {
+        .mixins(
+            @min-max: @query-min, @query-max;
+            @spacing: @margin, @padding;
+        );
+    }
+}
+//
+// Deprecated mixins won´t be available as of v2+
+
+//
+//  Use .position(absolute, top, right, bottom, left)
+
+.absolute {
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
+        when not (@top = skip) and (@query = 0) 
+    {
+        .position.align(absolute, @top, @right, @bottom, @left);
+    }
+    .left-top (@left: auto, @top: auto) 
+        when not (@left = skip) 
+    {
+        .position.left-top(absolute, @left, @top);
+    }
+    .left-bottom (@left: auto, @bottom: auto) 
+        when not (@left = skip) 
+    {
+        .position.left-bottom(absolute, @left, @bottom);
+    }
+    .right-top (@right: auto, @top: auto) 
+        when not (@right = skip) 
+    {
+        .position.right-top(absolute, @right, @top);
+    }
+    .right-bottom (@right: auto, @bottom: auto) 
+        when not (@right = skip) 
+    {
+        .position.right-bottom(absolute, @right, @bottom);
+    }
+}
+
+.absolute {
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .absolute.align(@top, @right, @bottom, @left);
+        }
+    }
+}
+
+//
+//  Use .align.top-left(@top, left)
+
+.align {
+    .left-top(@left) 
+        when (@left=null) {}
+
+    .left-top(@left: auto, @top: auto) 
+        when not (@left=null) 
+    {
+        left: @left;
+        top: @top; 
+    }
+    .left-bottom(@left) 
+        when (@left=null) {}
+
+    .left-bottom (@left: auto, @bottom: auto) 
+        when not (@left=null) 
+    {
+        left: @left;
+        bottom: @bottom;
+    }
+    .right-top(@right) 
+        when (@right=null) {}
+
+    .right-top (@right: auto, @top: auto) 
+        when not (@right=null) 
+    {
+        right: @right;
+        top: @top;
+    }
+    .right-bottom(@right) 
+        when (@right=null) {}
+
+    .right-bottom (@right: auto, @bottom: auto) 
+        when not (@right=null) 
+    {
+        right: @right; 
+        bottom: @bottom;
     }
 }
 
@@ -39,7 +674,6 @@
 // .animation.fill-mode(@fill-mode)
 // .animation.iteration(@iteration)
 // .animation.name(@name)
-// .animation.play-state(@play-state)
 
 .animation {
     .delay(@delay) {
@@ -90,61 +724,29 @@
              -o-animation-name: @name;
                 animation-name: @name;
     }
-
-    .play-state(@play-state) {
-        -webkit-animation-play-state: @play-state;
-           -moz-animation-play-state: @play-state;
-             -o-animation-play-state: @play-state;
-                animation-play-state: @play-state;
-    }
 }
 
 //
-// .transition(@property, @duration, @function, @delay, [@min-width-query, @max-width-query])
+//.appearance(@appearance, [@min-width-query, @max-width-query])
 
-.transition(@property) 
-    when (@property=null) {}
+.appearance(@appearance) 
+    when (@appearance=null) {}
 
-.transition(@property: all, @duration: 0s, @function: ease, @delay: 0s, @min-width-query:_, @max-width-query:_) {
-    & when not (@property=null) and (@property=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .transition(all, 0s, ease, 0s);
+.appearance(@appearance:_, @min-width-query:_, @max-width-query:_) {
+    & when not (@appearance=null) and (@appearance= _) and (@min-width-query=_) and (@max-width-query=_) {
+        .appearance(normal)
     }
 
-    & when not (@property=null) and (@property=_) and (@min-width-query=_) and (@max-width-query=_) {
-        -webkit-transition: @property @duration @function @delay;
-                transition: @property @duration @function @delay;
+    & when not (@appearance=null) and not (@appearance= _) and (@min-width-query=_) and (@max-width-query=_) {
+        -webkit-appearance: @appearance;
+           -moz-appearance: @appearance;
+                appearance: @appearance;
     }
 
     & when not (@min-width-query=_), not (@max-width-query=_) {
         .mixins(
             @min-max: @min-width-query, @max-width-query;
-            @transition: @property, @duration, @function, @delay;
-        );
-    }
-}
-
-//
-//  Background and Color
-
-//
-// @back: background-color, background-image, background-repeat, background-position;
-
-.back(@color) 
-    when (@color=null) {}
-
-.back(@color: transparent, @image: none, @repeat: repeat, @position: 0 0, @min-width-query:_, @max-width-query:_) {
-    & when not (@color=null) and (@image=none) and (@min-width-query=_) and (@max-width-query=_) {
-        background: @color @image @repeat @position;
-    }
-
-    & when not (@color=null) and not (@image=none) and (@min-width-query=_) and (@max-width-query=_) {
-        background: @color url('@{image}') @repeat @position; 
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
-        .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @back: @color, @image, @repeat, @position;
+            @animation: @appearance;
         );
     }
 }
@@ -159,7 +761,7 @@
 // .back.repeat(@repeat, [@min-width-query, @max-width-query])
 // .back.size(@size, [@min-width-query, @max-width-query])
 
-.back {
+._back {
     .attach(@attachment) 
         when (@attachment=null) {}
 
@@ -440,73 +1042,146 @@
 }
 
 //
-// .color(@color, @background-color, @border-color, [@min-width-query, @max-width-query])
+//  Use .back.clip(@back-clip)
 
-.color(@color) 
-    when (@color=null) {}
+.background-clip (@clip: border) 
+    when not (@clip = null)
+{
+    -webkit-background-clip: @clip;           // Safari 4? Chrome 6?
+       -moz-background-clip: @clip;           // Firefox 3.6
+            background-clip: ~'@{clip}-box';  // Firefox 4, Safari 5, Opera 10, IE9
+}
 
-.color(@color:_, @back-color:_, @border-color:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@color=null) and (@color=_) and (@back-color=_) and (@border-color=_) and (@min-width-query=_) and (@max-width-query=_) {
-        color: inherit; 
-        background-color: transparent;
-        border-color: inherit;
+//
+//  Use .back.origin(@back-origin)
+
+.background-origin (@orign: padding-box) 
+    when not (@orign = null) 
+{
+    -webkit-background-orign: @orign;  // Safari 4? Chrome 6?
+       -moz-background-orign: @orign;  // Firefox 3.6
+            background-orign: @orign;  // Firefox 4, Safari 5, Opera 10, IE9
+}
+
+//
+//  Use .back.size(@back-size)
+
+.background-size (@back-size: auto) 
+    when not (@back-size = null) 
+{
+    -webkit-background-size: @back-size;  // Safari 3.0+, Chrome 1.0+
+       -moz-background-size: @back-size;  // Firefox 3.6
+            background-size: @back-size;  // IE 9+
+}
+
+//
+//  Use
+// .border(@width, @style, @color [@min-width-query, @max-width-query])
+// .border(@width, _, _, [@min-width-query, @max-width-query])
+// .border(_, @style, _, [@min-width-query, @max-width-query])
+// .border(_, _, @color, [@min-width-query, @max-width-query])
+
+.border {
+    .min (@border: 0, @query: 0) when not (@border = null) and (@query = 0) {
+        border: @border;
     }
-
-    & when not (@color=null) and not (@color=_) and (@min-width-query=_) and (@max-width-query=_) {
-        color: @color;
+    .width (@width: 0) when not (@width = null) {
+        border-width: @width;
     }
-
-    & when not (@color=null) and not (@back-color=_) and (@min-width-query=_) and (@max-width-query=_) {
-        background-color: @back-color;
+    .style (@style: none) when not (@style = null) {
+        border-style: @style;
     }
-
-    & when not (@color=null) and not (@border-color=_) and (@min-width-query=_) and (@max-width-query=_) {
-        border-color: @border-color;
+    .color (@color: none) when not (@color = null) {
+        border-color: @color;
     }
+}
 
-    & when not (@min-width-query=_), not (@max-width-query=_) {
-        .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @color: @color, @back-color, @border-color;
-        );
+.border { 
+    .min (@border: 0, @query: 0) when (@query > 0) {
+        @media all and (min-width: @query) {
+            .border.min(@border, @query);
+        }
     }
 }
 
 //
-// .gradient(@start, @stop, @degrees, [@min-width-query, @max-width-query])
+// Deprecated
 
-.gradient(@start) 
-    when (@start=null) {}
+.columns (@var) 
+    when (@var=null) {}
+    
+.columns (@count: auto, @gap: normal, @width: auto) 
+    when not (@count=null)    {
+    -webkit-column-count: @count;
+        -moz-column-count: @count;
+            column-count: @count;
+    -webkit-column-gap: @gap;
+        -moz-column-gap: @gap;
+            column-gap: @gap;
+    -webkit-column-width: @width;
+        -moz-column-width: @width;
+            column-width: @width;
+}
 
-.gradient(@start:_, @stop:_, @degrees:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@start=null) and (@start=_) and (@stop=_) and (@degrees=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient(white, black, 180deg);
+//
+//  Use .position(fixed, top, right, bottom, left)
+
+.fixed {
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
+        when not (@top = skip) and (@query = 0) 
+    {
+    .position.align(fixed, @top, @right, @bottom, @left);
     }
-
-    & when not (@start=null) and not (@start=_) and (@stop=_) and (@degrees=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient(@start, black, 180deg);
+    .left-top (@left: auto, @top: auto) 
+        when not (@left = skip) 
+    {
+        .position.left-top(fixed, @left, @top);
     }
-
-    & when not (@start=null)  and (@start=_) and not (@stop=_) and (@degrees=_)and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient(white, @stop, 180deg);
+    .left-bottom (@left: auto, @bottom: auto) 
+        when not (@left = skip) 
+    {
+        .position.left-bottom(fixed, @left, @bottom);
     }
-
-    & when not (@start=null) and (@start=_) and (@stop=_) and not (@degrees=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .gradient(white, black, @degrees);
+    .right-top (@right: auto, @top: auto) 
+        when not (@right = skip) 
+    {
+        .position.right-top(fixed, @right, @top);
     }
-
-    & when not (@start=null) and not (@start=_) and not (@stop=_) and not (@degrees=_) and (@min-width-query=_) and (@max-width-query=_) {
-        background-image: -webkit-linear-gradient(@degrees, @start, @stop);  // Safari 5.1+, Chrome 10+
-        background-image:   -moz-linear-gradient(@degrees, @start, @stop);   // Firefox 3.6+
-        background-image:         linear-gradient(@degrees, @start, @stop);  // IE10
+    .right-bottom (@right: auto, @bottom: auto) 
+        when not (@right = skip) 
+    {
+        .position.right-bottom(fixed, @right, @bottom);
     }
+}
 
-    & when not (@min-width-query=_), not (@max-width-query=_) {
-        .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @gradient: @start, @stop, @degrees;
-        );
+.fixed {
+    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
+        when (@query > 0) 
+    {
+        @media all and (min-width: @query) {
+            .fixed.align(@top, @right, @bottom, @left);
+        }
     }
+}
+
+//
+// .font-size(@size, [@min-width, @max-width])
+
+.font-size (@param) 
+    when (@param=null) {}
+
+.font-size (@size: 1em, @query: 0) 
+    when not (@size=null) and (@query=0) 
+{
+    font-size: @size;
+}
+
+.font-size (@font: none, @query: 0) 
+    when (@query > 0) 
+{
+    @media all and (min-width: @query) {
+        .font-size(@font);
+    } 
 }
 
 //
@@ -766,789 +1441,6 @@
 }
 
 //
-// .shadow(@spread, @color, [@alpha, @min-width-query, @max-width-query])
-
-.shadow(@spread) 
-    when (@spread=null) {}
-
-.shadow(@spread:_, @color:_, @alpha:_, @inset:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@spread=null) and (@spread=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .shadow(none, transparent, 100%);
-    }
-
-    & when not (@spread=null) and not (@spread=_) and (@min-width-query=_) and (@max-width-query=_) {
-        @sinset: if(not (@inset=_), inset);
-        @rgba: fade(@color, @alpha/1);
-        -webkit-box-shadow: @spread @rgba @sinset;  // Android 2.3+, iOS 4.0.2-4.2
-                box-shadow: @spread @rgba @sinset;  // Chrome 6+, Firefox 4+, IE 9+
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
-        .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @shadow: @spread, @color, @alpha, @inset;
-        );
-    }
-}
-//
-//  Border mixins
-
-//
-// .border(@width, @style, @color, [@min-width-query, @max-width-query])
-
-.border(@width) 
-    when (@width=null) {}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_)
-    when not (@width=null) and (@width=_) and (@style=_) and (@color=_) 
-         and (@min-width-query=_) and (@max-width-query=_)
-{
-    border: medium none inherit;
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
-    when not (@width=null) and (@width=_) and (@style=_) and not (@color=_) 
-         and (@min-width-query=_) and (@max-width-query=_)
-{
-    border-color: @color;
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
-    when not (@width=null) and (@width=_) and not (@style=_) and (@color=_) 
-         and (@min-width-query=_) and (@max-width-query=_)
-{
-    border-style: @style;
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
-    when not (@width=null) and not (@width=_) and (@style=_) and (@color=_) 
-         and (@min-width-query=_) and (@max-width-query=_)
-{
-    border-width: @width;
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
-    when not (@width=null) and not (@width=_) and (@style=_) and not (@color=_) 
-         and (@min-width-query=_) and (@max-width-query=_)
-{
-    border-width: @width;
-    border-color: @color;
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_)
-    when not (@width=null) and not (@width=_) and not (@style=_) and (@color=_) 
-         and (@min-width-query=_) and (@max-width-query=_)
-{
-    border-width: @width;
-    border-style: @style;
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_)
-    when not (@width=null) and (@width=_) and not (@style=_) and not (@color=_) 
-         and (@min-width-query=_) and (@max-width-query=_)
-{
-    border-style: @style;
-    border-color: @color;
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_)
-    when not (@width=null) and not (@width=_) and not (@style=_) and not (@color=_) 
-         and (@min-width-query=_) and (@max-width-query=_)
-{
-    border: @width @style @color;
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
-    when (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (max-width: @max-width-query) {
-        .border(@width, @style, @color);
-    }
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
-    when not (@min-width-query=_) and (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) {
-        .border(@width, @style, @color);
-    }
-}
-
-.border(@width:_, @style:_, @color:_, @min-width-query:_, @max-width-query:_) 
-    when not (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-        .border(@width, @style, @color);
-    }
-}
-
-//
-// .rounded.top-left(@radius, [@min-width-query, @max-width-query])
-// .rounded.top-right(@radius, [@min-width-query, @max-width-query])
-// .rounded.bottom-right(@radius, [@min-width-query, @max-width-query])
-// .rounded.bottom-left(@radius, [@min-width-query, @max-width-query])
-
-.rounded {
-    .top-left(@radius) 
-        when (@radius=null) {}
-
-    .top-left(@radius:_) 
-        when not (@radius=null) and (@radius=_) 
-    {
-        .rounded.top-left(0)
-    }
-
-    .top-left(@radius:_) 
-        when not (@radius=null) and not (@radius=_)
-    {
-        -webkit-border-top-left-radius: @radius;
-            -moz-border-radius-topleft: @radius;
-                border-top-left-radius: @radius;
-    }
-
-    .top-left(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (max-width: @max-width-query) {
-            .rounded.top-left(@radius);
-        }
-    }
-    
-    .top-left(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when not (@min-width-query=_) and (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) {
-            .rounded.top-left(@radius);
-        }
-    }
-    
-    .top-left(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when not (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .rounded.top-left(@radius);
-        }
-    }
-
-    .top-right(@radius) 
-        when (@radius=null) {}
-
-    .top-right(@radius:_) 
-        when not (@radius=null) and (@radius=_) 
-    {
-        .rounded.top-right(0)
-    }
-
-    .top-right(@radius: 0) 
-        when not (@radius=null) and not (@radius=_)
-    {
-        -webkit-border-top-right-radius: @radius;
-            -moz-border-radius-topright: @radius;
-                border-top-right-radius: @radius;
-    }
-
-    .top-right(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (max-width: @max-width-query) {
-            .rounded.top-right(@radius);
-        }
-    }
-    
-    .top-right(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when not (@min-width-query=_) and (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) {
-            .rounded.top-right(@radius);
-        }
-    }
-    
-    .top-right(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when not (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .rounded.top-right(@radius);
-        }
-    }
-    
-    .bottom-right(@radius) 
-        when (@radius=null) {}
-
-    .bottom-right(@radius:_) 
-        when not (@radius=null) and (@radius=_) 
-    {
-        .rounded.bottom-right(0)
-    }
-
-    .bottom-right (@radius: 0) 
-        when not (@radius=null) and not (@radius=_)
-    {
-        -webkit-border-bottom-right-radius: @radius;
-            -moz-border-radius-bottomright: @radius;
-                border-bottom-right-radius: @radius;
-    }
-
-    .bottom-right(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (max-width: @max-width-query) {
-            .rounded.bottom-right(@radius);
-        }
-    }
-    
-    .bottom-right(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when not (@min-width-query=_) and (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) {
-            .rounded.bottom-right(@radius);
-        }
-    }
-    
-    .bottom-right(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when not (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .rounded.bottom-right(@radius);
-        }
-    }
-    .bottom-left(@radius) 
-        when (@radius=null) {}
-
-    .bottom-left(@radius:_) 
-        when not (@radius=null) and (@radius=_) 
-    {
-        .rounded.bottom-left(0)
-    }
-
-    .bottom-left (@radius: 0) 
-        when not (@radius=null) and not (@radius=_)
-    {
-        -webkit-border-bottom-left-radius: @radius;
-            -moz-border-radius-bottomleft: @radius;
-                border-bottom-left-radius: @radius;
-    }
-
-    .bottom-left(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (max-width: @max-width-query) {
-            .rounded.bottom-left(@radius);
-        }
-    }
-    
-    .bottom-left(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when not (@min-width-query=_) and (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) {
-            .rounded.bottom-left(@radius);
-        }
-    }
-    
-    .bottom-left(@radius:_, @min-width-query:_, @max-width-query:_) 
-        when not (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .rounded.bottom-left(@radius);
-        }
-    }
-}
-
-//
-// .rounded(@top-left, @top-right, @bottom-right, @bottom-left, [@min-width-query, @max-width-query])
-
-.rounded (@rounded) {
-    & when (@rounded=null) {}
-    
-    & when not (@rounded=null) and not (@rounded=_) {
-      .rounded(@rounded, @rounded, @rounded, @rounded)
-    }
-}
-
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@top-left=null) and (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-                border-radius: 0;
-    }
-
-    & when not (@top-left=null) and not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        -webkit-border-radius: @top-left @top-right @bottom-right @bottom-left;
-        -moz-border-radius: @top-left @top-right @bottom-right @bottom-left;
-                border-radius: @top-left @top-right @bottom-right @bottom-left;
-    }
-
-    & when not (@top-left=null) and (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.bottom-left(@bottom-left)
-    }
-
-    & when not (@top-left=null) and (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.bottom-right(@bottom-right)
-    }
-
-    & when not (@top-left=null) and (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-right(@top-right)
-    }
-
-    & when not (@top-left=null) and not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        // top-left property is not defaulted
-        -webkit-border-radius: @top-left;
-        -moz-border-radius: @top-left;
-                border-radius: @top-left;
-    }
-
-    & when not (@top-left=null) and (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.bottom-right(@bottom-right);
-        .rounded.bottom-left(@bottom-left)
-    }
-
-    & when not (@top-left=null) and (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-right(@top-right);
-        .rounded.bottom-right(@bottom-right)
-    }
-
-    & when not (@top-left=null) and not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-left(@top-left);
-        .rounded.top-right(@top-right)
-    }
-
-    & when not (@top-left=null) and not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-left(@top-left);
-        .rounded.bottom-left(@bottom-left)
-    }
-
-    & when not (@top-left=null) and not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) 
-            and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-left(@top-left);
-        .rounded.bottom-right(@bottom-right)
-    }
-
-    & when not (@top-left=null) and (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-right(@top-right);
-        .rounded.bottom-left(@bottom-left)
-    }
-
-    & when not (@top-left=null) and not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-left(@top-left);
-        .rounded.top-right(@top-right);
-        .rounded.bottom-left(@bottom-left)
-    }
-
-    & when not (@top-left=null) and not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-left(@top-left);
-        .rounded.bottom-right(@bottom-right);
-        .rounded.bottom-left(@bottom-left)
-    }
-
-    & when not (@top-left=null) and not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-left(@top-left);
-        .rounded.top-right(@top-right);
-        .rounded.bottom-right(@bottom-right)
-    }
-
-    & when not (@top-left=null) and (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) 
-            and (@min-width-query=_) and (@max-width-query=_) {
-        .rounded.top-right(@top-right);
-        .rounded.bottom-right(@bottom-right);
-        .rounded.bottom-left(@bottom-left);
-    }
-
-    & when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .rounded(@top-left, @top-right, @bottom-right, @bottom-left)
-        }
-    }
-
-    & when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .rounded(@top-left, @top-right, @bottom-right, @bottom-left)
-        }
-    }
-
-    & when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .rounded(@top-left, @top-right, @bottom-right, @bottom-left)
-        }
-    }
-}
-
-//
-//  Box-model properties
-
-.display(@display)
-    when (@display=null) {}
-    
-.display(@display:_, @size:_)
-    when not (@display=null) and not (@size=_) 
-{
-    .display(@display, @size, @size);
-}
-
-.display(@display:_, @width:_, @height:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@display=null) and (@display=_) and (@width=_) and (@height=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .display(initial, auto, auto);
-    }
-
-    & when not (@display=null) and not (@display=_) and (@min-width-query=_) and (@max-width-query=_) {
-        display: @display;
-    }
-
-    & when not (@display=null) and not (@width=_) and (@min-width-query=_) and (@max-width-query=_) {
-        width: @width;
-    }
-
-    & when not (@display=null) and not (@height=_) and (@min-width-query=_) and (@max-width-query=_) {
-        height: @height;
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
-        .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @display: @display, @width, @height;
-        );
-    }
-}
-
-//
-//  .min-size(@min-width, @min-height, [@min-width, @max-width])
-//  .mixins(
-//    @min-size: min-width, min-height; [@min-width; @max-width]
-//  );
-
-.min-size (@min-size) {
-    & when (@min-size=null) {}
-    
-    & when not (@min-size=null) and not (@min-size=_) {
-      .min-size(@min-size, @min-size)
-    }
-}
-
-.min-size(@min-width:_, @min-height:_, @query-min:_, @query-max:_) {
-    & when not (@min-width=null) and (@min-width=_) and (@min-height=_) and (@query-min=_) and (@query-max=_) {
-        .min-size(auto, auto);
-    }
-
-    & when not (@min-width=null) and not (@min-height=_) and (@query-min=_) and (@query-max=_) {
-        min-height: @min-height;
-    }
-
-    & when not (@min-width=null) and not (@min-width=_) and (@query-min=_) and (@query-max=_) {
-        min-width: @min-width;
-    }
-
-    & when not (@query-min=_), not (@query-max=_) {
-        .mixins(
-            @min-max: @query-min, @query-max;
-            @min-size: @min-width, @min-height;
-        );
-    }
-}
-
-//
-// Size combination values
-// 
-// .size()                      // default value
-// .size(10px)                  // duplicate value
-// .size(10px, 20px)            // custom propertie values
-// .size(10px, 20px, 570px)     // custom propertie values + min-width query
-// .size(10px, 20px, _, 1200px) // custom propertie values + max-width query
-// .size(10px, 20px, 570px, 1200px) // custom propertie values + min/max-width queries
-// ----------------------------------------------------------------
-
-.size (@size) {
-    & when (@size=null) {}
-    
-    & when not (@size=null) and not (@size=_) {
-      .size(@size, @size)
-    }
-}
-
-.size(@width:_, @height:_, @query-min:_, @query-max:_) {
-    & when not (@width=null) and (@width=_) and (@height=_) and (@query-min=_) and (@query-max=_) {
-        .size(auto, auto);
-    }
-  
-    & when not (@width=null) and not (@width=_) and (@query-min=_) and (@query-max=_) {
-        width: @width;
-    }
-  
-    & when not (@width=null) and not (@height=_) and (@query-min=_) and (@query-max=_) {
-        height: @height;
-    }
-
-    & when not (@query-min=_), not (@query-max=_) {
-        .mixins(
-            @min-max: @query-min, @query-max;
-            @size: @width, @height;
-        );
-    }
-}
-
-//
-// .spacing(margin, padding, [min-width, max-width])
-
-.spacing (@spacing) {
-    & when (@spacing=null) {}
-    
-    & when not (@spacing=null) and not (@spacing=_) {
-      .spacing(@spacing, @spacing)
-    }
-}
-
-.spacing (@margin:_, @padding:_, @query-min:_, @query-max:_) {
-    & when not (@margin=null) and (@margin=_) and (@padding=_) and (@query-min=_) and (@query-max=_) {
-        .spacing(auto, auto)
-    }
-
-    & when not (@margin=null) and not (@margin=_) and (@padding=_) and (@query-min=_) and (@query-max=_) {
-        margin: @margin;
-    }
-
-    & when not (@margin=null) and (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_) {
-        padding: @padding;
-    }
-
-    & when not (@margin=null) and not (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_) {
-        margin: @margin;
-        padding: @padding;
-    }
-
-    & when not (@query-min=_), not (@query-max=_) {
-        .mixins(
-            @min-max: @query-min, @query-max;
-            @spacing: @margin, @padding;
-        );
-    }
-}
-//
-// Deprecated mixins won´t be available as of v2+
-
-//
-//  Use .position(absolute, top, right, bottom, left)
-
-.absolute {
-    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
-        when not (@top = skip) and (@query = 0) 
-    {
-        .position.align(absolute, @top, @right, @bottom, @left);
-    }
-    .left-top (@left: auto, @top: auto) 
-        when not (@left = skip) 
-    {
-        .position.left-top(absolute, @left, @top);
-    }
-    .left-bottom (@left: auto, @bottom: auto) 
-        when not (@left = skip) 
-    {
-        .position.left-bottom(absolute, @left, @bottom);
-    }
-    .right-top (@right: auto, @top: auto) 
-        when not (@right = skip) 
-    {
-        .position.right-top(absolute, @right, @top);
-    }
-    .right-bottom (@right: auto, @bottom: auto) 
-        when not (@right = skip) 
-    {
-        .position.right-bottom(absolute, @right, @bottom);
-    }
-}
-
-.absolute {
-    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
-        when (@query > 0) 
-    {
-        @media all and (min-width: @query) {
-            .absolute.align(@top, @right, @bottom, @left);
-        }
-    }
-}
-
-//
-//  Use .align.top-left(@top, left)
-
-.align {
-    .left-top(@left) 
-        when (@left=null) {}
-
-    .left-top(@left: auto, @top: auto) 
-        when not (@left=null) 
-    {
-        left: @left;
-        top: @top; 
-    }
-    .left-bottom(@left) 
-        when (@left=null) {}
-
-    .left-bottom (@left: auto, @bottom: auto) 
-        when not (@left=null) 
-    {
-        left: @left;
-        bottom: @bottom;
-    }
-    .right-top(@right) 
-        when (@right=null) {}
-
-    .right-top (@right: auto, @top: auto) 
-        when not (@right=null) 
-    {
-        right: @right;
-        top: @top;
-    }
-    .right-bottom(@right) 
-        when (@right=null) {}
-
-    .right-bottom (@right: auto, @bottom: auto) 
-        when not (@right=null) 
-    {
-        right: @right; 
-        bottom: @bottom;
-    }
-}
-
-//
-//  Use .back.clip(@back-clip)
-
-.background-clip (@clip: border) 
-    when not (@clip = null)
-{
-    -webkit-background-clip: @clip;           // Safari 4? Chrome 6?
-       -moz-background-clip: @clip;           // Firefox 3.6
-            background-clip: ~'@{clip}-box';  // Firefox 4, Safari 5, Opera 10, IE9
-}
-
-//
-//  Use .back.origin(@back-origin)
-
-.background-origin (@orign: padding-box) 
-    when not (@orign = null) 
-{
-    -webkit-background-orign: @orign;  // Safari 4? Chrome 6?
-       -moz-background-orign: @orign;  // Firefox 3.6
-            background-orign: @orign;  // Firefox 4, Safari 5, Opera 10, IE9
-}
-
-//
-//  Use .back.size(@back-size)
-
-.background-size (@back-size: auto) 
-    when not (@back-size = null) 
-{
-    -webkit-background-size: @back-size;  // Safari 3.0+, Chrome 1.0+
-       -moz-background-size: @back-size;  // Firefox 3.6
-            background-size: @back-size;  // IE 9+
-}
-
-//
-//  Use
-// .border(@width, @style, @color [@min-width-query, @max-width-query])
-// .border(@width, _, _, [@min-width-query, @max-width-query])
-// .border(_, @style, _, [@min-width-query, @max-width-query])
-// .border(_, _, @color, [@min-width-query, @max-width-query])
-
-.border {
-    .min (@border: 0, @query: 0) when not (@border = null) and (@query = 0) {
-        border: @border;
-    }
-    .width (@width: 0) when not (@width = null) {
-        border-width: @width;
-    }
-    .style (@style: none) when not (@style = null) {
-        border-style: @style;
-    }
-    .color (@color: none) when not (@color = null) {
-        border-color: @color;
-    }
-}
-
-.border { 
-    .min (@border: 0, @query: 0) when (@query > 0) {
-        @media all and (min-width: @query) {
-            .border.min(@border, @query);
-        }
-    }
-}
-
-//
-// Deprecated
-
-.columns (@var) 
-    when (@var=null) {}
-    
-.columns (@count: auto, @gap: normal, @width: auto) 
-    when not (@count=null)    {
-    -webkit-column-count: @count;
-        -moz-column-count: @count;
-            column-count: @count;
-    -webkit-column-gap: @gap;
-        -moz-column-gap: @gap;
-            column-gap: @gap;
-    -webkit-column-width: @width;
-        -moz-column-width: @width;
-            column-width: @width;
-}
-
-//
-//  Use .position(fixed, top, right, bottom, left)
-
-.fixed {
-    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
-        when not (@top = skip) and (@query = 0) 
-    {
-    .position.align(fixed, @top, @right, @bottom, @left);
-    }
-    .left-top (@left: auto, @top: auto) 
-        when not (@left = skip) 
-    {
-        .position.left-top(fixed, @left, @top);
-    }
-    .left-bottom (@left: auto, @bottom: auto) 
-        when not (@left = skip) 
-    {
-        .position.left-bottom(fixed, @left, @bottom);
-    }
-    .right-top (@right: auto, @top: auto) 
-        when not (@right = skip) 
-    {
-        .position.right-top(fixed, @right, @top);
-    }
-    .right-bottom (@right: auto, @bottom: auto) 
-        when not (@right = skip) 
-    {
-        .position.right-bottom(fixed, @right, @bottom);
-    }
-}
-
-.fixed {
-    .align (@top: auto, @right: auto, @bottom: auto, @left: auto, @query: 0) 
-        when (@query > 0) 
-    {
-        @media all and (min-width: @query) {
-            .fixed.align(@top, @right, @bottom, @left);
-        }
-    }
-}
-
-//
-// .font-size(@size, [@min-width, @max-width])
-
-.font-size (@param) 
-    when (@param=null) {}
-
-.font-size (@size: 1em, @query: 0) 
-    when not (@size=null) and (@query=0) 
-{
-    font-size: @size;
-}
-
-.font-size (@font: none, @query: 0) 
-    when (@query > 0) 
-{
-    @media all and (min-width: @query) {
-        .font-size(@font);
-    } 
-}
-
-//
 // Use .size(_, @height, [@min-width-query, @max-width-query])
 
 .height (@height: auto, @query: 0) 
@@ -1597,6 +1489,41 @@
 {
     @media all and (min-width: @query) {
         .indent(@indent);
+    }
+}
+
+//
+//  .index()
+
+.index(@index) 
+    when (@index=null) {}
+
+.index(@index:_, @min-width-query:_, @max-width-query:_) {
+    & when not (@index=null) and (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
+        .index(0);
+    }
+
+    & when not (@index=null) and not (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
+        z-index: @index;
+    }
+
+    & when (@min-width-query=_) and not (@max-width-query=_) {
+        @media all and (max-width: @max-width-query) {
+            .index(@index);
+        }
+    }
+
+    & when not (@min-width-query=_) and (@max-width-query=_) {
+        @media all and (min-width: @min-width-query) {
+            .index(@index);
+        }
+    }
+
+    & when not (@min-width-query=_) and not (@max-width-query=_)
+    {
+        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
+            .index(@index);
+        }
     }
 }
 
@@ -2075,94 +2002,122 @@
 }
 
 //
-//  Fonts properties
+//  Font properties
 //
+
 //  .mixins(
+//      @min-max: min-width, max-width; 
 //      @font: font-style, font-weight, font-size, font-family;
 //      @text: text-align, text-indent, text-transform;
-//  }
+//      @tdecoration: spread, color, alpha;
+//      @tshadow: spread, color, alpha;
+//  );
 
 //
-// .font(font-style, font-weight, font-size, font-family, [@min-width, @max-width]);
+//  .font(font-style, font-weight, font-size, font-family);
+//   ------------------------------------------------------
+//   font-style   |  normal/italic/oblique/initial/inherit
+//   font-weight  |  normal/bold/bolder/lighter/number/initial/inherit  300/400/700
+//   font-family  |  family-name|initial|inherit
 
-.font(@size)
-when (@size=null) {}
+.font(@size:_, @weight:_, @family:_, @min-width:_, @max-width:_) {
 
-.font(@size:_, @weight:_, @family:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@size=null) and (@size=_) and (@weight=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_) {
-        font: medium @font-sans-serif;
-    }
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
 
-    & when not (@size=null) and (@size=_) and (@weight=_) and not (@family=_) and (@min-width-query=_) and (@max-width-query=_) {
-        font-family: @family;
-    }
+    & when (@size=null) {}
 
-    & when not (@size=null) and (@size=_) and not (@weight=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_) {
-        font-weight: @weight;
-    }
-
-    & when not (@size=null) and not (@size=_) and (@weight=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_) {
-        font-size: @size;
-    }
-
-    & when not (@size=null) and not (@size=_) and (@weight=_) and not (@family=_) and (@min-width-query=_) and (@max-width-query=_) {
-        font: @size @family;
-    }
-
-    & when not (@size=null) and (@size=_) and not (@weight=_) and not (@family=_) and (@min-width-query=_) and (@max-width-query=_) {
-        font-weight: @weight;
-        font-family: @family;
-    }
-
-    & when not (@size=null) and not (@size=_) and not (@weight=_) and (@family=_) and (@min-width-query=_) and (@max-width-query=_) {
-        font-size: @size;
-        font-weight: @weight;
-    }
-
-    & when not (@size=null) and not (@size=_) and not (@weight=_) and not (@family=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@size=null) and not (@size=_) and not (@weight=_) and not (@family=_) and (@query=_) {
         font: @weight @size @family;
     }
 
-    & when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .font(@size, @weight, @family)
-        }
+    & when not (@size=null) and not (@size=_) and (@weight=_) and not (@family=_) and (@query=_) {
+        font: @size @family;
     }
 
-    & when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .font(@size, @weight, @family)
-        }
+    & when not (@size=null) and not (@size=_) and not (@weight=_) and (@family=_) and (@query=_) {
+        font-size: @size;
+        font-weight: @weight;
     }
-    
-    & when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .font(@size, @weight, @family)
-        }
+
+    & when not (@size=null) and (@size=_) and not (@weight=_) and not (@family=_) and (@query=_) {
+        font-weight: @weight;
+        font-family: @family;
+    }
+
+    & when not (@size=null) and not (@size=_) and (@weight=_) and (@family=_) and (@query=_) {
+        font-size: @size;
+    }
+
+    & when not (@size=null) and (@size=_) and not (@weight=_) and (@family=_) and (@query=_) {
+        font-weight: @weight;
+    }
+
+    & when not (@size=null) and (@size=_) and (@weight=_) and not (@family=_) and (@query=_) {
+        font-family: @family;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @min-max: @query;
+            @font: @size, @weight, @family;
+        );
     }
 }
     
 //
-// .font-face(@font-family, @file-path, @font-weight, @font-style)
-//   @font-family, // font family name ie. Arial
-//   @file-path,   // absolute/relative URL to font files ie. '../fonts/Arial-Regular'
-//   @font-weight, // light/normal/bold/inherit | 300/400/700
-//   @font-style   // italic/normal/inherit
+//  .font-face(font-family, file-path, font-weight, font-style);
+//   ------------------------------------------------------
+//   font-family  |  font family name : Arial
+//   file-path    |  absolute/relative file path : '../fonts/Arial-Regular'
+//   font-weight  |  light/normal/bold/inherit  300/400/700
+//   font-style   |  italic/normal/inherit
 
-.font-face(@font-family) 
-    when (@font-family=null) {}
+.font-face(@font-family:_, @font-path:_, @font-weight:400, @font-style:normal) {
 
-.font-face(@font-family, @font-path, @font-weight:400, @font-style:normal) 
-    when not (@font-family=null) {
-    @font-face {
-        font-family: @font-family;
-        src: url('@{font-path}.eot');  // IE9
-        src: url('@{font-path}.eot?#iefix') format('embedded-opentype'),     
-             url('@{font-path}.woff') format('woff'),
-             url('@{font-path}.ttf') format('truetype'),
-             url('@{font-path}.svg#@{@font-family}') format('svg');
-        font-weight: @font-weight;
-        font-style: @font-style;
+    & when not (@font-family=_) and not (@font-path=_) {
+        @font-face {
+            font-family: @font-family;
+            src: url('@{font-path}.eot');  // IE9
+            src: url('@{font-path}.eot?#iefix') format('embedded-opentype'),     
+                url('@{font-path}.woff') format('woff'),
+                url('@{font-path}.ttf') format('truetype'),
+                url('@{font-path}.svg#@{@font-family}') format('svg');
+            font-weight: @font-weight;
+            font-style: @font-style;
+        }
+    }
+}
+
+//
+//  .text(text-align, text-indent, text-transform);
+//   ------------------------------------------------------
+//   text-align      |  left/right/center/justify/initial/inherit
+//   text-indent     |  length/initial/inherit
+//   text-transform  |  none/capitalize/uppercase/lowercase/initial/inherit
+
+.text(@align:_, @indent:_, @transform:_, @min-width:_, @max-width:_) {
+
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+    & when (@align=null) {}
+
+    & when not (@align=null) and not (@align=_) and (@query=_) {
+        text-align: @align;
+    }
+
+    & when not (@align=null) and not (@indent=_) and (@query=_) {
+        text-indent: @indent;
+    }
+
+    & when not (@align=null) and not (@transform=_) and (@query=_) {
+        text-transform: @transform;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @min-max: @query;
+            @text: @indent, @align, @transform;
+        );
     }
 }
 
@@ -2171,153 +2126,91 @@ when (@size=null) {}
 // .text-shadow(@spread, @color, @alpha, [@min-width-query, @max-width-query])
 
 .text {
-    .decoration(@line) 
-        when (@line=null) {}
 
-    .decoration(@line:_, @color:_, @style:_, @min-width-query:_, @max-width-query:_) {
-        & when not (@line=null) and (@line=_) and (@color=_) and (@style=_) and (@min-width-query=_) and (@max-width-query=_) {
-            text-decoration: none solid
+    .decoration(@line:_, @color:_, @style:_, @min-width:_, @max-width:_) {
+
+        @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+        & when (@line=null) {}
+
+        & when not (@line=null) and not (@line=_) and not (@color=_) and not (@style=_) and (@query=_) {
+            text-decoration: @line @color @style
         }
-
-        & when not (@line=null) and (@line=_) and (@color=_) and not (@style=_) and (@min-width-query=_) and (@max-width-query=_) {
-            text-decoration-style: @style  // IE not supported
-        }
-
-        & when not (@line=null) and (@line=_) and not (@color=_) and (@style=_) and (@min-width-query=_) and (@max-width-query=_) {
-            text-decoration-color: @color  // IE not supported
-        }
-
-        & when not (@line=null) and not (@line=_) and (@color=_) and (@style=_) and (@min-width-query=_) and (@max-width-query=_) {
-            text-decoration: @line
-        }
-
-        & when not (@line=null) and not (@line=_) and (@color=_) and not (@style=_) and (@min-width-query=_) and (@max-width-query=_) {
-            text-decoration: @line @style
-        }
-
-        & when not (@line=null) and (@line=_) and not (@color=_) and not (@style=_) and (@min-width-query=_) and (@max-width-query=_) {
-            text-decoration-color: @color;  // IE not supported
-            text-decoration-style: @style   // IE not supported
-        }
-
-        & when not (@line=null) and not (@line=_) and not (@color=_) and (@style=_) and (@min-width-query=_) and (@max-width-query=_) {
+        & when not (@line=null) and not (@line=_) and not (@color=_) and (@style=_) and (@query=_) {
             text-decoration: @line @color
         }
 
-        & when not (@line=null) and not (@line=_) and not (@color=_) and not (@style=_) and (@min-width-query=_) and (@max-width-query=_) {
-            text-decoration: @line @color @style
+        & when not (@line=null) and not (@line=_) and (@color=_) and not (@style=_) and (@query=_) {
+            text-decoration: @line @style
         }
 
-        & when (@min-width-query=_) and not (@max-width-query=_) 
-        {
-            @media all and (max-width: @max-width-query) {
-                .text.decoration(@line, @color, @style)
-            }
+        & when not (@line=null) and (@line=_) and not (@color=_) and not (@style=_) and (@query=_) {
+            text-decoration-color: @color;  // IE not supported
+            text-decoration-style: @style;  // IE not supported
         }
-        
-        & when not (@min-width-query=_) and (@max-width-query=_) 
-        {
-            @media all and (min-width: @min-width-query) {
-                .text.decoration(@line, @color, @style)
-            }
+
+        & when not (@line=null) and not (@line=_) and (@color=_) and (@style=_) and (@query=_) {
+            text-decoration-line: @line
         }
-        
-        & when not (@min-width-query=_) and not (@max-width-query=_) 
-        {
-            @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-                .text.decoration(@line, @color, @style)
-            }
+
+        & when not (@line=null) and (@line=_) and not (@color=_) and (@style=_) and (@query=_) {
+            text-decoration-color: @color  // IE not supported
+        }
+
+        & when not (@line=null) and (@line=_) and (@color=_) and not (@style=_) and (@query=_) {
+            text-decoration-style: @style  // IE not supported
+        }
+
+        & when not (@query=_) {
+            .mixins(
+                @min-max: @query;
+                @textdeco: @size, @weight, @family;
+            );
         }
     }
-
-    .shadow (@spread) 
-        when (@spread=null) {}
     
-    .shadow(@spread:_, @color:_, @alpha:_, @min-width-query:_, @max-width-query:_) {
-        & when not (@spread=null) and (@spread=_) and (@color=_) and (@alpha=_) and (@min-width-query=_) and (@max-width-query=_) {        
-            text-shadow: none;
+    .shadow(@spread:_, @color:_, @alpha:_, @min-width:_, @max-width:_) {
+
+        @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+
+        & when (@spread=null) {}
+        
+        & when not (@spread=null) and not (@spread=_) and not (@color=_) and not (@alpha=_) and (@query=_) {        
+            @alphaisp: if(ispercentage(@alpha), @alpha/1, @alpha);
+            @rgba: fade(@color, @alphaisp);
+            text-shadow: @spread @rgba;
         }
         
-        & when not (@spread=null) and not (@spread=_) and (@color=_) and (@alpha=_) and (@min-width-query=_) and (@max-width-query=_) {        
+        & when not (@spread=null) and not (@spread=_) and (@color=_) and (@alpha=_) and (@query=_) {        
             text-shadow: @spread black;
         }
         
-        & when not (@spread=null) and (@spread=_) and not (@color=_) and (@alpha=_) and (@min-width-query=_) and (@max-width-query=_) {        
+        & when not (@spread=null) and (@spread=_) and not (@color=_) and (@alpha=_) and (@query=_) {        
             text-shadow: 0 0 @color;
         }
         
-        & when not (@spread=null) and (@spread=_) and (@color=_) and not (@alpha=_) and (@min-width-query=_) and (@max-width-query=_) {        
+        & when not (@spread=null) and (@spread=_) and (@color=_) and not (@alpha=_) and (@query=_) {        
             .text.shadow(0 0, black, @alpha)
         }
         
-        & when not (@spread=null) and not (@spread=_) and not (@color=_) and (@alpha=_) and (@min-width-query=_) and (@max-width-query=_) {        
+        & when not (@spread=null) and not (@spread=_) and not (@color=_) and (@alpha=_) and (@query=_) {        
             text-shadow: @spread @color;
         }
         
-        & when not (@spread=null) and (@spread=_) and not (@color=_) and not (@alpha=_) and (@min-width-query=_) and (@max-width-query=_) {
-            @rgba: fade(@color, @alpha/1);
-            text-shadow: 0 0 @rgba;
+        & when not (@spread=null) and (@spread=_) and not (@color=_) and not (@alpha=_) and (@query=_) {
+            .text.shadow(0 0, @color, @alpha)
         }
         
-        & when not (@spread=null) and not (@spread=_) and (@color=_) and not (@alpha=_) and (@min-width-query=_) and (@max-width-query=_) {        
-            @rgba: fade(black, @alpha/1);
-            text-shadow: @spread @rgba;
-        }
-        
-        & when not (@spread=null) and not (@spread=_) and not (@color=_) and not (@alpha=_) and (@min-width-query=_) and (@max-width-query=_) {        
-            @rgba: fade(@color, @alpha/1);
-            text-shadow: @spread @rgba;
+        & when not (@spread=null) and not (@spread=_) and (@color=_) and not (@alpha=_) and (@query=_) {        
+            .text.shadow(@spread, black, @alpha)
         }
 
-        & when (@min-width-query=_) and not (@max-width-query=_) {
-            @media all and (max-width: @max-width-query) {
-                .text.shadow(@spread, @color, @alpha)
-            }
+        & when not (@query=_) {
+            .mixins(
+                @min-max: @query;
+                @tshadow: @spread, @color, @alpha;
+            );
         }
-        
-        & when not (@min-width-query=_) and (@max-width-query=_) {
-            @media all and (min-width: @min-width-query) {
-                .text.shadow(@spread, @color, @alpha)
-            }
-        }
-        
-        & when not (@min-width-query=_) and not (@max-width-query=_) {
-            @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-                .text.shadow(@spread, @color, @alpha)
-            }
-        }
-    }
-}
-
-//  .mixins(
-//      @text: text-align, text-indent, text-transform;
-//  }
-
-.text(@text) 
-    when (@text=null) {}
-
-.text(@align:_, @indent:_, @transform:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@align=null) and (@indent=_) and (@align=_) and (@transform=_) and (@min-width-query=_) and (@max-width-query=_) {
-        text-indent: 0;
-    }
-
-    & when not (@align=null) and not (@align=_) and (@min-width-query=_) and (@max-width-query=_) {
-        text-align: @align;
-    }
-
-    & when not (@align=null) and not (@indent=_) and (@min-width-query=_) and (@max-width-query=_) {
-        text-indent: @indent;
-    }
-
-    & when not (@align=null) and not (@transform=_) and (@min-width-query=_) and (@max-width-query=_) {
-        text-transform: @transform;
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
-        .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @text: @indent, @align, @transform;
-        );
     }
 }
 
@@ -2325,26 +2218,25 @@ when (@size=null) {}
 // Miscellaneous
 
 //
-//.appearance(@appearance, [@min-width-query, @max-width-query])
+//  .declaration(property, value, [min-width, max-width]);
+//   ------------------------------------------------------
+//   property            |  property name
+//   background-color    |  -color-/transparent/initial/inherit
 
-.appearance(@appearance) 
-    when (@appearance=null) {}
+.declaration(@property:_, @value:_, @min-width:_, @max-width:_) {
+    
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
 
-.appearance(@appearance:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@appearance=null) and (@appearance= _) and (@min-width-query=_) and (@max-width-query=_) {
-        .appearance(normal)
+    & when (@property=null) {}
+
+    & when not (@property=null) and not (@property=_) and not (@value=_) and (@query=_) {
+        @{property}: @value;
     }
 
-    & when not (@appearance=null) and not (@appearance= _) and (@min-width-query=_) and (@max-width-query=_) {
-        -webkit-appearance: @appearance;
-           -moz-appearance: @appearance;
-                appearance: @appearance;
-    }
-
-    & when not (@min-width-query=_), not (@max-width-query=_) {
+    & when not (@query=_) {
         .mixins(
-            @min-max: @min-width-query, @max-width-query;
-            @animation: @appearance;
+            @min-max: @query;
+            @declaration: @property, @value;
         );
     }
 }
@@ -2503,171 +2395,95 @@ when (@size=null) {}
 //  Mixins
 
 //
-// .mixins([
-//    @min-max;
-//    @align; 
-//    @background; 
-//    @index;
-//    @relative; 
-//    @min-width; 
-//    @max-width;
-// ]);
+//  .mixins(
+//      @back: background-color, background-image, background-repeat, background-position;
+//      @shadow: spread, color, alpha;
+//  );
 
-.getVal(@params:_; @repeat:0) {
-    @lenght: length(@params);
-    @1: extract(@params, 1);
-    @2: if((@lenght = @repeat) and (2 > @repeat), @@repeat, if((@lenght > 1), extract(@params, 2), _));
-    @3: if((@lenght = @repeat) and (3 > @repeat), @@repeat, if((@lenght > 2), extract(@params, 3), _));
-    @4: if((@lenght = @repeat) and (4 > @repeat), @@repeat, if((@lenght > 3), extract(@params, 4), _));
-    @5: if((@lenght = @repeat) and (5 > @repeat), @@repeat, if((@lenght > 4), extract(@params, 5), _));
-    @6: if((@lenght = @repeat) and (6 > @repeat), @@repeat, if((@lenght > 5), extract(@params, 6), _));
+.getVal(@args:_; @repeat:0) {
+    @lenght: length(@args);
+    @1: extract(@args, 1);
+    @2: if((@lenght = @repeat) and (2 > @repeat), @@repeat, if((@lenght > 1), extract(@args, 2), _));
+    @3: if((@lenght = @repeat) and (3 > @repeat), @@repeat, if((@lenght > 2), extract(@args, 3), _));
+    @4: if((@lenght = @repeat) and (4 > @repeat), @@repeat, if((@lenght > 3), extract(@args, 4), _));
+    @5: if((@lenght = @repeat) and (5 > @repeat), @@repeat, if((@lenght > 4), extract(@args, 5), _));
+    @6: if((@lenght = @repeat) and (6 > @repeat), @@repeat, if((@lenght > 5), extract(@args, 6), _));
+    @7: if((@lenght = @repeat) and (7 > @repeat), @@repeat, if((@lenght > 6), extract(@args, 7), _));
+    @8: if((@lenght = @repeat) and (8 > @repeat), @@repeat, if((@lenght > 7), extract(@args, 8), _));
 }
 
-.mixins(@min-max:_; @animation:null; @background:null; @border:null; @color:null; @display:null; @float:null; 
-        @font:null; @fontface:null; @gradient:null; @index:null; @min-size:null; @position:null; @size:null; @spacing:null; 
-        @textalign:null; @rounded:null; @shadow:null; @text:null; @transition:null;) {
-
-        @min-width: .getVal(@min-max)[@1];
-        @max-width: .getVal(@min-max)[@2];
-
-    & when (@min-width=_) and (@max-width=_) {
-
-        // Outside In ordering css properties
-
+.anchor-mixins(@align:_; @animation:_; @background:_; @border:_; @color:_; @declaration:_; @display:_; @float:_; @font:_; 
+               @fontface:_; @gradient:_; @min-size:_; @position:_; @rounded:_; @shadow:_; @size:_; @spacing:_; @text:_; 
+               @transition:_; @textdeco:_; @tshadow:_; @zindex:_;) {
         // Layout properties
         .position(.getVal(@position)[@1], .getVal(@position)[@2], .getVal(@position, 2)[@3], .getVal(@position, 2)[@4], 
                   .getVal(@position, 2)[@5]);
+        .align(.getVal(@align)[@1], .getVal(@align, 1)[@2], .getVal(@align, 1)[@3], .getVal(@align, 1)[@4]);
         .float(@float);
 
         // Box-model properties
         .display(.getVal(@display)[@1], .getVal(@display)[@2], .getVal(@display, 2)[@3]);
+        .size(.getVal(@size)[@1], .getVal(@size, 1)[@2]);
         .spacing(.getVal(@spacing)[@1], .getVal(@spacing, 1)[@2]);
         .border(.getVal(@border)[@1], .getVal(@border)[@2], .getVal(@border)[@3]);
         .min-size(.getVal(@min-size)[@1], .getVal(@min-size, 1)[@2]);
 
         // Visual properties
-        .back(.getVal(@background)[@1], .getVal(@background)[@2], .getVal(@background)[@3], .getVal(@background)[@4]);
-        .gradient(.getVal(@gradient)[@1], .getVal(@gradient)[@2], .getVal(@gradient)[@3]);
-        .rounded(.getVal(@rounded)[@1], .getVal(@rounded, 1)[@2], .getVal(@rounded, 1)[@3], .getVal(@rounded, 1)[@4]);
+        .color(.getVal(@color)[@1], .getVal(@color)[@2], .getVal(@color)[@3]);
+        .back(.getVal(@background)[@1], .getVal(@background)[@2], .getVal(@background)[@3], .getVal(@background)[@4],
+        .getVal(@background)[@5], .getVal(@background)[@6], .getVal(@background)[@7]);
+        .gradient(.getVal(@gradient)[@1], .getVal(@gradient)[@2], .getVal(@gradient)[@3], .getVal(@gradient)[@4], 
+                  .getVal(@gradient)[@5]);
+        .rounded(.getVal(@rounded)[@1], .getVal(@rounded)[@2], .getVal(@rounded)[@3], .getVal(@rounded)[@4]);
         .shadow(.getVal(@shadow)[@1], .getVal(@shadow)[@2], .getVal(@shadow)[@3], .getVal(@shadow)[@4]);
         
         // Typographic properties
-        .color(.getVal(@color)[@1], .getVal(@color)[@2], .getVal(@color)[@3]);
         .font(.getVal(@font)[@1], .getVal(@font)[@2], .getVal(@font)[@3]);
         .font-face(.getVal(@fontface)[@1], .getVal(@fontface)[@2], .getVal(@fontface)[@3], .getVal(@fontface)[@4]);
         .text(.getVal(@text)[@1], .getVal(@text)[@2], .getVal(@text)[@3]);
+        .text.decoration(.getVal(@textdeco)[@1], .getVal(@textdeco)[@2], .getVal(@textdeco)[@3]);
+        .text.shadow(.getVal(@tshadow)[@1], .getVal(@tshadow)[@2], .getVal(@tshadow)[@3]);
 
         // Animation properties
-        .animation(.getVal(@animation)[@1], .getVal(@animation)[@2], .getVal(@animation)[@3], 
-                   .getVal(@animation)[@4], .getVal(@animation)[@5], .getVal(@animation)[@6]);
+        .animation(.getVal(@animation)[@1], .getVal(@animation)[@2], .getVal(@animation)[@3], .getVal(@animation)[@4], 
+                   .getVal(@animation)[@5], .getVal(@animation)[@6], .getVal(@animation)[@7], .getVal(@animation)[@8]);
         .transition(.getVal(@transition)[@1], .getVal(@transition)[@2], .getVal(@transition)[@3], .getVal(@transition)[@4]);
 
         // Others
-        .index(@index);
+        .declaration(.getVal(@declaration)[@1], .getVal(@declaration)[@2]);
+        .zindex(@zindex);
+}
+
+.mixins(@min-max:_; @align:_; @animation:_; @background:_; @border:_; @color:_; @declaration:_; @display:_; @float:_; @font:_; 
+        @fontface:_; @gradient:_; @min-size:_; @position:_; @rounded:_; @shadow:_; @size:_; @spacing:_; @text:_; @transition:_; 
+        @textdeco:_; @tshadow:_; @zindex:_;) {
+
+        @min-width: .getVal(@min-max)[@1];
+        @max-width: .getVal(@min-max)[@2];
+
+    & when (@min-width=_) and (@max-width=_) {
+            .anchor-mixins(@align; @animation; @background; @border; @color; @declaration; @display; @float; @font; @fontface; @gradient; 
+                @min-size; @position; @rounded; @shadow; @size; @spacing; @text; @transition; @textdeco; @tshadow; @zindex;);
     }
 
     & when not (@min-width=_) and (@max-width=_) {
         @media all and (min-width: @min-width) {
-            // Layout properties
-            .position(.getVal(@position)[@1], .getVal(@position)[@2], .getVal(@position, 2)[@3], .getVal(@position, 2)[@4], 
-                    .getVal(@position, 2)[@5]);
-            .float(@float);
-
-            // Box-model properties
-            .display(.getVal(@display)[@1], .getVal(@display)[@2], .getVal(@display, 2)[@3]);
-            .spacing(.getVal(@spacing)[@1], .getVal(@spacing, 1)[@2]);
-            .min-size(.getVal(@min-size)[@1], .getVal(@min-size, 1)[@2]);
-
-            // Visual properties
-            .back(.getVal(@background)[@1], .getVal(@background)[@2], .getVal(@background)[@3], .getVal(@background)[@4]);
-            .border(.getVal(@border)[@1], .getVal(@border)[@2], .getVal(@border)[@3]);
-            .gradient(.getVal(@gradient)[@1], .getVal(@gradient)[@2], .getVal(@gradient)[@3]);
-            .rounded(.getVal(@rounded)[@1], .getVal(@rounded, 1)[@2], .getVal(@rounded, 1)[@3], .getVal(@rounded, 1)[@4]);
-            .shadow(.getVal(@shadow)[@1], .getVal(@shadow)[@2], .getVal(@shadow)[@3], .getVal(@shadow)[@4]);
-            
-            // Typographic properties
-            .color(.getVal(@color)[@1], .getVal(@color)[@2], .getVal(@color)[@3]);
-            .font(.getVal(@font)[@1], .getVal(@font)[@2], .getVal(@font)[@3]);
-            .font-face(.getVal(@fontface)[@1], .getVal(@fontface)[@2], .getVal(@fontface)[@3], .getVal(@fontface)[@4]);
-            .text(.getVal(@text)[@1], .getVal(@text)[@2], .getVal(@text)[@3]);
-
-            // Animation properties
-            .animation(.getVal(@animation)[@1], .getVal(@animation)[@2], .getVal(@animation)[@3], 
-                    .getVal(@animation)[@4], .getVal(@animation)[@5], .getVal(@animation)[@6]);
-            .transition(.getVal(@transition)[@1], .getVal(@transition)[@2], .getVal(@transition)[@3], .getVal(@transition)[@4]);
-
-            // Others
-            .index(@index);
+            .anchor-mixins(@align; @animation; @background; @border; @color; @declaration; @display; @float; @font; @fontface; @gradient; 
+                @min-size; @position; @rounded; @shadow; @size; @spacing; @text; @transition; @textdeco; @tshadow; @zindex;);
         }
     }
 
     & when (@min-width=_) and not (@max-width=_) {
         @media all and (max-width: @max-width) {
-            // Layout properties
-            .position(.getVal(@position)[@1], .getVal(@position)[@2], .getVal(@position, 2)[@3], .getVal(@position, 2)[@4], 
-                    .getVal(@position, 2)[@5]);
-            .float(@float);
-
-            // Box-model properties
-            .display(.getVal(@display)[@1], .getVal(@display)[@2], .getVal(@display, 2)[@3]);
-            .spacing(.getVal(@spacing)[@1], .getVal(@spacing, 1)[@2]);
-            .min-size(.getVal(@min-size)[@1], .getVal(@min-size, 1)[@2]);
-
-            // Visual properties
-            .back(.getVal(@background)[@1], .getVal(@background)[@2], .getVal(@background)[@3], .getVal(@background)[@4]);
-            .border(.getVal(@border)[@1], .getVal(@border)[@2], .getVal(@border)[@3]);
-            .gradient(.getVal(@gradient)[@1], .getVal(@gradient)[@2], .getVal(@gradient)[@3]);
-            .rounded(.getVal(@rounded)[@1], .getVal(@rounded, 1)[@2], .getVal(@rounded, 1)[@3], .getVal(@rounded, 1)[@4]);
-            .shadow(.getVal(@shadow)[@1], .getVal(@shadow)[@2], .getVal(@shadow)[@3], .getVal(@shadow)[@4]);
-            
-            // Typographic properties
-            .color(.getVal(@color)[@1], .getVal(@color)[@2], .getVal(@color)[@3]);
-            .font(.getVal(@font)[@1], .getVal(@font)[@2], .getVal(@font)[@3]);
-            .font-face(.getVal(@fontface)[@1], .getVal(@fontface)[@2], .getVal(@fontface)[@3], .getVal(@fontface)[@4]);
-            .text(.getVal(@text)[@1], .getVal(@text)[@2], .getVal(@text)[@3]);
-
-            // Animation properties
-            .animation(.getVal(@animation)[@1], .getVal(@animation)[@2], .getVal(@animation)[@3], 
-                    .getVal(@animation)[@4], .getVal(@animation)[@5], .getVal(@animation)[@6]);
-            .transition(.getVal(@transition)[@1], .getVal(@transition)[@2], .getVal(@transition)[@3], .getVal(@transition)[@4]);
-
-            // Others
-            .index(@index);
+            .anchor-mixins(@align; @animation; @background; @border; @color; @declaration; @display; @float; @font; @fontface; @gradient;
+                @min-size; @position; @rounded; @shadow; @size; @spacing; @text; @transition; @textdeco; @tshadow; @zindex;);
         }
     }
 
     & when not (@min-width=_) and not (@max-width=_) {
         @media all and (min-width: @min-width) and (max-width: @max-width) {
-            // Layout properties
-            .position(.getVal(@position)[@1], .getVal(@position)[@2], .getVal(@position, 2)[@3], .getVal(@position, 2)[@4], 
-                    .getVal(@position, 2)[@5]);
-            .float(@float);
-
-            // Box-model properties
-            .display(.getVal(@display)[@1], .getVal(@display)[@2], .getVal(@display, 2)[@3]);
-            .spacing(.getVal(@spacing)[@1], .getVal(@spacing, 1)[@2]);
-            .min-size(.getVal(@min-size)[@1], .getVal(@min-size, 1)[@2]);
-
-            // Visual properties
-            .back(.getVal(@background)[@1], .getVal(@background)[@2], .getVal(@background)[@3], .getVal(@background)[@4]);
-            .border(.getVal(@border)[@1], .getVal(@border)[@2], .getVal(@border)[@3]);
-            .gradient(.getVal(@gradient)[@1], .getVal(@gradient)[@2], .getVal(@gradient)[@3]);
-            .rounded(.getVal(@rounded)[@1], .getVal(@rounded, 1)[@2], .getVal(@rounded, 1)[@3], .getVal(@rounded, 1)[@4]);
-            .shadow(.getVal(@shadow)[@1], .getVal(@shadow)[@2], .getVal(@shadow)[@3], .getVal(@shadow)[@4]);
-            
-            // Typographic properties
-            .color(.getVal(@color)[@1], .getVal(@color)[@2], .getVal(@color)[@3]);
-            .font(.getVal(@font)[@1], .getVal(@font)[@2], .getVal(@font)[@3]);
-            .font-face(.getVal(@fontface)[@1], .getVal(@fontface)[@2], .getVal(@fontface)[@3], .getVal(@fontface)[@4]);
-            .text(.getVal(@text)[@1], .getVal(@text)[@2], .getVal(@text)[@3]);
-
-            // Animation properties
-            .animation(.getVal(@animation)[@1], .getVal(@animation)[@2], .getVal(@animation)[@3], 
-                    .getVal(@animation)[@4], .getVal(@animation)[@5], .getVal(@animation)[@6]);
-            .transition(.getVal(@transition)[@1], .getVal(@transition)[@2], .getVal(@transition)[@3], .getVal(@transition)[@4]);
-
-            // Others
-            .index(@index);
+            .anchor-mixins(@align; @animation; @background; @border; @color; @declaration; @display; @float; @font; @fontface; @gradient;
+                @min-size; @position; @rounded; @shadow; @size; @spacing; @text; @transition; @textdeco; @tshadow; @zindex;);
         }
     }
 }
@@ -2687,9 +2503,6 @@ when (@size=null) {}
 }
 
 .align(@top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@top=null) and (@top=_) and (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .align(static, auto, auto, auto, auto);
-    }
 
     & when not (@top=null) and not (@top=_) and (@min-width-query=_) and (@max-width-query=_) {
         top: @top;
@@ -2729,102 +2542,77 @@ when (@size=null) {}
     & when not (@float=null) and not (@float=_) and (@min-width-query=_) and (@max-width-query=_) {
         float: @float;
     }
- 
-    & when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .float(@float);
-        }
-    }
- 
-    & when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .float(@float);
-        }
-    }
- 
-    & when not (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .float(@float);
-        }
-    }
-}
 
-//
-// .index(index, [min-width-query]) 
-
-.index (@index) 
-    when (@index=null) {}
-
-.index(@index:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@index=null) and (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .index(0);
-    }
-
-    & when not (@index=null) and not (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
-        z-index: @index;
-    }
-
-    & when (@min-width-query=_) and not (@max-width-query=_) {
-        @media all and (max-width: @max-width-query) {
-            .index(@index);
-        }
-    }
-
-    & when not (@min-width-query=_) and (@max-width-query=_) {
-        @media all and (min-width: @min-width-query) {
-            .index(@index);
-        }
-    }
-
-    & when not (@min-width-query=_) and not (@max-width-query=_)
-    {
-        @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-            .index(@index);
-        }
+    & when not (@min-width-query=_), not (@max-width-query=_) {
+        .mixins(
+            @min-max: @min-width-query, @max-width-query;
+            @floag: @float;
+        );
     }
 }
 
 //
 // .position(position, [min-width-query]) 
 // .position.align(position, top, right, bottom, left, [min-width-query]) 
-
-.position(@position)
-    when (@position=null) {}
     
 .position(@position:_, @align:_)
     when not (@position=null) and not (@align=_) {
     .position(@position, @align, @align, @align, @align);
 }
 
-.position(@position:_, @top:_, @right:_, @bottom:_, @left:_, @min-width-query:_, @max-width-query:_) {
-    & when not (@position=null) and (@position=_) and (@top=_) and (@right=_) and (@bottom=_) and (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
-        .position(static, auto, auto, auto, auto);
-    }
+.position(@position:_, @top:_, @right:_, @bottom:_, @left:_, @min-width:_, @max-width:_) {
 
-    & when not (@position=null) and not (@position=_) and (@min-width-query=_) and (@max-width-query=_) {
+    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+    
+    & when (@position=null) {}
+
+    & when not (@position=null) and not (@position=_) and (@query=_) {
         position: @position;
     }
 
-    & when not (@position=null) and not (@top=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@position=null) and not (@top=_) and (@query=_) {
         top: @top;
     }
 
-    & when not (@position=null) and not (@right=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@position=null) and not (@right=_) and (@query=_) {
         right: @right;
     }
 
-    & when not (@position=null) and not (@bottom=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@position=null) and not (@bottom=_) and (@query=_) {
         bottom: @bottom;
     }
 
-    & when not (@position=null) and not (@left=_) and (@min-width-query=_) and (@max-width-query=_) {
+    & when not (@position=null) and not (@left=_) and (@query=_) {
         left: @left;
+    }
+
+    & when not (@query=_) {
+        .mixins(
+            @min-max: @query;
+            @position: @position, @top, @right, @bottom, @left;
+        );
+    }
+}
+
+//
+// @zindex: z-index;
+
+.zindex(@index) 
+    when (@index=null) {}
+
+.zindex(@index:_, @min-width-query:_, @max-width-query:_) {
+    & when not (@index=null) and (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
+        z-index: 0;
+    }
+
+    & when not (@index=null) and not (@index=_) and (@min-width-query=_) and (@max-width-query=_) {
+        z-index: @index;
     }
 
     & when not (@min-width-query=_), not (@max-width-query=_) {
         .mixins(
             @min-max: @min-width-query, @max-width-query;
-            @position: @position, @top, @right, @bottom, @left;
+            @index: @index;
         );
     }
 }
