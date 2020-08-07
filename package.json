@@ -1,6 +1,6 @@
 {
   "name": "anchorless",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "description": "anchorLess: The most extensive Less mixins library",
   "repository": {
     "type": "git",
@@ -24,8 +24,11 @@
   "author": "@invader365",
   "license": "Apache-2.0",
   "dependencies": {
+    "@angular/cli": "^10.0.1",
     "browser-sync": "^2.18.12",
     "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-jade": "^1.1.0",
     "gulp-less": "^3.3.0"
   }
 }
