@@ -1,96 +1,98 @@
 //
-//  Mixins
+//  Anchor mixins
 
-//
-//  .mixins(
-//      @back: background-color, background-image, background-repeat, background-position;
-//      @shadow: spread, color, alpha;
-//  );
+.mixins(@query:_; @align:_; @animation:_; @backface:_; @background:_; @blur:_; @border:_; @brightness:_; @color:_; @contrast:_; @custom:_; @display:_; 
+    @dropshadow:_; @filter:_; @float:_; @font:_; @fontface:_; @gradient:_; @grayscale:_; @huerotate:_; @invert:_; @minmax-size:_; @opacity:_; 
+    @origin:_; @paragraph:_; @perspective:_; @position:_; @resize:_; @rotate3d:_; @rounded:_; @saturate:_; @scale3d:_; @sepia:_; @shadow:_; @size:_; 
+    @skew:_; @spacing:_; @transition:_; @translate3d:_; @transform:_; @textdecoration:_; @textshadow:_; @url:_; @zindex:_;) {
 
-.getVal(@args:_; @repeat:0) {
-    @lenght: length(@args);
-    @1: extract(@args, 1);
-    @2: if((@lenght = @repeat) and (2 > @repeat), @@repeat, if((@lenght > 1), extract(@args, 2), _));
-    @3: if((@lenght = @repeat) and (3 > @repeat), @@repeat, if((@lenght > 2), extract(@args, 3), _));
-    @4: if((@lenght = @repeat) and (4 > @repeat), @@repeat, if((@lenght > 3), extract(@args, 4), _));
-    @5: if((@lenght = @repeat) and (5 > @repeat), @@repeat, if((@lenght > 4), extract(@args, 5), _));
-    @6: if((@lenght = @repeat) and (6 > @repeat), @@repeat, if((@lenght > 5), extract(@args, 6), _));
-    @7: if((@lenght = @repeat) and (7 > @repeat), @@repeat, if((@lenght > 6), extract(@args, 7), _));
-    @8: if((@lenght = @repeat) and (8 > @repeat), @@repeat, if((@lenght > 7), extract(@args, 8), _));
+    @min: extract(@query, 1);
+    @max: extract(@query, 2);
+
+    & when (@query=_) {
+        .return-mixins(@align; @animation; @backface; @background; @blur; @border; @brightness; @color; @contrast; @custom; @display; @dropshadow; 
+            @filter; @float; @font; @fontface; @gradient; @grayscale; @huerotate; @invert; @minmax-size; @opacity; @origin; @paragraph; @perspective; 
+            @position; @resize; @rotate3d; @rounded; @saturate; @scale3d; @sepia; @shadow; @size; @skew; @spacing; @transition; @translate3d; 
+            @transform; @textdecoration; @textshadow; @url; @zindex;);
+    }
+
+    & when not (@query=_) {
+        @minW:   if((@min=_); ''; 'and (minWidth: @{min}) ');
+        @min-max: if((@max=_); ~'@{minW}'; ~'@{minW}and (max-width: @{max})');
+
+        @media all @min-max {
+            .return-mixins(@align; @animation; @backface; @background; @blur; @border; @brightness; @color; @contrast; @custom; @display; @dropshadow; 
+                @filter; @float; @font; @fontface; @gradient; @grayscale; @huerotate; @invert; @minmax-size; @opacity; @origin; @paragraph; @perspective; 
+                @position; @resize; @rotate3d; @rounded; @saturate; @scale3d; @sepia; @shadow; @size; @skew; @spacing; @transition; @translate3d; 
+                @transform; @textdecoration; @textshadow; @url; @zindex;);
+        }
+    }
 }
 
-.anchor-mixins(@align:_; @animation:_; @background:_; @border:_; @color:_; @declaration:_; @display:_; @float:_; @font:_; 
-               @fontface:_; @gradient:_; @min-size:_; @position:_; @rounded:_; @shadow:_; @size:_; @spacing:_; @text:_; 
-               @transition:_; @textdeco:_; @tshadow:_; @zindex:_;) {
-        // Layout properties
-        .position(.getVal(@position)[@1], .getVal(@position)[@2], .getVal(@position, 2)[@3], .getVal(@position, 2)[@4], 
-                  .getVal(@position, 2)[@5]);
-        .align(.getVal(@align)[@1], .getVal(@align, 1)[@2], .getVal(@align, 1)[@3], .getVal(@align, 1)[@4]);
-        .float(@float);
-
-        // Box-model properties
-        .display(.getVal(@display)[@1], .getVal(@display)[@2], .getVal(@display, 2)[@3]);
-        .size(.getVal(@size)[@1], .getVal(@size, 1)[@2]);
-        .spacing(.getVal(@spacing)[@1], .getVal(@spacing, 1)[@2]);
-        .border(.getVal(@border)[@1], .getVal(@border)[@2], .getVal(@border)[@3]);
-        .min-size(.getVal(@min-size)[@1], .getVal(@min-size, 1)[@2]);
-
-        // Visual properties
-        .color(.getVal(@color)[@1], .getVal(@color)[@2], .getVal(@color)[@3]);
-        .back(.getVal(@background)[@1], .getVal(@background)[@2], .getVal(@background)[@3], .getVal(@background)[@4],
-        .getVal(@background)[@5], .getVal(@background)[@6], .getVal(@background)[@7]);
-        .gradient(.getVal(@gradient)[@1], .getVal(@gradient)[@2], .getVal(@gradient)[@3], .getVal(@gradient)[@4], 
-                  .getVal(@gradient)[@5]);
-        .rounded(.getVal(@rounded)[@1], .getVal(@rounded)[@2], .getVal(@rounded)[@3], .getVal(@rounded)[@4]);
-        .shadow(.getVal(@shadow)[@1], .getVal(@shadow)[@2], .getVal(@shadow)[@3], .getVal(@shadow)[@4]);
+.return-mixins(@align; @animation; @backface; @background; @blur; @border; @brightness; @color; @contrast; @custom; @display; @dropshadow; 
+    @filter; @float; @font; @fontface; @gradient; @grayscale; @huerotate; @invert; @minmax-size; @opacity; @origin; @paragraph; @perspective; 
+    @position; @resize; @rotate3d; @rounded; @saturate; @scale3d; @sepia; @shadow; @size; @skew; @spacing; @transition; @translate3d; 
+    @transform; @textdecoration; @textshadow; @url; @zindex;) {
+            
+    // Box-model
+    & when not (@display=_) { .display.parse(@display); }
+    & when not (@size=_) { .size.parse(@size); }
+    & when not (@minmax-size=_) { .minmax-size.parse(@minmax-size); }
+    & when not (@spacing=_) { .spacing.parse(@spacing); }
+    & when not (@border=_) { .border.parse(@border); }
         
-        // Typographic properties
-        .font(.getVal(@font)[@1], .getVal(@font)[@2], .getVal(@font)[@3]);
-        .font-face(.getVal(@fontface)[@1], .getVal(@fontface)[@2], .getVal(@fontface)[@3], .getVal(@fontface)[@4]);
-        .text(.getVal(@text)[@1], .getVal(@text)[@2], .getVal(@text)[@3]);
-        .text.decoration(.getVal(@textdeco)[@1], .getVal(@textdeco)[@2], .getVal(@textdeco)[@3]);
-        .text.shadow(.getVal(@tshadow)[@1], .getVal(@tshadow)[@2], .getVal(@tshadow)[@3]);
+    // Layout
+    & when not (@position=_) { .position.parse(@position); }
+    & when not (@align=_) { .align.parse(@align); }
+    & when not (@float=_) { .float(@float); }
+    & when not (@zindex=_) { .zindex(@zindex); }
 
-        // Animation properties
-        .animation(.getVal(@animation)[@1], .getVal(@animation)[@2], .getVal(@animation)[@3], .getVal(@animation)[@4], 
-                   .getVal(@animation)[@5], .getVal(@animation)[@6], .getVal(@animation)[@7], .getVal(@animation)[@8]);
-        .transition(.getVal(@transition)[@1], .getVal(@transition)[@2], .getVal(@transition)[@3], .getVal(@transition)[@4]);
+    // Visual
+    & when not (@color=_) { .color.parse(@color); }
+    & when not (@background=_) { .back.parse(@background); }
+    & when not (@gradient=_) { .gradient.parse(@gradient); }
+    & when not (@rounded=_) { .rounded.parse(@rounded); }
+    & when not (@shadow=_) { .shadow.parse(@shadow); }
+    & when not (@opacity=_) { .opacity(@opacity); }
+        
+    // Typographic
+    & when not (@font=_) { .font.parse(@font); }
+    & when not (@fontface=_) { .fontface.parse(@fontface); }
+    & when not (@paragraph=_) { .paragraph.parse(@paragraph); }
+    & when not (@textdecoration=_) { .textdecoration.parse(@textdecoration); }
+    & when not (@textshadow=_) { .textshadow.parse(@textshadow); }
 
-        // Others
-        .declaration(.getVal(@declaration)[@1], .getVal(@declaration)[@2]);
-        .zindex(@zindex);
-}
+    // Transform
+    & when not (@transform=_) { .transform(@transform); }
+    & when not (@perspective=_) { .perspective(@perspective); }
+    & when not (@rotate3d=_) { .rotate3d.parse(@rotate3d); }
+    & when not (@scale3d=_) { .scale3d.parse(@scale3d); }
+    & when not (@skew=_) { .skew.parse(@skew); }
+    & when not (@translate3d=_) { .translate3d.parse(@translate3d); }
+    & when not (@backface=_) { .backface(@backface); }
+    & when not (@origin=_) { .origin.parse(@origin); }
+    & when not (@resize=_) { .resize(@resize); }
 
-.mixins(@min-max:_; @align:_; @animation:_; @background:_; @border:_; @color:_; @declaration:_; @display:_; @float:_; @font:_; 
-        @fontface:_; @gradient:_; @min-size:_; @position:_; @rounded:_; @shadow:_; @size:_; @spacing:_; @text:_; @transition:_; 
-        @textdeco:_; @tshadow:_; @zindex:_;) {
+    // Filters
+    & when not (@filter=_) { .filter(@filter); }
+    & when not (@blur=_) { .blur(@blur); }
+    & when not (@brightness=_) { .brightness(@brightness); }
+    & when not (@contrast=_) { .contrast(@contrast); }
+    & when not (@dropshadow=_) { .dropshadow.parse(@dropshadow); }
+    & when not (@grayscale=_) { .grayscale(@grayscale); }
+    & when not (@huerotate=_) { .huerotate(@huerotate); }
+    & when not (@invert=_) { .invert(@invert); }
+    & when not (@saturate=_) { .saturate(@saturate); }
+    & when not (@sepia=_) { .sepia(@sepia); }
+    & when not (@url=_) { .url(@url); }
 
-        @min-width: .getVal(@min-max)[@1];
-        @max-width: .getVal(@min-max)[@2];
+    // Animation
+    & when not (@animation=_) { .animation.parse(@animation); }
+    & when not (@transition=_) { .transition.parse(@transition); }
 
-    & when (@min-width=_) and (@max-width=_) {
-            .anchor-mixins(@align; @animation; @background; @border; @color; @declaration; @display; @float; @font; @fontface; @gradient; 
-                @min-size; @position; @rounded; @shadow; @size; @spacing; @text; @transition; @textdeco; @tshadow; @zindex;);
-    }
+    // Assets
+    & when not (@triangle=_) { .triangle.parse(@triangle); }
 
-    & when not (@min-width=_) and (@max-width=_) {
-        @media all and (min-width: @min-width) {
-            .anchor-mixins(@align; @animation; @background; @border; @color; @declaration; @display; @float; @font; @fontface; @gradient; 
-                @min-size; @position; @rounded; @shadow; @size; @spacing; @text; @transition; @textdeco; @tshadow; @zindex;);
-        }
-    }
-
-    & when (@min-width=_) and not (@max-width=_) {
-        @media all and (max-width: @max-width) {
-            .anchor-mixins(@align; @animation; @background; @border; @color; @declaration; @display; @float; @font; @fontface; @gradient;
-                @min-size; @position; @rounded; @shadow; @size; @spacing; @text; @transition; @textdeco; @tshadow; @zindex;);
-        }
-    }
-
-    & when not (@min-width=_) and not (@max-width=_) {
-        @media all and (min-width: @min-width) and (max-width: @max-width) {
-            .anchor-mixins(@align; @animation; @background; @border; @color; @declaration; @display; @float; @font; @fontface; @gradient;
-                @min-size; @position; @rounded; @shadow; @size; @spacing; @text; @transition; @textdeco; @tshadow; @zindex;);
-        }
-    }
+    // Others
+    & when not (@custom=_) { .custom.parse(@custom); }
 }

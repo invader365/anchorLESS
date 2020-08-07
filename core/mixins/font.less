@@ -1,212 +1,238 @@
 //
 //  Font properties
-//
-
-//  .mixins(
-//      @min-max: min-width, max-width; 
-//      @font: font-style, font-weight, font-size, font-family;
-//      @text: text-align, text-indent, text-transform;
-//      @tdecoration: spread, color, alpha;
-//      @tshadow: spread, color, alpha;
-//  );
 
 //
-//  .font(font-style, font-weight, font-size, font-family);
+//  .font(@style, @weight, @size, @family, [@min-query, @max-query]);
 //   ------------------------------------------------------
-//   font-style   |  normal/italic/oblique/initial/inherit
-//   font-weight  |  normal/bold/bolder/lighter/number/initial/inherit  300/400/700
-//   font-family  |  family-name|initial|inherit
+//   @style    :  normal|italic|oblique|initial|inherit
+//   @weight   :  normal|bold|bolder|lighter|-number-|initial|inherit
+//   @family   :  family-name|initial|inherit
 
-.font(@size:_, @weight:_, @family:_, @min-width:_, @max-width:_) {
+.font(@size:_, @weight:_, @family:_, @min-query:_, @max-query:_) {
 
-    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-    & when (@size=null) {}
-
-    & when not (@size=null) and not (@size=_) and not (@weight=_) and not (@family=_) and (@query=_) {
+    & when not (@size=_) and not (@weight=_) and not (@family=_) and (@minmax=_) {
         font: @weight @size @family;
     }
 
-    & when not (@size=null) and not (@size=_) and (@weight=_) and not (@family=_) and (@query=_) {
+    & when not (@size=_) and (@weight=_) and not (@family=_) and (@minmax=_) {
         font: @size @family;
     }
 
-    & when not (@size=null) and not (@size=_) and not (@weight=_) and (@family=_) and (@query=_) {
+    & when not (@size=_) and not (@weight=_) and (@family=_) and (@minmax=_) {
         font-size: @size;
         font-weight: @weight;
     }
 
-    & when not (@size=null) and (@size=_) and not (@weight=_) and not (@family=_) and (@query=_) {
+    & when (@size=_) and not (@weight=_) and not (@family=_) and (@minmax=_) {
         font-weight: @weight;
         font-family: @family;
     }
 
-    & when not (@size=null) and not (@size=_) and (@weight=_) and (@family=_) and (@query=_) {
+    & when not (@size=_) and (@weight=_) and (@family=_) and (@minmax=_) {
         font-size: @size;
     }
 
-    & when not (@size=null) and (@size=_) and not (@weight=_) and (@family=_) and (@query=_) {
+    & when (@size=_) and not (@weight=_) and (@family=_) and (@minmax=_) {
         font-weight: @weight;
     }
 
-    & when not (@size=null) and (@size=_) and (@weight=_) and not (@family=_) and (@query=_) {
+    & when (@size=_) and (@weight=_) and not (@family=_) and (@minmax=_) {
         font-family: @family;
     }
 
-    & when not (@query=_) {
+    & when not (@minmax=_) {
         .mixins(
-            @min-max: @query;
+            @query: @minmax;
             @font: @size, @weight, @family;
         );
     }
-}
     
-//
-//  .font-face(font-family, file-path, font-weight, font-style);
-//   ------------------------------------------------------
-//   font-family  |  font family name : Arial
-//   file-path    |  absolute/relative file path : '../fonts/Arial-Regular'
-//   font-weight  |  light/normal/bold/inherit  300/400/700
-//   font-style   |  italic/normal/inherit
+    .parse(@args) {
 
-.font-face(@font-family:_, @font-path:_, @font-weight:400, @font-style:normal) {
-
-    & when not (@font-family=_) and not (@font-path=_) {
-        @font-face {
-            font-family: @font-family;
-            src: url('@{font-path}.eot');  // IE9
-            src: url('@{font-path}.eot?#iefix') format('embedded-opentype'),     
-                url('@{font-path}.woff') format('woff'),
-                url('@{font-path}.ttf') format('truetype'),
-                url('@{font-path}.svg#@{@font-family}') format('svg');
-            font-weight: @font-weight;
-            font-style: @font-style;
+        .loop(@i:3) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
         }
+        
+        .font(.loop[$1], .loop[$2], .loop[$3]);
     }
 }
 
 //
-//  .text(text-align, text-indent, text-transform);
+//  .font-face(@family, @path, @weight, @style, [@min-query, @max-query]);
 //   ------------------------------------------------------
-//   text-align      |  left/right/center/justify/initial/inherit
-//   text-indent     |  length/initial/inherit
-//   text-transform  |  none/capitalize/uppercase/lowercase/initial/inherit
+//   @family  :  font-family name
+//   @path    :  absolute/relative file path
+//   @weight  :  normal|bold|bolder|lighter|-number-|initial|inherit;
+//   @style   :  italic|normal|inherit
 
-.text(@align:_, @indent:_, @transform:_, @min-width:_, @max-width:_) {
+.fontface(@family:_, @path:_, @weight:_, @style:_, @min-query:_, @max-query:_) {
 
-    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+    @vweight: if(@weight=_; 400; @weight);
+    @vstyle:  if(@style=_; normal; @style);
 
-    & when (@align=null) {}
+    & when not (@family=_) and not (@path=_) {
+        @font-face {
+            font-family: @family;
+            src: url('@{path}.eot');  // IE9
+            src: url('@{path}.eot?#iefix') format('embedded-opentype'),     
+                 url('@{path}.woff') format('woff'),
+                 url('@{path}.ttf') format('truetype'),
+                 url('@{path}.svg#@{@family}') format('svg');
+            font-weight: @vweight;
+            font-style: @vstyle;
+        }
+    }
 
-    & when not (@align=null) and not (@align=_) and (@query=_) {
+    & when not (@min-query=_), not (@max-query=_) {
+        .mixins(
+            @query: @min-query, @max-query;
+            @paragraph: @family, @path, @weight, @style;
+        );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:4) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .fontface(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
+    }
+}
+
+//
+//  .paragraph(@align, @indent, @transform, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @align      :  left|right|center|justify|initial|inherit
+//   @indent     :  -length-|initial|inherit
+//   @transform  :  none|capitalize|uppercase|lowercase|initial|inherit
+
+.paragraph(@align:_, @indent:_, @transform:_, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@align=_) and (@minmax=_) {
         text-align: @align;
     }
 
-    & when not (@align=null) and not (@indent=_) and (@query=_) {
+    & when not (@indent=_) and (@minmax=_) {
         text-indent: @indent;
     }
 
-    & when not (@align=null) and not (@transform=_) and (@query=_) {
+    & when not (@transform=_) and (@minmax=_) {
         text-transform: @transform;
     }
 
-    & when not (@query=_) {
+    & when not (@minmax=_) {
         .mixins(
-            @min-max: @query;
-            @text: @indent, @align, @transform;
+            @query: @minmax;
+            @paragraph: @indent, @align, @transform;
         );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:3) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .paragraph(.loop[$1], .loop[$2], .loop[$3]);
     }
 }
 
 //
-// .text.decoration(@line, @color, @style, [@min-width-query, @max-width-query])
-// .text-shadow(@spread, @color, @alpha, [@min-width-query, @max-width-query])
+// .textdecoration(@line, @color, @style, [@min-query, @max-query])
+//   ------------------------------------------------------
+//   @line      :  none|underline|overline|line-through|initial|inherit
+//   @color     :  -color-|initial|inherit
+//   @style     :  solid|double|dotted|dashed|wavy|initial|inherit;
 
-.text {
+.textdecoration(@line:_, @color:_, @style:_, @min-query:_, @max-query:_) {
 
-    .decoration(@line:_, @color:_, @style:_, @min-width:_, @max-width:_) {
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-        @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+    & when not (@line=_) and not (@color=_) and not (@style=_) and (@minmax=_) {
+        text-decoration: @line @color @style
+    }
+    & when not (@line=_) and not (@color=_) and (@style=_) and (@minmax=_) {
+        text-decoration: @line @color
+    }
 
-        & when (@line=null) {}
+    & when not (@line=_) and (@color=_) and not (@style=_) and (@minmax=_) {
+        text-decoration: @line @style
+    }
 
-        & when not (@line=null) and not (@line=_) and not (@color=_) and not (@style=_) and (@query=_) {
-            text-decoration: @line @color @style
-        }
-        & when not (@line=null) and not (@line=_) and not (@color=_) and (@style=_) and (@query=_) {
-            text-decoration: @line @color
-        }
+    & when (@line=_) and not (@color=_) and not (@style=_) and (@minmax=_) {
+        text-decoration-color: @color;  // IE not supported
+        text-decoration-style: @style;  // IE not supported
+    }
 
-        & when not (@line=null) and not (@line=_) and (@color=_) and not (@style=_) and (@query=_) {
-            text-decoration: @line @style
-        }
+    & when not (@line=_) and (@color=_) and (@style=_) and (@minmax=_) {
+        text-decoration-line: @line
+    }
 
-        & when not (@line=null) and (@line=_) and not (@color=_) and not (@style=_) and (@query=_) {
-            text-decoration-color: @color;  // IE not supported
-            text-decoration-style: @style;  // IE not supported
-        }
+    & when (@line=_) and not (@color=_) and (@style=_) and (@minmax=_) {
+        text-decoration-color: @color  // IE not supported
+    }
 
-        & when not (@line=null) and not (@line=_) and (@color=_) and (@style=_) and (@query=_) {
-            text-decoration-line: @line
-        }
+    & when (@line=_) and (@color=_) and not (@style=_) and (@minmax=_) {
+        text-decoration-style: @style  // IE not supported
+    }
 
-        & when not (@line=null) and (@line=_) and not (@color=_) and (@style=_) and (@query=_) {
-            text-decoration-color: @color  // IE not supported
-        }
-
-        & when not (@line=null) and (@line=_) and (@color=_) and not (@style=_) and (@query=_) {
-            text-decoration-style: @style  // IE not supported
-        }
-
-        & when not (@query=_) {
-            .mixins(
-                @min-max: @query;
-                @textdeco: @size, @weight, @family;
-            );
-        }
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @textdecoration: @size, @weight, @family;
+        );
     }
     
-    .shadow(@spread:_, @color:_, @alpha:_, @min-width:_, @max-width:_) {
+    .parse(@args) {
 
-        @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+        .loop(@i:3) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .textdecoration(.loop[$1], .loop[$2], .loop[$3]);
+    }
+}
+    
+//
+//  .text-shadow(@spread, @color, @alpha, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @spread    :  h-shadow v-shadow [blur-radius]
+//   @color     :  -color-|initial|inherit
 
-        & when (@spread=null) {}
-        
-        & when not (@spread=null) and not (@spread=_) and not (@color=_) and not (@alpha=_) and (@query=_) {        
-            @alphaisp: if(ispercentage(@alpha), @alpha/1, @alpha);
-            @rgba: fade(@color, @alphaisp);
-            text-shadow: @spread @rgba;
-        }
-        
-        & when not (@spread=null) and not (@spread=_) and (@color=_) and (@alpha=_) and (@query=_) {        
-            text-shadow: @spread black;
-        }
-        
-        & when not (@spread=null) and (@spread=_) and not (@color=_) and (@alpha=_) and (@query=_) {        
-            text-shadow: 0 0 @color;
-        }
-        
-        & when not (@spread=null) and (@spread=_) and (@color=_) and not (@alpha=_) and (@query=_) {        
-            .text.shadow(0 0, black, @alpha)
-        }
-        
-        & when not (@spread=null) and not (@spread=_) and not (@color=_) and (@alpha=_) and (@query=_) {        
-            text-shadow: @spread @color;
-        }
-        
-        & when not (@spread=null) and (@spread=_) and not (@color=_) and not (@alpha=_) and (@query=_) {
-            .text.shadow(0 0, @color, @alpha)
-        }
-        
-        & when not (@spread=null) and not (@spread=_) and (@color=_) and not (@alpha=_) and (@query=_) {        
-            .text.shadow(@spread, black, @alpha)
-        }
+.textshadow(@spread:_, @color:_, @alpha:100%, @min-query:_, @max-query:_) {
 
-        & when not (@query=_) {
-            .mixins(
-                @min-max: @query;
-                @tshadow: @spread, @color, @alpha;
-            );
+    @percentage: if(ispercentage(@alpha); @alpha; @alpha*100%);
+    @rgba: fade(@color, @percentage);
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+    
+    & when not (@spread=_) and not (@color=_) and (@minmax=_) {
+        text-shadow: @spread @rgba;
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @textshadow: @spread, @color, @alpha;
+        );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:3) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
         }
+        
+        .textshadow(.loop[$1], .loop[$2], .loop[$3]);
     }
 }

@@ -3,11 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 ## [1.3.0] - 2020-07
+ - Updated border mixin (supports single and multiple parameters)
  - Added 'declaration' mixin to input custom css declaration
  - Added single mixins block to output media queries
  - New writting anchorless writting format
+ - Extended min-size to minmax-size mixin
  - Rewritten spacing code structure
  - Updated helper utilities
+ - Updated documentation
+ - Added filters mixins
 
 ## [1.2.0] - 2020-07-20
 - Added min an max-width media queries to gradients, font

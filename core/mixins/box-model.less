@@ -1,131 +1,318 @@
 //
-//  Box-model properties
+//   Box-model properties
+
+//
+//  .border(@width, @style, @color, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @width     :  medium|thin|thick|-length-|initial|inherit
+//   @style     :  none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit
+//   @color     :  color|transparent|initial|inherit
+
+.border(@width:_, @style:_, @color:_, @min-query:_, @max-query:_) {
+
+    @params: if(length(@width) = 1 and length(@style) = 1 and length(@color) = 1; single);
+    @minmax: if(@min-query=_ and @max-query=_; _; @min-query, @max-query);
+
+    & when not (@style=_) and (@params=single) and (@minmax=_) {
+        @rest: if(@color=_; @style; @style @color);
+        border: @width @rest;
+    }
+
+    & when not (@width=_) and (@style=_)  and (@minmax=_) {
+        border-width: @width;
+    }
+
+    & when not (@width=_) and (@params=multi)  and (@minmax=_) {
+        border-width: @width;
+    }
+
+    & when not (@style=_) and (@params=multi) and (@minmax=_) {
+        border-style: @style;
+    }
+
+    & when not (@color=_) and (@style=_) and (@minmax=_) {
+        border-color: @color;
+    }
+
+    & when not (@color=_) and (@params=multi) and (@minmax=_) {
+        border-color: @color;
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @border: @width, @style, @color;
+        );
+    }
     
-.display(@display:_, @size:_) {
-    & when not (@size=_) {
-        .display(@display, @size, @size);
+    .parse(@args) {
+
+        .loop(@i:3) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .border(.loop[$1], .loop[$2], .loop[$3]);
     }
 }
 
-.display(@display:_, @width:_, @height:_, @min-width:_, @max-width:_) {
+//  .display(@mode, @property1, @property2, @property3, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @mode                    :  inline|block|inline-block|flex|grid|list-item|table|table-row|table-column|table-cell|none|initial|inherit
+//   when (@mode = block) 
+//     @width                 :  auto|-length-|initial|inherit
+//     @height                :  auto|-length-|initial|inherit
+//   when (@mode = flex)
+//     @flex-flow             :  flex-direction flex-wrap|initial|inherit
+//     @justify-content       :  flex-start|flex-end|center|space-between|space-around|initial|inherit
+//     @align-items           :  flex-start|flex-end|center|space-between|space-around|initial|inherit
+//   when (@mode = grid)
+//     @grid-template-columns :  none|auto|max-content|min-content|-length-|initial|inherit
+//     @grid-template-rows    :  none|auto|max-content|min-content|-length-|initial|inherit
+//     @grid-gap              :  grid-row-gap grid-column-gap;
 
-    @query: if((@min-width=_ and @max-width=_); _; @min-width, @max-width);
+.display(@mode:_, @property1:_, @property2:_, @property3:_, @min-query:_, @max-query:_) {
 
-    & when not (@display=_) and (@query=_) {
-        display: @display;
+    @prop1: if(@mode=flex; flex-flow;       if(@mode=grid; grid-template-columns; width););
+    @prop2: if(@mode=flex; justify-content; if(@mode=grid; grid-template-rows; height););
+    @prop3: if(@mode=flex; align-items;     if(@mode=grid; gap););
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@mode=_) and (@minmax=_) {
+        display: @mode;
     }
 
-    & when not (@width=_) and (@query=_) {
-        width: @width;
+    & when not (@property1=_) and (@minmax=_) {
+        @{prop1}: @property1;
     }
 
-    & when not (@height=_) and (@query=_) {
-        height: @height;
+    & when not (@property2=_) and (@minmax=_) {
+        @{prop2}: @property2;
     }
 
-    & when not (@query=_) {
+    & when not (@property3=_) and (@minmax=_) {
+        @{prop3}: @property3;
+    }
+
+    & when not (@minmax=_) {
         .mixins(
-            @query;
-            @display: @display, @width, @height;
+            @query: @minmax;
+            @display: @mode, @property1, @property2, @property3;
         );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:4) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .display(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
     }
 }
 
 //
-//  .min-size(@min-width, @min-height, [@min-width, @max-width])
-//  .mixins(
-//    @min-size: min-width, min-height; [@min-width; @max-width]
-//  );
+//  .minmax-size(@min-width, @max-width, @min-height, @max-heigh, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @min-width      :  -length-|initial|inherit
+//   @max-width      :  -length-|initial|inherit
+//   @min-height     :  -length-|initial|inherit
+//   @max-height     :  -length-|initial|inherit
 
-.min-size (@min-size) {
-    & when not (@min-size=_) {
-      .min-size(@min-size, @min-size)
-    }
-}
-
-.min-size(@min-width:_, @min-height:_, @min-width-q:_, @max-width-q:_) {
+.minmax-size(@min-width:_, @max-width:_, @min-height:_, @max-height:_, @min-query:_, @max-query:_) {
     
-    @query: if((@min-width-q=_ and @max-width-q=_); _; @min-width-q, @max-width-q);
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-    & when not (@min-height=_) and (@query=_) {
-        min-height: @min-height;
-    }
-
-    & when not (@min-width=_) and (@query=_) {
+    & when not (@min-width=_) and (@minmax=_) {
         min-width: @min-width;
     }
 
-    & when not (@query=_) {
+    & when not (@max-width=_) and (@minmax=_) {
+        max-width: @max-width;
+    }
+
+    & when not (@min-height=_) and (@minmax=_) {
+        min-height: @min-height;
+    }
+
+    & when not (@max-height=_) and (@minmax=_) {
+        max-height: @max-height;
+    }
+
+    & when not (@minmax=_) {
         .mixins(
-            @query;
-            @min-size: @min-width, @min-height;
+            @query: @minmax;
+            @minmax-size: @min-width, @max-width, @min-height, @max-height;
         );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:4) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .minmax-size(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
     }
 }
 
 //
-// Size combination values
-// 
-// .size()                      // default value
-// .size(10px)                  // duplicate value
-// .size(10px, 20px)            // custom propertie values
-// .size(10px, 20px, 570px)     // custom propertie values + min-width query
-// .size(10px, 20px, _, 1200px) // custom propertie values + max-width query
-// .size(10px, 20px, 570px, 1200px) // custom propertie values + min/max-width queries
-// ----------------------------------------------------------------
+//  .rounded.top-left(@radius, [@min-query, @max-query]);
+//  .rounded.top-right(@radius, [@min-query, @max-query]);
+//  .rounded.bottom-right(@radius, [@min-query, @max-query]);
+//  .rounded.bottom-left(@radius, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @radius     :  -length- [length]|initial|inherit
 
-.size (@size) {
-    & when not (@size=_) {
-      .size(@size, @size)
+.rounded {
+    .top-left(@radius:_, @min-query:_, @max-query:_) {
+    
+        @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+        & when not (@radius=_) and (@minmax=_) {
+            -webkit-border-top-left-radius: @radius;
+                -moz-border-radius-topleft: @radius;
+                    border-top-left-radius: @radius;
+        }
+
+        & when not (@minmax=_) {
+            .mixins(
+                @query: @minmax;
+                @top-left: @radius;
+            );
+        }
+    }
+
+    .top-right(@radius:_, @min-query:_, @max-query:_) {
+    
+        @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+        
+        & when not (@radius=_) and (@minmax=_) {
+            -webkit-border-top-right-radius: @radius;
+                -moz-border-radius-topright: @radius;
+                    border-top-right-radius: @radius;
+        }
+
+        & when not (@minmax=_) {
+            .mixins(
+                @query: @minmax;
+                @top-right: @radius;
+            );
+        }
+    }
+
+    .bottom-right (@radius:_, @min-query:_, @max-query:_) {
+    
+        @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+        
+        & when not (@radius=_) and (@minmax=_) {
+            -webkit-border-bottom-right-radius: @radius;
+                -moz-border-radius-bottomright: @radius;
+                    border-bottom-right-radius: @radius;
+        }
+
+        & when not (@minmax=_) {
+            .mixins(
+                @query: @minmax;
+                @bottom-right: @radius;
+            );
+        }
+    }
+
+    .bottom-left (@radius:_, @min-query:_, @max-query:_) {
+    
+        @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+        
+        & when not (@radius=_) and (@minmax=_) {
+            -webkit-border-bottom-left-radius: @radius;
+                -moz-border-radius-bottomleft: @radius;
+                    border-bottom-left-radius: @radius;
+        }
+
+        & when not (@minmax=_) {
+            .mixins(
+                @query: @minmax;
+                @bottom-left: @radius;
+            );
+        }
     }
 }
 
-.size(@width:_, @height:_, @query-min:_, @query-max:_) {
+//
+//  .size(@width, @height, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @width         :  auto|-length-|initial|inherit
+//   @heigth        :  auto|-length-|initial|inherit
+
+.size(@width:_, @height:_, @min-query:_, @max-query:_) {
   
-    & when not (@width=_) and (@query-min=_) and (@query-max=_) {
+    @vheight: if(@height=_; @width; @height);
+  
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@width=_) and (@minmax=_) {
         width: @width;
     }
   
-    & when not (@height=_) and (@query-min=_) and (@query-max=_) {
-        height: @height;
+    & when not (@vheight=_) and (@minmax=_) {
+        height: @vheight;
     }
 
-    & when not (@query-min=_), not (@query-max=_) {
+    & when not (@minmax=_) {
         .mixins(
-            @min-max: @query-min, @query-max;
+            @query: @minmax;
             @size: @width, @height;
         );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:2) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .size(.loop[$1], .loop[$2]);
     }
 }
 
 //
-// .spacing(margin, padding, [min-width, max-width])
+//  .spacing(@margin, @padding, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @margin         :  -length-|auto|initial|inherit
+//   @padding        :  -length-|auto|initial|inherit
 
-.spacing (@spacing) {
-    & when not (@spacing=_) {
-      .spacing(@spacing, @spacing)
-    }
-}
+.spacing (@margin:_, @padding:_, @min-query:_, @max-query:_) {
+  
+    @vpadding: if(not (@margin=_) and (@padding=_); @margin; @padding);
 
-.spacing (@margin:_, @padding:_, @query-min:_, @query-max:_) {
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-    & when not (@margin=_) and (@padding=_) and (@query-min=_) and (@query-max=_) {
+    & when not (@margin=_) and (@minmax=_) {
         margin: @margin;
     }
 
-    & when (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_) {
-        padding: @padding;
+    & when not (@vpadding=_) and (@minmax=_) {
+        padding: @vpadding;
     }
 
-    & when not (@margin=_) and not (@padding=_) and (@query-min=_) and (@query-max=_) {
-        margin: @margin;
-        padding: @padding;
-    }
-
-    & when not (@query-min=_), not (@query-max=_) {
+    & when not (@minmax=_) {
         .mixins(
-            @min-max: @query-min, @query-max;
+            @query: @minmax;
             @spacing: @margin, @padding;
         );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:2) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .spacing(.loop[$1], .loop[$2]);
     }
 }

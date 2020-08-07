@@ -2,156 +2,269 @@
 //  Transform properties
 
 //
-// .backface(@visibility, [@min-width-query, @max-width-query])
+//  .backface(@visibility, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   backface         :  visible|hidden|initial|inherit
 
-.backface(@visibility) 
-    when (@visibility=null) {}
+.backface(@visibility:_, @min-query:_, @max-query:_) {
 
-.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
-    when not (@visibility=null) and (@visibility=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    .backface(visible)
-}
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+    
+    & when not (@visibility=_) and (@minmax=_) {
+        -webkit-backface-visibility: @visibility;
+           -moz-backface-visibility: @visibility;
+                backface-visibility: @visibility;
+    }
 
-.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
-    when not (@visibility=null) and not (@visibility=_) and (@min-width-query=_) and (@max-width-query=_)
-{
-    -webkit-backface-visibility: @visibility;
-       -moz-backface-visibility: @visibility;
-            backface-visibility: @visibility;
-}
-
-.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
-    when (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (max-width: @max-width-query) {
-        .backface(@visibility)
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @backface: @visibility;
+        );
     }
 }
 
-.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
-    when not (@min-width-query=_) and (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) {
-        .backface(@visibility)
+//
+//  .origin(@x-axis, @y-axis, @z-axis, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   x-axis             :  left|center|right|-length-|percentage
+//   y-axis             :  top|center|bottom|-length-|percentage
+//   z-axis             :  -length-
+
+.origin(@x-axis:_, @y-axis:_, @z-axis:0, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@x-axis=_) and (@y-axis=_) and (@minmax=_) {
+        -webkit-transform-origin: @x-axis @y-axis @z-axis;
+            -ms-transform-origin: @x-axis @y-axis @z-axis;
+                transform-origin: @x-axis @y-axis @z-axis;
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @origin: @x-axis, @y-axis, @z-axis;
+        );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:3) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .origin(.loop[$1], .loop[$2], .loop[$3]);
+    }
+    
+}
+
+//
+//  .perspective(@length, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   length         :  -length-|none
+
+.perspective(@length, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@length=_) and (@minmax=_) {
+        -webkit-perspective: @length;
+           -moz-perspective: @length;
+                perspective: @length;
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @perspective: @length;
+        );
     }
 }
 
-.backface(@visibility:_, @min-width-query:_, @max-width-query:_)
-    when not (@min-width-query=_) and not (@max-width-query=_)
-{
-    @media all and (min-width: @min-width-query) and (max-width: @max-width-query) {
-        .backface(@visibility)
+//
+//  .resize(@direction, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   direction          :  none|both|horizontal|vertical|initial|inherit
+
+.resize(@direction:_, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@direction=_) and (@minmax=_) {
+        resize: @direction;
+        overflow: auto;      // Fix for Safari
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @resize: @direction;
+        );
     }
 }
 
-.perspective (@param) 
-    when (@param = null) {}
+//
+//  .rotate3d(@x-axis, @y-axis, @z-axis, @angle, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   x-axis             :  1 (x-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   y-axis             :  1 (y-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   z-axis             :  1 (z-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   angle              :  degree|gradian|radian|turn
 
-.perspective (@length) {
-    -webkit-perspective: @length;
-        -moz-perspective: @length;
-            perspective: @length;
+.rotate3d(@x-axis:1, @y-axis:1, @z-axis:1, @angle:_, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@angle=_) and (@minmax=_) {
+        -webkit-transform+_: rotate3d(@x-axis, @y-axis, @z-axis, @angle);
+            -ms-transform+_: rotate3d(@x-axis, @y-axis, @z-axis, @angle);
+                transform+_: rotate3d(@x-axis, @y-axis, @z-axis, @angle);
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @rotate: @x-axis, @y-axis, @z-axis, @angle;
+        );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:4) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .rotate3d(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
+    }
 }
 
-.resize (@param) 
-    when (@param = null) {}
+//
+//  .scale3d(@factor, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   x-axis             :  1 (x-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   y-axis             :  1 (y-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   z-axis             :  1 (z-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
 
-.resize (@direction: none) 
-    when not (@direction = null) 
-{
-    resize: @direction;
-    overflow: auto;      // Safari fix
+.scale3d(@x-axis:_, @y-axis:_, @z-axis:_, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@x-axis=_) and not (@y-axis=_) and not (@z-axis=_) and (@minmax=_) {
+        -webkit-transform+_: scale3d(@x-axis, @y-axis, @z-axis);
+            -ms-transform+_: scale3d(@x-axis, @y-axis, @z-axis);
+                transform+_: scale3d(@x-axis, @y-axis, @z-axis);
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @scale3d: @x-axis, @y-axis, @z-axis;
+        );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:3) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .scale3d(.loop[$1], .loop[$2], .loop[$3]);
+    }
 }
 
-.rotate (@param) 
-    when (@param = null) {}
+//
+//  .skew(@transform, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   x-axis             :  1 (x-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   y-axis             :  1 (y-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
 
-.rotate (@degrees: 0deg) 
-    when not (@degrees = null) 
-{
-    -webkit-transform: rotate(@degrees);
-        -ms-transform: rotate(@degrees);
-            transform: rotate(@degrees);
+.skew(@x-axis:_, @y-axis:_, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@x-axis=_) and not (@y-axis=_) and  (@minmax=_) {
+        -webkit-transform+_: skewX(@x-axis) skewY(@y-axis);
+            -ms-transform+_: skewX(@x-axis) skewY(@y-axis);
+                transform+_: skewX(@x-axis) skewY(@y-axis);
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @skew: @x-axis, @y-axis;
+        );
+    }
+    
+    .parse(@args) {
+
+        .loop(@i:2) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .skew(.loop[$1], .loop[$2]);
+    }
 }
 
-.rotate-x (@param) 
-    when (@param = null) {}
+//
+//  .transform(@transform, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   transform          :  none|transform-functions|initial|inherit
 
-.rotate-x (@degrees: 0deg) 
-    when not (@degrees = null) 
-{
-    -webkit-transform: rotate-x(@degrees);
-        -ms-transform: rotate-x(@degrees);
-            transform: rotate-x(@degrees);
-}
+.transform(@transform:_, @min-query:_, @max-query:_) {
 
-.rotate-y (@param) 
-    when (@param = null) {}
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-.rotate-y (@degrees: 0deg) 
-    when not (@degrees = null) 
-{
-    -webkit-transform: rotate-y(@degrees);
-        -ms-transform: rotate-y(@degrees);
-            transform: rotate-y(@degrees);
-}
+    & when not (@transform=_) and (@min-query=_) and (@max-query=_) {
+        -webkit-transform+_: @transform;
+            -ms-transform+_: @transform;
+                transform+_: @transform;
+    }
 
-.scale (@param) 
-    when (@param = null) {}
-
-.scale (@factor: 0) 
-    when not (@factor = null) 
-{
-    -webkit-transform: scale(@factor);
-        -ms-transform: scale(@factor);
-            transform: scale(@factor);
+    & when not (@min-query=_), not (@max-query=_) {
+        .mixins(
+            @query: @min-query, @max-query;
+            @transform: @transform;
+        );
+    }
 }
 
 
-.skew (@param) 
-    when (@param = null) {}
+//
+//  .translate3d(@x-axis, @y-axis, @z-axis, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   x-axis             :  -length-|percentage
+//   y-axis             :  -length-|percentage
+//   z-axis             :  -length-|percentage
 
-.skew (@x: 0, @y: 0) 
-    when not (@x = null) 
-{
-    -webkit-transform: skew(@x, @y);
-        -moz-transform: skew(@x, @y);
-        -ms-transform: skewX(@x) skewY(@y);
-            transform: skew(@x, @y);
-}
+.translate3d(@x-axis:_, @y-axis:_, @z-axis:_, @min-query:_, @max-query:_) {
 
-.transform (@param) 
-    when (@param = null) {}
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-.transform (@transform: none) 
-    when not (@transform = null) 
-{
-    -webkit-transform: @transform;
-        -moz-transform: @transform;
-        -ms-transform: @transform;
-            transform: @transform;
-}
+    & when not (@x-axis=_) and not (@x-axis=_) and not (@x-axis=_) and (@minmax=_) {
+        -webkit-transform+_: translate3d(@x-axis, @y-axis, @z-axis);
+            -ms-transform+_: translate3d(@x-axis, @y-axis, @z-axis);   
+                transform+_: translate3d(@x-axis, @y-axis, @z-axis);
+    }
 
-.translate (@param) 
-    when (@param = null) {}
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @translate3d: @x-axis, @y-axis, @z-axis;
+        );
+    }
+    
+    .parse(@args) {
 
-.translate (@x: 0, @y: 0) 
-    when not (@x = null) 
-{
-    -webkit-transform: translate(@x, @y);
-        -moz-transform: translate(@x, @y);
-        -ms-transform: translate(@x, @y);   
-            transform: translate(@x, @y);
-}
-
-.translate3d (@param) 
-    when (@param = null) {}
-
-.translate3d (@x: 0, @y: 0, @z: 0) 
-    when not (@x = null) 
-{
-    -webkit-transform: translate3d(@x, @y, @z);
-        -moz-transform: translate3d(@x, @y, @z);
-            transform: translate3d(@x, @y, @z);
+        .loop(@i:3) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+        }
+        
+        .translate3d(.loop[$1], .loop[$2], .loop[$3]);
+    }
 }

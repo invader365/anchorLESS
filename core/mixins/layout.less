@@ -1,0 +1,165 @@
+//
+//  Layout properties
+
+//
+//  .align(@top, @right, @bottom, @left, [@min-query, @max-query]) 
+//   ------------------------------------------------------
+//   @top      :  auto|length|initial|inherit
+//   @right    :  auto|length|initial|inherit
+//   @bottom   :  auto|length|initial|inherit
+//   @left     :  auto|length|initial|inherit
+
+.align(@top:_) {
+
+    & when not (@top=_) {
+        .align(@top, @top, @top, @top);
+    }
+}
+
+.align(@top:_, @right:_, @bottom:_, @left:_, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@top=_) and (@minmax=_) {
+        top: @top;
+    }
+
+    & when not (@right=_) and (@minmax=_) {
+        right: @right;
+    }
+
+    & when not (@bottom=_) and (@minmax=_) {
+        bottom: @bottom;
+    }
+
+    & when not (@left=_) and (@minmax=_) {
+        left: @left;
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @align: @top, @right, @bottom, @left;
+        );
+    }
+
+    .parse(@args) {
+
+        @length: length(@args);
+        
+        & when (@length = 1) { .align(@args) }
+        
+        & when not (@length = 1) {
+            .loop(@i: 4) when (@i > 0) {
+                .loop((@i - 1));
+                @{i}: if(@length >= @i; extract(@args, @i); _);
+            }
+
+            .align(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
+        }
+    }
+}
+
+//
+//  .float(@float, [@min-width-query, @max-width-query]);
+//   ------------------------------------------------------
+//   @float      :  none|left|right|initial|inherit
+
+.float (@float:_, @min-query:_, @max-query:_) {
+ 
+    & when not (@float=_) and (@min-query=_) and (@max-query=_) {
+        float: @float;
+    }
+
+    & when not (@min-query=_), not (@max-query=_) {
+        .mixins(
+            @query: @min-query, @max-query;
+            @float: @float;
+        );
+    }
+}
+
+//
+//  .position(@position, @top, @right, @bottom, @left, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @position :  static|absolute|fixed|relative|sticky|initial|inherit
+//   @top      :  auto|length|initial|inherit
+//   @right    :  auto|length|initial|inherit
+//   @bottom   :  auto|length|initial|inherit
+//   @left     :  auto|length|initial|inherit
+
+.position(@position:_, @top:_) {
+
+    & when not (@top=_) {
+        .position(@position, @top, @top, @top, @top);
+    }
+}
+
+.position(@position:_, @top:_, @right:_, @bottom:_, @left:_, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@position=_) and (@minmax=_) {
+        position: @position;
+    }
+
+    & when not (@top=_) and (@minmax=_) {
+        top: @top;
+    }
+
+    & when not (@right=_) and (@minmax=_) {
+        right: @right;
+    }
+
+    & when not (@bottom=_) and (@minmax=_) {
+        bottom: @bottom;
+    }
+
+    & when not (@left=_) and (@minmax=_) {
+        left: @left;
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @position: @position, @top, @right, @bottom, @left;
+        );
+    }
+
+    .parse(@args) {
+
+        @length: length(@args);
+
+        .loop(@i: 5) when (@i > 0) {
+            .loop((@i - 1));
+            @{i}: if(@length >= @i; extract(@args, @i); _);
+        }
+        
+        & when (@length = 2) { 
+          .position(.loop[$1], .loop[$2]); 
+        }
+        
+        & when not (@length = 2) { 
+           .position(.loop[$1], .loop[$2], .loop[$3], .loop[$4], .loop[$5]);
+        }
+    }
+}
+
+//
+//  .zindex(z-index, [@min-query, @max-query]);
+//   ------------------------------------------------------
+//   @z-index :   auto|number|initial|inherit
+
+.zindex(@index:_, @min-query:_, @max-query:_) {
+
+    & when not (@index=_) and (@min-query=_) and (@max-query=_) {
+        z-index: @index;
+    }
+
+    & when not (@min-query=_), not (@max-query=_) {
+        .mixins(
+            @query: @min-query, @max-query;
+            @index: @index;
+        );
+    }
+}
