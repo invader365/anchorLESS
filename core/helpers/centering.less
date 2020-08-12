@@ -1,0 +1,92 @@
+//
+//  Centering
+
+//  .center(@mode, @width, @height);
+//   ------------------------------------------------------
+//   mode           :  none
+
+.center(@mode:_, @width:_, @height:_, @container-width:100%, @container-height:100%) {
+    & when (@mode=_) {
+    }
+}
+
+//
+//  .center-h(@mode, @width, @container-width);
+//   ------------------------------------------------------
+//   mode               :  none|negative|offset|absolute|flex
+//   width              :  auto|-length-|initial|inherit
+//   container-width    :  -percentage-  
+
+.center-h(@mode:_, @width:_, @container-width:100%) {
+
+    & when (@mode=_) { 
+        // Element has width: @width;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+
+    & when (@mode=negative) and not (@width=_) {
+        // Element has width: @width;
+        margin-left: @container-width / 2;
+        left: (@width / 2) * -1;
+    }
+
+    & when (@mode=offset) and not (@width=_) {
+        @padding : @height; // missing padding
+        @offset: @container-width * @padding / (@container-width - @padding);
+        margin-left: round(-@offset, 2);
+        padding-left: round(@offset, 2);
+        padding-right: round(@offset, 2);
+        .content-box();
+    }
+
+    & when (@mode=absolute) and not (@width=_) {
+        // Element has position: absolute; and width;
+        left:  @container-width / 2;
+        margin-left: (@width / 2) * -1;
+    }
+
+    & when (@mode=flex) {
+        // Element has display: flex and height;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+//  .center-v(@mode, @height, @container-height);
+//   ------------------------------------------------------
+//   mode               :  none|negative|offset|absolute|flex
+//   height             :  auto|-length-|initial|inherit
+//   container-height   :  -percentage-
+
+.center-v(@mode:_, @height:_, @container-height:100%) {
+
+    & when (@mode=negative) and not (@height=_) {
+        // Element has height: @height;
+        margin-top: @container-height / 2;
+        top: (@height / 2) * -1;
+    }
+
+    & when (@mode=offset) and not (@height=_) {
+        // not tested
+        @padding : @height; // missing padding
+        @offset:  @container-height * @padding / (@container-height - @padding);
+        margin-top: round(-@offset, 2);
+        padding-top: round(@offset, 2);
+        padding-bottom: round(@offset, 2);
+        .content-box;
+    }
+
+    & when (@mode=absolute) and not (@height=_) {
+        // Element has position: absolute; and height;
+        top: @container-height / 2;
+        margin-top: (@length / 2) * -1;
+    }
+
+    & when (@mode=flex) and not (@height=_) {
+        // Element has display: flex and height;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

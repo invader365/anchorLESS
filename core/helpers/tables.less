@@ -1,0 +1,69 @@
+//
+//  Tables
+
+//
+//  .table.padding(@padding);
+//  .table.border(@width, @style, @color);
+//  .table.color(@color, @background, @rows);
+//  .table.rounded(@weight, @line-height, @style, @family);
+//   ------------------------------------------------------
+//   @width         :  auto|-length-|initial|inherit
+//   @style         :  none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit
+//   @color         :  -color-|initial|inherit
+//   @rows          :  all|even|odd
+
+.table {
+
+    .padding (@padding: 0) {
+        & tr th,
+        & tr td { 
+            padding: @padding; 
+        }
+    }
+
+    .border(@width:_, @style:_, @color:_) {
+        & tr th,
+        & tr td { 
+            .border(@width, @style, @color);
+        }
+    }
+
+    .color(@text-color:_, @background-color:_, @rows: all) when (@rows=all) {
+        & tr th,
+        & tr td { 
+            .color(@text-color, @background-color); 
+        }
+    }
+
+    .color(@text-color:_, @background-color:_, @rows: all) when not (@rows=all) {
+        & when (@rows=odd) {
+            & tr th { 
+                .color(@text-color, @background-color); 
+            }
+        }
+        & tr:nth-child(@{rows}) td { 
+            .color(@text-color, @background-color); 
+        }
+    }
+    
+    .rounded (@radius: none) {
+        border-collapse: separate;      //
+        border-spacing: 0;              // border radius fix
+        border: none;                   //
+        .re-rounded(@radius) {          // maximum stack call fix
+            .rounded(@radius);
+        }
+        & tr:first-child th:first-child { 
+            .rounded.top-left(@radius); 
+        }
+        & tr:first-child th:last-child  { 
+            .rounded.top-right(@radius); 
+        }
+        & tr:last-child  td:first-child { 
+            .rounded.bottom-left(@radius); 
+        }
+        & tr:last-child  td:last-child  { 
+            .rounded.bottom-right(@radius); 
+        }
+    }
+}

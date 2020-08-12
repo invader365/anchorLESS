@@ -1,0 +1,147 @@
+//
+//  Pseudo-elements
+
+//
+//  .after(@content, @width, @height);
+//   ------------------------------------------------------
+//   @content       :  none|normal|counter|attr|string|open-quote|close-quote|no-open-quote|no-close-quote|url|initial|inherit
+//   @width         :  auto|-length-|initial|inherit
+//   @heigth        :  auto|-length-|initial|inherit
+
+.after(@content:_, @width:_, @height:_) {
+    
+    @ruleset: {
+        display: inline-block;
+        content: @content;
+        width: @width;
+        height: @height;
+    }
+
+    .pseudo(after, @ruleset);
+}
+
+//
+//  .before(@content, @width, @height);
+//   ------------------------------------------------------
+//   @content       :  none|normal|counter|attr|string|open-quote|close-quote|no-open-quote|no-close-quote|url|initial|inherit
+//   @width         :  auto|-length-|initial|inherit
+//   @heigth        :  auto|-length-|initial|inherit
+
+.before(@content:_, @width:_, @height:_) {
+    
+    @ruleset: {
+        display: inline-block;
+        content: @content;
+        width: @width;
+        height: @height;
+    }
+
+    .pseudo(before, @ruleset);
+}
+
+//
+//  .first-letter(@content, @width, @height);
+//   ------------------------------------------------------
+
+.first-letter(@size:_, @style:_, @color:_, @text-shadow:none) {
+    
+    @ruleset: {
+        .text(@size, @style, @color);
+        text-shadow: @text-shadow;
+    }
+
+    .pseudo(first-letter, @ruleset);
+}
+
+//
+//  .first-line(@content, @width, @height);
+//   ------------------------------------------------------
+
+.first-line(@size:_, @style:_, @color:_, @text-shadow:none) {
+    
+    @ruleset: {
+        .text(@size, @style, @color);
+        text-shadow: @text-shadow;
+    }
+
+    .pseudo(first-line, @ruleset);
+}
+
+//
+//  .placeholder(@text-color, @background-color, @text-shadow[, @min-query, @max-query]);
+//   ------------------------------------------------------
+//   @text-color        :  -color-|initial|inherit
+//   @background-color  :  -color-|transparent|initial|inherit
+//   @border-color      :  -color-|transparent|initial|inherit
+
+.placeholder(@color:_, @background:_, @text-shadow:none, @min-query:_, @max-query:_) {
+
+    @rulset: {
+        color: @color;
+        background-color: @background;
+        text-shadow: @text-shadow;
+    }
+
+    .pseudo-prefixed(before, @ruleset);
+}
+
+//
+//  .pseudo(@pseudo, @rules);
+//   ------------------------------------------------------
+//  @pseudo     :  ::after, ::before, ::first-letter, ::first-line, ::selection
+//  @rules      :  { css declarations; }
+
+.pseudo(@pseudo:_, @rules: {}) {
+    position: relative; 
+    overflow: visible;    // overflow IE 8/9
+
+    &@{pseudo} {
+        @rules();
+    }
+}
+
+//
+//  .pseudo-prefixed(@pseudo, @rules);
+//   ------------------------------------------------------
+//  @pseudo     :  ::placeholder
+//  @rules      :  { css declarations; }
+
+.pseudo-prefixed(@pseudo:_, @rules: {}) {
+    @standard: ~'::@{pseudo}';
+
+    &::-webkit-input-@{pseudo} {  // Chrome, Safari, Edge
+        @rules();
+    }
+
+    &::-moz-@{pseudo} {           // Firefox 19+
+        @rules();
+    }
+
+    &:-ms-input-@{pseudo} {
+        @rules();
+    }
+
+    &::-ms-input-@{pseudo} {      // IE 10+
+        @rules();
+    }
+
+    &@{standard} {
+        @rules();
+    }
+}
+
+//
+//  .selection(@text-color, @background-color, @text-shadow[, @min-query, @max-query]);
+//   ------------------------------------------------------
+//   @text-color        :  -color-|initial|inherit
+//   @background-color  :  -color-|transparent|initial|inherit
+//   @border-color      :  -color-|transparent|initial|inherit
+
+.selection(@text-color:_, @background-color:_, @text-shadow:_) {
+    @ruleset {
+        color: @text-color;
+        background-color: @background-color;
+        text-shadow: @text-shadow;
+    }
+    .pseudo(selection, @ruleset);
+}

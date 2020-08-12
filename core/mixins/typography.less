@@ -1,44 +1,41 @@
 //
-//  Font properties
+//  Typography
 
 //
-//  .font(@style, @weight, @size, @family, [@min-query, @max-query]);
+//  .font(@size, @line-height, @weight, @family, [@min-query, @max-query]);
 //   ------------------------------------------------------
-//   @style    :  normal|italic|oblique|initial|inherit
-//   @weight   :  normal|bold|bolder|lighter|-number-|initial|inherit
-//   @family   :  family-name|initial|inherit
+//   @size          :  medium|xx-small|x-small|small|large|x-large|xx-large|smaller|larger|length|initial|inherit
+//   @style         :  normal|italic|oblique|initial|inherit
+//   @weight/ style :  normal|bold|bolder|lighter|-number-|initial|inherit/ none|normal|italic
+//   @family        :  family-name|initial|inherit
 
-.font(@size:_, @weight:_, @family:_, @min-query:_, @max-query:_) {
+.font(@size:_, @line-height:_, @weight:_, @family:_, @min-query:_, @max-query:_) {
 
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+    @vfamily: if(@size=_ or @family=_; _);
+    @vsize:  if(not (@line-height=_); if(not (@size=_); e('@{size}/@{line-height}'); _); @size);
+    @minmax: if(@min-query=_ and @max-query=_; _; @min-query, @max-query);
 
-    & when not (@size=_) and not (@weight=_) and not (@family=_) and (@minmax=_) {
-        font: @weight @size @family;
+    & when not (@vsize=_) and not (@weight=_) and not (@family=_) and (@minmax=_) {
+        font: @weight @vsize @family;
     }
 
-    & when not (@size=_) and (@weight=_) and not (@family=_) and (@minmax=_) {
-        font: @size @family;
+    & when not (@vsize=_) and (@weight=_) and not (@family=_) and (@minmax=_) {
+        font: @vsize @family;
     }
 
-    & when not (@size=_) and not (@weight=_) and (@family=_) and (@minmax=_) {
-        font-size: @size;
-        font-weight: @weight;
-    }
-
-    & when (@size=_) and not (@weight=_) and not (@family=_) and (@minmax=_) {
-        font-weight: @weight;
-        font-family: @family;
-    }
-
-    & when not (@size=_) and (@weight=_) and (@family=_) and (@minmax=_) {
+    & when not (@size=_) and (@family=_) and (@minmax=_) {
         font-size: @size;
     }
 
-    & when (@size=_) and not (@weight=_) and (@family=_) and (@minmax=_) {
-        font-weight: @weight;
+    & when not (@line-height=_) and (@vfamily=_) and (@minmax=_) {
+        line-height: @line-height;
     }
 
-    & when (@size=_) and (@weight=_) and not (@family=_) and (@minmax=_) {
+    & when not (@weight=_) and (@vfamily=_) and (@minmax=_) {
+        font-weight: extract(@weight, 1);
+    }
+
+    & when (@size=_) and not (@family=_) and (@minmax=_) {
         font-family: @family;
     }
 
@@ -48,20 +45,10 @@
             @font: @size, @weight, @family;
         );
     }
-    
-    .parse(@args) {
-
-        .loop(@i:3) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .font(.loop[$1], .loop[$2], .loop[$3]);
-    }
 }
 
 //
-//  .font-face(@family, @path, @weight, @style, [@min-query, @max-query]);
+//  .fontface(@family, @path, @weight, @style, [@min-query, @max-query]);
 //   ------------------------------------------------------
 //   @family  :  font-family name
 //   @path    :  absolute/relative file path
@@ -74,7 +61,7 @@
     @vstyle:  if(@style=_; normal; @style);
 
     & when not (@family=_) and not (@path=_) {
-        @font-face {
+        @fontface {
             font-family: @family;
             src: url('@{path}.eot');  // IE9
             src: url('@{path}.eot?#iefix') format('embedded-opentype'),     
@@ -89,18 +76,8 @@
     & when not (@min-query=_), not (@max-query=_) {
         .mixins(
             @query: @min-query, @max-query;
-            @paragraph: @family, @path, @weight, @style;
+            @fontface: @family, @path, @weight, @style;
         );
-    }
-    
-    .parse(@args) {
-
-        .loop(@i:4) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .fontface(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
     }
 }
 
@@ -133,26 +110,45 @@
             @paragraph: @indent, @align, @transform;
         );
     }
-    
-    .parse(@args) {
+}
 
-        .loop(@i:3) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .paragraph(.loop[$1], .loop[$2], .loop[$3]);
+//
+// .text(@size, @weight, @color[, @min-query, @max-query])
+//   ------------------------------------------------------
+//   @line      :  none|underline|overline|line-through|initial|inherit
+
+.text(@size, @weight, @color, @min-query, @max-query) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@size=_) and (@minmax=_) {
+        font-size: @size;
+    }
+
+    & when not (@weight=_) and (@minmax=_) {
+        font-weight: @weight;
+    }
+
+    & when not (@color=_) and (@minmax=_) {
+        color: @color;
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @text: @size, @weight, @color;
+        );
     }
 }
 
 //
-// .textdecoration(@line, @color, @style, [@min-query, @max-query])
+// .text-decoration(@line, @color, @style, [@min-query, @max-query])
 //   ------------------------------------------------------
 //   @line      :  none|underline|overline|line-through|initial|inherit
 //   @color     :  -color-|initial|inherit
 //   @style     :  solid|double|dotted|dashed|wavy|initial|inherit;
 
-.textdecoration(@line:_, @color:_, @style:_, @min-query:_, @max-query:_) {
+.text-decoration(@line:_, @color:_, @style:_, @min-query:_, @max-query:_) {
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
@@ -187,18 +183,8 @@
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @textdecoration: @size, @weight, @family;
+            @text-decoration: @size, @weight, @family;
         );
-    }
-    
-    .parse(@args) {
-
-        .loop(@i:3) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .textdecoration(.loop[$1], .loop[$2], .loop[$3]);
     }
 }
     
@@ -208,7 +194,7 @@
 //   @spread    :  h-shadow v-shadow [blur-radius]
 //   @color     :  -color-|initial|inherit
 
-.textshadow(@spread:_, @color:_, @alpha:100%, @min-query:_, @max-query:_) {
+.text-shadow(@spread:_, @color:_, @alpha:100%, @min-query:_, @max-query:_) {
 
     @percentage: if(ispercentage(@alpha); @alpha; @alpha*100%);
     @rgba: fade(@color, @percentage);
@@ -222,17 +208,7 @@
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @textshadow: @spread, @color, @alpha;
+            @text-shadow: @spread, @color, @alpha;
         );
-    }
-    
-    .parse(@args) {
-
-        .loop(@i:3) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .textshadow(.loop[$1], .loop[$2], .loop[$3]);
     }
 }

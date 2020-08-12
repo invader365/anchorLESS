@@ -44,16 +44,6 @@
             @border: @width, @style, @color;
         );
     }
-    
-    .parse(@args) {
-
-        .loop(@i:3) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .border(.loop[$1], .loop[$2], .loop[$3]);
-    }
 }
 
 //  .display(@mode, @property1, @property2, @property3, [@min-query, @max-query]);
@@ -69,13 +59,13 @@
 //   when (@mode = grid)
 //     @grid-template-columns :  none|auto|max-content|min-content|-length-|initial|inherit
 //     @grid-template-rows    :  none|auto|max-content|min-content|-length-|initial|inherit
-//     @grid-gap              :  grid-row-gap grid-column-gap;
+//     @grid-gap              :  grid-row-gap grid-column-gap
 
 .display(@mode:_, @property1:_, @property2:_, @property3:_, @min-query:_, @max-query:_) {
 
     @prop1: if(@mode=flex; flex-flow;       if(@mode=grid; grid-template-columns; width););
     @prop2: if(@mode=flex; justify-content; if(@mode=grid; grid-template-rows; height););
-    @prop3: if(@mode=flex; align-items;     if(@mode=grid; gap););
+    @prop3: if(@mode=flex; align-items;     if(@mode=grid; gap); _);
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
@@ -101,15 +91,11 @@
             @display: @mode, @property1, @property2, @property3;
         );
     }
-    
-    .parse(@args) {
+}
 
-        .loop(@i:4) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .display(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
+.display(@mode:_, @property1:_) {
+    & when (@mode=block), (@mode=inline-block) {
+        .display(@mode, @property1, @property1);
     }
 }
 
@@ -147,15 +133,35 @@
             @minmax-size: @min-width, @max-width, @min-height, @max-height;
         );
     }
-    
-    .parse(@args) {
+}
 
-        .loop(@i:4) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
+//
+//  .overflow(@overflow-x, @overflow-y, [@min-query, @max-query])
+//   ------------------------------------------------------
+//   overflow-x         :  visible|hidden|scroll|auto|initial|inherit
+//   overflow-y         :  visible|hidden|scroll|auto|initial|inherit
+
+.overflow(@overflow-x:_, @overflow-y:_, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when (@overflow-x=@overflow-y) and (@minmax=_) {
+        overflow: @overflow-x;
+    }
+
+    & when not (@overflow-y=_) and (@minmax=_) {
+        overflow-y: @overflow-y;
+    }
         
-        .minmax-size(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
+    & when not (@overflow-x=_) and (@minmax=_) {
+        overflow-x: @overflow-x;
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @overflow: @overflow-x, @overflow-y;
+        );
     }
 }
 
@@ -250,8 +256,7 @@
 .size(@width:_, @height:_, @min-query:_, @max-query:_) {
   
     @vheight: if(@height=_; @width; @height);
-  
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+    @minmax:  if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
     & when not (@width=_) and (@minmax=_) {
         width: @width;
@@ -266,16 +271,6 @@
             @query: @minmax;
             @size: @width, @height;
         );
-    }
-    
-    .parse(@args) {
-
-        .loop(@i:2) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .size(.loop[$1], .loop[$2]);
     }
 }
 
@@ -304,15 +299,5 @@
             @query: @minmax;
             @spacing: @margin, @padding;
         );
-    }
-    
-    .parse(@args) {
-
-        .loop(@i:2) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .spacing(.loop[$1], .loop[$2]);
     }
 }

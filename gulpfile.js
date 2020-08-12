@@ -15,8 +15,8 @@ const dir = {
 const concatCore = done => {
     src([
         './core/mixins/**/*.less',
-        './core/assets/**/*.less',
-        './core/utilities/**/*.less'
+        './core/helpers/**/*.less',
+        './core/variables/**/*.less'
     ])
         .pipe(concat('anchor.less'))
         .pipe(dest('./'))

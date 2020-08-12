@@ -68,13 +68,13 @@
 }
 
 //
-//  .dropshadow(@offset, @color[, @min-query, @max-query]);
+//  .drop-shadow(@offset, @color[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   offset         :  none|h-offset v-offset blur|inset|initial|inherit
 //   blur           :  -length-
 //   color          :  -color-|transparent|initial|inherit
 
-.dropshadow(@offset:_, @blur:_, @color:_, @min-query:_, @max-query:_) {
+.drop-shadow(@offset:_, @blur:_, @color:_, @min-query:_, @max-query:_) {
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
     
@@ -87,18 +87,8 @@
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @dropshadow: @offset, @blur, @color;
+            @drop-shadow: @offset, @blur, @color;
         );
-    }
-    
-    .parse(@args) {
-
-        .loop(@i:3) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .dropshadow(.loop[$1], .loop[$2], .loop[$3]);
     }
 }
 

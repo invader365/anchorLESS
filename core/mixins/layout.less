@@ -42,22 +42,6 @@
             @align: @top, @right, @bottom, @left;
         );
     }
-
-    .parse(@args) {
-
-        @length: length(@args);
-        
-        & when (@length = 1) { .align(@args) }
-        
-        & when not (@length = 1) {
-            .loop(@i: 4) when (@i > 0) {
-                .loop((@i - 1));
-                @{i}: if(@length >= @i; extract(@args, @i); _);
-            }
-
-            .align(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
-        }
-    }
 }
 
 //
@@ -80,6 +64,20 @@
 }
 
 //
+//   .list-style(@type, @position, @image[, @min-width-query, @max-width-query]);
+//   ------------------------------------------------------
+//   @type      :  none|disc|circle|square|decimal|decimal-leading-zero|lower-roman|upper-roman|lower-greek|lower-latin|upper-latin|armenian|georgian|lower-alpha|upper-alpha|hiragana|katakana|initial|inherit
+
+.list-style(@type:_, @position:_, @image:_) {
+    
+    @vtype: if((@type=_); disc; @type);
+    @vpos:  if((@position=_); outside; @position);
+    @img:   if(@image=_; none; if(@image=none; none; url('@{image}')));
+
+    list-style: @vtype @vpos @img;
+}
+
+//
 //  .position(@position, @top, @right, @bottom, @left, [@min-query, @max-query]);
 //   ------------------------------------------------------
 //   @position :  static|absolute|fixed|relative|sticky|initial|inherit
@@ -87,13 +85,6 @@
 //   @right    :  auto|length|initial|inherit
 //   @bottom   :  auto|length|initial|inherit
 //   @left     :  auto|length|initial|inherit
-
-.position(@position:_, @top:_) {
-
-    & when not (@top=_) {
-        .position(@position, @top, @top, @top, @top);
-    }
-}
 
 .position(@position:_, @top:_, @right:_, @bottom:_, @left:_, @min-query:_, @max-query:_) {
 
@@ -125,23 +116,11 @@
             @position: @position, @top, @right, @bottom, @left;
         );
     }
+}
 
-    .parse(@args) {
-
-        @length: length(@args);
-
-        .loop(@i: 5) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(@length >= @i; extract(@args, @i); _);
-        }
-        
-        & when (@length = 2) { 
-          .position(.loop[$1], .loop[$2]); 
-        }
-        
-        & when not (@length = 2) { 
-           .position(.loop[$1], .loop[$2], .loop[$3], .loop[$4], .loop[$5]);
-        }
+.position(@position:_, @top:_) {
+    & when not (@top=_) {
+        .position(@position, @top, @top, @top, @top);
     }
 }
 

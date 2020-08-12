@@ -47,17 +47,6 @@
             @origin: @x-axis, @y-axis, @z-axis;
         );
     }
-    
-    .parse(@args) {
-
-        .loop(@i:3) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .origin(.loop[$1], .loop[$2], .loop[$3]);
-    }
-    
 }
 
 //
@@ -129,20 +118,10 @@
             @rotate: @x-axis, @y-axis, @z-axis, @angle;
         );
     }
-    
-    .parse(@args) {
-
-        .loop(@i:4) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .rotate3d(.loop[$1], .loop[$2], .loop[$3], .loop[$4]);
-    }
 }
 
 //
-//  .scale3d(@factor, [@min-query, @max-query]);
+//  .scale3d(@x-axis, @y-axis, @z-axis, [@min-query, @max-query]);
 //   ------------------------------------------------------
 //   x-axis             :  1 (x-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
 //   y-axis             :  1 (y-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
@@ -163,16 +142,6 @@
             @query: @minmax;
             @scale3d: @x-axis, @y-axis, @z-axis;
         );
-    }
-    
-    .parse(@args) {
-
-        .loop(@i:3) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .scale3d(.loop[$1], .loop[$2], .loop[$3]);
     }
 }
 
@@ -197,16 +166,6 @@
             @query: @minmax;
             @skew: @x-axis, @y-axis;
         );
-    }
-    
-    .parse(@args) {
-
-        .loop(@i:2) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .skew(.loop[$1], .loop[$2]);
     }
 }
 
@@ -256,15 +215,5 @@
             @query: @minmax;
             @translate3d: @x-axis, @y-axis, @z-axis;
         );
-    }
-    
-    .parse(@args) {
-
-        .loop(@i:3) when (@i > 0) {
-            .loop((@i - 1));
-            @{i}: if(length(@args) >= @i; extract(@args, @i); _);
-        }
-        
-        .translate3d(.loop[$1], .loop[$2], .loop[$3]);
     }
 }

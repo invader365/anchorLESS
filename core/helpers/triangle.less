@@ -1,0 +1,63 @@
+//
+//  Triangle
+
+//
+//  .triangle.(@direction, @width, @height, @color);
+//   ------------------------------------------------------
+//   @direction      :  top|right|bottom|left|top-right|top-left|bottom-right|bottom-left
+//   @width          :  auto|-length-|initial|inherit
+//   @heigth         :  auto|-length-|initial|inherit
+//   @color          :  -color-|transparent|initial|inherit
+
+.triangle(top, @width: 0, @height: 0, @color: black) {
+    .triangle.base();
+    border-width: 0 @width/2 @height @width/2;
+    border-color: @trn @trn @color @trn;
+}
+
+.triangle(right, @width: 0, @height: 0, @color: black) {
+    .triangle.base();
+    border-width: @height/2 0 @height/2 @width;
+    border-color: @trn @trn @trn @color;
+}
+
+.triangle(bottom, @width: 0, @height: 0, @color: black) {
+    .triangle.base();
+    border-width: @height @width/2 0 @width/2;
+    border-color: @color @trn @trn @trn;
+}
+    
+.triangle(left, @width: 0, @height: 0, @color: black) {
+    .triangle.base();
+    border-width: @height/2 @width @height/2 0;
+    border-color: @trn @color @trn @trn;
+}
+
+.triangle(top-left, @width: 0, @height: 0, @color: black) {
+    .triangle.base();
+    border-width: @height @width 0 0;
+    border-color: @color @trn @trn @trn;
+}
+
+.triangle(top-right, @width: 0, @height: 0, @color: black) {
+    .triangle.base();
+    border-width: 0 @width @height 0;
+    border-color: @trn @trn @color @trn;
+}
+
+.triangle(bottom-left, @width: 0, @height: 0, @color: black) {
+    .triangle.base();
+    border-width: @width 0 0 @height;
+    border-color: @trn @trn @trn @color;
+}
+
+.triangle(bottom-right, @width: 0, @height: 0, @color: black) {
+    .triangle.base();
+    border-width: 0 0 @height @width;
+    border-color: @trn @color @trn @trn;
+}
+
+.triangle.base()  {
+    .size(0);
+    border-style: solid;
+}
