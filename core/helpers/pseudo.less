@@ -76,13 +76,13 @@
 
 .placeholder(@color:_, @background:_, @text-shadow:none, @min-query:_, @max-query:_) {
 
-    @rulset: {
+    @ruleset: {
         color: @color;
         background-color: @background;
         text-shadow: @text-shadow;
     }
 
-    .pseudo-prefixed(before, @ruleset);
+    .pseudo-prefixed(placeholder, @ruleset);
 }
 
 //
@@ -94,8 +94,9 @@
 .pseudo(@pseudo:_, @rules: {}) {
     position: relative; 
     overflow: visible;    // overflow IE 8/9
+    @vpseudo: ~'::@{pseudo}';
 
-    &@{pseudo} {
+    &@{vpseudo} {
         @rules();
     }
 }
@@ -109,25 +110,19 @@
 .pseudo-prefixed(@pseudo:_, @rules: {}) {
     @standard: ~'::@{pseudo}';
 
-    &::-webkit-input-@{pseudo} {  // Chrome, Safari, Edge
-        @rules();
-    }
+    // Chrome, Safari, Edge
+    &::-webkit-input-@{pseudo} { @rules(); }
 
-    &::-moz-@{pseudo} {           // Firefox 19+
-        @rules();
-    }
+    // Firefox 19+
+    &::-moz-@{pseudo} { @rules(); }
 
-    &:-ms-input-@{pseudo} {
-        @rules();
-    }
+    //
+    &:-ms-input-@{pseudo} { @rules(); }
 
-    &::-ms-input-@{pseudo} {      // IE 10+
-        @rules();
-    }
+    // IE 10+
+    &::-ms-input-@{pseudo} { @rules(); }
 
-    &@{standard} {
-        @rules();
-    }
+    &@{standard} { @rules(); }
 }
 
 //

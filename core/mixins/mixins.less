@@ -1,40 +1,14 @@
 //
 //  Anchor mixins
 
-.mixins(@query:_; @after:_; @align:_; @animation:_; @backface:_; @background:_; @blur:_; @border:_; @brightness:_; @center:_; @center-h:_; @center-v:_; @color:_; @contrast:_; 
-    @custom:_; @display:_; @drop-shadow:_; @filter:_; @first-letter:_; @first-line:_; @float:_; @font:_; @fontface:_; @gradient:_; @grayscale:_; @huerotate:_; @invert:_; @list-style:_; @minmax-size:_; 
+.mixins(@query:_; @after:_; @align:_; @animation:_; @backface:_; @background:_; @before:_; @blur:_; @border:_; @brightness:_; @center:_; @center-h:_; @center-v:_; @color:_; @contrast:_; 
+    @custom:_; @display:_; @drop-shadow:_; @filter:_; @first-letter:_; @first-line:_; @float:_; @font:_; @fontface:_; @gradient:_; @grayscale:_; @hue-rotate:_; @invert:_; @list-style:_; @minmax-size:_; 
     @opacity:_; @origin:_; @overflow:_; @paragraph:_; @perspective:_; @placeholder:_; @position:_; @pseudo:_; @resize:_; @rotate3d:_; @rounded:_; @saturate:_; @scale3d:_; @sepia:_; @selection:_; @shadow:_; 
-    @size:_; @skew:_; @spacing:_; @text-decoration:_; @text-shadow:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @url:_; @zindex:_;) {
+    @size:_; @skew:_; @spacing:_; @table-cell-color:_; @text:_; @text-decoration:_; @text-shadow:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @url:_; @zindex:_;) {
 
-    @min: extract(@query, 1);
-    @max: extract(@query, 2);
+    @ruleset: {
 
-    & when (@query=_) {
-        .return-mixins(@after; @align; @animation; @backface; @background; @before; @blur; @border; @brightness; @center; @center-h; @center-v; @color; @contrast; @custom; @display; @drop-shadow; 
-            @filter; @first-letter; @first-line; @float; @font; @fontface; @gradient; @grayscale; @huerotate; @invert; @list-style; @minmax-size; @opacity; @origin; @overflow; @paragraph; @perspective; 
-            @placeholder; @position; @pseudo; @resize; @rotate3d; @rounded; @saturate; @scale3d; @selection; @sepia; @shadow; @size; @skew; @spacing; @transition; @translate3d; 
-            @text-decoration; @text-shadow; @transform; @triangle; @url; @zindex;);
-    }
-
-    & when not (@query=_) {
-        @minW:   if((@min=_); ''; 'and (minWidth: @{min}) ');
-        @min-max: if((@max=_); ~'@{minW}'; ~'@{minW}and (max-width: @{max})');
-
-        @media all @min-max {
-            .return-mixins(@after; @align; @animation; @backface; @background; @before; @blur; @border; @brightness; @center; @center-h; @center-v; @color; @contrast; @custom; @display; @drop-shadow; 
-                @filter; @first-letter; @first-line; @float; @font; @fontface; @gradient; @grayscale; @huerotate; @invert; @list-style; @minmax-size; @opacity; @origin; @overflow; @paragraph; @perspective; 
-                @placeholder; @position; @pseudo; @resize; @rotate3d; @rounded; @saturate; @scale3d; @selection; @sepia; @shadow; @size; @skew; @spacing; @transition; @translate3d; 
-                @text-decoration; @text-shadow; @transform; @triangle; @url; @zindex;);
-        }
-    }
-}
-
-.return-mixins(@after; @align; @animation; @backface; @background; @before; @blur; @border; @brightness; @center; @center-h; @center-v; @color; @contrast; @custom; @display; @drop-shadow; 
-    @filter; @first-letter; @first-line; @float; @font; @fontface; @gradient; @grayscale; @huerotate; @invert; @list-style; @minmax-size; @opacity; @origin; @overflow; @paragraph; @perspective; 
-    @placeholder; @position; @pseudo; @resize; @rotate3d; @rounded; @saturate; @scale3d; @selection; @sepia; @shadow; @size; @skew; @spacing; @transition; @translate3d; 
-    @text-decoration; @text-shadow; @transform; @triangle; @url; @zindex;) {
-            
-    // Box-model
+        // Box-model
         & when not (@display=_) {
             .parse(@display);
             & when (length(@display)=2) { .display(.loop[1], .loop[2]); }
@@ -61,7 +35,7 @@
             .overflow(.loop[1], .loop[2]);
         }
             
-    // Layout
+        // Layout
         & when not (@position=_) { 
             .parse(@position);
             & when (length(@position)=2) { .position(.loop[1], .loop[2]); }
@@ -81,7 +55,7 @@
             .zindex(@zindex); 
         }
 
-    // Visual
+        // Visual
         & when not (@color=_) { 
             .parse(@color);
             .color(.loop[1], .loop[2], .loop[3]);
@@ -106,7 +80,7 @@
             .opacity(@opacity); 
         }
             
-    // Typographic
+        // Typographic
         & when not (@font=_) { 
             .parse(@font);
             .font(.loop[1], .loop[2], .loop[3], .loop[4]);
@@ -119,6 +93,10 @@
             .parse(@paragraph); 
             .paragraph(.loop[1], .loop[2], .loop[3]);
         }
+        & when not (@text=_) { 
+            .parse(@text); 
+            .text(.loop[1], .loop[2], .loop[3]);
+        }
         & when not (@text-decoration=_) { 
             .parse(@text-decoration); 
             .text-decoration(.loop[1], .loop[2], .loop[3]);
@@ -128,7 +106,7 @@
             .text-shadow(.loop[1], .loop[2], .loop[3]);
         }
 
-    // Transform
+        // Transform
         & when not (@transform=_) {
             .transform(@transform); 
         }
@@ -162,7 +140,7 @@
             .resize(@resize); 
         }
 
-    // Filters
+        // Filters
         & when not (@filter=_) { 
             .filter(@filter); 
         }
@@ -182,8 +160,8 @@
         & when not (@grayscale=_) { 
             .grayscale(@grayscale); 
         }
-        & when not (@huerotate=_) { 
-            .huerotate(@huerotate); 
+        & when not (@hue-rotate=_) { 
+            .hue-rotate(@hue-rotate); 
         }
         & when not (@invert=_) { 
             .invert(@invert); 
@@ -198,7 +176,7 @@
             .url(@url); 
         }
 
-    // Animation
+        // Animation
         & when not (@animation=_) { 
             .parse(@animation);
             .animation(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6], .loop[7], .loop[8]);
@@ -208,7 +186,7 @@
             .transition(.loop[1], .loop[2], .loop[3], .loop[4]);
         }
 
-    // Helpers
+        // Helpers
         & when not (@after=_) { 
             .parse(@after);
             .after(.loop[1], .loop[2], .loop[3]);
@@ -249,6 +227,10 @@
             .parse(@center-v);
             .center-v(.loop[1], .loop[2], .loop[3]);
         }
+        & when not (@table-cell-color=_) { 
+            .parse(@table-cell-color);
+            .table.cell-color(.loop[1], .loop[2], .loop[3]);
+        }
         & when not (@triangle=_) { 
             .parse(@triangle);
             .triangle(.loop[1], .loop[2], .loop[3], .loop[4]);
@@ -258,10 +240,28 @@
             .custom(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6]);
         }
 
-        .parse(@args) {
+        .parse(@params) {
             .loop(@i:8) when (@i > 0) {
                 .loop((@i - 1));
-                @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+                @{i}: if(length(@params) >= @i; extract(@params, @i); _);
             }
         }
+    }
+
+    & when not (@query=_) {
+
+        @min: extract(@query, 1);
+        @max: extract(@query, 2);
+        
+        @minW:    if((@min=_); ''; 'and (minWidth: @{min}) ');
+        @min-max: if((@max=_); ~'@{minW}'; ~'@{minW}and (max-width: @{max})');
+
+        @media all @min-max {
+            @ruleset();
+        }
+    }
+
+    & when (@query=_) {
+        @ruleset();
+    }
 }

@@ -141,7 +141,7 @@
 //   ------------------------------------------------------
 //   huerotate         :  degrees
 
-.huerotate(@degrees:_, @min-query:_, @max-query:_) {
+.hue-rotate(@degrees:_, @min-query:_, @max-query:_) {
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
     
@@ -153,7 +153,7 @@
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @huerotate: @degrees;
+            @hue-rotate: @degrees;
         );
     }
 }

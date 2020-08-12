@@ -117,7 +117,7 @@
 //   ------------------------------------------------------
 //   @line      :  none|underline|overline|line-through|initial|inherit
 
-.text(@size, @weight, @color, @min-query, @max-query) {
+.text(@size:_, @weight:_, @color:_, @min-query:_, @max-query:_) {
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
@@ -142,7 +142,7 @@
 }
 
 //
-// .text-decoration(@line, @color, @style, [@min-query, @max-query])
+// .text-decoration(@line, @color, @style[, @min-query, @max-query])
 //   ------------------------------------------------------
 //   @line      :  none|underline|overline|line-through|initial|inherit
 //   @color     :  -color-|initial|inherit

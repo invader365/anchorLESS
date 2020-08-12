@@ -522,7 +522,7 @@
 //   ------------------------------------------------------
 //   huerotate         :  degrees
 
-.huerotate(@degrees:_, @min-query:_, @max-query:_) {
+.hue-rotate(@degrees:_, @min-query:_, @max-query:_) {
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
     
@@ -534,7 +534,7 @@
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @huerotate: @degrees;
+            @hue-rotate: @degrees;
         );
     }
 }
@@ -696,6 +696,7 @@
 //   .list-style(@type, @position, @image[, @min-width-query, @max-width-query]);
 //   ------------------------------------------------------
 //   @type      :  none|disc|circle|square|decimal|decimal-leading-zero|lower-roman|upper-roman|lower-greek|lower-latin|upper-latin|armenian|georgian|lower-alpha|upper-alpha|hiragana|katakana|initial|inherit
+//   @position  :  inside|outside|initial|inherit
 
 .list-style(@type:_, @position:_, @image:_) {
     
@@ -775,40 +776,14 @@
 //
 //  Anchor mixins
 
-.mixins(@query:_; @after:_; @align:_; @animation:_; @backface:_; @background:_; @blur:_; @border:_; @brightness:_; @center:_; @center-h:_; @center-v:_; @color:_; @contrast:_; 
-    @custom:_; @display:_; @drop-shadow:_; @filter:_; @first-letter:_; @first-line:_; @float:_; @font:_; @fontface:_; @gradient:_; @grayscale:_; @huerotate:_; @invert:_; @list-style:_; @minmax-size:_; 
+.mixins(@query:_; @after:_; @align:_; @animation:_; @backface:_; @background:_; @before:_; @blur:_; @border:_; @brightness:_; @center:_; @center-h:_; @center-v:_; @color:_; @contrast:_; 
+    @custom:_; @display:_; @drop-shadow:_; @filter:_; @first-letter:_; @first-line:_; @float:_; @font:_; @fontface:_; @gradient:_; @grayscale:_; @hue-rotate:_; @invert:_; @list-style:_; @minmax-size:_; 
     @opacity:_; @origin:_; @overflow:_; @paragraph:_; @perspective:_; @placeholder:_; @position:_; @pseudo:_; @resize:_; @rotate3d:_; @rounded:_; @saturate:_; @scale3d:_; @sepia:_; @selection:_; @shadow:_; 
-    @size:_; @skew:_; @spacing:_; @text-decoration:_; @text-shadow:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @url:_; @zindex:_;) {
+    @size:_; @skew:_; @spacing:_; @table-cell-color:_; @text:_; @text-decoration:_; @text-shadow:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @url:_; @zindex:_;) {
 
-    @min: extract(@query, 1);
-    @max: extract(@query, 2);
+    @ruleset: {
 
-    & when (@query=_) {
-        .return-mixins(@after; @align; @animation; @backface; @background; @before; @blur; @border; @brightness; @center; @center-h; @center-v; @color; @contrast; @custom; @display; @drop-shadow; 
-            @filter; @first-letter; @first-line; @float; @font; @fontface; @gradient; @grayscale; @huerotate; @invert; @list-style; @minmax-size; @opacity; @origin; @overflow; @paragraph; @perspective; 
-            @placeholder; @position; @pseudo; @resize; @rotate3d; @rounded; @saturate; @scale3d; @selection; @sepia; @shadow; @size; @skew; @spacing; @transition; @translate3d; 
-            @text-decoration; @text-shadow; @transform; @triangle; @url; @zindex;);
-    }
-
-    & when not (@query=_) {
-        @minW:   if((@min=_); ''; 'and (minWidth: @{min}) ');
-        @min-max: if((@max=_); ~'@{minW}'; ~'@{minW}and (max-width: @{max})');
-
-        @media all @min-max {
-            .return-mixins(@after; @align; @animation; @backface; @background; @before; @blur; @border; @brightness; @center; @center-h; @center-v; @color; @contrast; @custom; @display; @drop-shadow; 
-                @filter; @first-letter; @first-line; @float; @font; @fontface; @gradient; @grayscale; @huerotate; @invert; @list-style; @minmax-size; @opacity; @origin; @overflow; @paragraph; @perspective; 
-                @placeholder; @position; @pseudo; @resize; @rotate3d; @rounded; @saturate; @scale3d; @selection; @sepia; @shadow; @size; @skew; @spacing; @transition; @translate3d; 
-                @text-decoration; @text-shadow; @transform; @triangle; @url; @zindex;);
-        }
-    }
-}
-
-.return-mixins(@after; @align; @animation; @backface; @background; @before; @blur; @border; @brightness; @center; @center-h; @center-v; @color; @contrast; @custom; @display; @drop-shadow; 
-    @filter; @first-letter; @first-line; @float; @font; @fontface; @gradient; @grayscale; @huerotate; @invert; @list-style; @minmax-size; @opacity; @origin; @overflow; @paragraph; @perspective; 
-    @placeholder; @position; @pseudo; @resize; @rotate3d; @rounded; @saturate; @scale3d; @selection; @sepia; @shadow; @size; @skew; @spacing; @transition; @translate3d; 
-    @text-decoration; @text-shadow; @transform; @triangle; @url; @zindex;) {
-            
-    // Box-model
+        // Box-model
         & when not (@display=_) {
             .parse(@display);
             & when (length(@display)=2) { .display(.loop[1], .loop[2]); }
@@ -835,7 +810,7 @@
             .overflow(.loop[1], .loop[2]);
         }
             
-    // Layout
+        // Layout
         & when not (@position=_) { 
             .parse(@position);
             & when (length(@position)=2) { .position(.loop[1], .loop[2]); }
@@ -855,7 +830,7 @@
             .zindex(@zindex); 
         }
 
-    // Visual
+        // Visual
         & when not (@color=_) { 
             .parse(@color);
             .color(.loop[1], .loop[2], .loop[3]);
@@ -880,7 +855,7 @@
             .opacity(@opacity); 
         }
             
-    // Typographic
+        // Typographic
         & when not (@font=_) { 
             .parse(@font);
             .font(.loop[1], .loop[2], .loop[3], .loop[4]);
@@ -893,6 +868,10 @@
             .parse(@paragraph); 
             .paragraph(.loop[1], .loop[2], .loop[3]);
         }
+        & when not (@text=_) { 
+            .parse(@text); 
+            .text(.loop[1], .loop[2], .loop[3]);
+        }
         & when not (@text-decoration=_) { 
             .parse(@text-decoration); 
             .text-decoration(.loop[1], .loop[2], .loop[3]);
@@ -902,7 +881,7 @@
             .text-shadow(.loop[1], .loop[2], .loop[3]);
         }
 
-    // Transform
+        // Transform
         & when not (@transform=_) {
             .transform(@transform); 
         }
@@ -936,7 +915,7 @@
             .resize(@resize); 
         }
 
-    // Filters
+        // Filters
         & when not (@filter=_) { 
             .filter(@filter); 
         }
@@ -956,8 +935,8 @@
         & when not (@grayscale=_) { 
             .grayscale(@grayscale); 
         }
-        & when not (@huerotate=_) { 
-            .huerotate(@huerotate); 
+        & when not (@hue-rotate=_) { 
+            .hue-rotate(@hue-rotate); 
         }
         & when not (@invert=_) { 
             .invert(@invert); 
@@ -972,7 +951,7 @@
             .url(@url); 
         }
 
-    // Animation
+        // Animation
         & when not (@animation=_) { 
             .parse(@animation);
             .animation(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6], .loop[7], .loop[8]);
@@ -982,7 +961,7 @@
             .transition(.loop[1], .loop[2], .loop[3], .loop[4]);
         }
 
-    // Helpers
+        // Helpers
         & when not (@after=_) { 
             .parse(@after);
             .after(.loop[1], .loop[2], .loop[3]);
@@ -1023,6 +1002,10 @@
             .parse(@center-v);
             .center-v(.loop[1], .loop[2], .loop[3]);
         }
+        & when not (@table-cell-color=_) { 
+            .parse(@table-cell-color);
+            .table.cell-color(.loop[1], .loop[2], .loop[3]);
+        }
         & when not (@triangle=_) { 
             .parse(@triangle);
             .triangle(.loop[1], .loop[2], .loop[3], .loop[4]);
@@ -1032,12 +1015,30 @@
             .custom(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6]);
         }
 
-        .parse(@args) {
+        .parse(@params) {
             .loop(@i:8) when (@i > 0) {
                 .loop((@i - 1));
-                @{i}: if(length(@args) >= @i; extract(@args, @i); _);
+                @{i}: if(length(@params) >= @i; extract(@params, @i); _);
             }
         }
+    }
+
+    & when not (@query=_) {
+
+        @min: extract(@query, 1);
+        @max: extract(@query, 2);
+        
+        @minW:    if((@min=_); ''; 'and (minWidth: @{min}) ');
+        @min-max: if((@max=_); ~'@{minW}'; ~'@{minW}and (max-width: @{max})');
+
+        @media all @min-max {
+            @ruleset();
+        }
+    }
+
+    & when (@query=_) {
+        @ruleset();
+    }
 }
 
 //
@@ -1379,7 +1380,7 @@
 //   ------------------------------------------------------
 //   @line      :  none|underline|overline|line-through|initial|inherit
 
-.text(@size, @weight, @color, @min-query, @max-query) {
+.text(@size:_, @weight:_, @color:_, @min-query:_, @max-query:_) {
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
@@ -1404,7 +1405,7 @@
 }
 
 //
-// .text-decoration(@line, @color, @style, [@min-query, @max-query])
+// .text-decoration(@line, @color, @style[, @min-query, @max-query])
 //   ------------------------------------------------------
 //   @line      :  none|underline|overline|line-through|initial|inherit
 //   @color     :  -color-|initial|inherit
@@ -1479,7 +1480,7 @@
 //  Visual appearance properties
 
 //
-//  .back(@color, @image, @repeat, @position/backsize, @repeat, @origin, @clip, @attachment, [@min-query, @max-query]);
+//  .background(@color, @image, @repeat, @position/backsize, @repeat, @origin, @clip, @attachment[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   @color          :  -color-|transparent|initial|inherit
 //   @image          :  none|url|initial|inherit
@@ -1511,38 +1512,38 @@
 }
 
 //
-//  .color(@color, @background-color, @border-color, [@min-query, @max-query]);
+//  .color(@text, @background, @border[, @min-query, @max-query]);
 //   ------------------------------------------------------
-//   @color             :  -color-|initial|inherit
-//   @background-color  :  -color-|transparent|initial|inherit
-//   @border-color      :  -color-|transparent|initial|inherit
+//   @text              :  -color-|initial|inherit
+//   @background        :  -color-|transparent|initial|inherit
+//   @border            :  -color-|transparent|initial|inherit
 
-.color(@color:_, @back-color:_, @border-color:_, @min-query:_, @max-query:_) {
+.color(@text:_, @background:_, @border:_, @min-query:_, @max-query:_) {
     
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-    & when not (@color=_) and (@minmax=_) {
-        color: @color;
+    & when not (@text=_) and (@minmax=_) {
+        color: @text;
     }
 
-    & when not (@back-color=_) and (@minmax=_) {
-        background-color: @back-color;
+    & when not (@background=_) and (@minmax=_) {
+        background-color: @background;
     }
 
-    & when not (@border-color=_) and (@minmax=_) {
-        border-color: @border-color;
+    & when not (@border=_) and (@minmax=_) {
+        border-color: @border;
     }
 
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @color: @color, @back-color, @border-color;
+            @color: @text, @background, @border;
         );
     }
 }
 
 //
-//  .gradient(@gradient, @start, @stop1, @stop2, @stop3, [@min-query, @max-query]);
+//  .gradient(@gradient, @start, @stop1, @stop2, @stop3[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   @gradient         :  linear|-angle-|to-top|to-bottom|to-right|to-left|radial|ellipse|circle
 //   @start            :  -color- [position]
@@ -1780,7 +1781,7 @@
     }
 
     & when (@mode=offset) and not (@width=_) {
-        @padding : @height; // missing padding
+        @padding : @width; // missing padding
         @offset: @container-width * @padding / (@container-width - @padding);
         margin-left: round(-@offset, 2);
         padding-left: round(@offset, 2);
@@ -1889,6 +1890,7 @@
         }
     }
 }
+
 //
 //  Helpers
 
@@ -2066,13 +2068,13 @@
 
 .placeholder(@color:_, @background:_, @text-shadow:none, @min-query:_, @max-query:_) {
 
-    @rulset: {
+    @ruleset: {
         color: @color;
         background-color: @background;
         text-shadow: @text-shadow;
     }
 
-    .pseudo-prefixed(before, @ruleset);
+    .pseudo-prefixed(placeholder, @ruleset);
 }
 
 //
@@ -2084,8 +2086,9 @@
 .pseudo(@pseudo:_, @rules: {}) {
     position: relative; 
     overflow: visible;    // overflow IE 8/9
+    @vpseudo: ~'::@{pseudo}';
 
-    &@{pseudo} {
+    &@{vpseudo} {
         @rules();
     }
 }
@@ -2099,25 +2102,19 @@
 .pseudo-prefixed(@pseudo:_, @rules: {}) {
     @standard: ~'::@{pseudo}';
 
-    &::-webkit-input-@{pseudo} {  // Chrome, Safari, Edge
-        @rules();
-    }
+    // Chrome, Safari, Edge
+    &::-webkit-input-@{pseudo} { @rules(); }
 
-    &::-moz-@{pseudo} {           // Firefox 19+
-        @rules();
-    }
+    // Firefox 19+
+    &::-moz-@{pseudo} { @rules(); }
 
-    &:-ms-input-@{pseudo} {
-        @rules();
-    }
+    //
+    &:-ms-input-@{pseudo} { @rules(); }
 
-    &::-ms-input-@{pseudo} {      // IE 10+
-        @rules();
-    }
+    // IE 10+
+    &::-ms-input-@{pseudo} { @rules(); }
 
-    &@{standard} {
-        @rules();
-    }
+    &@{standard} { @rules(); }
 }
 
 //
@@ -2140,82 +2137,70 @@
 //  Tables
 
 //
-//  .table-head.border(@width, @height, @color);
-//  .table-head.padding(@color, @image, @position);
-//  .table-head.rounded(@weight, @line-height, @style, @family);
+//  .table.padding(@padding);
+//  .table.border(@width, @style, @color);
+//  .table.color(@color, @background, @rows);
+//  .table.rounded(@weight, @line-height, @style, @family);
 //   ------------------------------------------------------
-//   width              :  auto|-length-|initial|inherit
+//   @width         :  auto|-length-|initial|inherit
+//   @style         :  none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit
+//   @color         :  -color-|initial|inherit
+//   @rows          :  all|even|odd
 
 .table {
 
-    .padding (@padding: 0) when not (@padding=skip) {
+    .cell-padding (@padding: 0) {
         & tr th,
         & tr td { 
             padding: @padding; 
         }
     }
-    
-    .border(@width:_, @style:_, @color:_) {
-        & { 
-            .border(@width, @style, @color);
-        }
-    }
-    
-    .rounded (@radius: none) when not (@radius=skip) {
-        .re-rounded(@radius) { 
-            .rounded(@radius);  // Maximum stack call Fix
-        }
-        & tr:first-child th:first-child { 
-            .rounded.left-top(@radius); 
-        }
-        & tr:first-child th:last-child  { 
-            .rounded.right-top(@radius); 
-        }
-        & tr:last-child  td:first-child { 
-            .rounded.left-bottom(@radius); 
-        }
-        & tr:last-child  td:last-child  { 
-            .rounded.right-bottom(@radius); 
-        }
-    }
-}
 
-//
-//  .table-cell.border(@width, @height, @color);
-//  .table-cell.background(@color, @image, @position);
-//  .table-cell.font(@weight, @line-height, @style, @family);
-//   ------------------------------------------------------
-//   width              :  auto|-length-|initial|inherit
-
-.table-cell {
-
-    .font(@weight:_, @line-height:_, @style:_, @family:_) when not (@font=_) {
-        & tr td,
-        & tr td { 
-            .font(@weight, @line-height, @style, @family); 
-        }
-    }
-
-    .color(@color:_, @back:_, @rows: all) {
-        & when not (@rows=all) {
-            & tr:nth-child(@{rows}) td,
-            & tr.@{rows} td { 
-                .color(@color, @back); 
-            }
-        }
-    }
-
-    .background(@color:_, @image:_, @position:_) when (@rows=all) {
-        & tr td,
-        & tr td { 
-            .background(@color, @image, position); 
-        }
-    }
-
-    .border(@width:_, @style:_, @color:_) {
+    .cell-border(@width:_, @style:_, @color:_) {
         & tr th,
         & tr td { 
             .border(@width, @style, @color);
+        }
+    }
+
+    .cell-color(@text-color:_, @background-color:_, @rows: all) when (@rows=all) {
+        & tr th,
+        & tr td { 
+            .color(@text-color, @background-color); 
+        }
+    }
+
+    .cell-color(@text-color:_, @background-color:_, @rows: all) when not (@rows=all) {
+        & when (@rows=odd) {
+            & tr th { 
+                .color(@text-color, @background-color); 
+            }
+        }
+        & when not (@rows=_) {
+            & tr:nth-child(@{rows}) td { 
+                .color(@text-color, @background-color); 
+            }
+        }
+    }
+    
+    .cell-rounded (@radius: none) {
+        border-collapse: separate;      //
+        border-spacing: 0;              // border radius fix
+        border: none;                   //
+        .re-rounded(@radius) {          // maximum stack call fix
+            .rounded(@radius);
+        }
+        & tr:first-child th:first-child { 
+            .rounded.top-left(@radius); 
+        }
+        & tr:first-child th:last-child  { 
+            .rounded.top-right(@radius); 
+        }
+        & tr:last-child  td:first-child { 
+            .rounded.bottom-left(@radius); 
+        }
+        & tr:last-child  td:last-child  { 
+            .rounded.bottom-right(@radius); 
         }
     }
 }
@@ -2232,55 +2217,56 @@
 //   @color          :  -color-|transparent|initial|inherit
 
 .triangle(top, @width: 0, @height: 0, @color: black) {
-    .triangle.base();
+    ._triangle-base();
     border-width: 0 @width/2 @height @width/2;
     border-color: @trn @trn @color @trn;
 }
 
 .triangle(right, @width: 0, @height: 0, @color: black) {
-    .triangle.base();
+    ._triangle-base();
     border-width: @height/2 0 @height/2 @width;
     border-color: @trn @trn @trn @color;
 }
 
 .triangle(bottom, @width: 0, @height: 0, @color: black) {
-    .triangle.base();
+    ._triangle-base();
     border-width: @height @width/2 0 @width/2;
     border-color: @color @trn @trn @trn;
 }
     
 .triangle(left, @width: 0, @height: 0, @color: black) {
-    .triangle.base();
+    ._triangle-base();
     border-width: @height/2 @width @height/2 0;
     border-color: @trn @color @trn @trn;
 }
 
 .triangle(top-left, @width: 0, @height: 0, @color: black) {
-    .triangle.base();
+    ._triangle-base();
     border-width: @height @width 0 0;
     border-color: @color @trn @trn @trn;
 }
 
 .triangle(top-right, @width: 0, @height: 0, @color: black) {
-    .triangle.base();
+    ._triangle-base();
     border-width: 0 @width @height 0;
     border-color: @trn @trn @color @trn;
 }
 
 .triangle(bottom-left, @width: 0, @height: 0, @color: black) {
-    .triangle.base();
+    ._triangle-base();
     border-width: @width 0 0 @height;
     border-color: @trn @trn @trn @color;
 }
 
 .triangle(bottom-right, @width: 0, @height: 0, @color: black) {
-    .triangle.base();
+    ._triangle-base();
     border-width: 0 0 @height @width;
     border-color: @trn @color @trn @trn;
 }
 
-.triangle.base()  {
-    .size(0);
+._triangle-base()  {
+    width: 0;
+    height: 0;
     border-style: solid;
 }
 

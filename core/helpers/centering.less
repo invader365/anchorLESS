@@ -33,7 +33,7 @@
     }
 
     & when (@mode=offset) and not (@width=_) {
-        @padding : @height; // missing padding
+        @padding : @width; // missing padding
         @offset: @container-width * @padding / (@container-width - @padding);
         margin-left: round(-@offset, 2);
         padding-left: round(@offset, 2);

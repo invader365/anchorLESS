@@ -2,7 +2,7 @@
 //  Visual appearance properties
 
 //
-//  .back(@color, @image, @repeat, @position/backsize, @repeat, @origin, @clip, @attachment, [@min-query, @max-query]);
+//  .background(@color, @image, @repeat, @position/backsize, @repeat, @origin, @clip, @attachment[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   @color          :  -color-|transparent|initial|inherit
 //   @image          :  none|url|initial|inherit
@@ -34,38 +34,38 @@
 }
 
 //
-//  .color(@color, @background-color, @border-color, [@min-query, @max-query]);
+//  .color(@text, @background, @border[, @min-query, @max-query]);
 //   ------------------------------------------------------
-//   @color             :  -color-|initial|inherit
-//   @background-color  :  -color-|transparent|initial|inherit
-//   @border-color      :  -color-|transparent|initial|inherit
+//   @text              :  -color-|initial|inherit
+//   @background        :  -color-|transparent|initial|inherit
+//   @border            :  -color-|transparent|initial|inherit
 
-.color(@color:_, @back-color:_, @border-color:_, @min-query:_, @max-query:_) {
+.color(@text:_, @background:_, @border:_, @min-query:_, @max-query:_) {
     
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-    & when not (@color=_) and (@minmax=_) {
-        color: @color;
+    & when not (@text=_) and (@minmax=_) {
+        color: @text;
     }
 
-    & when not (@back-color=_) and (@minmax=_) {
-        background-color: @back-color;
+    & when not (@background=_) and (@minmax=_) {
+        background-color: @background;
     }
 
-    & when not (@border-color=_) and (@minmax=_) {
-        border-color: @border-color;
+    & when not (@border=_) and (@minmax=_) {
+        border-color: @border;
     }
 
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @color: @color, @back-color, @border-color;
+            @color: @text, @background, @border;
         );
     }
 }
 
 //
-//  .gradient(@gradient, @start, @stop1, @stop2, @stop3, [@min-query, @max-query]);
+//  .gradient(@gradient, @start, @stop1, @stop2, @stop3[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   @gradient         :  linear|-angle-|to-top|to-bottom|to-right|to-left|radial|ellipse|circle
 //   @start            :  -color- [position]

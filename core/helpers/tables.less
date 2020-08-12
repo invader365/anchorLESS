@@ -14,39 +14,41 @@
 
 .table {
 
-    .padding (@padding: 0) {
+    .cell-padding (@padding: 0) {
         & tr th,
         & tr td { 
             padding: @padding; 
         }
     }
 
-    .border(@width:_, @style:_, @color:_) {
+    .cell-border(@width:_, @style:_, @color:_) {
         & tr th,
         & tr td { 
             .border(@width, @style, @color);
         }
     }
 
-    .color(@text-color:_, @background-color:_, @rows: all) when (@rows=all) {
+    .cell-color(@text-color:_, @background-color:_, @rows: all) when (@rows=all) {
         & tr th,
         & tr td { 
             .color(@text-color, @background-color); 
         }
     }
 
-    .color(@text-color:_, @background-color:_, @rows: all) when not (@rows=all) {
+    .cell-color(@text-color:_, @background-color:_, @rows: all) when not (@rows=all) {
         & when (@rows=odd) {
             & tr th { 
                 .color(@text-color, @background-color); 
             }
         }
-        & tr:nth-child(@{rows}) td { 
-            .color(@text-color, @background-color); 
+        & when not (@rows=_) {
+            & tr:nth-child(@{rows}) td { 
+                .color(@text-color, @background-color); 
+            }
         }
     }
     
-    .rounded (@radius: none) {
+    .cell-rounded (@radius: none) {
         border-collapse: separate;      //
         border-spacing: 0;              // border radius fix
         border: none;                   //
