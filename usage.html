@@ -44,20 +44,20 @@
       <section class="max-width fixed">
         <div class="m-module span-5">
           <h2 class="heading primary">Usage</h2>
-          <p>1. Download the "anchor.less" file</p>
+          <p>1. Download <a href="https://github.com/invader365/anchorLESS/archive/master.zip">anchor.less</a></p>
           <p>2. Reference for use globally with: </p>
           <pre class="panel primary"><code><span class="selector">@import</span> "../node_modules/anchorless/anchor.less";</code></pre>
           <p></p>
           <h4>Example:</h4>
           <pre class="panel primary"><code><span class="selector">#button</span> {
-   .gradient.to-bottom(#a53df6, #7c16cb);
+   .gradient(to-bottom, #a53df6, #7c16cb);
    .border(0 1px 2px, solid, #9c33ed);
    .rounded(7px);
    .width(25%, 640px);
    .shadow.inset(0 1px 0 0, #d197fe, .9);
    .color(@yellow);
    .size(56px, 128px);
-   .font(bold 12px @d 56px, 'Arial');
+   .font(12px, 56px, bold, 'Arial');
  }</code></pre>
           <p>Compiles to:</p>
           <pre class="panel primary"><code><span class="selector">#button</span> {
