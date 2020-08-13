@@ -14,7 +14,12 @@
         display: inline-block;
         content: @content;
         width: @width;
-        height: @height;
+        & when not (@width=_) and (@height=_) {
+            height: @width;
+        }
+        & when not (@height=_) {
+            height: @height;
+        }
     }
 
     .pseudo(after, @ruleset);
@@ -33,7 +38,12 @@
         display: inline-block;
         content: @content;
         width: @width;
-        height: @height;
+        & when not (@width=_) and (@height=_) {
+            height: @width;
+        }
+        & when not (@height=_) {
+            height: @height;
+        }
     }
 
     .pseudo(before, @ruleset);
@@ -47,7 +57,9 @@
     
     @ruleset: {
         .text(@size, @style, @color);
-        text-shadow: @text-shadow;
+        & when not (@text-shadow=_) {
+            text-shadow: @text-shadow;
+        }
     }
 
     .pseudo(first-letter, @ruleset);
@@ -61,7 +73,9 @@
     
     @ruleset: {
         .text(@size, @style, @color);
-        text-shadow: @text-shadow;
+        & when not (@text-shadow=_) {
+            text-shadow: @text-shadow;
+        }
     }
 
     .pseudo(first-line, @ruleset);
@@ -74,15 +88,29 @@
 //   @background-color  :  -color-|transparent|initial|inherit
 //   @border-color      :  -color-|transparent|initial|inherit
 
-.placeholder(@color:_, @background:_, @text-shadow:none, @min-query:_, @max-query:_) {
+.placeholder(@color:_, @background:_, @text-shadow: none, @min-query:_, @max-query:_) {
 
     @ruleset: {
         color: @color;
         background-color: @background;
-        text-shadow: @text-shadow;
+        & when not (@text-shadow=_) {
+            text-shadow: @text-shadow;
+        }
     }
 
-    .pseudo-prefixed(placeholder, @ruleset);
+    // Chrome, Safari, Edge
+    &::-webkit-input-placeholder { @ruleset(); }
+
+    // Firefox 19+
+    &::-moz-placeholder          { @ruleset(); }
+
+    // IE
+    &:-ms-input-placeholder      { @ruleset(); }
+
+    // IE 10+
+    &::-ms-input-placeholder     { @ruleset(); }
+
+    &::placeholder               { @ruleset(); }
 }
 
 //
@@ -92,37 +120,15 @@
 //  @rules      :  { css declarations; }
 
 .pseudo(@pseudo:_, @rules: {}) {
-    position: relative; 
-    overflow: visible;    // overflow IE 8/9
+    & when (@pseudo=after),  (@pseudo=before) {
+        position: relative; 
+        overflow: visible;    // overflow IE 8/9
+    }
     @vpseudo: ~'::@{pseudo}';
 
     &@{vpseudo} {
         @rules();
     }
-}
-
-//
-//  .pseudo-prefixed(@pseudo, @rules);
-//   ------------------------------------------------------
-//  @pseudo     :  ::placeholder
-//  @rules      :  { css declarations; }
-
-.pseudo-prefixed(@pseudo:_, @rules: {}) {
-    @standard: ~'::@{pseudo}';
-
-    // Chrome, Safari, Edge
-    &::-webkit-input-@{pseudo} { @rules(); }
-
-    // Firefox 19+
-    &::-moz-@{pseudo} { @rules(); }
-
-    //
-    &:-ms-input-@{pseudo} { @rules(); }
-
-    // IE 10+
-    &::-ms-input-@{pseudo} { @rules(); }
-
-    &@{standard} { @rules(); }
 }
 
 //
@@ -133,7 +139,7 @@
 //   @border-color      :  -color-|transparent|initial|inherit
 
 .selection(@text-color:_, @background-color:_, @text-shadow:_) {
-    @ruleset {
+    @ruleset: {
         color: @text-color;
         background-color: @background-color;
         text-shadow: @text-shadow;

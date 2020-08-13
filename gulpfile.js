@@ -16,7 +16,7 @@ const concatCore = done => {
     src([
         './core/mixins/**/*.less',
         './core/helpers/**/*.less',
-        './core/variables/**/*.less'
+        './core/shortcuts/**/*.less'
     ])
         .pipe(concat('anchor.less'))
         .pipe(dest('./'))

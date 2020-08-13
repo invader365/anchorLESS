@@ -3,8 +3,8 @@
 
 .mixins(@query:_; @after:_; @align:_; @animation:_; @backface:_; @background:_; @before:_; @blur:_; @border:_; @brightness:_; @center:_; @center-h:_; @center-v:_; @color:_; @contrast:_; 
     @custom:_; @display:_; @drop-shadow:_; @filter:_; @first-letter:_; @first-line:_; @float:_; @font:_; @fontface:_; @gradient:_; @grayscale:_; @hue-rotate:_; @invert:_; @list-style:_; @minmax-size:_; 
-    @opacity:_; @origin:_; @overflow:_; @paragraph:_; @perspective:_; @placeholder:_; @position:_; @pseudo:_; @resize:_; @rotate3d:_; @rounded:_; @saturate:_; @scale3d:_; @sepia:_; @selection:_; @shadow:_; 
-    @size:_; @skew:_; @spacing:_; @table-cell-color:_; @text:_; @text-decoration:_; @text-shadow:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @url:_; @zindex:_;) {
+    @opacity:_; @origin:_; @overflow:_; @paragraph:_; @perspective:_; @placeholder:_; @position:_; @resize:_; @rotate3d:_; @rounded:_; @saturate:_; @scale3d:_; @sepia:_; @selection:_; @shadow:_; 
+    @size:_; @skew:_; @spacing:_; @table-cell-color:_; @text:_; @text-decoration:_; @text-shadow:_; @text-transform:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @url:_; @zindex:_;) {
 
     @ruleset: {
 
@@ -105,6 +105,9 @@
             .parse(@text-shadow); 
             .text-shadow(.loop[1], .loop[2], .loop[3]);
         }
+        & when not (@text-transform=_) { 
+            .text-transform(@text-transform); 
+        }
 
         // Transform
         & when not (@transform=_) {
@@ -186,7 +189,7 @@
             .transition(.loop[1], .loop[2], .loop[3], .loop[4]);
         }
 
-        // Helpers
+        // Pseudo-elements
         & when not (@after=_) { 
             .parse(@after);
             .after(.loop[1], .loop[2], .loop[3]);
@@ -207,14 +210,12 @@
             .parse(@placeholder);
             .placeholder(.loop[1], .loop[2], .loop[3]);
         }
-        & when not (@pseudo=_) { 
-            .parse(@pseudo);
-            .pseudo(.loop[1], .loop[2]);
-        }
         & when not (@selection=_) { 
             .parse(@selection);
             .selection(.loop[1], .loop[2], .loop[3]);
         }
+
+        // Helpers
         & when not (@center=_) { 
             .parse(@center);
             .center(.loop[1], .loop[2], .loop[3]);

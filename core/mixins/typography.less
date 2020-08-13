@@ -48,7 +48,7 @@
 }
 
 //
-//  .fontface(@family, @path, @weight, @style, [@min-query, @max-query]);
+//  .fontface(@family, @path, @weight, @style[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   @family  :  font-family name
 //   @path    :  absolute/relative file path
@@ -82,15 +82,19 @@
 }
 
 //
-//  .paragraph(@align, @indent, @transform, [@min-query, @max-query]);
+//  .paragraph(@line-height, @align, @indent[, @min-query, @max-query]);
 //   ------------------------------------------------------
-//   @align      :  left|right|center|justify|initial|inherit
-//   @indent     :  -length-|initial|inherit
-//   @transform  :  none|capitalize|uppercase|lowercase|initial|inherit
+//   @line-height   :  normal|number|-length-|initial|inherit
+//   @align         :  left|right|center|justify|initial|inherit
+//   @indent        :  -length-|initial|inherit
 
-.paragraph(@align:_, @indent:_, @transform:_, @min-query:_, @max-query:_) {
+.paragraph(@line-height:_, @align:_, @indent:_, @min-query:_, @max-query:_) {
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+
+    & when not (@line-height=_) and (@minmax=_) {
+        line-height: @line-height;
+    }
 
     & when not (@align=_) and (@minmax=_) {
         text-align: @align;
@@ -100,14 +104,10 @@
         text-indent: @indent;
     }
 
-    & when not (@transform=_) and (@minmax=_) {
-        text-transform: @transform;
-    }
-
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @paragraph: @indent, @align, @transform;
+            @paragraph: @line-height, @align, @indent;
         );
     }
 }
@@ -189,7 +189,7 @@
 }
     
 //
-//  .text-shadow(@spread, @color, @alpha, [@min-query, @max-query]);
+//  .text-shadow(@spread, @color, @alpha[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   @spread    :  h-shadow v-shadow [blur-radius]
 //   @color     :  -color-|initial|inherit
@@ -209,6 +209,27 @@
         .mixins(
             @query: @minmax;
             @text-shadow: @spread, @color, @alpha;
+        );
+    }
+}
+    
+//
+//  .text-transform(@spread, @color, @alpha[, @min-query, @max-query]);
+//   ------------------------------------------------------
+//   text-transform      :  none|capitalize|uppercase|lowercase|initial|inherit
+
+.text-transform(@transform, @min-query:_, @max-query:_) {
+
+    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+    
+    & when not (@transform=_) and (@minmax=_) {
+        text-transform: @transform;
+    }
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @text-transform: @transform;
         );
     }
 }

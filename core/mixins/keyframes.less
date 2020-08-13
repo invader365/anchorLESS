@@ -1,0 +1,160 @@
+//
+//  Keyframes
+
+//
+//  ._fade-in()
+//  ._fade-out()
+//  ._shake()
+//  ._slide-down()
+//  ._slide-up()
+//  ._zoom-in()
+//  ._zoom-out()
+
+._fade-in() {
+    @-webkit-keyframes fade-in {
+        @fade-in();
+    }
+
+    @keyframes fade-in {
+        @fade-in();
+    }
+    @fade-in: {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+._fade-out() {
+    @-webkit-keyframes fade-out {
+        @fade-out();
+    }
+
+    @keyframes fade-out {
+        @fade-out();
+    }
+    @fade-out: {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+}
+
+._shake() {
+    @-webkit-keyframes shake {
+        @shake();
+    }
+
+    @keyframes shake {
+        @shake();
+    }
+
+    @shake: {
+        0%, 100% {
+            .translate3d(0, 0, 0);
+        }
+
+        10%, 30%, 50%, 70%, 90% {
+            .translate3d(0, 0, -10px);
+        }
+
+        20%, 40%, 60%, 80% {
+            .translate3d(0, 0, 10px);
+        }
+    }
+}
+
+._slide-down() {
+    @-webkit-keyframes slide-down {
+        @slide-down();
+    }
+
+    @keyframes slide-down {
+        @slide-down();
+    }
+    @slide-down: {
+        0% {
+            opacity: 0;
+            .transform(translateY(-20px) perspective(600px) rotateX(15deg));
+        }
+
+        100% {
+            opacity: 1;
+            .transform(translateY(0) perspective(600px) rotateX(0deg));
+        }
+    }
+}
+
+._slide-up() {
+    @-webkit-keyframes slide-up {
+        @slide-up();
+    }
+
+    @keyframes slide-up {
+        @slide-up();
+    }
+
+    @slide-up: {
+        0% {
+            opacity: 1;
+            .transform(translateY(0) perspective(600px) rotateX(0deg));
+        }
+        100% {
+            opacity: 0;
+            .transform(translateY(-20px) perspective(600px) rotateX(15deg));
+        }
+    }
+}
+
+._zoom-in() {
+    @-webkit-keyframes zoom-in {
+        @zoom-in();
+    }
+
+    @keyframes zoom-in {
+        @zoom-in();
+    }
+
+    @zoom-in: {
+        0% {
+            opacity: 0;
+            .scale3d(0.3, 0.3, 0);
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+}
+
+._zoom-out() {
+    @-webkit-keyframes zoom-out {
+        @zoom-out();
+    }
+
+    @keyframes zoom-out {
+        @zoom-out();
+    }
+    @zoom-out: {
+        0% {
+            opacity: 1;
+            .scale3d(1, 1, 1);
+        }
+
+        50% {
+            opacity: 0;
+            .scale3d(0.3, 0.3, 0);
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+}

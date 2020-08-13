@@ -6,31 +6,26 @@ Anchor less is a collection of less Mixins, Assets and Utilities to write better
 
 Features:
 
-- Responsive mixins, assets and utilities.
+- Responsive mixins, helpers and shortcuts.
 - Seamless integration with html5 frameworks.
 - Faster performance (Less.js build-in functions).
-- The most extensive (and growing) LESS mixins library.
+- The most extensive LESS mixins library.
 - A single 'anchor.less' file, no other dependencies.
 
 ## Library
 
-Common mixins:
-
-00. .align(top, right, bottom, left, [min-width-query, max-width-query]);
-00. .back(color, image, repeat, position, [min-width-query, max-width-query]);
-00. .border(width, style, color, [min-width-query, max-width-query]);
-00. .color(color, back-color, border-color, [min-width-query, max-width-query]);
-00. .font(font, family, [min-width-query, max-width-query]);
-00. .gradient.linear(start, stop, degrees, [min-width-query, max-width-query]);
-00. .gradient.radial(start, stop, [min-width-query, max-width-query]);
-00. .opacity(opacity, [min-width-query, max-width-query]);
-00. .pseudo(content, width, height)
-00. .rounded(top-left, top-right, bottom-right, bottom-left, [min-width-query, max-width-query]);
-00. .shadow(spread, color, alpha, [min-width-query, max-width-query]);
-00. .shadow.inset(spread, color, alpha, [min-width-query, max-width-query]);
-00. .size(width, height, [min-width-query, max-width-query]);
-00. .spacing(margin, padding, [min-width-query, max-width-query]);
-00. .transition(property, durations, function, delay, [min-width-query, max-width-query]);
+01. .align(@top, @right, @bottom, @left);
+00. .background(@color, @image, @position, @repeat, @origin, @clip, @attachment);
+00. .border(@width, @style, @color);
+00. .color(@text, @background, @border);
+00. .font(@size, @line-height, @width, @family);
+00. .gradient(@direction, @start, @stop1, @stop2, @stop3);
+00. .paragraph(@line-height, @align, @indent);
+00. .rounded(@top-left, @top-right, @bottom-right, @bottom-left);
+00. .shadow(@spread, @color, @alpha);
+00. .size(@width, @height);
+00. .spacing(@margin, @padding);
+00. .transition(@property, @durations, @function, @delay);
 
 See the **[full list](http://invader365.github.io/anchorLESS/reference.html)**
 
@@ -42,10 +37,10 @@ Import the relative url at the top of your less file
 ```
 Example:
 ```css
-      #button {
+      button {
         .border(0 1px 2px, solid, #dcdcdc);
-        .back.image('../image.png');
-        .gradient.to-bottom(#ededed, #dfdfdf);
+        .background('../image.png');
+        .gradient(to-bottom, #ededed, #dfdfdf);
         .spacing(_, 0.5em);
         .rounded(5px);
         .size(33%, _);
@@ -54,7 +49,7 @@ Example:
 ```
 CSS output:
 ```css
-      #button {
+      button {
         background-image: url('../images.png');
         background: #ededed none repeat-x center;
         background-image: -webkit-linear-gradient(180deg, #ededed, #dfdfdf);
@@ -71,7 +66,7 @@ CSS output:
       }
 
       @media all and (min-width: 640px) {
-        #button {
+        button {
           width: 25%;
         }
       }
