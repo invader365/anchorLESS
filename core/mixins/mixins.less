@@ -1,10 +1,10 @@
 //
-//  Anchor mixins
+//  Mixins
 
 .mixins(@query:_; @after:_; @align:_; @animation:_; @backface:_; @background:_; @before:_; @blur:_; @border:_; @brightness:_; @center:_; @center-h:_; @center-v:_; @color:_; @contrast:_; 
     @custom:_; @display:_; @drop-shadow:_; @filter:_; @first-letter:_; @first-line:_; @float:_; @font:_; @fontface:_; @gradient:_; @grayscale:_; @hue-rotate:_; @invert:_; @list-style:_; @minmax-size:_; 
-    @opacity:_; @origin:_; @overflow:_; @paragraph:_; @perspective:_; @placeholder:_; @position:_; @resize:_; @rotate3d:_; @rounded:_; @saturate:_; @scale3d:_; @sepia:_; @selection:_; @shadow:_; 
-    @size:_; @skew:_; @spacing:_; @table-cell-color:_; @text:_; @text-decoration:_; @text-shadow:_; @text-transform:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @url:_; @zindex:_;) {
+    @opacity:_; @transform-origin:_; @overflow:_; @paragraph:_; @perspective:_; @placeholder:_; @position:_; @resize:_; @rotate3d:_; @rounded:_; @saturate:_; @scale3d:_; @sepia:_; @selection:_; @shadow:_; 
+    @size:_; @skew:_; @spacing:_; @table-cell-color:_; @text:_; @text-decoration:_; @text-shadow:_; @text-transform:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @url:_; @z-index:_;) {
 
     @ruleset: {
 
@@ -52,7 +52,7 @@
             .list-style(@list-style); 
         }
         & when not (@zindex=_) { 
-            .zindex(@zindex); 
+            .z-index(@z-index); 
         }
 
         // Visual
@@ -135,9 +135,9 @@
         & when not (@backface=_) { 
             .backface(@backface); 
         }
-        & when not (@origin=_) { 
-            .parse(@origin); 
-            .origin(.loop[1], .loop[2], .loop[3]);
+        & when not (@transform-origin=_) { 
+            .parse(@transform-origin); 
+            .transform-origin(.loop[1], .loop[2], .loop[3]);
         }
         & when not (@resize=_) { 
             .resize(@resize); 
@@ -251,11 +251,11 @@
 
     & when not (@query=_) {
 
-        @min: extract(@query, 1);
-        @max: extract(@query, 2);
+        @minW: extract(@query, 1);
+        @maxW: extract(@query, 2);
         
-        @minW:    if((@min=_); ''; 'and (minWidth: @{min}) ');
-        @min-max: if((@max=_); ~'@{minW}'; ~'@{minW}and (max-width: @{max})');
+        @min:     if((@minW=_); ''; 'and (min-width: @{minW}) ');
+        @min-max: if((@maxW=_); ~'@{min}'; ~'@{min}and (max-width: @{maxW})');
 
         @media all @min-max {
             @ruleset();

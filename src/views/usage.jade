@@ -11,7 +11,8 @@ html(lang="es")
             section.max-width.fixed
                 .m-module.span-5
                     h2.heading.primary Usage
-                    p 1. Download the "anchor.less" file
+                    p 1. Download 
+                        a(href="https://github.com/invader365/anchorLESS/archive/master.zip") anchor.less
                     p 2. Reference for use globally with: 
                     pre.panel.primary
                         code
@@ -23,14 +24,14 @@ html(lang="es")
                         code
                             span.selector #button
                             |  {
-                            |    .gradient.to-bottom(#a53df6, #7c16cb);
+                            |    .gradient(to-bottom, #a53df6, #7c16cb);
                             |    .border(0 1px 2px, solid, #9c33ed);
                             |    .rounded(7px);
                             |    .width(25%, 640px);
                             |    .shadow.inset(0 1px 0 0, #d197fe, .9);
                             |    .color(@yellow);
                             |    .size(56px, 128px);
-                            |    .font(bold 12px @d 56px, 'Arial');
+                            |    .font(12px, 56px, bold, 'Arial');
                             |  }
                     p Compiles to:
                     pre.panel.primary
@@ -61,22 +62,4 @@ html(lang="es")
                             |          width: 25%;
                             |      }
                             |  }
-                .m-module.span-5
-                    h2 Runing the example
-                    p 1. Install npm modules
-                    pre.panel.primary
-                        code
-                            span.selector npm
-                            |  install 
-                    p 2. Run gulp example
-                    pre.panel.primary
-                        code
-                            span.selector gulp
-                            |  example
-                    p 3. Edit styles.less located on the example folder
-                    pre.panel.primary
-                        code
-                            span.selector cd
-                            |  /example
-                    p Your browser will reload after saving changes
         include includes/footer

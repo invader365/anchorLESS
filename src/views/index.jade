@@ -23,41 +23,39 @@ html(lang="es")
                                 |  Features
                             ul.decimal
                                 li The most extensive Less mixins library.
-                                li Ready to use with html5 frameworks.
+                                li Easy to integrate with Less-based frameworks.
                                 li Responsive mixins (mobile-first)
                                 li Faster performance (Less.js powered).
+                                li A single 'anchor.less' file, no dependencies required.
                         .panel.primary
                             h4.title
                                 i.fa.fa-recycle
                                 |  Mixins
                             ul
                                 li
-                                    span.mix .back 
-                                    |  (color, image, repeat, position, query);
+                                    span.mix .align
+                                    | (@top, @right, @bottom, @left);
                                 li
-                                    span.mix .color 
-                                    | (color, back-color);
+                                    span.mix .background
+                                    | (@color, @image, @position, @repeat, @origin, @clip, @attachment);
                                 li
-                                    span.mix .gradient 
-                                    | (start, stop, degrees, image);
+                                    span.mix .color
+                                    | (@text, @background, @border);
                                 li
-                                    span.mix .image 
-                                    | (url);
+                                    span.mix .paragraph
+                                    | (@line-height, @align, @indent);
                                 li
-                                    span.mix .pseudo 
-                                    | (content, width, height)
+                                    span.mix .text
+                                    | (@size, @width, @color)
                                 li
-                                    span.mix .rounded 
-                                    | (radius);
+                                    span.mix .rounded
+                                    | (@top-left, @top-right, @bottom-right, @bottom-left);
                                 li
-                                    span.mix .shadow 
-                                    | (spread, color, alpha, offset);
+                                    span.mix .size
+                                    | (@width, @height);
                                 li
-                                    span.mix .size 
-                                    | (width, height, query);
-                                li
-                                    span.mix .transition 
-                                    | (property, duration, function, delay);
+                                    span.mix .shadow
+                                    | (@spread, @color, @alpha);
                             p
                                 a(href=page.root + 'reference.html') See the full list
                     div

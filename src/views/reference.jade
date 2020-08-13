@@ -22,53 +22,39 @@ html(lang="es")
                             h2.title Mixins
                             ul.cat_mixins
                                 li
-                                    a(href='#animation') Animation
+                                    a(href='#animation') Animation and transition
                                 li
-                                    a(href='#background') Background and Color
+                                    a(href='#box-model') Box-model
                                 li
-                                    a(href='#border') Border
+                                    a(href='#filter') Filters
                                 li
-                                    a(href='#properties') Box Properties
-                                li
-                                    a(href='#font') Font and Text
-                                li
-                                    a(href='#position') Positioning
-                                li
-                                    a(href='#size') Size and Spacing
+                                    a(href='#position') Layout
                                 li
                                     a(href='#transform') Transform
                                 li
-                                    a(href='#transition') Transition
-                            h2.title Assets
+                                    a(href='#font') Typography
+                                li
+                                    a(href='#visual') Visual properties
+                            h2.title Helpers
                             ul.cat_assets
                                 li
-                                    a(href='#arrows') Arrows
+                                    a(href='#assets') assets
                                 li
                                     a(href='#centering') Centering
                                 li
-                                    a(href='#lists') Lists
-                                li
                                     a(href='#pseudo') Pseudo
                                 li
-                                    a(href='#states') States
-                                li
-                                    a(href='#tables') Tables
-                            h2.title Utilities
+                                    a(href='#others') Others
+                            h2.title Shortcuts
                             ul.cat_utilities
-                                li
-                                    a(href='#colornames') Color names
                                 li
                                     a(href='#easing') Easing
                                 li
-                                    a(href='#grays') Gray shades
-                                li
-                                    a(href='#helpers') Helpers
-                                li
-                                    a(href='#keyframes') Keyframes
+                                    a(href='#grays') Gray scale
                                 li
                                     a(href='#webfonts') Web-safe fonts
                                 li
-                                    a(href='#resources') Uri resources
+                                    a(href='#svg') Svg filters
                     .c-module.span-5
                         .tabset.primary.horizontal
                             h2.summary
@@ -122,212 +108,135 @@ html(lang="es")
                                 .grid.split-6
                                     h3#A.letter A
                                     ul.grid.split-3.span-5
-                                        li .active.color ();
-                                        li .active.gradient ();
-                                        li .animation ();
-                                        li .animation.delay ();
-                                        li .animation.direction ();
-                                        li .animation.duration ();
-                                        li .animation.ease ();
-                                        li .animation.fill-mode ();
-                                        li .animation.iteration ();
-                                        li .animation.name ();
-                                        li .animation.play-state ();
-                                        li .appearance ();
-                                        li .absolute.align ();
-                                        li .absolute.left-bottom ();
-                                        li .absolute.left-top ();
-                                        li .absolute.right-bottom ();
-                                        li .absolute.right-top ();
-                                        li .align ();
-                                        li .align.left-bottom ();
-                                        li .align.left-top ();
-                                        li .align.right-bottom ();
-                                        li .align.right-top ();
-                                        li .arrow.bottom ();
-                                        li .arrow.left ();
-                                        li .arrow.right ();
-                                        li .arrow.top ();
-                                        li .arrow.left-bottom ();
-                                        li .arrow.left-top ();
-                                        li .arrow.right-bottom ();
-                                        li .arrow.right-top ();
+                                        li .after();
+                                        li .animation();
+                                        li .align();
                                 .grid.split-6
                                     h3#B.letter B
                                     ul.grid.split-3.span-5
-                                        li .back ();
-                                        li .back.attach ();
-                                        li .back.color ();
-                                        li .back.clip ();
-                                        li .back.position ();
-                                        li .back.repeat ();
-                                        li .back.size ();
-                                        li .backface ();
-                                        li .block ();
-                                        li .border ();
-                                        li .border.color ();
-                                        li .border.style ();
-                                        li .border.width ();
-                                        li .box-sizing ();
+                                        li .backface();
+                                        li .background();
+                                        li .before();
+                                        li .blur();
+                                        li .border();
+                                        li .brightness();
                                 .grid.split-6
                                     h3#C.letter C
                                     ul.grid.split-3.span-5
-                                        li .center-block ();
-                                        li .center-inline ();
-                                        li .center-vertical ();
-                                        li .clearfix ();
-                                        li .color ();
-                                        li .columns ();
+                                        li .center();
+                                        li .center-h();
+                                        li .center-v();
+                                        li .clearfix();
+                                        li .color();
+                                        li .contrast();
+                                        li .custom();
                                 .grid.split-6
                                     h3#D.letter D
                                     ul.grid.split-3.span-5
-                                        li .display (display, query);
+                                        li .display();
+                                        li .drop-shadow();
                                 .grid.split-6
                                     h3#E.letter E
                                     ul.grid.split-3.span-5
-                                        li .ellipsis ();
+                                        li .ellipsis();
                                 .grid.split-6
                                     h3#F.letter F
                                     ul.grid.split-3.span-5
-                                        li .fixed.align ();
-                                        li .float ();
-                                        li .focus.color ();
-                                        li .focus.gradient ();
-                                        li .font ();
-                                        li .font-face ();
-                                        li .font-size ();
+                                        li .filter();
+                                        li .first-letter();
+                                        li .first-line();
+                                        li .float();
+                                        li .font();
+                                        li .fontface();
                                 .grid.split-6
                                     h3#G.letter G
                                     ul.grid.split-3.span-5
-                                        li .gradient ();
-                                        li .gradient.to-bottom ();
-                                        li .gradient.to-left ();
-                                        li .gradient.to-right ();
-                                        li .gradient.to-top ();
-                                        li .gradient.radial ();
+                                        li .gradient();
+                                        li .grayscale();
                                 .grid.split-6
                                     h3#H.letter H
                                     ul.grid.split-3.span-5
-                                        li .height ();
-                                        li .hover.color ();
-                                        li .hover.gradient ();
-                                        li .hover-focus.color ();
-                                        li .hover-focus.gradient ();
-                                        li .hyphens ();
+                                        li .hide-text();
+                                        li .hue-rotate();
+                                        li .hyphens();
                                 .grid.split-6
                                     h3#I.letter I
                                     ul.grid.split-3.span-5
-                                        li .image ();
-                                        li .indent ();
-                                        li .index ();
-                                        li .inline ();
-                                        li .inline-block ();
+                                        li .invert();
                                 .grid.split-6
                                     h3#K.letter K
                                     ul.grid.split-3.span-5
-                                        li .keyframes-fade-in ();
-                                        li .keyframes-fade-out ();
-                                        li .keyframes-shake ();
-                                        li .keyframes-slide-down ();
-                                        li .keyframes-slide-up ();
-                                        li .keyframes-zoom-in ();
-                                        li .keyframes-zoom-out ();
                                 .grid.split-6
                                     h3#L.letter L
                                     ul.grid.split-3.span-5
-                                        li .line-break ();
-                                        li .list-style ();
+                                        li .line-break();
+                                        li .list-style();
                                 .grid.split-6
                                     h3#M.letter M
                                     ul.grid.split-3.span-5
-                                        li .margin ();
-                                        li .max-width ();
-                                        li .min-width ();
+                                        li .minmax-size();
                                 .grid.split-6
                                     h3#N.letter N
                                     ul.grid.split-3.span-5
-                                        li .nowrap ();
-                                        li .normal-active.color ();
-                                        li .normal-active.gradient ();
+                                        li .nowrap();
                                 .grid.split-6
                                     h3#O.letter O
                                     ul.grid.split-3.span-5
-                                        li .offset ();
-                                        li .opacity ();
-                                        li .overflow ();
+                                        li .opacity();
+                                        li .overflow();
                                 .grid.split-6
                                     h3#P.letter P
                                     ul.grid.split-3.span-5
-                                        li .padding ();
-                                        li .perspective ();
-                                        li .placeholder ();
-                                        li .position ();
-                                        li .pseudo ();
-                                        li .pseudo-container ();
+                                        li .paragraph();
+                                        li .perspective();
+                                        li .placeholder();
+                                        li .position();
                                 .grid.split-6
                                     h3#R.letter R
                                     ul.grid.split-3.span-5
-                                        li .reset-block ();
-                                        li .reset-vertical ();
-                                        li .resize ();
-                                        li .rgba ();
-                                        li .relative.align ();
-                                        li .rotate ();
-                                        li .rounded ();
-                                        li .rounded.bottom ();
-                                        li .rounded.left ();
-                                        li .rounded.left-bottom ();
-                                        li .rounded.left-top ();
-                                        li .rounded.right ();
-                                        li .rounded.right-bottom ();
-                                        li .rounded.right-top ();
-                                        li .rounded.top ();
+                                        li .resize();
+                                        li .rounded();
+                                        li .rotate3d();
                                 .grid.split-6
                                     h3#S.letter S
                                     ul.grid.split-3.span-5
-                                        li .scale ();
-                                        li .skew ();
-                                        li .shadow ();
-                                        li .shadow.inset ();
-                                        li .shadow-multi ();
-                                        li .size ();
-                                        li .size-min ();
-                                        li .spacing ();
-                                        li .square ();
+                                        li .saturate();
+                                        li .scale3d();
+                                        li .selection();
+                                        li .sepia();
+                                        li .shadow();
+                                        li .size();
+                                        li .skew();
+                                        li .spacing();
                                 .grid.split-6
                                     h3#T.letter T
                                     ul.grid.split-3.span-5
-                                        li .table.border ();
-                                        li .table.border-outer ();
-                                        li .table.color ();
-                                        li .table.font ();
-                                        li .table.head-color ();
-                                        li .table.head-font ();
-                                        li .table.padding ();
-                                        li .table.rounded ();
-                                        li .tap-highlight ();
-                                        li .text-align ();
-                                        li .text-shadow ();
-                                        li .transform ();
-                                        li .transition ();
-                                        li .transition-multi ();
-                                        li .translate ();
-                                        li .translate3d ();
+                                        li .table-cell-color();
+                                        li .text();
+                                        li .text-decoration();
+                                        li .text-shadow();
+                                        li .text-transform();
+                                        li .transform();
+                                        li .transform-origin();
+                                        li .translate3d();
+                                        li .triangle();
                                 .grid.split-6
                                     h3#U.letter U
                                     ul.grid.split-3.span-5
-                                        li .user-select ();
+                                        li .url();
+                                        li .user-select();
                                 .grid.split-6
                                     h3#V.letter V
                                     ul.grid.split-3.span-5
-                                        li .visited.color ();
-                                        li .visited.gradient ();
                                 .grid.split-6
                                     h3#W.letter W
                                     ul.grid.split-3.span-5
-                                        li .width ();
-                                        li .word-break ();
-                                        li .wrap ();
+                                        li .word-break();
+                                        li .wrap();
+                                .grid.split-6
+                                    h3#Z.letter Z
+                                    ul.grid.split-3.span-5
+                                        li .z-index();
                             h2.summary.mixins.active
                                 a(href='#') Mixins
                             .details
@@ -336,24 +245,20 @@ html(lang="es")
                                 p Mixins are sets of code that can be configured to modify an element's properties.
                                 ul.grid.split-3.circle
                                     li
-                                        a(href='#animation') Animation
+                                        a(href='#animation') Animation and transition
                                     li
-                                        a(href='#background') Background and Color
+                                        a(href='#box-model') Box-model
                                     li
-                                        a(href='#border') Border
+                                        a(href='#filter') Filters
                                     li
-                                        a(href='#properties') Box Properties
-                                    li
-                                        a(href='#font') Font and Text
-                                    li
-                                        a(href='#position') Positioning
-                                    li
-                                        a(href='#size') Size and Spacing
+                                        a(href='#position') Layout
                                     li
                                         a(href='#transform') Transform
                                     li
-                                        a(href='#transition') Transition
-                                h4#animation Animation
+                                        a(href='#font') Typography
+                                    li
+                                        a(href='#visual') Visual properties
+                                h4#animation Animation and Transition
                                 .scrollable
                                     table.table.primary
                                         thead
@@ -362,33 +267,12 @@ html(lang="es")
                                                 th Syntax
                                             tbody
                                             tr
-                                                td .animation ();
-                                                td .animation (name, duration, ease, delay, iteration, direction);
+                                                td .animation(...);
+                                                td @name, @duration, @timing, @delay, @iteration, @direction, @fill-mode, @play-state
                                             tr
-                                                td .animation.delay ();
-                                                td .animation.delay (delay);
-                                            tr
-                                                td .animation.direction ();
-                                                td .animation.direction (direction);
-                                            tr
-                                                td .animation.duration ();
-                                                td .animation.duration (duration);
-                                            tr
-                                                td .animation.ease ();
-                                                td .animation.ease (ease);
-                                            tr
-                                                td .animation.fill-mode ();
-                                                td .animation.fill-mode (fill-mode);
-                                            tr
-                                                td .animation.iteration ();
-                                                td .animation.iteration (iteration);
-                                            tr
-                                                td .animation.name ();
-                                                td .animation.name (name);
-                                            tr
-                                                td .animation.play-state ();
-                                                td .animation.play-state (play-state);
-                                h4#background Background and Color
+                                                td .transition(...);
+                                                td @property, @duration, @timing, @delay
+                                h4#visual Visual properties
                                 .scrollable
                                     table.table.primary
                                         thead
@@ -397,54 +281,65 @@ html(lang="es")
                                                 th Syntax
                                             tbody
                                             tr
-                                                td .back ();
-                                                td .back (color, image, repeat, position, query);
+                                                td .background(...);
+                                                td @color, @image, @repeat, @position/backsize, @repeat, @origin, @clip, @attachment
                                             tr
-                                                td .back.attach ();
-                                                td .back.attach (attachment);
+                                                td .color(...);
+                                                td @color, @background, @border
                                             tr
-                                                td .back.color ();
-                                                td .back.color (color);
+                                                td .gradient(...);
+                                                td @direction, @start, @stop1[, @stop2, @stop3]
                                             tr
-                                                td .back.clip ();
-                                                td .back.clip (clip);
+                                                td .opacity(...);
+                                                td @level;
                                             tr
-                                                td .back.position ();
-                                                td .back.position (position);
+                                                td .rounded(...);
+                                                td @top-right @bottom-right @bottom-left
                                             tr
-                                                td .back.repeat ();
-                                                td .back.repeat (repeat);
+                                                td .shadow(...);
+                                                td @offset, @color, @alpha[, @inset]
+                                h4#filter Filters
+                                .scrollable
+                                    table.table.primary
+                                        thead
                                             tr
-                                                td .back.size ();
-                                                td .back.size (size);
+                                                th.first Name 
+                                                th Syntax
+                                            tbody
                                             tr
-                                                td .color ();
-                                                td .color (color, back-color);
+                                                td .blur(...);
+                                                td @pixels
                                             tr
-                                                td .gradient ();
-                                                td .gradient (start, stop, degrees, image);
+                                                td .brightnes(...);
+                                                td @percentage
                                             tr
-                                                td .gradient.to-bottom ();
-                                                td .gradient.to-bottom (start, stop, image);
+                                                td .contrast(...);
+                                                td @percentage
                                             tr
-                                                td .gradient.to-left ();
-                                                td .gradient.to-left (start, stop, image);
+                                                td .drop-shadow(...);
+                                                td @offset, @blur, @color
                                             tr
-                                                td .gradient.to-right ();
-                                                td .gradient.to-right (start, stop, image);
+                                                td .filter(...);
+                                                td @pixels
                                             tr
-                                                td .gradient.to-top ();
-                                                td .gradient.to-top (start, stop, image);
+                                                td .grayscale(...);
+                                                td @percentage
                                             tr
-                                                td .gradient.radial ();
-                                                td .gradient.radial (inner, outer, image);
+                                                td .hue-rotate(...);
+                                                td @pixels
                                             tr
-                                                td .image ();
-                                                td .image (image);
+                                                td .invert(...);
+                                                td @percentage
                                             tr
-                                                td .rgba ();
-                                                td .rgba (hex-color, alpha);
-                                h4#border Border
+                                                td .saturate(...);
+                                                td @percentage
+                                            tr
+                                                td .sepia(...);
+                                                td @percentage
+                                            tr
+                                                td .url(...);
+                                                td @svg-url
+                                h4#box-model Box-model
                                 .scrollable
                                     table.table.primary
                                         thead
@@ -453,45 +348,24 @@ html(lang="es")
                                                 th Syntax
                                             tbody
                                             tr
-                                                td .border ();
-                                                td .border (width, style, color, query);
+                                                td .border(...);
+                                                td @width, @style, @color
                                             tr
-                                                td .border.color ();
-                                                td .border.color (color);
+                                                td .display(...);
+                                                td @display, @horiz-width, @vert-height, @comp
                                             tr
-                                                td .border.style ();
-                                                td .border.style (style);
+                                                td .minmax-size(...);
+                                                td @min-width, @max-width, @min-height, @max-height
                                             tr
-                                                td .border.width ();
-                                                td .border.width (width);
+                                                td .overflow(...);
+                                                td @overflow-x, @overflow-y
                                             tr
-                                                td .rounded ();
-                                                td .rounded (radius);
+                                                td .size(...);
+                                                td @width, @height
                                             tr
-                                                td .rounded.top ();
-                                                td .rounded.top (radius);
-                                            tr
-                                                td .rounded.right ();
-                                                td .rounded.right (radius);
-                                            tr
-                                                td .rounded.bottom ();
-                                                td .rounded.bottom (radius);
-                                            tr
-                                                td .rounded.left ();
-                                                td .rounded.left (radius);
-                                            tr
-                                                td .rounded.left-top ();
-                                                td .rounded.left-top (radius);
-                                            tr
-                                                td .rounded.left-bottom ();
-                                                td .rounded.left-bottom (radius);
-                                            tr
-                                                td .rounded.right-top ();
-                                                td .rounded.right-top (radius);
-                                            tr
-                                                td .rounded.right-bottom ();
-                                                td .rounded.right-bottom (radius);
-                                h4#properties Box Properties
+                                                td .spacing(...);
+                                                td @margin, @padding
+                                h4#font Typography
                                 .scrollable
                                     table.table.primary
                                         thead
@@ -500,42 +374,27 @@ html(lang="es")
                                                 th Syntax
                                             tbody
                                             tr
-                                                td .appearance ();
-                                                td .appearance (appearance);
+                                                td .font(...);
+                                                td @size, @line-height, @weight, @family
                                             tr
-                                                td .backface ();
-                                                td .backface (visibility);
+                                                td .fontface(...);
+                                                td @family, @path, @weight, @style
                                             tr
-                                                td .box-sizing ();
-                                                td .box-sizing(box-model);
+                                                td .paragraph(...);
+                                                td @line-height, @align, @indent
                                             tr
-                                                td .display (display, query);
-                                                td .display ();
+                                                td .text(...);
+                                                td @size, @weight, @color
                                             tr
-                                                td .opacity ();
-                                                td .opacity (opacity, query);
+                                                td .text-decoration(...);
+                                                td @line, @color, @style
                                             tr
-                                                td .overflow ();
-                                                td .overflow (x, y);
+                                                td .text-shadow(...);
+                                                td @spread, @color, @alpha
                                             tr
-                                                td .placeholder ();
-                                                td .placeholder (color);
-                                            tr
-                                                td .shadow ();
-                                                td .shadow (spread, color, alpha);
-                                            tr
-                                                td .shadow.inset ();
-                                                td .shadow.inset (spread, color, alpha);
-                                            tr
-                                                td .shadow-multi ();
-                                                td .shadow-multi (arguments);
-                                            tr
-                                                td .tap-highlight ();
-                                                td .tap-highlight (color);
-                                            tr
-                                                td .user-select ();
-                                                td .user-select (select);
-                                h4#font Font and Text
+                                                td .text-transform(...);
+                                                td @transform
+                                h4#position Layout
                                 .scrollable
                                     table.table.primary
                                         thead
@@ -544,117 +403,20 @@ html(lang="es")
                                                 th Syntax
                                             tbody
                                             tr
-                                                td .font ();
-                                                td .font (font, family);
+                                                td .align(...);
+                                                td @top, @right, @bottom, @left
                                             tr
-                                                td .font-face ();
-                                                td .font-face (name, path);
+                                                td .float(...);
+                                                td @float
                                             tr
-                                                td .font-size ();
-                                                td .font-size (size, query);
+                                                td list-style(...);
+                                                td @type, @position, @image
                                             tr
-                                                td .indent ();
-                                                td .indent (indent, query);
+                                                td position(...);
+                                                td @position, @top, @right, @bottom, @left
                                             tr
-                                                td .text-align ();
-                                                td .text-align (align, query);
-                                            tr
-                                                td .text-shadow ();
-                                                td .text-shadow (spread, color, alpha, query);
-                                h4#position Positioning
-                                .scrollable
-                                    table.table.primary
-                                        thead
-                                            tr
-                                                th.first Name
-                                                th Syntax
-                                            tbody
-                                            tr
-                                                td .absolute.align ();
-                                                td .absolute.align (top, right, bottom, left, query);
-                                            tr
-                                                td .absolute.left-top ();
-                                                td .absolute.left-top (left, top);
-                                            tr
-                                                td .absolute.left-bottom ();
-                                                td .absolute.left-bottom (left, bottom);
-                                            tr
-                                                td .absolute.right-top ();
-                                                td .absolute.right-top (right, top);
-                                            tr
-                                                td .absolute.right-bottom ();
-                                                td .absolute.right-bottom (right, bottom);
-                                            tr
-                                                td .align ();
-                                                td .align (top, right, bottom, left, query);
-                                            tr
-                                                td .align.left-top ();
-                                                td .align.left-top (left, top);
-                                            tr
-                                                td .align.left-bottom ();
-                                                td .align.left-bottom (left, bottom);
-                                            tr
-                                                td .align.right-top ();
-                                                td .align.right-top (right, top);
-                                            tr
-                                                td .align.right-bottom ();
-                                                td .align.right-bottom (right, bottom);
-                                            tr
-                                                td .columns ();
-                                                td .columns (count, gap, width);
-                                            tr
-                                                td .fixed.align ();
-                                                td .fixed.align (top, right, bottom, left, query);
-                                            tr
-                                                td .float ();
-                                                td .float (float, query);
-                                            tr
-                                                td .index ();
-                                                td .index (index, query);
-                                            tr
-                                                td .position ();
-                                                td .position (position, query);
-                                            tr
-                                                td .relative.align ();
-                                                td .relative.align (top, right, bottom, left, query);
-                                h4#size Size and Spacing
-                                .scrollable
-                                    table.table.primary
-                                        thead
-                                            tr
-                                                th.first Name
-                                                th Syntax
-                                            tbody
-                                            tr
-                                                td .height ();
-                                                td .height (height, query);
-                                            tr
-                                                td .margin ();
-                                                td .margin (margin, query);
-                                            tr
-                                                td .max-width ();
-                                                td .max-width (width, query);
-                                            tr
-                                                td .min-width ();
-                                                td .min-width (width, query);
-                                            tr
-                                                td .padding ();
-                                                td .padding (padding, query);
-                                            tr
-                                                td .size ();
-                                                td .size (width, height, query);
-                                            tr
-                                                td .size-min ();
-                                                td .size-min (min-width, min-height, query);
-                                            tr
-                                                td .spacing ();
-                                                td .spacing (margin, padding, query);
-                                            tr
-                                                td .square ();
-                                                td .square (size, query);
-                                            tr
-                                                td .width ();
-                                                td .width (width, query);
+                                                td .z-index(...);
+                                                td @index
                                 h4#transform Transform
                                 .scrollable
                                     table.table.primary
@@ -664,580 +426,326 @@ html(lang="es")
                                                 th Syntax
                                             tbody
                                             tr
-                                                td .perspective ();
-                                                td .perspective (length);
+                                                td .backface(...);
+                                                td @visibility
                                             tr
-                                                td .resize ();
-                                                td .resize (direction);
+                                                td .transform-origin(...);
+                                                td @x-axis, @y-axis, @z-axis
                                             tr
-                                                td .rotate ();
-                                                td .rotate (degrees);
+                                                td .perspective(...);
+                                                td @length;
                                             tr
-                                                td .scale ();
-                                                td .scale (factor);
+                                                td .resize(...);
+                                                td @direction;
                                             tr
-                                                td .skew ();
-                                                td .skew (x, y);
+                                                td .rotate3d(...);
+                                                td @x-axis, @y-axis, @z-axis, @angle
                                             tr
-                                                td .transform ();
-                                                td .transform (transform);
+                                                td .scale3d(...);
+                                                td @x-axis, @y-axis, @z-axis
                                             tr
-                                                td .translate ();
-                                                td .translate (x, y);
+                                                td .skew(...);
+                                                td @x-axis, @y-axis
                                             tr
-                                                td .translate3d ();
-                                                td .translate3d (x, y, z);
-                                h4#transition Transition
+                                                td .transform(...);
+                                                td @function
+                                            tr
+                                                td .translate3d(...);
+                                                td @x-axis, @y-axis, @z-axis
+                            h2.summary.assets
+                                a(href='#') Helpers
+                            .details
+                                hr
+                                h3.heading.primary Helpers
+                                p Helpers are sets of code to create or modify an specific html element.
+                                ul.grid.split-3.circle
+                                    li
+                                        a(href='#assets') Assets
+                                    li
+                                        a(href='#centering') Centering
+                                    li
+                                        a(href='#pseudo') Pseudo
+                                    li
+                                        a(href='#others') Others
+                                h4#assets Assets
+                                .scrollable
+                                    table.table.primary
+                                        thead
+                                            tr
+                                                th.first Name
+                                                th Description
+                                            tr
+                                                td .clearfix();
+                                                td A snippet for an element to clear after itself
+                                            tr
+                                                td .ellipsis();
+                                                td Applies properties to an element to render an ellipsis '...'
+                                            tr
+                                                td .hide-text();
+                                                td A way have text without showing it up 
+                                            tr
+                                                td .hyphens();
+                                                td Splits words whenever available
+                                            tr
+                                                td .line-break();
+                                                td Clears a left floated element
+                                            tr
+                                                td .nowrap();
+                                                td
+                                            tr
+                                                td .word-break();
+                                                td
+                                            tr
+                                                td .wrap();
+                                                td
+                                h4#centering Centering
                                 .scrollable
                                     table.table.primary
                                         thead
                                             tr
                                                 th.first Name
                                                 th Syntax
-                                            tbody
+                                        tbody
                                             tr
-                                                td .transition ();
-                                                td .transition (property, durations, function, delay);
+                                                td .center(...);
+                                                td @mode, @width, @height, @container-width, @container-height
                                             tr
-                                                td .transition-multi ();
-                                                td .transition-multi (arguments);
-                            h2.summary.assets
-                                a(href='#') Assets
-                            .details
-                                hr
-                                h3.heading.primary Assets
-                                p Assets are sets of code to create or modify an specific element or component.
-                                ul.grid.split-3.circle
-                                    li
-                                        a(href='#arrows') Arrows
-                                    li
-                                        a(href='#centering') Centering
-                                    li
-                                        a(href='#lists') Lists
-                                    li
-                                        a(href='#pseudo') Pseudo
-                                    li
-                                        a(href='#states') States
-                                    li
-                                        a(href='#tables') Tables
-                                h4#arrows Arrows
-                                .scrollable
-                                    table.table.primary
-                                        thead
-                                        tr
-                                            th.first Name
-                                            th Syntax
-                                        tbody
-                                        tr
-                                            td .arrow.top ();
-                                            td .arrow.top (width, color, query);
-                                        tr
-                                            td .arrow.bottom ();
-                                            td .arrow.bottom (width, color, query);
-                                        tr
-                                            td .arrow.right ();
-                                            td .arrow.right (width, color, query);
-                                        tr
-                                            td .arrow.left ();
-                                            td .arrow.left (width, color, query);
-                                        tr
-                                            td .arrow.left-top ();
-                                            td .arrow.left-top (width, color, query);
-                                        tr
-                                            td .arrow.left-bottom ();
-                                            td .arrow.left-bottom (width, color, query);
-                                        tr
-                                            td .arrow.right-top ();
-                                            td .arrow.right-top (width, color, query);
-                                        tr
-                                            td .arrow.right-bottom ();
-                                            td .arrow.right-bottom (width, color, query);
-                                h4#centering Centering
-                                .scrollable
-                                    table.table.primary
-                                        thead
-                                        tr
-                                            th.first Name
-                                            th Syntax
-                                        tbody
-                                        tr
-                                            td .center-block ();
-                                            td .center-block (width, query);
-                                        tr
-                                            td .center-inline ();
-                                            td .center-inline (display, query);
-                                        tr
-                                            td .center-vertical ();
-                                            td .center-vertical (height);
-                                        tr
-                                            td .offset ();
-                                            td .offset (padding, query);
-                                        tr
-                                            td .reset-block ();
-                                            td .reset-block (margin-left, query);
-                                        tr
-                                            td .reset-vertical ();
-                                            td .reset-vertical (margin-top, query);
-                                h4#lists Lists
-                                .scrollable
-                                    table.table.primary
-                                        thead
-                                        tr
-                                            th.first Name
-                                            th Syntax
-                                        tbody
-                                        tr
-                                            td .list-style ();
-                                            td .list-style (type, image);
+                                                td .center-h(...);
+                                                td @mode, @width, @container-width
+                                            tr
+                                                td .center-v(...);
+                                                td @mode, @height, @container-height
                                 h4#pseudo Pseudo
                                 .scrollable
                                     table.table.primary
                                         thead
-                                        tr
-                                            th.first Name
-                                            th Syntax
+                                            tr
+                                                th.first Name
+                                                th Syntax
                                         tbody
-                                        tr
-                                            td .pseudo-container ();
-                                            td .pseudo-container (display);
-                                        tr
-                                            td .pseudo ();
-                                            td .pseudo (content, width, height);
-                                h4#states States
+                                            tr
+                                                td .after(...);
+                                                td @content, @width, @height
+                                            tr
+                                                td .before(...);
+                                                td @content, @width, @height
+                                            tr
+                                                td .first-letter(...);
+                                                td @size, @style, @color, @text-shadow
+                                            tr
+                                                td .first-line(...);
+                                                td @size, @style, @color, @text-shadow
+                                            tr
+                                                td .placeholder(...);
+                                                td @text-color, @background-color, @text-shadow
+                                            tr
+                                                td .selection(...);
+                                                td @text-color, @background-color, @text-shadow
+                                h4#others Others
                                 .scrollable
                                     table.table.primary
                                         thead
-                                        tr
-                                            th.first Name
-                                            th Syntax
+                                            tr
+                                                th.first Name
+                                                th Syntax
                                         tbody
-                                        tr
-                                            td .active.color ();
-                                            td .active.color (color, back);
-                                        tr
-                                            td .active.gradient ();
-                                            td .active.gradient (start, stop, degrees, image);
-                                        tr
-                                            td .focus.color ();
-                                            td .focus.color (color, back);
-                                        tr
-                                            td .focus.gradient ();
-                                            td .focus.gradient (start, stop, degrees, image);
-                                        tr
-                                            td .hover.color ();
-                                            td .hover.color (color, back);
-                                        tr
-                                            td .hover.gradient ();
-                                            td .hover.gradient (start, stop, degrees, image);
-                                        tr
-                                            td .visited.color ();
-                                            td .visited.color (color, back);
-                                        tr
-                                            td .visited.gradient ();
-                                            td .visited.gradient (start, stop, degrees, image);
-                                        tr
-                                            td .hover-focus.color ();
-                                            td .hover-focus.color (color, back);
-                                        tr
-                                            td .hover-focus.gradient ();
-                                            td .hover-focus.gradient (start, stop, degrees, image);
-                                        tr
-                                            td .normal-active.color ();
-                                            td .normal-active.color (color, back);
-                                        tr
-                                            td .normal-active.gradient ();
-                                            td .normal-active.gradient (start, stop, degrees, image);
-                                h4#tables Tables
-                                .scrollable
-                                    table.table.primary
-                                        thead
-                                        tr
-                                            th.first Name
-                                            th Syntax
-                                        tbody
-                                        tr
-                                            td .table.border ();
-                                            td .table.border (width, style, color);
-                                        tr
-                                            td .table.border-outer ();
-                                            td .table.border-outer (width, style, color);
-                                        tr
-                                            td .table.color ();
-                                            td .table.color (color, back, rows);
-                                        tr
-                                            td .table.font ();
-                                            td .table.font (font, family);
-                                        tr
-                                            td .table.head-color ();
-                                            td .table.head-color (color, back);
-                                        tr
-                                            td .table.head-font ();
-                                            td .table.head-font (font, family);
-                                        tr
-                                            td .table.padding ();
-                                            td .table.padding (padding);
-                                        tr
-                                            td .table.rounded ();
-                                            td .table.rounded (radius);
+                                            tr
+                                                td .custom(...);
+                                                td @property1, @value1, @property2, @value2, @property3, @value3;
+                                            tr
+                                                td .table-cell-color(...);
+                                                td @text-color, @background-color, @rows
+                                            tr
+                                                td .triangle(...);
+                                                td @direction, @width, @height, @color
                             h2.summary.utilities
-                                a(href='#') Utilities
+                                a(href='#') Shortcuts
                             .details
                                 hr
-                                h3.heading.primary Utilities
-                                p Helpers, Shortcodes and Build-in resources.
+                                h3.heading.primary Shortcodes
+                                p Shortcodes and Build-in resources.
                                 ul.grid.split-3.circle
-                                    li
-                                        a(href='#colornames') Color names
                                     li
                                         a(href='#easing') Easing
                                     li
                                         a(href='#grays') Gray shades
                                     li
-                                        a(href='#helpers') Helpers
-                                    li
-                                        a(href='#keyframes') Keyframes
-                                    li
                                         a(href='#webfonts') Web-safe fonts
-                                    li
-                                        a(href='#resources') Uri resources
-                                h4#helpers Helpers
-                                .scrollable
-                                    table.table.primary
-                                        thead
-                                        tr
-                                            th.first Name
-                                            th Description
-                                        tbody
-                                        tr
-                                            td .block ();
-                                            td Turns an inline element into a floated block
-                                        tr
-                                            td .clearfix ();
-                                            td A snippet for an element to clear after itself
-                                        tr
-                                            td .ellipsis ();
-                                            td Applies properties to an element to render an ellipsis '...'
-                                        tr
-                                            td .hide-text ();
-                                            td A way have text without showing it up 
-                                        tr
-                                            td .hyphens ();
-                                            td Splits words whenever available
-                                        tr
-                                            td .inline ();
-                                            td Turns a block element into an inline
-                                        tr
-                                            td .inline-block ();
-                                            td Turns an element into an unfloated inline-block
-                                        tr
-                                            td .line-break ();
-                                            td Clears a left floated element
-                                        tr
-                                            td .nowrap ();
-                                            td
-                                        tr
-                                            td .word-break ();
-                                            td
-                                        tr
-                                            td .wrap ();
-                                            td
                                 h4#colornames Color Names
                                 .scrollable
-                                    table.table.primary
-                                        thead
-                                        tr
-                                            th.first Name
-                                            th Output
-                                        tbody
-                                        tr
-                                            td @aqua
-                                            td #00ffff
-                                        tr
-                                            td @black
-                                            td #000000
-                                        tr
-                                            td @blue
-                                            td #0000ff
-                                        tr
-                                            td @blueViolet
-                                            td #8a2be2
-                                        tr
-                                            td @brown
-                                            td #a52a2a
-                                        tr
-                                            td @fuchsia
-                                            td #ff00ff
-                                        tr
-                                            td @gold
-                                            td #ffd700
-                                        tr
-                                            td @green
-                                            td #008000
-                                        tr
-                                            td @gray
-                                            td #808080
-                                        tr
-                                            td @lime
-                                            td #00ff00
-                                        tr
-                                            td @maroon
-                                            td #85144b
-                                        tr
-                                            td @navy
-                                            td #001f3f
-                                        tr
-                                            td @olive
-                                            td #808000
-                                        tr
-                                            td @orange
-                                            td #ffa500
-                                        tr
-                                            td @orangeRed
-                                            td #ff4500
-                                        tr
-                                            td @pink
-                                            td #ffc0cb
-                                        tr
-                                            td @purple
-                                            td #800080
-                                        tr
-                                            td @red
-                                            td #ff0000
-                                        tr
-                                            td @silver
-                                            td #c0c0c0
-                                        tr
-                                            td @teal
-                                            td #008080
-                                        tr
-                                            td @trans
-                                            td transparent
-                                        tr
-                                            td @violet
-                                            td #ee82ee
-                                        tr
-                                            td @white
-                                            td #ffffff
-                                        tr
-                                            td @yellow
-                                            td #ffff00
-                                        tr
-                                            td @yellowGreen
-                                            td #9acd32
                                 h4#grays Gray Shades
                                 .scrollable
                                     table.table.primary
                                         thead
-                                        tr
-                                            th.first Name
-                                            th Hexadecimal value
+                                            tr
+                                                th.first Name
+                                                th Value
                                         tbody
-                                        tr
-                                            td @hex0
-                                            td #000000
-                                        tr
-                                            td @hex1
-                                            td #111111
-                                        tr
-                                            td @hex2
-                                            td #222222
-                                        tr
-                                            td @hex3
-                                            td #333333
-                                        tr
-                                            td @hex4
-                                            td #444444
-                                        tr
-                                            td @hex5
-                                            td #555555
-                                        tr
-                                            td @hex6
-                                            td #666666
-                                        tr
-                                            td @hex7
-                                            td #777777
-                                        tr
-                                            td @hex8
-                                            td #888888
-                                        tr
-                                            td @hex9
-                                            td #999999
-                                        tr
-                                            td @hexa
-                                            td #aaaaaa
-                                        tr
-                                            td @hexb
-                                            td #bbbbbb
-                                        tr
-                                            td @hexc
-                                            td #cccccc
-                                        tr
-                                            td @hexd
-                                            td #dddddd
-                                        tr
-                                            td @hexe
-                                            td #eeeeee
-                                        tr
-                                            td @hexef
-                                            td #f6f6f7
-                                        tr
-                                            td @hexf
-                                            td #ffffff
+                                            tr
+                                                td @hex0
+                                                td #000000
+                                            tr
+                                                td @hex1
+                                                td #111111
+                                            tr
+                                                td @hex2
+                                                td #222222
+                                            tr
+                                                td @hex3
+                                                td #333333
+                                            tr
+                                                td @hex4
+                                                td #444444
+                                            tr
+                                                td @hex5
+                                                td #555555
+                                            tr
+                                                td @hex6
+                                                td #666666
+                                            tr
+                                                td @hex7
+                                                td #777777
+                                            tr
+                                                td @hex8
+                                                td #888888
+                                            tr
+                                                td @hex9
+                                                td #999999
+                                            tr
+                                                td @hexa
+                                                td #aaaaaa
+                                            tr
+                                                td @hexb
+                                                td #bbbbbb
+                                            tr
+                                                td @hexc
+                                                td #cccccc
+                                            tr
+                                                td @hexd
+                                                td #dddddd
+                                            tr
+                                                td @hexe
+                                                td #eeeeee
+                                            tr
+                                                td @hexef
+                                                td #f6f6f7
+                                            tr
+                                                td @hexf
+                                                td #ffffff
                                 h4#easing Easing
                                 .scrollable
                                     table.table.primary
                                         thead
-                                        tr
-                                            th.first Name
-                                            th Description
+                                            tr
+                                                th.first Name
+                                                th Description
                                         tbody
-                                        tr
-                                            td @ease-in-back
-                                            td Further reference http://matthewlein.com/ceaser/
-                                        tr
-                                            td @ease-out-back
-                                            td
-                                        tr
-                                            td @ease-in-out-back
-                                            td
-                                        tr
-                                            td @ease-in-cubic
-                                            td
-                                        tr
-                                            td @ease-out-cubic
-                                            td
-                                        tr
-                                            td @ease-in-out-cubic
-                                            td
-                                        tr
-                                            td @ease-in-circ
-                                            td
-                                        tr
-                                            td @ease-out-circ
-                                            td
-                                        tr
-                                            td @ease-in-out-circ
-                                            td
-                                        tr
-                                            td @ease-in-expo
-                                            td
-                                        tr
-                                            td @ease-out-expo
-                                            td
-                                        tr
-                                            td @ease-in-out-expo
-                                            td
-                                        tr
-                                            td @ease-in-quad
-                                            td
-                                        tr
-                                            td @ease-out-quad
-                                            td
-                                        tr
-                                            td @ease-in-out-quad
-                                            td
-                                        tr
-                                            td @ease-in-quart
-                                            td
-                                        tr
-                                            td @ease-out-quart
-                                            td
-                                        tr
-                                            td @ease-in-out-quart
-                                            td
-                                        tr
-                                            td @ease-in-quint
-                                            td
-                                        tr
-                                            td @ease-out-quint
-                                            td
-                                        tr
-                                            td @ease-in-out-quint
-                                            td
-                                        tr
-                                            td @ease-in-sine
-                                            td
-                                        tr
-                                            td @ease-out-sine
-                                            td
-                                        tr
-                                            td @ease-in-out-sine
-                                            td
-                                h4#keyframes Keyframes
-                                .scrollable
-                                    table.table.primary
-                                        thead
-                                        tr
-                                            th.first Name
-                                            th Description
-                                        tbody
-                                        tr
-                                            td .keyframes-fade-in ();
-                                            td Keyframes for fade-in animation
-                                        tr
-                                            td .keyframes-fade-out ();
-                                            td Keyframes for fade-out animation
-                                        tr
-                                            td .keyframes-shake ();
-                                            td Keyframes for shake animation
-                                        tr
-                                            td .keyframes-slide-down ();
-                                            td Keyframes for slide-down animation
-                                        tr
-                                            td .keyframes-slide-up ();
-                                            td Keyframes for slide-up animation
-                                        tr
-                                            td .keyframes-zoom-in ();
-                                            td Keyframes for zoom-in animation
-                                        tr
-                                            td .keyframes-zoom-out ();
-                                            td Keyframes for zoom-out animation
+                                            tr
+                                                td @ease-in-back
+                                                td Further reference http://matthewlein.com/ceaser/
+                                            tr
+                                                td @ease-out-back
+                                                td
+                                            tr
+                                                td @ease-in-out-back
+                                                td
+                                            tr
+                                                td @ease-in-cubic
+                                                td
+                                            tr
+                                                td @ease-out-cubic
+                                                td
+                                            tr
+                                                td @ease-in-out-cubic
+                                                td
+                                            tr
+                                                td @ease-in-circ
+                                                td
+                                            tr
+                                                td @ease-out-circ
+                                                td
+                                            tr
+                                                td @ease-in-out-circ
+                                                td
+                                            tr
+                                                td @ease-in-expo
+                                                td
+                                            tr
+                                                td @ease-out-expo
+                                                td
+                                            tr
+                                                td @ease-in-out-expo
+                                                td
+                                            tr
+                                                td @ease-in-quad
+                                                td
+                                            tr
+                                                td @ease-out-quad
+                                                td
+                                            tr
+                                                td @ease-in-out-quad
+                                                td
+                                            tr
+                                                td @ease-in-quart
+                                                td
+                                            tr
+                                                td @ease-out-quart
+                                                td
+                                            tr
+                                                td @ease-in-out-quart
+                                                td
+                                            tr
+                                                td @ease-in-quint
+                                                td
+                                            tr
+                                                td @ease-out-quint
+                                                td
+                                            tr
+                                                td @ease-in-out-quint
+                                                td
+                                            tr
+                                                td @ease-in-sine
+                                                td
+                                            tr
+                                                td @ease-out-sine
+                                                td
+                                            tr
+                                                td @ease-in-out-sine
+                                                td
                                 h4#webfonts Web Safe Fonts
                                 .scrollable
                                     table.table.primary
                                         thead
-                                        tr
-                                            th.first Name
-                                            th Output
+                                            tr
+                                                th.first Name
+                                                th Output
                                         tbody
-                                        tr
-                                            td @font-mono 
-                                            td Menlo, Monaco, Consolas, monospace
-                                        tr
-                                            td @font-sans 
-                                            td Helvetica Neue, Helvetica, Arial, sans-serif
-                                        tr
-                                            td @font-script 
-                                            td Brush Script MT, cursive
-                                        tr
-                                            td @font-serif 
-                                            td Georgia, Times New Roman, Times, serif
-                                h4#resources Uri resources
+                                            tr
+                                                td @safe-font-monospace 
+                                                td Menlo, Monaco, Consolas, monospace
+                                            tr
+                                                td @safe-font-sans-serif
+                                                td Helvetica Neue, Helvetica, Arial, sans-serif
+                                            tr
+                                                td @safe-font-script 
+                                                td Brush Script MT, cursive
+                                            tr
+                                                td @safe-font-serif 
+                                                td Georgia, Times New Roman, Times, serif
+                                h4#svg Svg filters
                                 .scrollable
                                     table.table.primary
                                         thead
-                                        tr
-                                            th.first Name
-                                            th Output
+                                            tr
+                                                th.first Name
+                                                th Output
                                         tbody
-                                        tr
-                                            td @gif-spacer
-                                            td 1px x 1px transparent gif
-                                        tr
-                                            td @gif-x-close
-                                            td 10px x 10px black X
-                                        tr
-                                            td @png-square-black75
-                                            td 1px x 1px 75% black png
-                                        tr
-                                            td @png-to-gray15
-                                            td 1px x 64px transparent to 75% gray
-                                        tr
-                                            td @svg-grayscale
-                                            td Grayscale filter
-                                        tr
-                                            td @svg-grayscale-ie10
-                                            td Grayscale filter for ie10
+                                            tr
+                                                td @svg-grayscale
+                                                td Grayscale filter
+                                            tr
+                                                td @svg-grayscale-ie10
+                                                td IE10 Grayscale filter
         include includes/footer
         script(src=page.root + 'js/scripts.js')
         script.

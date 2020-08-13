@@ -17,14 +17,13 @@
     "anchorless",
     "less",
     "mixins",
-    "assets",
-    "utilities",
+    "helpers",
+    "shortcuts",
     "css"
   ],
   "author": "@invader365",
   "license": "Apache-2.0",
   "dependencies": {
-    "@angular/cli": "^10.0.1",
     "browser-sync": "^2.18.12",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",

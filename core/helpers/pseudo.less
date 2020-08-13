@@ -88,11 +88,11 @@
 //   @background-color  :  -color-|transparent|initial|inherit
 //   @border-color      :  -color-|transparent|initial|inherit
 
-.placeholder(@color:_, @background:_, @text-shadow: none, @min-query:_, @max-query:_) {
+.placeholder(@text-color:_, @background-color:_, @text-shadow: none, @min-query:_, @max-query:_) {
 
     @ruleset: {
-        color: @color;
-        background-color: @background;
+        color: @text-color;
+        background-color: @background-color;
         & when not (@text-shadow=_) {
             text-shadow: @text-shadow;
         }

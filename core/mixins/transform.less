@@ -25,13 +25,13 @@
 }
 
 //
-//  .origin(@x-axis, @y-axis, @z-axis, [@min-query, @max-query]);
+//  .transform-origin(@x-axis, @y-axis, @z-axis[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   x-axis             :  left|center|right|-length-|percentage
 //   y-axis             :  top|center|bottom|-length-|percentage
 //   z-axis             :  -length-
 
-.origin(@x-axis:_, @y-axis:_, @z-axis:0, @min-query:_, @max-query:_) {
+.transform-origin(@x-axis:_, @y-axis:_, @z-axis:0, @min-query:_, @max-query:_) {
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
@@ -44,7 +44,7 @@
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @origin: @x-axis, @y-axis, @z-axis;
+            @transform-origin: @x-axis, @y-axis, @z-axis;
         );
     }
 }
@@ -73,7 +73,7 @@
 }
 
 //
-//  .resize(@direction, [@min-query, @max-query]);
+//  .resize(@direction[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   direction          :  none|both|horizontal|vertical|initial|inherit
 
@@ -95,7 +95,7 @@
 }
 
 //
-//  .rotate3d(@x-axis, @y-axis, @z-axis, @angle, [@min-query, @max-query]);
+//  .rotate3d(@x-axis, @y-axis, @z-axis, @angle[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   x-axis             :  1 (x-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
 //   y-axis             :  1 (y-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
@@ -115,7 +115,7 @@
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @rotate: @x-axis, @y-axis, @z-axis, @angle;
+            @rotate3d: @x-axis, @y-axis, @z-axis, @angle;
         );
     }
 }
@@ -170,24 +170,24 @@
 }
 
 //
-//  .transform(@transform, [@min-query, @max-query]);
+//  .transform(@function[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   transform          :  none|transform-functions|initial|inherit
 
-.transform(@transform:_, @min-query:_, @max-query:_) {
+.transform(@function:_, @min-query:_, @max-query:_) {
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-    & when not (@transform=_) and (@min-query=_) and (@max-query=_) {
-        -webkit-transform+_: @transform;
-            -ms-transform+_: @transform;
-                transform+_: @transform;
+    & when not (@function=_) and (@min-query=_) and (@max-query=_) {
+        -webkit-transform+_: @function;
+            -ms-transform+_: @function;
+                transform+_: @function;
     }
 
     & when not (@min-query=_), not (@max-query=_) {
         .mixins(
             @query: @min-query, @max-query;
-            @transform: @transform;
+            @transform: @function;
         );
     }
 }

@@ -42,7 +42,7 @@
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @font: @size, @weight, @family;
+            @font: @size, @line-height, @weight, @family;
         );
     }
 }
@@ -214,7 +214,7 @@
 }
     
 //
-//  .text-transform(@spread, @color, @alpha[, @min-query, @max-query]);
+//  .text-transform(@transform[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   text-transform      :  none|capitalize|uppercase|lowercase|initial|inherit
 

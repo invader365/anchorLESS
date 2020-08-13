@@ -65,23 +65,23 @@
 }
 
 //
-//  .gradient(@gradient, @start, @stop1, @stop2, @stop3[, @min-query, @max-query]);
+//  .gradient(@direction, @start, @stop1[, @stop2, @stop3, @min-query, @max-query]);
 //   ------------------------------------------------------
-//   @gradient         :  linear|-angle-|to-top|to-bottom|to-right|to-left|radial|ellipse|circle
+//   @direction         :  linear|-angle-|to-top|to-bottom|to-right|to-left|radial|ellipse|circle
 //   @start            :  -color- [position]
 //   @stops            :  -color- [position]
 
-.gradient(@gradient:_, @start:_, @stop1:_, @stop2:_, @stop3:_, @min-query:_, @max-query:_) {
+.gradient(@direction:_, @start:_, @stop1:_, @stop2:_, @stop3:_, @min-query:_, @max-query:_) {
     
-    @mode: if((@gradient=radial) or (@gradient=ellipse) or (@gradient=circle); radial; linear);
+    @mode: if((@direction=radial) or (@direction=ellipse) or (@direction=circle); radial; linear);
     
-    @a0: if((@gradient=_) or (@gradient=linear); 180deg; @gradient);
+    @a0: if((@direction=_) or (@direction=linear); 180deg; @direction);
     @a1: if((@a0=to-left);   270deg; @a0);
     @a2: if((@a1=to-bottom); 180deg; @a1);
     @a3: if((@a2=to-right);   90deg; @a2);
     @angle: if((@a3=to-top);   0deg; @a3);
     
-    @shape: if((@gradient=radial); circle; ellipse);
+    @shape: if((@direction=radial); circle; ellipse);
 
     @s1: if(not (@stop1=_); @stop1);
     @s2: if(not (@stop2=_); @s1, @stop2; @s1);
@@ -89,17 +89,17 @@
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-    & when (iscolor(extract(@gradient, 1))) and (iscolor(extract(@start, 1))) and (@stop1=_) and (@minmax=_) {
-        .gradient(linear, @gradient, @start);
+    & when (iscolor(extract(@direction, 1))) and (iscolor(extract(@start, 1))) and (@stop1=_) and (@minmax=_) {
+        .gradient(linear, @direction, @start);
     }
 
-    & when not (@gradient=_) and not (@mode=radial) and not (@start=_) and not (@stop1=_) and (@minmax=_) {
+    & when not (@direction=_) and not (@mode=radial) and not (@start=_) and not (@stop1=_) and (@minmax=_) {
         background-image: -webkit-linear-gradient(@angle, @start, @stops);  // Safari 5.1+, Chrome 10+
         background-image:    -moz-linear-gradient(@angle, @start, @stops);  // Firefox 3.6+
         background-image:         linear-gradient(@angle, @start, @stops);  // IE10
     }
     
-    & when not (@gradient=_) and (@mode=radial) and not (@start=_) and not (@stop1=_) and (@minmax=_) {
+    & when not (@direction=_) and (@mode=radial) and not (@start=_) and not (@stop1=_) and (@minmax=_) {
         background-image: -webkit-radial-gradient(center, @shape, @start, @stops);  // Safari 5.1+, Chrome 10+
         background-image:    -moz-radial-gradient(center, @shape, @start, @stops);   // Firefox 3.6+
         background-image:       radial-gradient(@shape at center, @start, @stops);
@@ -108,28 +108,28 @@
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @gradient: @gradient, @start, @stop1, @stop2, @stop3;
+            @gradient: @direction, @start, @stop1, @stop2, @stop3;
         );
     }
 }
 
 //
-//  .opacity(@opacity, [@min-query, @max-query])
+//  .opacity(@level, [@min-query, @max-query])
 //   ------------------------------------------------------
 //   opacity             :  -number-|initial|inherit
 
-.opacity(@opacity:_, @min-query:_, @max-query:_) {
+.opacity(@level:_, @min-query:_, @max-query:_) {
 
-    & when not (@opacity=_) and (@min-query=_) and (@max-query=_) {
-        @filter: @opacity * 100;
-        opacity: @opacity;
+    & when not (@level=_) and (@min-query=_) and (@max-query=_) {
+        @filter: @level * 100;
+        opacity: @level;
         filter: ~"alpha(opacity=@{filter})";
     }
 
     & when not (@min-query=_), not (@max-query=_) {
         .mixins(
             @query: @minmax;
-            @opacity: @opacity;
+            @opacity: @level;
         );
     }
 }

@@ -2,19 +2,12 @@
 //  Layout properties
 
 //
-//  .align(@top, @right, @bottom, @left, [@min-query, @max-query]) 
+//  .align(@top, @right, @bottom, @left[, @min-query, @max-query]) 
 //   ------------------------------------------------------
 //   @top      :  auto|length|initial|inherit
 //   @right    :  auto|length|initial|inherit
 //   @bottom   :  auto|length|initial|inherit
 //   @left     :  auto|length|initial|inherit
-
-.align(@top:_) {
-
-    & when not (@top=_) {
-        .align(@top, @top, @top, @top);
-    }
-}
 
 .align(@top:_, @right:_, @bottom:_, @left:_, @min-query:_, @max-query:_) {
 
@@ -44,8 +37,15 @@
     }
 }
 
+.align(@top:_) {
+
+    & when not (@top=_) {
+        .align(@top, @top, @top, @top);
+    }
+}
+
 //
-//  .float(@float, [@min-width-query, @max-width-query]);
+//  .float(@float[, @min-width-query, @max-width-query]);
 //   ------------------------------------------------------
 //   @float      :  none|left|right|initial|inherit
 
@@ -79,7 +79,7 @@
 }
 
 //
-//  .position(@position, @top, @right, @bottom, @left, [@min-query, @max-query]);
+//  .position(@position, @top, @right, @bottom, @left[, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   @position :  static|absolute|fixed|relative|sticky|initial|inherit
 //   @top      :  auto|length|initial|inherit
@@ -126,11 +126,11 @@
 }
 
 //
-//  .zindex(z-index, [@min-query, @max-query]);
+//  .z-index(@index[, @min-query, @max-query]);
 //   ------------------------------------------------------
-//   @z-index :   auto|number|initial|inherit
+//   @index     :  auto|number|initial|inherit
 
-.zindex(@index:_, @min-query:_, @max-query:_) {
+.z-index(@index:_, @min-query:_, @max-query:_) {
 
     & when not (@index=_) and (@min-query=_) and (@max-query=_) {
         z-index: @index;
@@ -139,7 +139,7 @@
     & when not (@min-query=_), not (@max-query=_) {
         .mixins(
             @query: @min-query, @max-query;
-            @index: @index;
+            @z-index: @index;
         );
     }
 }

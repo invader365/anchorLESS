@@ -1,12 +1,12 @@
-@import "../../anchor";
+@import "anchor";
 @import "base";
 @import "theme";
 
 @accent: #fb292d;
-
+ 
 //  Global
 
-    // * { background-image: radial-gradient(circle at 1% 1%, #328bf2, #1644ad) }
+    // * { background-image: radial-gradient(circle at 1% 1%, #328bf2, #1644ad); }
 
     h1 a,
     h2 a,
@@ -37,11 +37,11 @@
     }
 
     .mix {
-        color: #dadbb1;
+        color: #dadbb1; 
     }
 
     table tr .first { 
-        width: 33.33%; 
+        width: 30.00%; 
     }
 
     hr {
@@ -54,9 +54,9 @@
 
     .badge {
         .rounded(5px);
-        .square(9px);
-        .absolute.right-top(-15px, 15px);
-        .gradient.to-bottom(@accent, darken(@accent, 20%));
+        .size(9px);
+        .position(absolute, 15px, -15px);
+        .gradient(to-bottom, @accent, darken(@accent, 20%));
     }
 
     .text-center {
@@ -194,7 +194,7 @@
 
     footer > section {  
         border-top: 1px solid #121212; 
-        .shadow.inset(0 1px 0, @hexf, .07); 
+        .shadow(0 1px 0, @hexf, .07, inset); 
     }
     
     .m-legal {

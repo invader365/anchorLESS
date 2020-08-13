@@ -46,56 +46,56 @@
     }
 }
 
-//  .display(@mode, @property1, @property2, @property3, [@min-query, @max-query]);
+//  .display(@display, @h-width, @v-height, @comp, [@min-query, @max-query]);
 //   ------------------------------------------------------
-//   @mode                    :  inline|block|inline-block|flex|grid|list-item|table|table-row|table-column|table-cell|none|initial|inherit
-//   when (@mode = block) 
+//   @display                    :  inline|block|inline-block|flex|grid|list-item|table|table-row|table-column|table-cell|none|initial|inherit
+//   when (@display = block) 
 //     @width                 :  auto|-length-|initial|inherit
 //     @height                :  auto|-length-|initial|inherit
-//   when (@mode = flex)
-//     @flex-flow             :  flex-direction flex-wrap|initial|inherit
+//   when (@display = flex)
 //     @justify-content       :  flex-start|flex-end|center|space-between|space-around|initial|inherit
 //     @align-items           :  flex-start|flex-end|center|space-between|space-around|initial|inherit
-//   when (@mode = grid)
+//     @flex-flow             :  flex-direction flex-wrap|initial|inherit
+//   when (@display = grid)
 //     @grid-template-columns :  none|auto|max-content|min-content|-length-|initial|inherit
 //     @grid-template-rows    :  none|auto|max-content|min-content|-length-|initial|inherit
 //     @grid-gap              :  grid-row-gap grid-column-gap
 
-.display(@mode:_, @property1:_, @property2:_, @property3:_, @min-query:_, @max-query:_) {
+.display(@display:_, @horiz-width:_, @vert-height:_, @comp:_, @min-query:_, @max-query:_) {
 
-    @prop1: if(@mode=flex; flex-flow;       if(@mode=grid; grid-template-columns; width););
-    @prop2: if(@mode=flex; justify-content; if(@mode=grid; grid-template-rows; height););
-    @prop3: if(@mode=flex; align-items;     if(@mode=grid; gap); _);
+    @prop1: if(@display=flex; justify-content; if(@display=grid; grid-template-columns; width););
+    @prop2: if(@display=flex; align-items;     if(@display=grid; grid-template-rows;    height););
+    @prop3: if(@display=flex; flex-flow;       if(@display=grid; gap); _);
 
     @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-    & when not (@mode=_) and (@minmax=_) {
-        display: @mode;
+    & when not (@display=_) and (@minmax=_) {
+        display: @display;
     }
 
-    & when not (@property1=_) and (@minmax=_) {
-        @{prop1}: @property1;
+    & when not (@horiz-width=_) and (@minmax=_) {
+        @{prop1}: @horiz-width;
     }
 
-    & when not (@property2=_) and (@minmax=_) {
-        @{prop2}: @property2;
+    & when not (@vert-height=_) and (@minmax=_) {
+        @{prop2}: @vert-height;
     }
 
-    & when not (@property3=_) and (@minmax=_) {
-        @{prop3}: @property3;
+    & when not (@comp=_) and (@minmax=_) {
+        @{prop3}: @comp;
     }
 
     & when not (@minmax=_) {
         .mixins(
             @query: @minmax;
-            @display: @mode, @property1, @property2, @property3;
+            @display: @display, @horiz-width, @vert-height, @comp;
         );
     }
 }
 
-.display(@mode:_, @property1:_) {
-    & when (@mode=block), (@mode=inline-block) {
-        .display(@mode, @property1, @property1);
+.display(@display:_, @horiz-width:_) {
+    & when (@display=block), (@display=inline-block) {
+        .display(@display, @horiz-width, @horiz-width);
     }
 }
 

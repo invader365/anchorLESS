@@ -22,6 +22,15 @@
             @{prop}: @val;
         }
     }
+    
+    .loop();
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @custom: @property1, @value1, @property2, @value2, @property3, @value3;
+        );
+    }
 }
 
 //
@@ -47,5 +56,14 @@
                 -ms-@{prop}: @val;
                     @{prop}: @val;
         }
+    }
+
+    .loop();
+
+    & when not (@minmax=_) {
+        .mixins(
+            @query: @minmax;
+            @custom-prefixed: @property1, @value1, @property2, @value2, @property3, @value3;
+        );
     }
 }
