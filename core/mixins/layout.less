@@ -2,38 +2,29 @@
 //  Layout properties
 
 //
-//  .align(@top, @right, @bottom, @left[, @min-query, @max-query]) 
+//  .align(@top, @right, @bottom, @left) 
 //   ------------------------------------------------------
 //   @top      :  auto|length|initial|inherit
 //   @right    :  auto|length|initial|inherit
 //   @bottom   :  auto|length|initial|inherit
 //   @left     :  auto|length|initial|inherit
 
-.align(@top:_, @right:_, @bottom:_, @left:_, @min-query:_, @max-query:_) {
+.align(@top:_, @right:_, @bottom:_, @left:_) {
 
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-
-    & when not (@top=_) and (@minmax=_) {
+    & when not (@top=_) {
         top: @top;
     }
 
-    & when not (@right=_) and (@minmax=_) {
+    & when not (@right=_) {
         right: @right;
     }
 
-    & when not (@bottom=_) and (@minmax=_) {
+    & when not (@bottom=_) {
         bottom: @bottom;
     }
 
-    & when not (@left=_) and (@minmax=_) {
+    & when not (@left=_) {
         left: @left;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @align: @top, @right, @bottom, @left;
-        );
     }
 }
 
@@ -49,17 +40,10 @@
 //   ------------------------------------------------------
 //   @float      :  none|left|right|initial|inherit
 
-.float (@float:_, @min-query:_, @max-query:_) {
+.float (@float:_) {
  
-    & when not (@float=_) and (@min-query=_) and (@max-query=_) {
+    & when not (@float=_) {
         float: @float;
-    }
-
-    & when not (@min-query=_), not (@max-query=_) {
-        .mixins(
-            @query: @min-query, @max-query;
-            @float: @float;
-        );
     }
 }
 
@@ -79,7 +63,7 @@
 }
 
 //
-//  .position(@position, @top, @right, @bottom, @left[, @min-query, @max-query]);
+//  .position(@position, @top, @right, @bottom, @left);
 //   ------------------------------------------------------
 //   @position :  static|absolute|fixed|relative|sticky|initial|inherit
 //   @top      :  auto|length|initial|inherit
@@ -87,35 +71,26 @@
 //   @bottom   :  auto|length|initial|inherit
 //   @left     :  auto|length|initial|inherit
 
-.position(@position:_, @top:_, @right:_, @bottom:_, @left:_, @min-query:_, @max-query:_) {
+.position(@position:_, @top:_, @right:_, @bottom:_, @left:_) {
 
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-
-    & when not (@position=_) and (@minmax=_) {
+    & when not (@position=_) {
         position: @position;
     }
 
-    & when not (@top=_) and (@minmax=_) {
+    & when not (@top=_) {
         top: @top;
     }
 
-    & when not (@right=_) and (@minmax=_) {
+    & when not (@right=_) {
         right: @right;
     }
 
-    & when not (@bottom=_) and (@minmax=_) {
+    & when not (@bottom=_) {
         bottom: @bottom;
     }
 
-    & when not (@left=_) and (@minmax=_) {
+    & when not (@left=_) {
         left: @left;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @position: @position, @top, @right, @bottom, @left;
-        );
     }
 }
 
@@ -126,20 +101,13 @@
 }
 
 //
-//  .z-index(@index[, @min-query, @max-query]);
+//  .z-index(@index);
 //   ------------------------------------------------------
 //   @index     :  auto|number|initial|inherit
 
-.z-index(@index:_, @min-query:_, @max-query:_) {
+.z-index(@index:_) {
 
-    & when not (@index=_) and (@min-query=_) and (@max-query=_) {
+    & when not (@index=_) {
         z-index: @index;
-    }
-
-    & when not (@min-query=_), not (@max-query=_) {
-        .mixins(
-            @query: @min-query, @max-query;
-            @z-index: @index;
-        );
     }
 }

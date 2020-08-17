@@ -2,247 +2,148 @@
 //   Filter properties
 
 //
-//  .blur(@pixels[, @min-query, @max-query]);
+//  .blur(@pixels);
 //   ------------------------------------------------------
-//   blur           :  pixels
+//   @pixels           :  pixels
 
-.blur(@pixels:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.blur(@pixels:_) {
     
-    & when not (@pixels=_) and (@minmax=_) {
+    & when not (@pixels=_) {
         -webkit-filter+_: blur(@pixels);
                 filter+_: blur(@pixels);
     }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @blur: @pixels;
-        );
-    }
 }
 
 //
-//  .brightness(@percentage[, @min-query, @max-query]);
+//  .brightness(@percentage);
 //   ------------------------------------------------------
-//   brightness         :  percentage
+//   @percentage         :  percentage
 
-.brightness(@percentage:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.brightness(@percentage:_) {
     
-    & when not (@percentage=_) and (@minmax=_) {
+    & when not (@percentage=_) {
         -webkit-filter+_: brightness(@percentage);
                 filter+_: brightness(@percentage);
     }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @brightness: @percentage;
-        );
-    }
 }
 
 //
-//  .contrast(@percentage[, @min-query, @max-query]);
+//  .contrast(@percentage);
 //   ------------------------------------------------------
-//   contrast         :  percentage
+//   @percentage         :  percentage
 
-.contrast(@percentage:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.contrast(@percentage:_) {
     
-    & when not (@percentage=_) and (@minmax=_) {
+    & when not (@percentage=_) {
         -webkit-filter+_: contrast(@percentage);
                 filter+_: contrast(@percentage);
     }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @contrast: @percentage;
-        );
-    }
 }
 
 //
-//  .drop-shadow(@offset, @blur, @color[, @min-query, @max-query]);
+//  .drop-shadow(@offset, @blur, @color);
 //   ------------------------------------------------------
-//   offset         :  none|h-offset v-offset blur|inset|initial|inherit
-//   blur           :  -length-
-//   color          :  -color-|transparent|initial|inherit
+//   @offset         :  none|h-offset v-offset blur|inset|initial|inherit
+//   @blur           :  -length-
+//   @color          :  -color-|transparent|initial|inherit
 
-.drop-shadow(@offset:_, @blur:_, @color:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.drop-shadow(@offset:_, @blur:_, @color:_) {
     
-    & when not (@offset=_) and (@minmax=_) {
+    & when not (@offset=_) {
 
         -webkit-filter+_: drop-shadow(@offset @blur @color);
                 filter+_: drop-shadow(@offset @blur @color);
     }
+}
 
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @drop-shadow: @offset, @blur, @color;
-        );
+//
+//  .filter(@function);
+//   ------------------------------------------------------
+//   @function:         :  none|filter-function|initial|inherit
+
+.filter(@function:_) {
+    
+    & when not (@function=_) {
+        -webkit-filter+_: @function;
+                filter+_: @function;
     }
 }
 
 //
-//  .filter(@pixels[, @min-query, @max-query]);
+//  .grayscale(@percentage);
 //   ------------------------------------------------------
-//   filter:         :  none|filter-function|initial|inherit
+//   @percentage         :  percentage
 
-.filter(@params:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.grayscale(@percentage:_) {
     
-    & when not (@params=_) and (@minmax=_) {
-        -webkit-filter+_: @params;
-                filter+_: @params;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @filter: @params;
-        );
-    }
-}
-
-//
-//  .grayscale(@percentage[, @min-query, @max-query]);
-//   ------------------------------------------------------
-//   grayscale         :  percentage
-
-.grayscale(@percentage:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-    
-    & when not (@percentage=_) and (@minmax=_) {
+    & when not (@percentage=_) {
         -webkit-filter+_: grayscale(@percentage);
                 filter+_: grayscale(@percentage);
     }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @grayscale: @percentage;
-        );
-    }
 }
 
 //
-//  .hue-rotate(@degrees[, @min-query, @max-query]);
+//  .hue-rotate(@degrees);
 //   ------------------------------------------------------
-//   hue-rotate         :  degrees
+//   @degrees         :  degrees
 
-.hue-rotate(@degrees:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.hue-rotate(@degrees:_) {
     
-    & when not (@degrees=_) and (@minmax=_) {
+    & when not (@degrees=_) {
         -webkit-filter+_: hue-rotate(@degrees);
                 filter+_: hue-rotate(@degrees);
     }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @hue-rotate: @degrees;
-        );
-    }
 }
 
 //
-//  .invert(@percentage[, @min-query, @max-query]);
+//  .invert(@percentage);
 //   ------------------------------------------------------
-//   invert         :  percentage
+//   @percentage         :  percentage
 
-.invert(@percentage:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.invert(@percentage:_) {
     
-    & when not (@percentage=_) and (@minmax=_) {
+    & when not (@percentage=_) {
         -webkit-filter+_: invert(@percentage);
                 filter+_: invert(@percentage);
     }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @invert: @percentage;
-        );
-    }
 }
 
 //
-//  .saturate(@percentage[, @min-query, @max-query]);
+//  .saturate(@percentage);
 //   ------------------------------------------------------
-//   saturate         :  percentage
+//   @percentage         :  percentage
 
-.saturate(@percentage:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.saturate(@percentage:_) {
     
-    & when not (@percentage=_) and (@minmax=_) {
+    & when not (@percentage=_) {
         -webkit-filter+_: saturate(@percentage);
                 filter+_: saturate(@percentage);
     }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @saturate: @percentage;
-        );
-    }
 }
 
 //
-//  .sepia(@percentage[, @min-query, @max-query]);
+//  .sepia(@percentage);
 //   ------------------------------------------------------
-//   sepia         :  percentage
+//   @sepia         :  percentage
 
-.sepia(@percentage:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.sepia(@percentage:_) {
     
-    & when not (@percentage=_) and (@minmax=_) {
+    & when not (@percentage=_) {
         -webkit-filter+_: sepia(@percentage);
                 filter+_: sepia(@percentage);
     }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @sepia: @percentage;
-        );
-    }
 }
 
 //
-//  .url(@svg-url[, @min-query, @max-query]);
+//  .svg(@url);
 //   ------------------------------------------------------
-//   url         :  location of the svg filter
+//   @url         :  location of the svg filter
 
-.url(@svg-url:_, @min-query:_, @max-query:_) {
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.svg(@url:_) {
     
-    & when not (@svg-url=_) and (@minmax=_) {
-        -webkit-filter+_: url(@svg-url);
-                filter+_: url(@svg-url);
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @url: @svg-url;
-        );
+    & when not (@url=_) {
+        -webkit-filter+_: url('@{url}');
+                filter+_: url('@{url}');
     }
 }
   

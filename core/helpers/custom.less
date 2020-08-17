@@ -7,30 +7,21 @@
 //   property            :  custom property name
 //   value               :  custom value
 
-.custom(@property1:_, @value1:_, @property2:_, @value2:_, @property3:_, @value3:_, @min-query:_, @max-query:_) {
+.custom(@property1:_, @value1:_, @property2:_, @value2:_, @property3:_, @value3:_) {
     
     @args: @property1, @value1, @property2, @value2, @property3, @value3;
-    
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
     
     .loop(@i: 5) when (@i > 0) {
         .loop(@i - 2);
         @prop: extract(@args, @i);
         @val:  extract(@args, @i+1);
 
-        & when not (@prop=_) and not (@val=_) and (@minmax=_) {
+        & when not (@prop=_) and not (@val=_) {
             @{prop}: @val;
         }
     }
     
     .loop();
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @custom: @property1, @value1, @property2, @value2, @property3, @value3;
-        );
-    }
 }
 
 //
@@ -39,18 +30,16 @@
 //   property            :  custom property name
 //   value               :  custom value
 
-.custom-prefixed(@property1:_, @value1:_, @property2:_, @value2:_, @property3:_, @value3:_, @min-query:_, @max-query:_) {
+.custom-prefixed(@property1:_, @value1:_, @property2:_, @value2:_, @property3:_, @value3:_) {
     
     @args: @property1, @value1, @property2, @value2, @property3, @value3;
-    
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
     
     .loop(@i: 5) when (@i > 0) {
         .loop(@i - 2);
         @prop: extract(@args, @i);
         @val:  extract(@args, @i+1);
 
-        & when not (@prop=_) and not (@val=_) and (@minmax=_) {
+        & when not (@prop=_) and not (@val=_) {
             -webkit-@{prop}: @val;
                -moz-@{prop}: @val;
                 -ms-@{prop}: @val;
@@ -59,11 +48,4 @@
     }
 
     .loop();
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @custom-prefixed: @property1, @value1, @property2, @value2, @property3, @value3;
-        );
-    }
 }

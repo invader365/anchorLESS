@@ -4,7 +4,7 @@
 .mixins(@query:_; @after:_; @align:_; @animation:_; @backface:_; @background:_; @before:_; @blur:_; @border:_; @brightness:_; @center:_; @center-h:_; @center-v:_; @color:_; @contrast:_; 
     @custom:_; @display:_; @drop-shadow:_; @filter:_; @first-letter:_; @first-line:_; @float:_; @font:_; @fontface:_; @gradient:_; @grayscale:_; @hue-rotate:_; @invert:_; @list-style:_; @minmax-size:_; 
     @opacity:_; @transform-origin:_; @overflow:_; @paragraph:_; @perspective:_; @placeholder:_; @position:_; @resize:_; @rotate3d:_; @rounded:_; @saturate:_; @scale3d:_; @sepia:_; @selection:_; @shadow:_; 
-    @size:_; @skew:_; @spacing:_; @table-cell-color:_; @text:_; @text-decoration:_; @text-shadow:_; @text-transform:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @url:_; @z-index:_;) {
+    @size:_; @skew:_; @spacing:_; @table-cell-color:_; @text:_; @text-decoration:_; @text-shadow:_; @text-transform:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @svg:_; @z-index:_;) {
 
     @ruleset: {
 
@@ -51,7 +51,7 @@
         & when not (@list-style=_) { 
             .list-style(@list-style); 
         }
-        & when not (@zindex=_) { 
+        & when not (@z-index=_) { 
             .z-index(@z-index); 
         }
 
@@ -83,11 +83,11 @@
         // Typographic
         & when not (@font=_) { 
             .parse(@font);
-            .font(.loop[1], .loop[2], .loop[3], .loop[4]);
+            .font(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5]);
         }
         & when not (@fontface=_) { 
             .parse(@fontface); 
-            .fontface(.loop[1], .loop[2], .loop[3], .loop[4]);
+            .fontface(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5]);
         }
         & when not (@paragraph=_) { 
             .parse(@paragraph); 
@@ -175,8 +175,8 @@
         & when not (@sepia=_) { 
             .sepia(@sepia); 
         }
-        & when not (@url=_) { 
-            .url(@url); 
+        & when not (@svg=_) { 
+            .svg(@svg); 
         }
 
         // Animation
@@ -249,20 +249,25 @@
         }
     }
 
-    & when not (@query=_) {
+    @min-width: extract(@query, 1);
+    @max-width: if(length(@query) = 2; extract(@query, 2); _);
 
-        @minW: extract(@query, 1);
-        @maxW: extract(@query, 2);
+    .breakpoint(@ruleset, @min-width, @max-width);
+}
+
+.breakpoint(@ruleset:_, @min-width:_, @max-width:_) {
+
+    & when not (@min-width=_), not (@max-width=_) {
         
-        @min:     if((@minW=_); ''; 'and (min-width: @{minW}) ');
-        @min-max: if((@maxW=_); ~'@{min}'; ~'@{min}and (max-width: @{maxW})');
+        @min:     if((@min-width=_); ''; 'and (min-width: @{min-width}) ');
+        @min-max: if((@max-width=_); ~'@{min}'; ~'@{min}and (max-width: @{max-width})');
 
         @media all @min-max {
             @ruleset();
         }
     }
 
-    & when (@query=_) {
+    & when (@min-width=_) and (@max-width=_) {
         @ruleset();
     }
 }

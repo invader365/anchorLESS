@@ -15,10 +15,9 @@
   "homepage": "http://invader365.github.io/anchorLESS/",
   "keywords": [
     "anchorless",
-    "less",
     "mixins",
     "helpers",
-    "shortcuts",
+    "less",
     "css"
   ],
   "author": "@invader365",

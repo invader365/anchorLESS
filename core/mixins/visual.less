@@ -2,16 +2,14 @@
 //  Visual appearance properties
 
 //
-//  .background(@color, @image, @repeat, @position/backsize, @repeat, @origin, @clip, @attachment[, @min-query, @max-query]);
+//  .background(@color, @image, @repeat, @position/backsize, @repeat, @origin, @clip, @attachment);
 //   ------------------------------------------------------
 //   @color          :  -color-|transparent|initial|inherit
 //   @image          :  none|url|initial|inherit
 //   @repeat         :  repeat|repeat-x|repeat-y|no-repeat|initial|inherit
 //   @position/ size :  center|hpos vpos|xpos ypos|initial|inherit/ auto|-length-|cover|contain|initial|inherit
 
-.background(@color:_, @image:_, @position:_, @repeat:_, @origin:_, @clip:_, @attachment:_, @min-query:_, @max-query:_) {
-    
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.background(@color:_, @image:_, @position:_, @repeat:_, @origin:_, @clip:_, @attachment:_) {
 
     @1: if((not (@color=_)); if((isstring(@color)); url('@{color}'); @color));
     @2: if((not (@image=_)); @1 if((isstring(@image)); url('@{image}'); @image); @1);
@@ -21,46 +19,30 @@
     @6: if((not (@clip=_)); @5 @clip; @5);
     @args: if((not (@attachment=_)); @6 @attachment; @6);
 
-    & when not (@color=_) and (@minmax=_) {
+    & when not (@color=_) {
         background: @args;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @back: @color, @image, @position, @repeat, @origin, @clip, @attachment;
-        );
     }
 }
 
 //
-//  .color(@text, @background, @border[, @min-query, @max-query]);
+//  .color(@text, @background, @border);
 //   ------------------------------------------------------
 //   @text              :  -color-|initial|inherit
 //   @background        :  -color-|transparent|initial|inherit
 //   @border            :  -color-|transparent|initial|inherit
 
-.color(@text:_, @background:_, @border:_, @min-query:_, @max-query:_) {
-    
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.color(@text:_, @background:_, @border:_) {
 
-    & when not (@text=_) and (@minmax=_) {
+    & when not (@text=_) {
         color: @text;
     }
 
-    & when not (@background=_) and (@minmax=_) {
+    & when not (@background=_) {
         background-color: @background;
     }
 
-    & when not (@border=_) and (@minmax=_) {
+    & when not (@border=_) {
         border-color: @border;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @color: @text, @background, @border;
-        );
     }
 }
 
@@ -71,7 +53,7 @@
 //   @start            :  -color- [position]
 //   @stops            :  -color- [position]
 
-.gradient(@direction:_, @start:_, @stop1:_, @stop2:_, @stop3:_, @min-query:_, @max-query:_) {
+.gradient(@direction:_, @start:_, @stop1:_, @stop2:_, @stop3:_) {
     
     @mode: if((@direction=radial) or (@direction=ellipse) or (@direction=circle); radial; linear);
     
@@ -87,144 +69,46 @@
     @s2: if(not (@stop2=_); @s1, @stop2; @s1);
     @stops: if(not (@stop3=_); @s2, @stop3; @s2);
 
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-
-    & when (iscolor(extract(@direction, 1))) and (iscolor(extract(@start, 1))) and (@stop1=_) and (@minmax=_) {
+    & when (iscolor(extract(@direction, 1))) and (iscolor(extract(@start, 1))) and (@stop1=_) {
         .gradient(linear, @direction, @start);
     }
 
-    & when not (@direction=_) and not (@mode=radial) and not (@start=_) and not (@stop1=_) and (@minmax=_) {
+    & when not (@direction=_) and not (@mode=radial) and not (@start=_) and not (@stop1=_) {
         background-image: -webkit-linear-gradient(@angle, @start, @stops);  // Safari 5.1+, Chrome 10+
         background-image:    -moz-linear-gradient(@angle, @start, @stops);  // Firefox 3.6+
         background-image:         linear-gradient(@angle, @start, @stops);  // IE10
     }
     
-    & when not (@direction=_) and (@mode=radial) and not (@start=_) and not (@stop1=_) and (@minmax=_) {
+    & when not (@direction=_) and (@mode=radial) and not (@start=_) and not (@stop1=_) {
         background-image: -webkit-radial-gradient(center, @shape, @start, @stops);  // Safari 5.1+, Chrome 10+
         background-image:    -moz-radial-gradient(center, @shape, @start, @stops);   // Firefox 3.6+
         background-image:       radial-gradient(@shape at center, @start, @stops);
     }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @gradient: @direction, @start, @stop1, @stop2, @stop3;
-        );
-    }
 }
 
 //
-//  .opacity(@level, [@min-query, @max-query])
+//  .opacity(@level)
 //   ------------------------------------------------------
 //   opacity             :  -number-|initial|inherit
 
-.opacity(@level:_, @min-query:_, @max-query:_) {
+.opacity(@level:_) {
 
-    & when not (@level=_) and (@min-query=_) and (@max-query=_) {
+    & when not (@level=_) {
         @filter: @level * 100;
         opacity: @level;
         filter: ~"alpha(opacity=@{filter})";
     }
-
-    & when not (@min-query=_), not (@max-query=_) {
-        .mixins(
-            @query: @minmax;
-            @opacity: @level;
-        );
-    }
 }
 
 //
-//  .rounded.top-left(@radius, [@min-query, @max-query]);
-//  .rounded.top-right(@radius, [@min-query, @max-query]);
-//  .rounded.bottom-right(@radius, [@min-query, @max-query]);
-//  .rounded.bottom-left(@radius, [@min-query, @max-query]);
-//   ------------------------------------------------------
-//   @radius     :  -length- [length]|initial|inherit
-
-.rounded {
-    .top-left(@radius:_, @min-query:_, @max-query:_) {
-    
-        @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-
-        & when not (@radius=_) and (@minmax=_) {
-            -webkit-border-top-left-radius: @radius;
-                -moz-border-radius-topleft: @radius;
-                    border-top-left-radius: @radius;
-        }
-
-        & when not (@minmax=_) {
-            .mixins(
-                @query: @minmax;
-                @top-left: @radius;
-            );
-        }
-    }
-
-    .top-right(@radius:_, @min-query:_, @max-query:_) {
-    
-        @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-        
-        & when not (@radius=_) and (@minmax=_) {
-            -webkit-border-top-right-radius: @radius;
-                -moz-border-radius-topright: @radius;
-                    border-top-right-radius: @radius;
-        }
-
-        & when not (@minmax=_) {
-            .mixins(
-                @query: @minmax;
-                @top-right: @radius;
-            );
-        }
-    }
-
-    .bottom-right (@radius:_, @min-query:_, @max-query:_) {
-    
-        @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-        
-        & when not (@radius=_) and (@minmax=_) {
-            -webkit-border-bottom-right-radius: @radius;
-                -moz-border-radius-bottomright: @radius;
-                    border-bottom-right-radius: @radius;
-        }
-
-        & when not (@minmax=_) {
-            .mixins(
-                @query: @minmax;
-                @bottom-right: @radius;
-            );
-        }
-    }
-
-    .bottom-left (@radius:_, @min-query:_, @max-query:_) {
-    
-        @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-        
-        & when not (@radius=_) and (@minmax=_) {
-            -webkit-border-bottom-left-radius: @radius;
-                -moz-border-radius-bottomleft: @radius;
-                    border-bottom-left-radius: @radius;
-        }
-
-        & when not (@minmax=_) {
-            .mixins(
-                @query: @minmax;
-                @bottom-left: @radius;
-            );
-        }
-    }
-}
-
-//
-//  .rounded(@top-left, @top-right, @bottom-right, @bottom-left, [@min-query, @max-query]);
+//  .rounded(@top-left, @top-right, @bottom-right, @bottom-left);
 //   ------------------------------------------------------
 //   @top-left      :  -length-|initial|inherit
 //   @top-right     :  -length-|initial|inherit
 //   @bottom-left   :  -length-|initial|inherit
 //   @bottom-left   :  -length-|initial|inherit
 
-.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_, @min-query:_, @max-query:_) {
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_) {
 
     @borders: if(
                  (@top-left=@top-right) 
@@ -233,106 +117,93 @@
                   @top-left;
                   @top-left @top-right @bottom-right @bottom-left
              );
-    
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
 
-    & when not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@minmax=_) {
-        -webkit-border-radius: @borders;
-           -moz-border-radius: @borders;
-                border-radius: @borders;
+    & when not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) {
+        border-radius: @borders;
     }
     
-    & when not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@minmax=_) {
+    & when not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) {
         .rounded(@top-left, @top-left, @top-left, @top-left);
     }
 
-    & when (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-right(@top-right);
+    & when (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) {
+        border-top-right-radius: @radius;
     }
 
-    & when (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@minmax=_) {
-        .rounded.bottom-right(@bottom-right)
+    & when (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) {
+        border-bottom-right-radius: @radius;
     }
 
-    & when (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@minmax=_) {
-        .rounded.bottom-left(@bottom-left)
+    & when (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) {
+        border-bottom-left-radius: @radius;
     }
 
-    & when (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@minmax=_) {
-        .rounded.bottom-right(@bottom-right);
-        .rounded.bottom-left(@bottom-left)
+    & when (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) {
+        border-bottom-right-radius: @radius;
+        border-bottom-left-radius: @radius;
     }
 
-    & when (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-right(@top-right);
-        .rounded.bottom-right(@bottom-right)
+    & when (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) {
+        border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
     }
 
-    & when not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-left(@top-left);
-        .rounded.top-right(@top-right)
+    & when not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-top-right-radius: @radius;
     }
 
-    & when not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-left(@top-left);
-        .rounded.bottom-left(@bottom-left)
+    & when not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-bottom-left-radius: @radius;
     }
 
-    & when not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-left(@top-left);
-        .rounded.bottom-right(@bottom-right)
+    & when not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-bottom-right-radius: @radius;
     }
 
-    & when (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-right(@top-right);
-        .rounded.bottom-left(@bottom-left)
+    & when (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-right-radius: @radius;
+        border-bottom-left-radius: @radius;
     }
 
-    & when not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-left(@top-left);
-        .rounded.top-right(@top-right);
-        .rounded.bottom-left(@bottom-left)
+    & when not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-top-right-radius: @radius;
+        border-bottom-left-radius: @radius;
     }
 
-    & when not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-left(@top-left);
-        .rounded.bottom-right(@bottom-right);
-        .rounded.bottom-left(@bottom-left)
+    & when not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-bottom-right-radius: @radius;
+        border-bottom-left-radius: @radius;
     }
 
-    & when not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-left(@top-left);
-        .rounded.top-right(@top-right);
-        .rounded.bottom-right(@bottom-right)
+    & when not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
     }
 
-    & when (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) and (@minmax=_) {
-        .rounded.top-right(@top-right);
-        .rounded.bottom-right(@bottom-right);
-        .rounded.bottom-left(@bottom-left);
-    }
-
-    & when not (@minmax=_) {
-        .mixins(            
-            @query: @minmax;
-            @rounded: @top-left, @top-right, @bottom-right, @bottom-left;
-        );
+    & when (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
+        border-bottom-left-radius: @radius;
     }
 }
 
 //
-//  .shadow(@offset, @color, @alpha[, @inset, @min-query, @max-query]);
+//  .shadow(@offset, @color[, @alpha, @inset, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   @offset     :  none|h-offset v-offset blur|inset|initial|inherit
 //   @color      :  -color-|transparent|initial|inherit
 //   @alpha      :  none|0-1|-percentage-
 //   @inset      :  inner shadow
 
-.shadow(@offset:_, @color:_, @alpha:_, @inset:_, @min-query:_, @max-query:_) {
-    
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.shadow(@offset:_, @color:_, @alpha:_, @inset:_) {
 
-    & when not (@offset=_) and not (@color=_) and (@minmax=_) {
+    & when not (@offset=_) and not (@color=_) {
         
         @valpha: if(isnumber(@alpha); if(ispercentage(@alpha); @alpha; @alpha*100%); 100%);
         @rgba: fade(@color, @valpha);
@@ -340,12 +211,5 @@
 
         -webkit-box-shadow: @offset @vcolor;  // Android 2.3+, iOS 4.0.2-4.2
                 box-shadow: @offset @vcolor;  // Chrome 6+, Firefox 4+, IE 9+
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @shadow: @offset, @color, @alpha, @inset;
-        );
     }
 }

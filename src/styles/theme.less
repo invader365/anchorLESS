@@ -59,25 +59,41 @@
 
 //  Page layout
 
-    body                        { .font(@base-font-size @d @base-line-height, @base-font); .color(@text-base, @base); 
-        // .back(@trans, '../images/back.png'); background-attachment: fixed; 
+    body                        { 
+        .font(@base-font-size, @base-line-height, _, _, @base-font); 
+        .color(@text-base, @base); 
+        .back(@trans, '../img/back.png'); 
+        background-attachment: fixed; 
     }
 
-    // header > section            { .color(@hexf, @hex4); }
-    // main > section              { .color(@text-base, @hexf); }
-    // footer > section            { .color(@hexf, @accent); }
+    header > section            { 
+        .color(@hexf, @hex4); 
+    }
+    main > section              { 
+        .color(@text-base, @hexf); 
+    }
+    footer > section            { 
+        .color(@hexf, @accent); 
+    }
 
     header > section,
     nav > section,
     main > section,
-    footer > section            { .spacing(_, 0 4%); .spacing(_, 0 2%, 800px); }
+    footer > section            { 
+        .spacing(_, 0 4%);
+        .breakpoint({
+            .spacing(_, 0 2%); 
+        }, 800px);
+    }
 
 //  Page elements
 
     a, 
-    .link                       { .color(#84bcde); }
+    .link                       { 
+        .color(#84bcde); 
+    }
 
-    // a:hover                     { text-decoration: underline; }
+    a:hover                     { text-decoration: underline; }
     
     em                          { .color(@accent); }
 
@@ -176,25 +192,50 @@
     }
 
     .table.primary              {
-        &                       { /*.table.spacing(_, .2em .7em);*/ .font(.9em, @min-width:800px); }
-        & caption               { .color(@text-primary, @primary-lighter); .spacing(_, .35em); .font(bold 1.2em); }
+        &                       { 
+            /*.table.padding().2em .7em);*/ 
+            .breakpoint({
+                .font(.9em); 
+            });
+        }
+        & caption               { 
+            .color(@text-primary, @primary-lighter); 
+            .spacing(_, .35em); 
+            .font(1.2em, _, bold); 
+        }
         & thead tr th           { .color(@text-primary, #222); }
-        & thead tr th a         {  color: @primary; .hover.color(@secondary); }
-        & tbody tr              { .hover.color(@text-base, #222); }
+        & thead tr th a         { .color(@primary); }
+        & thead tr th a         { .color(@secondary); }
+        & tbody tr:hover        { .color(@text-base, #222); }
         & tbody tr.selected     { .color(@hexf, @primary); }
     }
 
     .tabset.primary             {
         & > .summary            {
-            &                   { .spacing(@base-margin/3 1em 0 0, 0); font-size: 1em; }
+            &                   { 
+                .spacing(@base-margin/3 1em 0 0, 0); 
+                .font(1em); 
+            }
             & a:hover,
-            &.active            { .back(rgba(0, 0, 0, 0.3), none, repeat); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset; .rounded(@base-radius); text-decoration: none; }
-            & a                 { .spacing(_, .3em .7em); }
+            &.active            { 
+                .back(rgba(0, 0, 0, 0.3), none, repeat); 
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset; 
+                .rounded(@base-radius); 
+                text-decoration: none; 
+            }
+            & a                 { 
+                .spacing(_, .3em .7em); 
+            }
         }
     }
 
     .tooltip.primary            { 
-        &:after                 { .font(14px @d 1.2); .color(@hexf, #333); .spacing(_, 7px 14px); .rounded(@base-radius); }
+        &:after                 { 
+            .font(14px, 1.2); 
+            .color(@hexf, #333); 
+            .spacing(_, 7px 14px); 
+            .rounded(@base-radius); 
+        }
         &.up:before             { .triangle(bottom, 4px, 4px, #333); }
         &.down:before           { .triangle(top, 4px, 4px, #333); }
         &.right:before          { .triangle(left, 4px, 4px, #333); }

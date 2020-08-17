@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
  - Updated border mixin (supports single and multiple parameters)
  - Added 'declaration' mixin to input custom css declaration
  - Added single mixins block to output media queries
+ - Query parameters moved out of single mixins
  - New writting anchorless writting format
  - Extended min-size to minmax-size mixin
  - Rewritten spacing code structure

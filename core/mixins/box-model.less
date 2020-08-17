@@ -2,51 +2,43 @@
 //   Box-model properties
 
 //
-//  .border(@width, @style, @color, [@min-query, @max-query]);
+//  .border(@width, @style, @color);
 //   ------------------------------------------------------
 //   @width     :  medium|thin|thick|-length-|initial|inherit
 //   @style     :  none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit
 //   @color     :  color|transparent|initial|inherit
 
-.border(@width:_, @style:_, @color:_, @min-query:_, @max-query:_) {
+.border(@width:_, @style:_, @color:_) {
 
     @params: if(length(@width) = 1 and length(@style) = 1 and length(@color) = 1; single);
-    @minmax: if(@min-query=_ and @max-query=_; _; @min-query, @max-query);
 
-    & when not (@style=_) and (@params=single) and (@minmax=_) {
+    & when not (@style=_) and (@params=single) {
         @rest: if(@color=_; @style; @style @color);
         border: @width @rest;
     }
 
-    & when not (@width=_) and (@style=_)  and (@minmax=_) {
+    & when not (@width=_) and (@style=_)  {
         border-width: @width;
     }
 
-    & when not (@width=_) and (@params=multi)  and (@minmax=_) {
+    & when not (@width=_) and (@params=multi)  {
         border-width: @width;
     }
 
-    & when not (@style=_) and (@params=multi) and (@minmax=_) {
+    & when not (@style=_) and (@params=multi) {
         border-style: @style;
     }
 
-    & when not (@color=_) and (@style=_) and (@minmax=_) {
+    & when not (@color=_) and (@style=_) {
         border-color: @color;
     }
 
-    & when not (@color=_) and (@params=multi) and (@minmax=_) {
+    & when not (@color=_) and (@params=multi) {
         border-color: @color;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @border: @width, @style, @color;
-        );
     }
 }
 
-//  .display(@display, @h-width, @v-height, @comp, [@min-query, @max-query]);
+//  .display(@display, @h-width, @v-height, @comp);
 //   ------------------------------------------------------
 //   @display                    :  inline|block|inline-block|flex|grid|list-item|table|table-row|table-column|table-cell|none|initial|inherit
 //   when (@display = block) 
@@ -61,35 +53,26 @@
 //     @grid-template-rows    :  none|auto|max-content|min-content|-length-|initial|inherit
 //     @grid-gap              :  grid-row-gap grid-column-gap
 
-.display(@display:_, @horiz-width:_, @vert-height:_, @comp:_, @min-query:_, @max-query:_) {
+.display(@display:_, @horiz-width:_, @vert-height:_, @comp:_) {
 
     @prop1: if(@display=flex; justify-content; if(@display=grid; grid-template-columns; width););
     @prop2: if(@display=flex; align-items;     if(@display=grid; grid-template-rows;    height););
     @prop3: if(@display=flex; flex-flow;       if(@display=grid; gap); _);
 
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-
-    & when not (@display=_) and (@minmax=_) {
+    & when not (@display=_) {
         display: @display;
     }
 
-    & when not (@horiz-width=_) and (@minmax=_) {
+    & when not (@horiz-width=_) {
         @{prop1}: @horiz-width;
     }
 
-    & when not (@vert-height=_) and (@minmax=_) {
+    & when not (@vert-height=_) {
         @{prop2}: @vert-height;
     }
 
-    & when not (@comp=_) and (@minmax=_) {
+    & when not (@comp=_) {
         @{prop3}: @comp;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @display: @display, @horiz-width, @vert-height, @comp;
-        );
     }
 }
 
@@ -100,122 +83,99 @@
 }
 
 //
-//  .minmax-size(@min-width, @max-width, @min-height, @max-heigh, [@min-query, @max-query]);
+//  .minmax-size(@min-width, @max-width, @min-height, @max-heigh);
 //   ------------------------------------------------------
 //   @min-width      :  -length-|initial|inherit
 //   @max-width      :  -length-|initial|inherit
 //   @min-height     :  -length-|initial|inherit
 //   @max-height     :  -length-|initial|inherit
 
-.minmax-size(@min-width:_, @max-width:_, @min-height:_, @max-height:_, @min-query:_, @max-query:_) {
-    
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.minmax-size(@min-width:_, @max-width:_, @min-height:_, @max-height:_) {
 
-    & when not (@min-width=_) and (@minmax=_) {
+    & when not (@min-width=_) {
         min-width: @min-width;
     }
 
-    & when not (@max-width=_) and (@minmax=_) {
+    & when not (@max-width=_) {
         max-width: @max-width;
     }
 
-    & when not (@min-height=_) and (@minmax=_) {
+    & when not (@min-height=_) {
         min-height: @min-height;
     }
 
-    & when not (@max-height=_) and (@minmax=_) {
+    & when not (@max-height=_) {
         max-height: @max-height;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @minmax-size: @min-width, @max-width, @min-height, @max-height;
-        );
     }
 }
 
 //
-//  .overflow(@overflow-x, @overflow-y, [@min-query, @max-query])
+//  .overflow(@overflow-x, @overflow-y)
 //   ------------------------------------------------------
 //   overflow-x         :  visible|hidden|scroll|auto|initial|inherit
 //   overflow-y         :  visible|hidden|scroll|auto|initial|inherit
 
-.overflow(@overflow-x:_, @overflow-y:_, @min-query:_, @max-query:_) {
+.overflow(@overflow-x:_, @overflow-y:_) {
 
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-
-    & when (@overflow-x=@overflow-y) and (@minmax=_) {
+    & when (@overflow-x=@overflow-y) {
         overflow: @overflow-x;
     }
 
-    & when not (@overflow-y=_) and (@minmax=_) {
+    & when not (@overflow-y=_) {
         overflow-y: @overflow-y;
     }
         
-    & when not (@overflow-x=_) and (@minmax=_) {
+    & when not (@overflow-x=_) {
         overflow-x: @overflow-x;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @overflow: @overflow-x, @overflow-y;
-        );
     }
 }
 
 //
-//  .size(@width, @height, [@min-query, @max-query]);
+//  .size(@width, @height);
 //   ------------------------------------------------------
 //   @width         :  auto|-length-|initial|inherit
 //   @heigth        :  auto|-length-|initial|inherit
 
-.size(@width:_, @height:_, @min-query:_, @max-query:_) {
-  
-    @vheight: if(@height=_; @width; @height);
-    @minmax:  if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
+.size(@width:_, @height:_) {
 
-    & when not (@width=_) and (@minmax=_) {
+    & when not (@width=_) {
         width: @width;
     }
   
-    & when not (@vheight=_) and (@minmax=_) {
-        height: @vheight;
+    & when not (@height=_) {
+        height: @height;
     }
+}
 
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @size: @width, @height;
-        );
+.size(@width:_) {
+
+    & when not (@width=_) {
+        width: @width;
+        height: @width;
     }
 }
 
 //
-//  .spacing(@margin, @padding, [@min-query, @max-query]);
+//  .spacing(@margin, @padding);
 //   ------------------------------------------------------
 //   @margin         :  -length-|auto|initial|inherit
 //   @padding        :  -length-|auto|initial|inherit
 
-.spacing (@margin:_, @padding:_, @min-query:_, @max-query:_) {
+.spacing (@margin:_, @padding:_) {
   
-    @vpadding: if(not (@margin=_) and (@padding=_); @margin; @padding);
-
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-
-    & when not (@margin=_) and (@minmax=_) {
+    & when not (@margin=_) {
         margin: @margin;
     }
 
-    & when not (@vpadding=_) and (@minmax=_) {
-        padding: @vpadding;
+    & when not (@padding=_) {
+        padding: @padding;
     }
+}
 
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @spacing: @margin, @padding;
-        );
+.spacing (@margin:_) {
+  
+    & when not (@margin=_) {
+        margin: @margin;
+        padding: @margin;
     }
 }

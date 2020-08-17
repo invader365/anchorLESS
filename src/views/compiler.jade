@@ -13,7 +13,7 @@ html(lang="es")
         include includes/nav
     main
       section.max-width.fixed
-        h2.title Less Live-Compiler
+        h2.title Live-Compiler
         .panel.primary
           code.code.less(contenteditable='true', onkeyup='compileCSS()', spellcheck="false")
           .toggle
@@ -24,28 +24,28 @@ html(lang="es")
         code.code.css
     script.
       const pre = {
-      less: `  .box {
-      .rounded(20px);
-      .size(200px, 40px);
-      .spacing(20px auto, 0);
-      .gradient.to-bottom(orange, darken(#fb292d, 20%));
-      }`,
-      error:`  .box {
-      Parse error: Unrecognized input
-      }`
+        less: `  div.box {
+          .rounded(20px);
+          .size(200px, 40px);
+          .spacing(20px auto, 0);
+          .gradient(to-bottom, orange, darken(#fb292d, 20%));
+        }`,
+        error:`Parse error: Unrecognized input`,
+        type:`...`
       };
       const compileCSS = result => {
         const codeLess = document.querySelector(`.code.less`);
         const codeCss  = document.querySelector(`.code.css`);
         const styleTag = document.querySelector(`.style.css`);
-        const anchorLess = "@import './less/anchor.less';";
+        const anchorLess = "@import './anchor.less';";
         if(result) codeLess.innerHTML = eval(result).less;
         styleTag.innerHTML = anchorLess + codeLess.textContent;
         styleTag.setAttribute("type", "text/less");
         less.refreshStyles();
+        codeCss.innerHTML = eval(pre).type;
         setTimeout(() => {
-          codeCss.innerHTML = (styleTag.innerHTML.slice(0, 1) != '@') ? styleTag.innerHTML : eval(pre).error
-        }, 200)
+          codeCss.innerHTML = (styleTag.innerHTML.slice(0, 2) != '@i') ? styleTag.innerHTML : eval(pre).error
+        }, 1200)
       };
       compileCSS(pre);
       const showHide = () => {

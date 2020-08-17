@@ -2,7 +2,7 @@
 //  Animation and Transition
 
 //
-//  .animation(@name, @duration, @timing-function, @delay, @iteration-count, @direction, @fill-mode, @play-state, [@min-query, @max-query]);
+//  .animation(@name, @duration, @timing-function, @delay, @iteration-count, @direction, @fill-mode, @play-state);
 //   ------------------------------------------------------
 //   @name            :  name of the @keyframes animation
 //   @duration        :  -time-|initial|inherit
@@ -13,7 +13,7 @@
 //   @fill-mode       :  none|forwards|backwards|both|initial|inherit
 //   @play-state      :  paused|running|initial|inherit
 
-.animation(@name:_, @duration:_, @timing:_, @delay:_, @iteration:_, @direction:_, @fill-mode:_, @play-state:_, @min-query:_, @max-query:_) {
+.animation(@name:_, @duration:_, @timing:_, @delay:_, @iteration:_, @direction:_, @fill-mode:_, @play-state:_) {
 
     @1: if(not (@name=_); @name);
     @2: if(@duration=_;   @1; @1 @duration);
@@ -24,20 +24,9 @@
     @7: if(@fill-mode=_;  @6; @6 @fill-mode);
     @args: if(@play-state=_; @7; @7 @play-state);
     
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-
-    & when not (@name=_) and (@minmax=_) {
+    & when not (@name=_) {
         -webkit-animation: @args;  // Safari, Chrome
-           -moz-animation: @args;
-            -ms-animation: @args;
                 animation: @args;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @animation: @name, @duration, @timing, @delay, @iteration, @direction, @fill-mode, @play-state;
-        );
     }
     
     & when (@name=fade-in)      { ._fade-in(); }
@@ -56,32 +45,23 @@
 }
 
 //
-//  .transition(@property, @duration, @timing-function, @delay, [@min-query, @max-query]);
+//  .transition(@property, @duration, @timing-function, @delay);
 //   ------------------------------------------------------
 //   @property        :  none|all|-property-|initial|inherit
 //   @duration        :  -time-|initial|inherit
 //   @timing-function :  linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start/end)|initial|inherit
 //   @delay           :  -time-|initial|inherit
 
-.transition(@property:_, @duration:_, @timing:_, @delay:_, @min-query:_, @max-query:_) {
+.transition(@property:_, @duration:_, @timing:_, @delay:_) {
 
-    @1: if((not (@property=_)); @property);
-    @2: if((not (@duration=_)); @1 @duration; @1 1s);
-    @3: if((not (@timing=_)); @2 @timing; @2);
-    @args: if((not (@delay=_)); @3 @delay; @3);
+    @1:    if(not (@property=_); @property);
+    @2:    if(@duration=_; @1 1s; @1 @duration);
+    @3:    if((@timing=_); @2; @2 @timing);
+    @args: if((@delay=_); @3; @3 @delay);
 
-    @minmax: if((@min-query=_ and @max-query=_); _; @min-query, @max-query);
-
-    & when not (@property=_) and (@minmax=_) {
+    & when not (@property=_) {
         -webkit-transition: @args;
              -o-transition: @args;
                 transition: @args;
-    }
-
-    & when not (@minmax=_) {
-        .mixins(
-            @query: @minmax;
-            @transition: @property, @duration, @timing, @delay;
-        );
     }
 }
