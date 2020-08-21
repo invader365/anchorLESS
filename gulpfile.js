@@ -19,6 +19,8 @@ const concatCore = done => {
         './core/variables/**/*.less'
     ])
         .pipe(concat('anchor.less'))
+        .pipe(dest('./example/anchor/'))
+        .pipe(dest('./public/'))
         .pipe(dest('./'))
     done()
 }
@@ -61,6 +63,6 @@ function watchFileChanges(base, styles, stylesSrc, stylesDest, views) {
     }
 }
 
-exports.anchor  = concatCore
+exports.public  = parallel(startServer(dir.public), watchFileChanges(dir.public, dir.styles, 'custom.less', 'css/', dir.views))
 exports.example = parallel(startServer(dir.example), watchFileChanges(dir.example, dir.example, 'styles.less', '', './'))
-exports.default = parallel(startServer(dir.public), watchFileChanges(dir.public, dir.styles, 'custom.less', 'css/', dir.views))
+exports.default = concatCore

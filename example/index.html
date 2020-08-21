@@ -40,24 +40,25 @@
                 <p>2. Write anchorless semantic</p>
 <pre>
 <code>
-<span class="selector">#button</span> {
-    <span class="anchor">.gradient.to-bottom</span>(#6e8efb, #a777e3);
+<span class="selector">button</span> {
+    <span class="anchor">.gradient</span>(to-bottom, #6e8efb, #a777e3);
     <span class="anchor">.border</span>(0 1px 2px, solid, #9c33ed);
     <span class="anchor">.padding</span>(0.2em 0.8em);
     <span class="anchor">.rounded</span>(4px);
-    <span class="anchor">.width</span>(25%, 640px);
-    <span class="anchor">.shadow.inset</span>(0 5px 15px, #d197fe, .3);
+    <span class="anchor">.shadow</span>(0 5px 15px, #d197fe, .3, inset);
     <span class="anchor">.color</span>(@white);
     <span class="anchor">.size</span>(128px, 36px);
-    <span class="anchor">.font</span>(bold 12px @d 34px, 'Arial');
+    <span class="anchor">.font</span>(12px, 34px, bold, _, Arial, Sans-Serif);
+    <span class="anchor">.query</span>({
+    <span class="anchor">    .size</span>(25%, 1em);
+    <span class="anchor"></span>}, 640px);
 }
 </code>
 </pre>
                 <p>Compiles to:</p>
 <pre>
 <code>
-<span class="selector">#button</span> {
-    <span class="attr">background:</span> #6e8efb none repeat-x center;
+<span class="selector">button</span> {
     <span class="attr">background-image:</span> -webkit-linear-gradient(180deg, #6e8efb, #a777e3);
     <span class="attr">background-image:</span> -moz-linear-gradient(180deg, #6e8efb, #a777e3);
     <span class="attr">background-image:</span> linear-gradient(180deg, #6e8efb, #a777e3);
@@ -73,13 +74,14 @@
     <span class="attr">color:</span> #ffffff;
     <span class="attr">width:</span> 128px;
     <span class="attr">height:</span> 36px;
-    <span class="attr">font:</span> bold 12px / 34px 'Arial';
+    <span class="attr">font:</span> bold 12px / 34px Arial,  Sans-Serif;
 }
 </code>
 <code>
 <span class="media">@media all and</span> (<span class="attr">min-width:</span> 640px) {
-    <span class="selector">#button</span> {
+    <span class="selector">button</span> {
         <span class="attr">width:</span> 25%;
+        <span class="attr">padding:</span> 1em;
     }
 }
 </code>

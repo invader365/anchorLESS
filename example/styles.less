@@ -1,25 +1,24 @@
-@import './less/anchor.less';
+@import './anchor/anchor.less';
 
 body {
     .spacing(0);
     .color(@hex2, @hexe);
-    .font(14px, _, normal, _, Helvetica);
+    .font(14px, _, normal, _, Helvetica, Arial, Sans-Serif);
 
     pre {
-        .border-box();
-        .size(100%, _);
+        .size(100%, _); 
         .spacing(0, 0 20px);
         .rounded(4px);
         .border(1px, solid, @hexb);
         .overflow(auto, hidden);
         .font(13px, 1.2em, normal, _, Menlo, Monaco, Consolas, monospace);
         .color(#4d4d4c);
-        background: linear-gradient(180deg, @hexd 0, @hexd 16px, @hexe 0);
-        background-size: 1px 31px; 
+        .gradient(180deg, @hexd 0, @hexd 16px, @hexe 0);
+        .background(@size: 1px 30px);
         .content-box();
         
         code {
-            padding: 10px;
+            padding: 10px; 
             color: #383a42;
         }
         
@@ -51,17 +50,17 @@ body {
     }
     
     section {
-        .border-box();
         .spacing(0 auto, 20px);
         .size(100%, _);
-        .breakpoint({
+        .border-box();
+        .query({
             .size(940px, _);
-        }, 980px);
+        }, 980px, _);
     }
 
     footer {
-        font-size: 13px;
+        .font(13px);
         .color(@hex8);
-        .paragraph(_, right);
+        .text(right);
     }
 }

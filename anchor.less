@@ -109,7 +109,7 @@
     }
 }
 
-//  .display(@display, @h-width, @v-height, @comp);
+//  .display(@display, @horiz-axis, @vert-axis, @comp);
 //   ------------------------------------------------------
 //   @display                    :  inline|block|inline-block|flex|grid|list-item|table|table-row|table-column|table-cell|none|initial|inherit
 //   when (@display = block) 
@@ -124,32 +124,32 @@
 //     @grid-template-rows    :  none|auto|max-content|min-content|-length-|initial|inherit
 //     @grid-gap              :  grid-row-gap grid-column-gap
 
-.display(@display:_, @horiz-width:_, @vert-height:_, @comp:_) {
+.display(@display:_, @horiz-axis:_, @vert-axis:_, @comp:_) {
 
-    @prop1: if(@display=flex; justify-content; if(@display=grid; grid-template-columns; width););
-    @prop2: if(@display=flex; align-items;     if(@display=grid; grid-template-rows;    height););
-    @prop3: if(@display=flex; flex-flow;       if(@display=grid; gap); _);
+    @prop1: if(@display=flex; justify-content; if(@display=grid; grid-template-columns; width));
+    @prop2: if(@display=flex; align-items;     if(@display=grid; grid-template-rows;    height));
+    @prop3: if(@display=flex; flex-flow;       if(@display=grid; gap; _));
 
     & when not (@display=_) {
         display: @display;
     }
 
-    & when not (@horiz-width=_) {
-        @{prop1}: @horiz-width;
+    & when not (@horiz-axis=_) {
+        @{prop1}: @horiz-axis;
     }
 
-    & when not (@vert-height=_) {
-        @{prop2}: @vert-height;
+    & when not (@vert-axis=_) {
+        @{prop2}: @vert-axis;
     }
 
-    & when not (@comp=_) {
+    & when not (@prop3=_) and not (@comp=_) {
         @{prop3}: @comp;
     }
 }
 
-.display(@display:_, @horiz-width:_) {
+.display(@display:_, @horiz-axis:_) {
     & when (@display=block), (@display=inline-block) {
-        .display(@display, @horiz-width, @horiz-width);
+        .display(@display, @horiz-axis, @horiz-axis);
     }
 }
 
@@ -739,7 +739,7 @@
         }
         & when not (@background=_) { 
             .parse(@background);
-            .background(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6], .loop[7]);
+            .background(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6], .loop[7], .loop[8]);
         }
         & when not (@gradient=_) { 
             .parse(@gradient);
@@ -929,10 +929,10 @@
     @min-width: extract(@query, 1);
     @max-width: if(length(@query) = 2; extract(@query, 2); _);
 
-    .breakpoint(@ruleset, @min-width, @max-width);
+    .query(@ruleset, @min-width, @max-width);
 }
 
-.breakpoint(@ruleset:_, @min-width:_, @max-width:_) {
+.query(@ruleset:{}, @min-width:_, @max-width:_) {
 
     & when not (@min-width=_), not (@max-width=_) {
         
@@ -1100,9 +1100,9 @@
 //   @style         :  normal|italic|oblique|initial|inherit
 //   @family        :  family-name|initial|inherit
 
-.font(@size:_, @line-height:_, @weight:_, @style:_, @family1:_, @family2:_, @family3:_, @family4:_, @family5:_) {
+.font(@size:_, @line-height:_, @weight:_, @style:_, @family:_, @family2:_, @family3:_, @family4:_, @family5:_) {
     
-    @1: @family1;
+    @1: @family;
     @2: if(@family2=_; @1; if(@1=_; @family2; @1, @family2));
     @3: if(@family3=_; @2; if(@2=_; @family3; @2, @family3));
     @4: if(@family4=_; @3; if(@3=_; @family4; @3, @family4));
@@ -1166,44 +1166,24 @@
 }
 
 //
-//  .paragraph(@line-height, @align, @indent);
+//  .text(@align, @transform, @indent);
 //   ------------------------------------------------------
-//   @line-height   :  normal|number|-length-|initial|inherit
 //   @align         :  left|right|center|justify|initial|inherit
+//   @transform     :  none|capitalize|uppercase|lowercase|initial|inherit
 //   @indent        :  -length-|initial|inherit
 
-.paragraph(@line-height:_, @align:_, @indent:_) {
-
-    & when not (@line-height=_) {
-        line-height: @line-height;
-    }
+.text(@align:_, @transform:_, @indent:_) {
 
     & when not (@align=_) {
         text-align: @align;
     }
 
+    & when not (@transform=_) {
+        text-transform: @transform;
+    }
+
     & when not (@indent=_) {
         text-indent: @indent;
-    }
-}
-
-//
-// .text(@size, @weight, @color)
-//   ------------------------------------------------------
-//   @line      :  none|underline|overline|line-through|initial|inherit
-
-.text(@size:_, @weight:_, @color:_) {
-
-    & when not (@size=_) {
-        font-size: @size;
-    }
-
-    & when not (@weight=_) {
-        font-weight: @weight;
-    }
-
-    & when not (@color=_) {
-        color: @color;
     }
 }
 
@@ -1246,10 +1226,11 @@
 }
     
 //
-//  .text-shadow(@spread, @color, @alpha);
+//  .text-shadow(@spread, @color[, @alpha]);
 //   ------------------------------------------------------
 //   @spread    :  h-shadow v-shadow [blur-radius]
 //   @color     :  -color-|initial|inherit
+//   @alpha     :  none|0-1|-percentage-
 
 .text-shadow(@spread:_, @color:_, @alpha:100%) {
 
@@ -1260,42 +1241,48 @@
         text-shadow: @spread @rgba;
     }
 }
-    
-//
-//  .text-transform(@transform);
-//   ------------------------------------------------------
-//   text-transform      :  none|capitalize|uppercase|lowercase|initial|inherit
-
-.text-transform(@transform) {
-    
-    & when not (@transform=_) {
-        text-transform: @transform;
-    }
-}
 
 //
 //  Visual appearance properties
 
 //
-//  .background(@color, @image, @repeat, @position/backsize, @repeat, @origin, @clip, @attachment);
+//  .background(@color, @image, @position, @size, @repeat, @origin, @clip, @attachment);
 //   ------------------------------------------------------
-//   @color          :  -color-|transparent|initial|inherit
-//   @image          :  none|url|initial|inherit
-//   @repeat         :  repeat|repeat-x|repeat-y|no-repeat|initial|inherit
-//   @position/ size :  center|hpos vpos|xpos ypos|initial|inherit/ auto|-length-|cover|contain|initial|inherit
+//   @color         :  -color-|transparent|initial|inherit
+//   @image         :  none|url|initial|inherit
+//   @position      :  center|hpos vpos|xpos ypos|initial|inherit
+//   @size          :  auto|-length-|cover|contain|initial|inherit
+//   @repeat        :  repeat|repeat-x|repeat-y|no-repeat|initial|inherit
+//   @origin        :  padding-box|border-box|content-box|initial|inherit
+//   @clip          :  border-box|padding-box|content-box|initial|inherit
+//   @attachment    :  scroll|fixed|local|initial|inherit
 
-.background(@color:_, @image:_, @position:_, @repeat:_, @origin:_, @clip:_, @attachment:_) {
+.background(@color:_, @image:_, @position:_, @size:_, @repeat:_, @origin:_, @clip:_, @attachment:_) {
 
-    @1: if((not (@color=_)); if((isstring(@color)); url('@{color}'); @color));
-    @2: if((not (@image=_)); @1 if((isstring(@image)); url('@{image}'); @image); @1);
-    @3: if((not (@position=_)); @2 @position; @2);
-    @4: if((not (@repeat=_)); @3 @repeat; @3);
-    @5: if((not (@origin=_)); @4 @origin; @4);
-    @6: if((not (@clip=_)); @5 @clip; @5);
-    @args: if((not (@attachment=_)); @6 @attachment; @6);
-
-    & when not (@color=_) {
+    .url(@param:_) {
+        @res: if(isstring(@param); url('@{param}'); @param);
+    }
+      
+    @1: .url(@color)[];
+    @2: if(@image=_; @1; if(@1=_; .url(@image)[]; @1 .url(@image)[]));
+    @3: if(@repeat=_; @2; if(@2=_; @repeat; @2 @repeat));
+    @4: if(@attachment=_; @3; if(@3=_; @attachment; @3 @attachment));
+    @args: if(@position=_; @4; if(@4=_; @position; @4 @position));
+  
+    & when not (@args=_) {
         background: @args;
+    }
+  
+    & when not (@size=_) {
+        background-size: @size;
+    }
+  
+    & when not (@origin=_) {
+        background-origin: @origin;
+    }
+  
+    & when not (@clip=_) {
+        background-clip: @clip;
     }
 }
 
@@ -1469,20 +1456,20 @@
 }
 
 //
-//  .shadow(@offset, @color[, @alpha, @inset, @min-query, @max-query]);
+//  .shadow(@offset, @color[, @alpha, @mode, @min-query, @max-query]);
 //   ------------------------------------------------------
 //   @offset     :  none|h-offset v-offset blur|inset|initial|inherit
 //   @color      :  -color-|transparent|initial|inherit
 //   @alpha      :  none|0-1|-percentage-
-//   @inset      :  inner shadow
+//   @mode       :  inner shadow
 
-.shadow(@offset:_, @color:_, @alpha:_, @inset:_) {
+.shadow(@offset:_, @color:_, @alpha:_, @mode:_) {
 
     & when not (@offset=_) and not (@color=_) {
         
         @valpha: if(isnumber(@alpha); if(ispercentage(@alpha); @alpha; @alpha*100%); 100%);
         @rgba: fade(@color, @valpha);
-        @vcolor: if(not (@inset=_); @rgba inset; @rgba);
+        @vcolor: if(not (@mode=_); @rgba inset; @rgba);
 
         -webkit-box-shadow: @offset @vcolor;  // Android 2.3+, iOS 4.0.2-4.2
                 box-shadow: @offset @vcolor;  // Chrome 6+, Firefox 4+, IE 9+

@@ -62,7 +62,7 @@
         }
         & when not (@background=_) { 
             .parse(@background);
-            .background(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6], .loop[7]);
+            .background(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6], .loop[7], .loop[8]);
         }
         & when not (@gradient=_) { 
             .parse(@gradient);
@@ -252,10 +252,10 @@
     @min-width: extract(@query, 1);
     @max-width: if(length(@query) = 2; extract(@query, 2); _);
 
-    .breakpoint(@ruleset, @min-width, @max-width);
+    .query(@ruleset, @min-width, @max-width);
 }
 
-.breakpoint(@ruleset:_, @min-width:_, @max-width:_) {
+.query(@ruleset:{}, @min-width:_, @max-width:_) {
 
     & when not (@min-width=_), not (@max-width=_) {
         

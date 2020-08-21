@@ -50,37 +50,39 @@
           <p></p>
           <h4>Example:</h4>
           <pre class="panel primary"><code><span class="selector">button</span> {
-     .gradient(to-bottom, #a53df6, #7c16cb);
-     .border(0 1px 2px, solid, #9c33ed);
-     .rounded(7px);
-     .shadow(0 1px 0 0, #d197fe, .9, inset);
-     .color(yellow);
-     .size(56px, 128px);
-     .font(12px, 56px, bold, 'Arial');
-     .breakpoint({
-          .size(25%, _);
-      }, 640px);
+    .display(flex, center, center);
+    .font(2em, 40px, bold);
+    .rounded(5px);
+    .background(#fb292d);
+    .query({
+        .rounded(20px);
+        .size(200px, 40px);
+        .spacing(0 auto, 10px);
+        .gradient(#fb292d, #470103);
+    }, 800px);
  }</code></pre>
           <p>Compiles to:</p>
           <pre class="panel primary"><code><span class="selector">button</span> {
-      background-image: -webkit-linear-gradient(180deg, #a53df6, #7c16cb);
-      background-image: -moz-linear-gradient(180deg, #a53df6, #7c16cb);
-      background-image: linear-gradient(180deg, #a53df6, #7c16cb);
-      border-radius: 7px;
-      -webkit-box-shadow: 0 1px 0 0 rgba(209, 151, 254, 0.9) inset;
-      box-shadow: 0 1px 0 0 rgba(209, 151, 254, 0.9) inset;
-      color: yellow;
-      width: 56px;
-      height: 128px;
-      font-size: 12px;
-      line-height: 56px;
-      font-weight: bold;
-      font-style: 'Arial';
-  }</code><code><span class="selector">@media all and (min-width: 640px)</span> {
-     button {
-          width: 25%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 2em;
+   line-height: 40px;
+   font-weight: bold;
+   border-radius: 5px;
+   background: #fb292d;
+ }</code><code><span class="selector">@media all and (min-width: 640px)</span> {
+      button {
+          border-radius: 20px;
+          width: 200px;
+          height: 40px;
+          margin: 0 auto;
+          padding: 10px;
+          background-image: -webkit-linear-gradient(180deg, #fb292d, #470103);
+          background-image: -moz-linear-gradient(180deg, #fb292d, #470103);
+          background-image: linear-gradient(180deg, #fb292d, #470103);
       }
-  }</code></pre>
+ }</code></pre>
         </div>
       </section>
     </main>

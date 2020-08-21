@@ -13,7 +13,7 @@ html(lang="es")
                     hr
                     p
                         strong Anchor Less
-                        |  is a collection of less Mixins, Assets and Utilities.
+                        |  is a collection of less Mixins, Helpers and Variables.
                         |  These enables you to create blocks of reusable css, avoiding duplication of code and making it maintenable.
                 .grid.split-2.separate
                     div
@@ -23,7 +23,7 @@ html(lang="es")
                                 |  Features
                             ul.decimal
                                 li The most extensive Less mixins library.
-                                li Easy to integrate with Less-based frameworks.
+                                li Easy to integrate with less-based frameworks.
                                 li Responsive mixins (mobile-first)
                                 li Faster performance (Less.js powered).
                                 li A single 'anchor.less' file, no dependencies required.
@@ -34,28 +34,25 @@ html(lang="es")
                             ul
                                 li
                                     span.mix .align
-                                    | (top, right, bottom, left);
+                                    | ( top, right, bottom, left );
                                 li
                                     span.mix .background
-                                    | (color, image, position, repeat, origin, clip, attachment);
+                                    | ( color, image, position, size repeat, origin, clip, attachment );
                                 li
                                     span.mix .color
-                                    | (text, background, border);
-                                li
-                                    span.mix .paragraph
-                                    | (line-height, align, indent);
+                                    | ( text, background, border );
                                 li
                                     span.mix .text
-                                    | (size, width, color)
+                                    | ( align, indent, transform );
                                 li
                                     span.mix .rounded
-                                    | (top-left, top-right, bottom-right, bottom-left);
+                                    | ( top-left, top-right, bottom-right, bottom-left );
                                 li
                                     span.mix .size
-                                    | (width, height); 
+                                    | ( width, height ); 
                                 li
                                     span.mix .shadow
-                                    | (spread, color, alpha);
+                                    | ( spread, color, alpha );
                             p
                                 a(href=page.root + 'reference.html') See the full list
                     div
@@ -63,14 +60,16 @@ html(lang="es")
                             h4.title
                                 i.fa.fa-rocket
                                 |  Compiler
-                            p Try the less 
+                            p Try the live less 
                                 a(href=page.root + 'compiler.html') compiler
-                                |  to see how it works!
+                                |  to see how it works
                             img(src=page.root + 'img/compiler.gif')
                         .m-download
                             p 
-                                a(href='http://lesscss.org/', target='_blank', rel="external") LESS JS
-                                |  is a javascript pre-processor that extends CSS with features like variables, functions and operations.
+                                | Requires 
+                                a(href='http://lesscss.org/', target='_blank', rel="external") less JS 3.0+
+                                |  or
+                                a(href='https://www.npmjs.com/package/gulp-less', target='_blank', rel="external")  gulp-less 4.0.1+
                             p.text-right
                                 a.button.secondary.big(href='https://github.com/invader365/anchorLESS/archive/master.zip')
                                     i.fa.fa-arrow-circle-o-down

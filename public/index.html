@@ -48,7 +48,7 @@
       <section class="max-width">
         <div class="m-module span-5">
           <hr>
-          <p><strong>Anchor Less</strong> is a collection of less Mixins, Assets and Utilities.
+          <p><strong>Anchor Less</strong> is a collection of less Mixins, Helpers and Variables.
              These enables you to create blocks of reusable css, avoiding duplication of code and making it maintenable.
           </p>
         </div>
@@ -58,7 +58,7 @@
               <h4 class="title"><i class="fa fa-check"></i> Features</h4>
               <ul class="decimal">
                 <li>The most extensive Less mixins library.</li>
-                <li>Easy to integrate with Less-based frameworks.</li>
+                <li>Easy to integrate with less-based frameworks.</li>
                 <li>Responsive mixins (mobile-first)</li>
                 <li>Faster performance (Less.js powered).</li>
                 <li>A single 'anchor.less' file, no dependencies required.</li>
@@ -67,14 +67,13 @@
             <div class="panel primary">
               <h4 class="title"><i class="fa fa-recycle"></i> Mixins</h4>
               <ul>
-                <li><span class="mix">.align</span>(top, right, bottom, left);</li>
-                <li><span class="mix">.background</span>(color, image, position, repeat, origin, clip, attachment);</li>
-                <li><span class="mix">.color</span>(text, background, border);</li>
-                <li><span class="mix">.paragraph</span>(line-height, align, indent);</li>
-                <li><span class="mix">.text</span>(size, width, color)</li>
-                <li><span class="mix">.rounded</span>(top-left, top-right, bottom-right, bottom-left);</li>
-                <li><span class="mix">.size</span>(width, height); </li>
-                <li><span class="mix">.shadow</span>(spread, color, alpha);</li>
+                <li><span class="mix">.align</span>( top, right, bottom, left );</li>
+                <li><span class="mix">.background</span>( color, image, position, size repeat, origin, clip, attachment );</li>
+                <li><span class="mix">.color</span>( text, background, border );</li>
+                <li><span class="mix">.text</span>( align, indent, transform );</li>
+                <li><span class="mix">.rounded</span>( top-left, top-right, bottom-right, bottom-left );</li>
+                <li><span class="mix">.size</span>( width, height ); </li>
+                <li><span class="mix">.shadow</span>( spread, color, alpha );</li>
               </ul>
               <p><a href="reference.html">See the full list</a></p>
             </div>
@@ -82,10 +81,13 @@
           <div>
             <div class="panel primary">
               <h4 class="title"><i class="fa fa-rocket"></i> Compiler</h4>
-              <p>Try the less <a href="compiler.html">compiler</a> to see how it works!</p><img src="img/compiler.gif">
+              <p>Try the live less <a href="compiler.html">compiler</a> to see how it works</p><img src="img/compiler.gif">
             </div>
             <div class="m-download">
-              <p> <a href="http://lesscss.org/" target="_blank" rel="external">LESS JS</a> is a javascript pre-processor that extends CSS with features like variables, functions and operations.</p>
+              <p>
+                 
+                Requires <a href="http://lesscss.org/" target="_blank" rel="external">less JS 3.0+</a> or<a href="https://www.npmjs.com/package/gulp-less" target="_blank" rel="external"> gulp-less 4.0.1+</a>
+              </p>
               <p class="text-right"><a href="https://github.com/invader365/anchorLESS/archive/master.zip" class="button secondary big"><i class="fa fa-arrow-circle-o-down"></i> Download Anchor Less</a></p>
               <p class="text-right">Source on <a href="https://github.com/invader365/anchorLESS">GitHub</a></p>
             </div>

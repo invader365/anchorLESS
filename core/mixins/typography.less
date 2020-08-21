@@ -76,17 +76,13 @@
 }
 
 //
-//  .paragraph(@line-height, @align, @indent);
+//  .text(@align, @indent, @transform);
 //   ------------------------------------------------------
-//   @line-height   :  normal|number|-length-|initial|inherit
 //   @align         :  left|right|center|justify|initial|inherit
 //   @indent        :  -length-|initial|inherit
+//   @transform     :  none|capitalize|uppercase|lowercase|initial|inherit
 
-.paragraph(@line-height:_, @align:_, @indent:_) {
-
-    & when not (@line-height=_) {
-        line-height: @line-height;
-    }
+.text(@align:_, @indent:_, @transform:_) {
 
     & when not (@align=_) {
         text-align: @align;
@@ -95,25 +91,9 @@
     & when not (@indent=_) {
         text-indent: @indent;
     }
-}
 
-//
-// .text(@size, @weight, @color)
-//   ------------------------------------------------------
-//   @line      :  none|underline|overline|line-through|initial|inherit
-
-.text(@size:_, @weight:_, @color:_) {
-
-    & when not (@size=_) {
-        font-size: @size;
-    }
-
-    & when not (@weight=_) {
-        font-weight: @weight;
-    }
-
-    & when not (@color=_) {
-        color: @color;
+    & when not (@transform=_) {
+        text-transform: @transform;
     }
 }
 
@@ -156,10 +136,11 @@
 }
     
 //
-//  .text-shadow(@spread, @color, @alpha);
+//  .text-shadow(@spread, @color[, @alpha]);
 //   ------------------------------------------------------
 //   @spread    :  h-shadow v-shadow [blur-radius]
 //   @color     :  -color-|initial|inherit
+//   @alpha     :  none|0-1|-percentage-
 
 .text-shadow(@spread:_, @color:_, @alpha:100%) {
 
@@ -168,17 +149,5 @@
     
     & when not (@spread=_) and not (@color=_) {
         text-shadow: @spread @rgba;
-    }
-}
-    
-//
-//  .text-transform(@transform);
-//   ------------------------------------------------------
-//   text-transform      :  none|capitalize|uppercase|lowercase|initial|inherit
-
-.text-transform(@transform) {
-    
-    & when not (@transform=_) {
-        text-transform: @transform;
     }
 }

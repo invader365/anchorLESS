@@ -38,7 +38,7 @@
     }
 }
 
-//  .display(@display, @h-width, @v-height, @comp);
+//  .display(@display, @horiz-axis, @vert-axis, @comp);
 //   ------------------------------------------------------
 //   @display                    :  inline|block|inline-block|flex|grid|list-item|table|table-row|table-column|table-cell|none|initial|inherit
 //   when (@display = block) 
@@ -53,32 +53,32 @@
 //     @grid-template-rows    :  none|auto|max-content|min-content|-length-|initial|inherit
 //     @grid-gap              :  grid-row-gap grid-column-gap
 
-.display(@display:_, @horiz-width:_, @vert-height:_, @comp:_) {
+.display(@display:_, @horiz-axis:_, @vert-axis:_, @comp:_) {
 
-    @prop1: if(@display=flex; justify-content; if(@display=grid; grid-template-columns; width););
-    @prop2: if(@display=flex; align-items;     if(@display=grid; grid-template-rows;    height););
-    @prop3: if(@display=flex; flex-flow;       if(@display=grid; gap); _);
+    @prop1: if(@display=flex; justify-content; if(@display=grid; grid-template-columns; width));
+    @prop2: if(@display=flex; align-items;     if(@display=grid; grid-template-rows;    height));
+    @prop3: if(@display=flex; flex-flow;       if(@display=grid; gap; _));
 
     & when not (@display=_) {
         display: @display;
     }
 
-    & when not (@horiz-width=_) {
-        @{prop1}: @horiz-width;
+    & when not (@horiz-axis=_) {
+        @{prop1}: @horiz-axis;
     }
 
-    & when not (@vert-height=_) {
-        @{prop2}: @vert-height;
+    & when not (@vert-axis=_) {
+        @{prop2}: @vert-axis;
     }
 
-    & when not (@comp=_) {
+    & when not (@prop3=_) and not (@comp=_) {
         @{prop3}: @comp;
     }
 }
 
-.display(@display:_, @horiz-width:_) {
+.display(@display:_, @horiz-axis:_) {
     & when (@display=block), (@display=inline-block) {
-        .display(@display, @horiz-width, @horiz-width);
+        .display(@display, @horiz-axis, @horiz-axis);
     }
 }
 

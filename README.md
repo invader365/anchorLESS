@@ -15,14 +15,14 @@ Features:
 ## Library
 
 01. .align(@top, @right, @bottom, @left);
-00. .background(@color, @image, @position, @repeat, @origin, @clip, @attachment);
+00. .background(@color, @image, @position, @size @repeat, @origin, @clip, @attachment);
 00. .border(@width, @style, @color);
 00. .color(@text, @background, @border);
-00. .font(@size, @line-height, @width, @family);
+00. .font(@size, @line-height, @width, @style, @family, @family2, @family3, @family4, @family5);
 00. .gradient(@direction, @start, @stop1, @stop2, @stop3);
-00. .paragraph(@line-height, @align, @indent);
+00. .text(@align, @indent, @transform);
 00. .rounded(@top-left, @top-right, @bottom-right, @bottom-left);
-00. .shadow(@spread, @color, @alpha);
+00. .shadow(@spread, @color, @alpha, @mode);
 00. .size(@width, @height);
 00. .spacing(@margin, @padding);
 00. .transition(@property, @durations, @function, @delay);
@@ -38,36 +38,39 @@ Import the relative url at the top of your less file
 Example:
 ```css
       button {
-        .border(0 1px 2px, solid, #dcdcdc);
-        .background('../image.png');
-        .gradient(to-bottom, #ededed, #dfdfdf);
-        .spacing(_, 0.5em);
+        .display(flex, center, center);
+        .font(2em, 40px, bold);
         .rounded(5px);
-        .size(33%, _);
-        .size(25%, _, 640px);
+        .background(#fb292d);
+        .query({
+          .rounded(20px);
+          .size(200px, 40px);
+          .spacing(0 auto, _);
+          .gradient(#fb292d, #470103);
+        }, 800px);
       }
 ```
 CSS output:
 ```css
       button {
-        background-image: url('../images.png');
-        background: #ededed none repeat-x center;
-        background-image: -webkit-linear-gradient(180deg, #ededed, #dfdfdf);
-        background-image: -moz-linear-gradient(180deg, #ededed, #dfdfdf);
-        background-image: linear-gradient(180deg, #ededed, #dfdfdf);
-        border-width: 0 1px 2px;
-        border-style: solid;
-        border-color: #dcdcdc;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2em;
+        line-height: 40px;
+        font-weight: bold;
         border-radius: 5px;
-        padding: 0.5em;
-        width: 33%;
+        background: #fb292d;
       }
-
-      @media all and (min-width: 640px) {
+      @media all and (min-width: 800px)  {
         button {
-          width: 25%;
+          border-radius: 20px;
+          width: 200px;
+          height: 40px;
+          margin: 0 auto;
+          background-image: -webkit-linear-gradient(180deg, #fb292d, #470103);
+          background-image: -moz-linear-gradient(180deg, #fb292d, #470103);
+          background-image: linear-gradient(180deg, #fb292d, #470103);
         }
       }
 ```
@@ -86,7 +89,8 @@ CSS output:
 ```
 Your browser will reload after saving
 
-Try the less [compiler](http://invader365.github.io/anchorLESS/compiler.html) to see how it works!
+<sub>* Requires LessJS 3.0+ or gulp-less 4.0.1+</sub>
+
 ## License
 
 Copyright © 2020 Licensed under the [Apache License Version 2.0](LICENSE).

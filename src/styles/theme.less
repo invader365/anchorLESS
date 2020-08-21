@@ -62,26 +62,25 @@
     body                        { 
         .font(@base-font-size, @base-line-height, _, _, @base-font); 
         .color(@text-base, @base); 
-        .back(@trans, '../img/back.png'); 
-        background-attachment: fixed; 
+        .background('../img/back.png', @attachment: fixed);
     }
 
-    header > section            { 
-        .color(@hexf, @hex4); 
+    header > section { 
+        .color(@hexf); 
     }
-    main > section              { 
-        .color(@text-base, @hexf); 
+    main > section { 
+        .color(@text-base); 
     }
-    footer > section            { 
-        .color(@hexf, @accent); 
+    footer > section { 
+        .color(@hexf); 
     }
 
     header > section,
     nav > section,
     main > section,
-    footer > section            { 
+    footer > section { 
         .spacing(_, 0 4%);
-        .breakpoint({
+        .query({
             .spacing(_, 0 2%); 
         }, 800px);
     }
@@ -89,57 +88,124 @@
 //  Page elements
 
     a, 
-    .link                       { 
+    .link { 
         .color(#84bcde); 
     }
 
-    a:hover                     { text-decoration: underline; }
+    a:hover { 
+        text-decoration: underline; 
+    }
     
-    em                          { .color(@accent); }
+    em { 
+        .color(@accent); 
+    }
 
-    hr                          { border-bottom: 1px solid #121212; .shadow(0 1px 0, @hexf, .07); }
+    hr { 
+        border-bottom: 1px solid #121212; 
+        .shadow(0 1px 0, @hexf, .07); 
+    }
 
-    .mark ()                    { .color(@hexf, @primary-lighter); text-shadow: none; }
-    ::selection                 { .mark; }
-    ::-moz-selection            { .mark; }
+    .mark () { 
+        .color(@hexf, @primary-lighter); 
+        text-shadow: none; 
+    }
+    ::selection { 
+        .mark; 
+    }
+    ::-moz-selection { 
+        .mark; 
+    }
 
     .input, .select,
     input, select,
-    textarea                    {
-        &                       { .rounded(@base-radius); }
+    textarea {
+        & { 
+            .rounded(@base-radius); 
+        }
         &.focus,
         &:focus,
         &.hover,
-        &:hover                 {  border-color: @secondary; }
+        &:hover {  
+            border-color: @secondary; 
+        }
     }
 
     .breadcrumb,
     .button-group,
     .pagination,
     .panel,
-    .table                      {
-        &                       { margin-bottom: @base-margin; }
+    .table {
+        & { 
+            margin-bottom: @base-margin; 
+        }
     }
 
 //  Primary styles
 
-    .breadcrumb.primary         {
-        &                       { .rounded(@base-radius); .border(1px, solid, @hexd); .background(@hexef); }
-        & li                    {  padding:6px 0 6px 12px; font-size: 12px; line-height: 20px; }
-        & li a                  {  color: @hex8; /*.hover.color(@primary);*/ padding-right: 14px; text-shadow: 0 1px @hexf .3; position: relative; }
-        & li a:after            {  color: @hexc; font-size: 1.2em; /*.pseudo('/', auto, 16px); .center-vertical(20px); */right: 0; }
+    .breadcrumb.primary {
+        & { 
+            .rounded(@base-radius); 
+            .border(1px, solid, @hexd); 
+            .background(@hexf5); 
+        }
+        & li {  
+            padding:6px 0 6px 12px; 
+            font-size: 12px; 
+            line-height: 20px; 
+        }
+        & li a {  
+            color: @hex8; 
+            /*.hover.color(@primary);*/ 
+            padding-right: 14px; 
+            text-shadow: 0 1px @hexf .3; 
+            position: relative; 
+        }
+        & li a:after {  
+            color: @hexc; 
+            font-size: 1.2em; 
+            /*.pseudo('/', auto, 16px); 
+            .center-vertical(20px); */
+            right: 0; 
+        }
     }
 
     .button.primary             { 
-        &                       { background: none repeat scroll 0 0 rgba(255, 255, 255, 0.06); color:black;  border: 1px solid rgba(0, 0, 0, 0.5); .spacing(_, .2em .5em); .rounded(4px); .font(1.4em); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.08); }
-        &.big                   { .spacing(_, .5em 1em); } 
+        & { 
+            background: none repeat scroll 0 0 rgba(255, 255, 255, 0.06); 
+            color:black;  border: 1px solid rgba(0, 0, 0, 0.5); 
+            .spacing(_, .2em .5em); 
+            .rounded(4px); 
+            .font(1.4em); 
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.08); 
+        }
+        &.big { 
+            .spacing(_, .5em 1em); 
+        } 
     }
-    .button.secondary           {
-        &                       { .font(bold 1em @d 1); .rounded(@base-radius); /*.hover-focus.color(@hexf, @secondary); .normal-active.color(@hexf, @primary); */text-shadow: 0 1px 0 rgba(0, 0, 0, .2); }
-        &.big                   { .spacing(_, 1em 2em); .shadow(0 0 2px, black, .3); } 
+    .button.secondary {
+        & { 
+            .font(1em, 1, bold); 
+            .rounded(@base-radius); 
+            text-shadow: 0 1px 0 rgba(0, 0, 0, .2); 
+            &:hover {
+                .color(@hexf, @secondary)
+            }
+            &:active {
+                .color(@hexf, @primary)
+            }
+        }
+        &.big { 
+            .spacing(_, 1em 2em); 
+            .shadow(0 0 2px, black, .3); 
+        } 
     }
 
-    .heading.primary            { .font(2.2em, 55px); .color(@hexf); border-bottom: 1px solid #121212; .shadow(0 1px 0, @hexf, .07); }
+    .heading.primary { 
+        .font(2.2em, 55px); 
+        .color(@hexf); 
+        border-bottom: 1px solid #121212; 
+        .shadow(0 1px 0, @hexf, .07); 
+    }
 
     .grid.primary               { 
         & li                    { .border(1px 0 0 1px, solid, @hexc); .spacing(_, .2em .25em 0 .75em); min-height: 53px; }
@@ -147,7 +213,8 @@
     }
     
     .message.primary            {
-        &                       {  margin-bottom: @base-margin; padding: 1em 28px 1em 1em; .color(@hex2, @hexef); .border(3px 0 0 0 , solid, @hexc); .font-size(0.96em); .rounded(3px); }
+        &                       {  margin-bottom: @base-margin; padding: 1em 28px 1em 1em; 
+            .color(@hex2, @hexf5); .border(3px 0 0 0 , solid, @hexc); .font(0.96em); .rounded(3px); }
         &.error                 { 
             &                   { .background(@error); border-color: @border-error; }
             & .heading, strong, a { color: @text-error; }
@@ -185,45 +252,69 @@
         }
     }
 
-    .panel.primary              { 
-        &                       { .background(#212121); .spacing(_, @base-margin); .rounded(@base-radius); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.8) inset;}
-        & .title                { .font(2em); .color(@hexf); border-bottom: 1px solid #121212; box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.07); }
-        & .fa                   { .color(@accent); font-size: .86em; }
+    .panel.primary { 
+        & { 
+            .background(#212121); 
+            .spacing(_, @base-margin); 
+            .rounded(@base-radius); 
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.8) inset;
+        }
+
+        & .title { 
+            .font(2em); 
+            .color(@hexf); 
+            border-bottom: 1px solid #121212; 
+            box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.07); 
+        }
+        & .fa { 
+            .color(@accent); 
+            font-size: .86em; 
+        }
     }
 
     .table.primary              {
         &                       { 
-            /*.table.padding().2em .7em);*/ 
-            .breakpoint({
+            /*.table.padding(.2em .7em);*/ 
+            .query({
                 .font(.9em); 
             });
         }
-        & caption               { 
+        & caption { 
             .color(@text-primary, @primary-lighter); 
             .spacing(_, .35em); 
             .font(1.2em, _, bold); 
         }
-        & thead tr th           { .color(@text-primary, #222); }
-        & thead tr th a         { .color(@primary); }
-        & thead tr th a         { .color(@secondary); }
-        & tbody tr:hover        { .color(@text-base, #222); }
-        & tbody tr.selected     { .color(@hexf, @primary); }
+        & thead tr th { 
+            .color(@text-primary, #1b1b1b); 
+        }
+        & thead tr th a { 
+            .color(@primary); 
+        }
+        & thead tr th a { 
+            .color(@secondary); 
+        }
+        & tbody tr:hover { 
+            .color(@text-base, #222); 
+        }
+        & tbody tr.selected { 
+            .color(@hexf, @primary); 
+        }
     }
 
-    .tabset.primary             {
-        & > .summary            {
-            &                   { 
+    .tabset.primary {
+        & > .summary {
+            & { 
                 .spacing(@base-margin/3 1em 0 0, 0); 
                 .font(1em); 
             }
             & a:hover,
-            &.active            { 
-                .back(rgba(0, 0, 0, 0.3), none, repeat); 
+            &.active { 
+                .background(rgba(0, 0, 0, 0.3), none, repeat); 
                 box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset; 
                 .rounded(@base-radius); 
                 text-decoration: none; 
             }
-            & a                 { 
+            & a { 
                 .spacing(_, .3em .7em); 
             }
         }
@@ -236,9 +327,19 @@
             .spacing(_, 7px 14px); 
             .rounded(@base-radius); 
         }
-        &.up:before             { .triangle(bottom, 4px, 4px, #333); }
-        &.down:before           { .triangle(top, 4px, 4px, #333); }
-        &.right:before          { .triangle(left, 4px, 4px, #333); }
-        &.left:before           { .triangle(right, 4px, 4px, #333); }
-        &.wrap:after            {  min-width: 160px; }
+        &.up:before { 
+            .triangle(bottom, 4px, 4px, #333); 
+        }
+        &.down:before { 
+            .triangle(top, 4px, 4px, #333); 
+        }
+        &.right:before { 
+            .triangle(left, 4px, 4px, #333); 
+        }
+        &.left:before { 
+            .triangle(right, 4px, 4px, #333); 
+        }
+        &.wrap:after {  
+            min-width: 160px; 
+        }
     }

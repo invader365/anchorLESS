@@ -11,41 +11,59 @@ html(lang="es")
     body.uno.l-right-top-nav.compiler
         include includes/header_pages
         include includes/nav
-    main
-      section.max-width.fixed
+    main.panel.primary(style="min-height:800px")
+      section.max-width
         h2.title Live-Compiler
-        .panel.primary
-          code.code.less(contenteditable='true', onkeyup='compileCSS()', spellcheck="false")
-          .toggle
-            a.no-select(onclick="showHide()") Result
+        .toggle
+          a.no-select(onclick="showHide()") Demo
           .result(style="display:none")
             .box box
-        h4 CSS
-        code.code.css
+        .grid.split-2.separate
+          div.span
+            h4 LESS
+            .panel--primary
+              code.code.less(contenteditable='true', onkeyup='compileCSS()', spellcheck="false")
+          div.span
+            h4 CSS
+            code.code.css
     script.
       const pre = {
         less: `  div.box {
+        .display(flex, center, center);
+        .font(2em, 40px, bold);
+        .rounded(5px);
+        .background(#fb292d);
+        .query({
           .rounded(20px);
           .size(200px, 40px);
-          .spacing(20px auto, 0);
-          .gradient(to-bottom, orange, darken(#fb292d, 20%));
+          .spacing(0 auto, 10px);
+          .gradient(#fb292d, #470103);
+        }, 800px);
         }`,
         error:`Parse error: Unrecognized input`,
-        type:`...`
+        typing:`...`
       };
-      const compileCSS = result => {
-        const codeLess = document.querySelector(`.code.less`);
-        const codeCss  = document.querySelector(`.code.css`);
-        const styleTag = document.querySelector(`.style.css`);
-        const anchorLess = "@import './anchor.less';";
-        if(result) codeLess.innerHTML = eval(result).less;
-        styleTag.innerHTML = anchorLess + codeLess.textContent;
-        styleTag.setAttribute("type", "text/less");
-        less.refreshStyles();
-        codeCss.innerHTML = eval(pre).type;
-        setTimeout(() => {
-          codeCss.innerHTML = (styleTag.innerHTML.slice(0, 2) != '@i') ? styleTag.innerHTML : eval(pre).error
-        }, 1200)
+      const compileCSS = input => {
+          const codeLess = document.querySelector(`.code.less`);
+          const codeCss  = document.querySelector(`.code.css`);
+          const styleTag = document.querySelector(`.style.css`);
+          const anchorLess = "@import './anchor.less';";
+          
+          if(input) codeLess.innerHTML = eval(input).less;
+          styleTag.innerHTML = anchorLess + codeLess.textContent;
+          styleTag.setAttribute("type", "text/less");
+          less.refreshStyles();
+          codeLess.addEventListener("keyup", event => {
+            if (event.keyCode >= 37 && event.keyCode <= 40) { 
+              event.preventDefault();
+            } else {
+                codeCss.innerHTML = eval(pre).typing;
+            }
+          });
+
+          setTimeout(() => {
+            codeCss.innerHTML = (styleTag.innerHTML.slice(0, 2) != '@i') ? styleTag.innerHTML : eval(pre).error
+          }, 800)
       };
       compileCSS(pre);
       const showHide = () => {
