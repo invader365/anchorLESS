@@ -1,0 +1,2073 @@
+//
+//  AnchorLESS v1.3.0
+//  http://invader365.github.io/anchorLESS/
+//
+//  Animation and Transition
+
+//
+//  .animation(@name, @duration, @timing-function, @delay, @iteration-count, @direction, @fill-mode, @play-state);
+//   ------------------------------------------------------
+//   @name            :  name of the @keyframes animation
+//   @duration        :  -time-|initial|inherit
+//   @timing-function :  linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start/end)|initial|inherit
+//   @delay           :  -time-|initial|inherit
+//   @iteration-count :  -number-|infinite|initial|inherit
+//   @direction       :  normal|reverse|alternate|alternate-reverse|initial|inherit
+//   @fill-mode       :  none|forwards|backwards|both|initial|inherit
+//   @play-state      :  paused|running|initial|inherit
+
+.animation(@name:_, @duration:_, @timing:_, @delay:_, @iteration:_, @direction:_, @fill-mode:_, @play-state:_) {
+
+    @1: if(not (@name=_); @name);
+    @2: if(@duration=_;   @1; @1 @duration);
+    @3: if(@timing=_;     @2; @2 @timing);
+    @4: if(@delay=_;      @3; @3 @delay);
+    @5: if(@iteration=_;  @4; @4 @iteration);
+    @6: if(@direction=_;  @5; @5 @direction);
+    @7: if(@fill-mode=_;  @6; @6 @fill-mode);
+    @args: if(@play-state=_; @7; @7 @play-state);
+    
+    & when not (@name=_) {
+        -webkit-animation: @args;  // Safari, Chrome
+                animation: @args;
+    }
+    
+    & when (@name=fade-in)      { ._fade-in(); }
+    
+    & when (@name=fade-out)     { ._fade-out(); }
+    
+    & when (@name=shake)        { ._shake(); }
+    
+    & when (@name=slide-down)   { ._slide-down(); }
+    
+    & when (@name=slide-up)     { ._slide-up(); }
+
+    & when (@name=zoom-in)      { ._zoom-in(); }
+    
+    & when (@name=zoom-out)     { ._zoom-out(); }
+}
+
+//
+//  .transition(@property, @duration, @timing-function, @delay);
+//   ------------------------------------------------------
+//   @property        :  none|all|-property-|initial|inherit
+//   @duration        :  -time-|initial|inherit
+//   @timing-function :  linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start/end)|initial|inherit
+//   @delay           :  -time-|initial|inherit
+
+.transition(@property:_, @duration:_, @timing:_, @delay:_) {
+
+    @1:    if(not (@property=_); @property);
+    @2:    if(@duration=_; @1 1s; @1 @duration);
+    @3:    if((@timing=_); @2; @2 @timing);
+    @args: if((@delay=_); @3; @3 @delay);
+
+    & when not (@property=_) {
+        -webkit-transition: @args;
+             -o-transition: @args;
+                transition: @args;
+    }
+}
+
+//
+//   Box-model properties
+
+//
+//  .border(@width, @style, @color);
+//   ------------------------------------------------------
+//   @width     :  medium|thin|thick|-length-|initial|inherit
+//   @style     :  none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit
+//   @color     :  color|transparent|initial|inherit
+
+.border(@width:_, @style:_, @color:_) {
+
+    @params: if(length(@width) = 1 and length(@style) = 1 and length(@color) = 1; single);
+
+    & when not (@style=_) and (@params=single) {
+        @rest: if(@color=_; @style; @style @color);
+        border: @width @rest;
+    }
+
+    & when not (@width=_) and (@style=_)  {
+        border-width: @width;
+    }
+
+    & when not (@width=_) and (@params=multi)  {
+        border-width: @width;
+    }
+
+    & when not (@style=_) and (@params=multi) {
+        border-style: @style;
+    }
+
+    & when not (@color=_) and (@style=_) {
+        border-color: @color;
+    }
+
+    & when not (@color=_) and (@params=multi) {
+        border-color: @color;
+    }
+}
+
+//  .display(@display, @horiz-axis, @vert-axis, @comp);
+//   ------------------------------------------------------
+//   @display                    :  inline|block|inline-block|flex|grid|list-item|table|table-row|table-column|table-cell|none|initial|inherit
+//   when (@display = block) 
+//     @width                 :  auto|-length-|initial|inherit
+//     @height                :  auto|-length-|initial|inherit
+//   when (@display = flex)
+//     @justify-content       :  flex-start|flex-end|center|space-between|space-around|initial|inherit
+//     @align-items           :  flex-start|flex-end|center|space-between|space-around|initial|inherit
+//     @flex-flow             :  flex-direction flex-wrap|initial|inherit
+//   when (@display = grid)
+//     @grid-template-columns :  none|auto|max-content|min-content|-length-|initial|inherit
+//     @grid-template-rows    :  none|auto|max-content|min-content|-length-|initial|inherit
+//     @grid-gap              :  grid-row-gap grid-column-gap
+
+.display(@display:_, @horiz-axis:_, @vert-axis:_, @comp:_) {
+
+    @prop1: if(@display=flex; justify-content; if(@display=grid; grid-template-columns; width));
+    @prop2: if(@display=flex; align-items;     if(@display=grid; grid-template-rows;    height));
+    @prop3: if(@display=flex; flex-flow;       if(@display=grid; gap; _));
+
+    & when not (@display=_) {
+        display: @display;
+    }
+
+    & when not (@horiz-axis=_) {
+        @{prop1}: @horiz-axis;
+    }
+
+    & when not (@vert-axis=_) {
+        @{prop2}: @vert-axis;
+    }
+
+    & when not (@prop3=_) and not (@comp=_) {
+        @{prop3}: @comp;
+    }
+}
+
+.display(@display:_, @horiz-axis:_) {
+    & when (@display=block), (@display=inline-block) {
+        .display(@display, @horiz-axis, @horiz-axis);
+    }
+}
+
+//
+//  .minmax-size(@min-width, @max-width, @min-height, @max-heigh);
+//   ------------------------------------------------------
+//   @min-width      :  -length-|initial|inherit
+//   @max-width      :  -length-|initial|inherit
+//   @min-height     :  -length-|initial|inherit
+//   @max-height     :  -length-|initial|inherit
+
+.minmax-size(@min-width:_, @max-width:_, @min-height:_, @max-height:_) {
+
+    & when not (@min-width=_) {
+        min-width: @min-width;
+    }
+
+    & when not (@max-width=_) {
+        max-width: @max-width;
+    }
+
+    & when not (@min-height=_) {
+        min-height: @min-height;
+    }
+
+    & when not (@max-height=_) {
+        max-height: @max-height;
+    }
+}
+
+//
+//  .overflow(@overflow-x, @overflow-y)
+//   ------------------------------------------------------
+//   overflow-x         :  visible|hidden|scroll|auto|initial|inherit
+//   overflow-y         :  visible|hidden|scroll|auto|initial|inherit
+
+.overflow(@overflow-x:_, @overflow-y:_) {
+
+    & when (@overflow-x=@overflow-y) {
+        overflow: @overflow-x;
+    }
+
+    & when not (@overflow-y=_) {
+        overflow-y: @overflow-y;
+    }
+        
+    & when not (@overflow-x=_) {
+        overflow-x: @overflow-x;
+    }
+}
+
+//
+//  .size(@width, @height);
+//   ------------------------------------------------------
+//   @width         :  auto|-length-|initial|inherit
+//   @heigth        :  auto|-length-|initial|inherit
+
+.size(@width:_, @height:_) {
+
+    & when not (@width=_) {
+        width: @width;
+    }
+  
+    & when not (@height=_) {
+        height: @height;
+    }
+}
+
+.size(@width:_) {
+
+    & when not (@width=_) {
+        width: @width;
+        height: @width;
+    }
+}
+
+//
+//  .spacing(@margin, @padding);
+//   ------------------------------------------------------
+//   @margin         :  -length-|auto|initial|inherit
+//   @padding        :  -length-|auto|initial|inherit
+
+.spacing (@margin:_, @padding:_) {
+  
+    & when not (@margin=_) {
+        margin: @margin;
+    }
+
+    & when not (@padding=_) {
+        padding: @padding;
+    }
+}
+
+.spacing (@margin:_) {
+  
+    & when not (@margin=_) {
+        margin: @margin;
+        padding: @margin;
+    }
+}
+
+//
+//   Filter properties
+
+//
+//  .blur(@pixels);
+//   ------------------------------------------------------
+//   @pixels           :  pixels
+
+.blur(@pixels:_) {
+    
+    & when not (@pixels=_) {
+        -webkit-filter+_: blur(@pixels);
+                filter+_: blur(@pixels);
+    }
+}
+
+//
+//  .brightness(@percentage);
+//   ------------------------------------------------------
+//   @percentage         :  percentage
+
+.brightness(@percentage:_) {
+    
+    & when not (@percentage=_) {
+        -webkit-filter+_: brightness(@percentage);
+                filter+_: brightness(@percentage);
+    }
+}
+
+//
+//  .contrast(@percentage);
+//   ------------------------------------------------------
+//   @percentage         :  percentage
+
+.contrast(@percentage:_) {
+    
+    & when not (@percentage=_) {
+        -webkit-filter+_: contrast(@percentage);
+                filter+_: contrast(@percentage);
+    }
+}
+
+//
+//  .drop-shadow(@offset, @blur, @color);
+//   ------------------------------------------------------
+//   @offset         :  none|h-offset v-offset blur|inset|initial|inherit
+//   @blur           :  -length-
+//   @color          :  -color-|transparent|initial|inherit
+
+.drop-shadow(@offset:_, @blur:_, @color:_) {
+    
+    & when not (@offset=_) {
+
+        -webkit-filter+_: drop-shadow(@offset @blur @color);
+                filter+_: drop-shadow(@offset @blur @color);
+    }
+}
+
+//
+//  .filter(@function);
+//   ------------------------------------------------------
+//   @function:         :  none|filter-function|initial|inherit
+
+.filter(@function:_) {
+    
+    & when not (@function=_) {
+        -webkit-filter+_: @function;
+                filter+_: @function;
+    }
+}
+
+//
+//  .grayscale(@percentage);
+//   ------------------------------------------------------
+//   @percentage         :  percentage
+
+.grayscale(@percentage:_) {
+    
+    & when not (@percentage=_) {
+        -webkit-filter+_: grayscale(@percentage);
+                filter+_: grayscale(@percentage);
+    }
+}
+
+//
+//  .hue-rotate(@degrees);
+//   ------------------------------------------------------
+//   @degrees         :  degrees
+
+.hue-rotate(@degrees:_) {
+    
+    & when not (@degrees=_) {
+        -webkit-filter+_: hue-rotate(@degrees);
+                filter+_: hue-rotate(@degrees);
+    }
+}
+
+//
+//  .invert(@percentage);
+//   ------------------------------------------------------
+//   @percentage         :  percentage
+
+.invert(@percentage:_) {
+    
+    & when not (@percentage=_) {
+        -webkit-filter+_: invert(@percentage);
+                filter+_: invert(@percentage);
+    }
+}
+
+//
+//  .saturate(@percentage);
+//   ------------------------------------------------------
+//   @percentage         :  percentage
+
+.saturate(@percentage:_) {
+    
+    & when not (@percentage=_) {
+        -webkit-filter+_: saturate(@percentage);
+                filter+_: saturate(@percentage);
+    }
+}
+
+//
+//  .sepia(@percentage);
+//   ------------------------------------------------------
+//   @sepia         :  percentage
+
+.sepia(@percentage:_) {
+    
+    & when not (@percentage=_) {
+        -webkit-filter+_: sepia(@percentage);
+                filter+_: sepia(@percentage);
+    }
+}
+
+//
+//  .svg(@url);
+//   ------------------------------------------------------
+//   @url         :  location of the svg filter
+
+.svg(@url:_) {
+    
+    & when not (@url=_) {
+        -webkit-filter+_: url('@{url}');
+                filter+_: url('@{url}');
+    }
+}
+  
+//
+//  Keyframes
+
+//
+//  ._fade-in()
+//  ._fade-out()
+//  ._shake()
+//  ._slide-down()
+//  ._slide-up()
+//  ._zoom-in()
+//  ._zoom-out()
+
+._fade-in() {
+    @-webkit-keyframes fade-in {
+        @fade-in();
+    }
+
+    @keyframes fade-in {
+        @fade-in();
+    }
+    @fade-in: {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+._fade-out() {
+    @-webkit-keyframes fade-out {
+        @fade-out();
+    }
+
+    @keyframes fade-out {
+        @fade-out();
+    }
+    @fade-out: {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+}
+
+._shake() {
+    @-webkit-keyframes shake {
+        @shake();
+    }
+
+    @keyframes shake {
+        @shake();
+    }
+
+    @shake: {
+        0%, 100% {
+            .translate3d(0, 0, 0);
+        }
+
+        10%, 30%, 50%, 70%, 90% {
+            .translate3d(0, 0, -10px);
+        }
+
+        20%, 40%, 60%, 80% {
+            .translate3d(0, 0, 10px);
+        }
+    }
+}
+
+._slide-down() {
+    @-webkit-keyframes slide-down {
+        @slide-down();
+    }
+
+    @keyframes slide-down {
+        @slide-down();
+    }
+    @slide-down: {
+        0% {
+            opacity: 0;
+            .transform(translateY(-20px) perspective(600px) rotateX(15deg));
+        }
+
+        100% {
+            opacity: 1;
+            .transform(translateY(0) perspective(600px) rotateX(0deg));
+        }
+    }
+}
+
+._slide-up() {
+    @-webkit-keyframes slide-up {
+        @slide-up();
+    }
+
+    @keyframes slide-up {
+        @slide-up();
+    }
+
+    @slide-up: {
+        0% {
+            opacity: 1;
+            .transform(translateY(0) perspective(600px) rotateX(0deg));
+        }
+        100% {
+            opacity: 0;
+            .transform(translateY(-20px) perspective(600px) rotateX(15deg));
+        }
+    }
+}
+
+._zoom-in() {
+    @-webkit-keyframes zoom-in {
+        @zoom-in();
+    }
+
+    @keyframes zoom-in {
+        @zoom-in();
+    }
+
+    @zoom-in: {
+        0% {
+            opacity: 0;
+            .scale3d(0.3, 0.3, 0);
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+}
+
+._zoom-out() {
+    @-webkit-keyframes zoom-out {
+        @zoom-out();
+    }
+
+    @keyframes zoom-out {
+        @zoom-out();
+    }
+    @zoom-out: {
+        0% {
+            opacity: 1;
+            .scale3d(1, 1, 1);
+        }
+
+        50% {
+            opacity: 0;
+            .scale3d(0.3, 0.3, 0);
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+}
+
+//
+//  Layout properties
+
+//
+//  .align(@top, @right, @bottom, @left) 
+//   ------------------------------------------------------
+//   @top      :  auto|length|initial|inherit
+//   @right    :  auto|length|initial|inherit
+//   @bottom   :  auto|length|initial|inherit
+//   @left     :  auto|length|initial|inherit
+
+.align(@top:_, @right:_, @bottom:_, @left:_) {
+
+    & when not (@top=_) {
+        top: @top;
+    }
+
+    & when not (@right=_) {
+        right: @right;
+    }
+
+    & when not (@bottom=_) {
+        bottom: @bottom;
+    }
+
+    & when not (@left=_) {
+        left: @left;
+    }
+}
+
+.align(@top:_) {
+
+    & when not (@top=_) {
+        .align(@top, @top, @top, @top);
+    }
+}
+
+//
+//  .float(@float[, @min-width-query, @max-width-query]);
+//   ------------------------------------------------------
+//   @float      :  none|left|right|initial|inherit
+
+.float (@float:_) {
+ 
+    & when not (@float=_) {
+        float: @float;
+    }
+}
+
+//
+//   .list-style(@type, @position, @image[, @min-width-query, @max-width-query]);
+//   ------------------------------------------------------
+//   @type      :  none|disc|circle|square|decimal|decimal-leading-zero|lower-roman|upper-roman|lower-greek|lower-latin|upper-latin|armenian|georgian|lower-alpha|upper-alpha|hiragana|katakana|initial|inherit
+//   @position  :  inside|outside|initial|inherit
+
+.list-style(@type:_, @position:_, @image:_) {
+    
+    @vtype: if((@type=_); disc; @type);
+    @vpos:  if((@position=_); outside; @position);
+    @img:   if(@image=_; none; if(@image=none; none; url('@{image}')));
+
+    list-style: @vtype @vpos @img;
+}
+
+//
+//  .position(@position, @top, @right, @bottom, @left);
+//   ------------------------------------------------------
+//   @position :  static|absolute|fixed|relative|sticky|initial|inherit
+//   @top      :  auto|length|initial|inherit
+//   @right    :  auto|length|initial|inherit
+//   @bottom   :  auto|length|initial|inherit
+//   @left     :  auto|length|initial|inherit
+
+.position(@position:_, @top:_, @right:_, @bottom:_, @left:_) {
+
+    & when not (@position=_) {
+        position: @position;
+    }
+
+    & when not (@top=_) {
+        top: @top;
+    }
+
+    & when not (@right=_) {
+        right: @right;
+    }
+
+    & when not (@bottom=_) {
+        bottom: @bottom;
+    }
+
+    & when not (@left=_) {
+        left: @left;
+    }
+}
+
+.position(@position:_, @top:_) {
+    & when not (@top=_) {
+        .position(@position, @top, @top, @top, @top);
+    }
+}
+
+//
+//  .z-index(@index);
+//   ------------------------------------------------------
+//   @index     :  auto|number|initial|inherit
+
+.z-index(@index:_) {
+
+    & when not (@index=_) {
+        z-index: @index;
+    }
+}
+
+//
+//  Mixins
+
+.mixins(@query:_; @after:_; @align:_; @animation:_; @backface:_; @background:_; @before:_; @blur:_; @border:_; @brightness:_; @center:_; @center-h:_; @center-v:_; @color:_; @contrast:_; 
+    @custom:_; @display:_; @drop-shadow:_; @filter:_; @first-letter:_; @first-line:_; @float:_; @font:_; @fontface:_; @gradient:_; @grayscale:_; @hue-rotate:_; @invert:_; @list-style:_; @minmax-size:_; 
+    @opacity:_; @transform-origin:_; @overflow:_; @paragraph:_; @perspective:_; @placeholder:_; @position:_; @resize:_; @rotate3d:_; @rounded:_; @saturate:_; @scale3d:_; @sepia:_; @selection:_; @shadow:_; 
+    @size:_; @skew:_; @spacing:_; @table-cell-color:_; @text:_; @text-decoration:_; @text-shadow:_; @text-transform:_; @transform:_; @transition:_; @translate3d:_; @triangle:_; @svg:_; @z-index:_;) {
+
+    @ruleset: {
+
+        // Box-model
+        & when not (@display=_) {
+            .parse(@display);
+            & when (length(@display)=2) { .display(.loop[1], .loop[2]); }
+            & when (length(@display)>2) { .display(.loop[1], .loop[2], .loop[3], .loop[4]); }
+        }
+        & when not (@size=_) {
+            .parse(@size);
+            .size(.loop[1], .loop[2]);
+        }
+        & when not (@minmax-size=_) { 
+            .parse(@minmax-size);
+            .minmax-size(.loop[1], .loop[2], .loop[3], .loop[4]);
+        }
+        & when not (@spacing=_) { 
+            .parse(@spacing);
+            .spacing(.loop[1], .loop[2]);
+        }
+        & when not (@border=_) {
+            .parse(@border);
+            .border(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@overflow=_) {
+            .parse(@overflow);
+            .overflow(.loop[1], .loop[2]);
+        }
+            
+        // Layout
+        & when not (@position=_) { 
+            .parse(@position);
+            & when (length(@position)=2) { .position(.loop[1], .loop[2]); }
+            & when (length(@position)>2) { .position(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5]); }
+        }
+        & when not (@align=_) { 
+            .parse(@align);
+            .align(.loop[1], .loop[2], .loop[3], .loop[4]);
+        }
+        & when not (@float=_) { 
+            .float(@float); 
+        }
+        & when not (@list-style=_) { 
+            .list-style(@list-style); 
+        }
+        & when not (@z-index=_) { 
+            .z-index(@z-index); 
+        }
+
+        // Visual
+        & when not (@color=_) { 
+            .parse(@color);
+            .color(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@background=_) { 
+            .parse(@background);
+            .background(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6], .loop[7], .loop[8]);
+        }
+        & when not (@gradient=_) { 
+            .parse(@gradient);
+            .gradient(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5]);
+        }
+        & when not (@rounded=_) {
+            .parse(@rounded);
+            .rounded(.loop[1], .loop[2], .loop[3], .loop[4]);
+        }
+        & when not (@shadow=_) {
+            .parse(@shadow);
+            .shadow(.loop[1], .loop[2], .loop[3], .loop[4]);
+        }
+        & when not (@opacity=_) { 
+            .opacity(@opacity); 
+        }
+            
+        // Typographic
+        & when not (@font=_) { 
+            .parse(@font);
+            .font(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5]);
+        }
+        & when not (@fontface=_) { 
+            .parse(@fontface); 
+            .fontface(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5]);
+        }
+        & when not (@paragraph=_) { 
+            .parse(@paragraph); 
+            .paragraph(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@text=_) { 
+            .parse(@text); 
+            .text(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@text-decoration=_) { 
+            .parse(@text-decoration); 
+            .text-decoration(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@text-shadow=_) { 
+            .parse(@text-shadow); 
+            .text-shadow(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@text-transform=_) { 
+            .text-transform(@text-transform); 
+        }
+
+        // Transform
+        & when not (@transform=_) {
+            .transform(@transform); 
+        }
+        & when not (@perspective=_) { 
+            .perspective(@perspective); 
+        }
+        & when not (@rotate3d=_) { 
+            .parse(@rotate3d); 
+            .rotate3d(.loop[1], .loop[2], .loop[3], .loop[4]);
+        }
+        & when not (@scale3d=_) { 
+            .parse(@scale3d); 
+            .scale3d(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@skew=_) { 
+            .parse(@skew); 
+            .skew(.loop[1], .loop[2]);
+        }
+        & when not (@translate3d=_) { 
+            .parse(@translate3d); 
+            .translate3d(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@backface=_) { 
+            .backface(@backface); 
+        }
+        & when not (@transform-origin=_) { 
+            .parse(@transform-origin); 
+            .transform-origin(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@resize=_) { 
+            .resize(@resize); 
+        }
+
+        // Filters
+        & when not (@filter=_) { 
+            .filter(@filter); 
+        }
+        & when not (@blur=_) { 
+            .blur(@blur); 
+        }
+        & when not (@brightness=_) { 
+            .brightness(@brightness); 
+        }
+        & when not (@contrast=_) { 
+            .contrast(@contrast); 
+        }
+        & when not (@drop-shadow=_) { 
+            .parse(@drop-shadow); 
+            .drop-shadow(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@grayscale=_) { 
+            .grayscale(@grayscale); 
+        }
+        & when not (@hue-rotate=_) { 
+            .hue-rotate(@hue-rotate); 
+        }
+        & when not (@invert=_) { 
+            .invert(@invert); 
+        }
+        & when not (@saturate=_) { 
+            .saturate(@saturate); 
+        }
+        & when not (@sepia=_) { 
+            .sepia(@sepia); 
+        }
+        & when not (@svg=_) { 
+            .svg(@svg); 
+        }
+
+        // Animation
+        & when not (@animation=_) { 
+            .parse(@animation);
+            .animation(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6], .loop[7], .loop[8]);
+        }
+        & when not (@transition=_) { 
+            .parse(@transition);
+            .transition(.loop[1], .loop[2], .loop[3], .loop[4]);
+        }
+
+        // Pseudo-elements
+        & when not (@after=_) { 
+            .parse(@after);
+            .after(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@before=_) { 
+            .parse(@before);
+            .before(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@first-letter=_) { 
+            .parse(@first-letter);
+            .first-letter(.loop[1], .loop[2], .loop[3], .loop[4]);
+        }
+        & when not (@first-line=_) { 
+            .parse(@first-line);
+            .first-line(.loop[1], .loop[2], .loop[3], .loop[4]);
+        }
+        & when not (@placeholder=_) { 
+            .parse(@placeholder);
+            .placeholder(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@selection=_) { 
+            .parse(@selection);
+            .selection(.loop[1], .loop[2], .loop[3]);
+        }
+
+        // Helpers
+        & when not (@center=_) { 
+            .parse(@center);
+            .center(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@center-h=_) { 
+            .parse(@center-h);
+            .center-h(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@center-v=_) { 
+            .parse(@center-v);
+            .center-v(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@table-cell-color=_) { 
+            .parse(@table-cell-color);
+            .table.cell-color(.loop[1], .loop[2], .loop[3]);
+        }
+        & when not (@triangle=_) { 
+            .parse(@triangle);
+            .triangle(.loop[1], .loop[2], .loop[3], .loop[4]);
+        }
+        & when not (@custom=_) { 
+            .parse(@custom);
+            .custom(.loop[1], .loop[2], .loop[3], .loop[4], .loop[5], .loop[6]);
+        }
+
+        .parse(@params) {
+            .loop(@i:8) when (@i > 0) {
+                .loop((@i - 1));
+                @{i}: if(length(@params) >= @i; extract(@params, @i); _);
+            }
+        }
+    }
+
+    @min-width: extract(@query, 1);
+    @max-width: if(length(@query) = 2; extract(@query, 2); _);
+
+    .query(@ruleset, @min-width, @max-width);
+}
+
+.query(@ruleset:{}, @min-width:_, @max-width:_) {
+
+    & when not (@min-width=_), not (@max-width=_) {
+        
+        @min:     if((@min-width=_); ''; 'and (min-width: @{min-width}) ');
+        @min-max: if((@max-width=_); ~'@{min}'; ~'@{min}and (max-width: @{max-width})');
+
+        @media all @min-max {
+            @ruleset();
+        }
+    }
+
+    & when (@min-width=_) and (@max-width=_) {
+        @ruleset();
+    }
+}
+
+//
+//  Transform properties
+
+//
+//  .backface(@visibility);
+//   ------------------------------------------------------
+//   backface         :  visible|hidden|initial|inherit
+
+.backface(@visibility:_) {
+    
+    & when not (@visibility=_) {
+        -webkit-backface-visibility: @visibility;
+           -moz-backface-visibility: @visibility;
+                backface-visibility: @visibility;
+    }
+}
+
+//
+//  .transform-origin(@x-axis, @y-axis, @z-axis);
+//   ------------------------------------------------------
+//   x-axis             :  left|center|right|-length-|percentage
+//   y-axis             :  top|center|bottom|-length-|percentage
+//   z-axis             :  -length-
+
+.transform-origin(@x-axis:_, @y-axis:_, @z-axis:0) {
+
+    & when not (@x-axis=_) and (@y-axis=_) {
+        -webkit-transform-origin: @x-axis @y-axis @z-axis;
+            -ms-transform-origin: @x-axis @y-axis @z-axis;
+                transform-origin: @x-axis @y-axis @z-axis;
+    }
+}
+
+//
+//  .perspective(@length);
+//   ------------------------------------------------------
+//   length         :  -length-|none
+
+.perspective(@length:_) {
+
+    & when not (@length=_) {
+        -webkit-perspective: @length;
+           -moz-perspective: @length;
+                perspective: @length;
+    }
+}
+
+//
+//  .resize(@direction);
+//   ------------------------------------------------------
+//   direction          :  none|both|horizontal|vertical|initial|inherit
+
+.resize(@direction:_) {
+
+    & when not (@direction=_) {
+        resize: @direction;
+        overflow: auto;      // Fix for Safari
+    }
+}
+
+//
+//  .rotate3d(@x-axis, @y-axis, @z-axis, @angle);
+//   ------------------------------------------------------
+//   x-axis             :  1 (x-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   y-axis             :  1 (y-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   z-axis             :  1 (z-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   angle              :  degree|gradian|radian|turn
+
+.rotate3d(@x-axis:1, @y-axis:1, @z-axis:1, @angle:_) {
+
+    & when not (@angle=_) {
+        -webkit-transform+_: rotate3d(@x-axis, @y-axis, @z-axis, @angle);
+            -ms-transform+_: rotate3d(@x-axis, @y-axis, @z-axis, @angle);
+                transform+_: rotate3d(@x-axis, @y-axis, @z-axis, @angle);
+    }
+}
+
+//
+//  .scale3d(@x-axis, @y-axis, @z-axis);
+//   ------------------------------------------------------
+//   x-axis             :  1 (x-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   y-axis             :  1 (y-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   z-axis             :  1 (z-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+
+.scale3d(@x-axis:_, @y-axis:_, @z-axis:_) {
+
+    & when not (@x-axis=_) and not (@y-axis=_) and not (@z-axis=_) {
+        -webkit-transform+_: scale3d(@x-axis, @y-axis, @z-axis);
+            -ms-transform+_: scale3d(@x-axis, @y-axis, @z-axis);
+                transform+_: scale3d(@x-axis, @y-axis, @z-axis);
+    }
+}
+
+//
+//  .skew(@transform);
+//   ------------------------------------------------------
+//   x-axis             :  1 (x-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+//   y-axis             :  1 (y-axis rotation)|0 (no rotation)|-1 (opposite rotation direction)
+
+.skew(@x-axis:_, @y-axis:_) {
+
+    & when not (@x-axis=_) and not (@y-axis=_) {
+        -webkit-transform+_: skewX(@x-axis) skewY(@y-axis);
+            -ms-transform+_: skewX(@x-axis) skewY(@y-axis);
+                transform+_: skewX(@x-axis) skewY(@y-axis);
+    }
+}
+
+//
+//  .transform(@function);
+//   ------------------------------------------------------
+//   transform          :  none|transform-functions|initial|inherit
+
+.transform(@function:_) {
+
+    & when not (@function=_) {
+        -webkit-transform+_: @function;
+            -ms-transform+_: @function;
+                transform+_: @function;
+    }
+}
+
+
+//
+//  .translate3d(@x-axis, @y-axis, @z-axis);
+//   ------------------------------------------------------
+//   x-axis             :  -length-|percentage
+//   y-axis             :  -length-|percentage
+//   z-axis             :  -length-|percentage
+
+.translate3d(@x-axis:_, @y-axis:_, @z-axis:_) {
+
+    & when not (@x-axis=_) and not (@x-axis=_) and not (@x-axis=_) {
+        -webkit-transform+_: translate3d(@x-axis, @y-axis, @z-axis);
+            -ms-transform+_: translate3d(@x-axis, @y-axis, @z-axis);   
+                transform+_: translate3d(@x-axis, @y-axis, @z-axis);
+    }
+}
+
+//
+//  Typography
+
+//
+//  .font(@size, @line-height, @weight, @style, @family);
+//   ------------------------------------------------------
+//   @size          :  medium|xx-small|x-small|small|large|x-large|xx-large|smaller|larger|length|initial|inherit
+//   @line-height   :  normal|number|-length-|initial|inherit
+//   @weight        :  normal|bold|bolder|lighter|-number-|initial|inherit
+//   @style         :  normal|italic|oblique|initial|inherit
+//   @family        :  family-name|initial|inherit
+
+.font(@size:_, @line-height:_, @weight:_, @style:_, @family:_, @family2:_, @family3:_, @family4:_, @family5:_) {
+    
+    @1: @family;
+    @2: if(@family2=_; @1; if(@1=_; @family2; @1, @family2));
+    @3: if(@family3=_; @2; if(@2=_; @family3; @2, @family3));
+    @4: if(@family4=_; @3; if(@3=_; @family4; @3, @family4));
+    @vfamily: if(@family5=_; @4; if(@4=_; @family5; @4, @family5));
+    @vweight: if(@style=_;  @weight; if(@weight=_; @style; @style @weight));
+    @vsize:   if(@line-height=_; @size; if(@size=_; _; e('@{size}/@{line-height}')));
+    
+    @shortcut: if(@size=_ or @vfamily=_; false; true);
+
+    & when (@shortcut=true) {
+        @font: if(@vweight=_; @vsize @vfamily; @vweight @vsize @vfamily);
+        font: @font;
+    }
+
+    & when not (@size=_) and (@shortcut=false) {
+        font-size: @size;
+    }
+
+    & when not (@line-height=_) and (@shortcut=false) {
+        line-height: @line-height;
+    }
+
+    & when not (@weight=_) and (@shortcut=false) {
+        font-weight: @weight;
+    }
+
+    & when not (@style=_) and (@shortcut=false) {
+        font-style: @style;
+    }
+
+    & when not (@vfamily=_) and (@shortcut=false) {
+        font-family: @vfamily;
+    }
+}
+
+//
+//  .fontface(@family, @font-path, @style, @weight, @compatibility);
+//   ------------------------------------------------------
+//   @family        :  font-family name
+//   @font-path     :  absolute/relative file path
+//   @style         :  italic|normal|inherit
+//   @weight        :  normal|bold|bolder|lighter|-number-|initial|inherit
+//   @compatibility :  none|latest
+
+.fontface(@family:_, @font-path:_, @weight:_, @style:_, @compatibility:_) {
+
+    @vweight:    if(@weight=_; 400; @weight);
+    @vstyle:     if(@style=_; normal; @style);
+    @latest:     url('@{font-path}.woff2') format('woff2'), url('@{font-path}.woff') format('woff');
+    @vfont-path: if(not (@compatibility=latest); url('@{font-path}.eot?#iefix') format('embedded-opentype'), @latest, url('@{font-path}.ttf') format('truetype'); @latest);
+
+    & when not (@family=_) and not (@font-path=_) {
+        @font-face {
+            font-family: @family;
+            & when not (@compatibility=latest) { src: url('@{font-path}.eot'); }
+            src: @vfont-path;
+            font-style: @vstyle;
+            font-weight: @vweight;
+        }
+    }
+}
+
+//
+//  .text(@align, @transform, @indent);
+//   ------------------------------------------------------
+//   @align         :  left|right|center|justify|initial|inherit
+//   @transform     :  none|capitalize|uppercase|lowercase|initial|inherit
+//   @indent        :  -length-|initial|inherit
+
+.text(@align:_, @transform:_, @indent:_) {
+
+    & when not (@align=_) {
+        text-align: @align;
+    }
+
+    & when not (@transform=_) {
+        text-transform: @transform;
+    }
+
+    & when not (@indent=_) {
+        text-indent: @indent;
+    }
+}
+
+//
+// .text-decoration(@line, @style, @color)
+//   ------------------------------------------------------
+//   @line      :  none|underline|overline|line-through|initial|inherit
+//   @color     :  -color-|initial|inherit
+//   @style     :  solid|double|dotted|dashed|wavy|initial|inherit;
+
+.text-decoration(@line:_, @style:_, @color:_) {
+
+    & when not (@line=_) and not (@color=_) and not (@style=_) {
+        text-decoration: @line @color @style
+    }
+    & when not (@line=_) and not (@color=_) and (@style=_) {
+        text-decoration: @line @color
+    }
+
+    & when not (@line=_) and (@color=_) and not (@style=_) {
+        text-decoration: @line @style
+    }
+
+    & when (@line=_) and not (@color=_) and not (@style=_) {
+        text-decoration-color: @color;  // IE not supported
+        text-decoration-style: @style;  // IE not supported
+    }
+
+    & when not (@line=_) and (@color=_) and (@style=_) {
+        text-decoration-line: @line
+    }
+
+    & when (@line=_) and not (@color=_) and (@style=_) {
+        text-decoration-color: @color  // IE not supported
+    }
+
+    & when (@line=_) and (@color=_) and not (@style=_) {
+        text-decoration-style: @style  // IE not supported
+    }
+}
+    
+//
+//  .text-shadow(@spread, @color[, @alpha]);
+//   ------------------------------------------------------
+//   @spread    :  h-shadow v-shadow [blur-radius]
+//   @color     :  -color-|initial|inherit
+//   @alpha     :  none|0-1|-percentage-
+
+.text-shadow(@spread:_, @color:_, @alpha:100%) {
+
+    @percentage: if(ispercentage(@alpha); @alpha; @alpha*100%);
+    @rgba: fade(@color, @percentage);
+    
+    & when not (@spread=_) and not (@color=_) {
+        text-shadow: @spread @rgba;
+    }
+}
+
+//
+//  Visual appearance properties
+
+//
+//  .background(@color, @image, @position, @size, @repeat, @origin, @clip, @attachment);
+//   ------------------------------------------------------
+//   @color         :  -color-|transparent|initial|inherit
+//   @image         :  none|url|initial|inherit
+//   @position      :  center|hpos vpos|xpos ypos|initial|inherit
+//   @size          :  auto|-length-|cover|contain|initial|inherit
+//   @repeat        :  repeat|repeat-x|repeat-y|no-repeat|initial|inherit
+//   @origin        :  padding-box|border-box|content-box|initial|inherit
+//   @clip          :  border-box|padding-box|content-box|initial|inherit
+//   @attachment    :  scroll|fixed|local|initial|inherit
+
+.background(@color:_, @image:_, @position:_, @size:_, @repeat:_, @origin:_, @clip:_, @attachment:_) {
+
+    .url(@param:_) {
+        @res: if(isstring(@param); url('@{param}'); @param);
+    }
+      
+    @1: .url(@color)[];
+    @2: if(@image=_; @1; if(@1=_; .url(@image)[]; @1 .url(@image)[]));
+    @3: if(@repeat=_; @2; if(@2=_; @repeat; @2 @repeat));
+    @4: if(@attachment=_; @3; if(@3=_; @attachment; @3 @attachment));
+    @args: if(@position=_; @4; if(@4=_; @position; @4 @position));
+  
+    & when not (@args=_) {
+        background: @args;
+    }
+  
+    & when not (@size=_) {
+        background-size: @size;
+    }
+  
+    & when not (@origin=_) {
+        background-origin: @origin;
+    }
+  
+    & when not (@clip=_) {
+        background-clip: @clip;
+    }
+}
+
+//
+//  .color(@text, @background, @border);
+//   ------------------------------------------------------
+//   @text              :  -color-|initial|inherit
+//   @background        :  -color-|transparent|initial|inherit
+//   @border            :  -color-|transparent|initial|inherit
+
+.color(@text:_, @background:_, @border:_) {
+
+    & when not (@text=_) {
+        color: @text;
+    }
+
+    & when not (@background=_) {
+        background-color: @background;
+    }
+
+    & when not (@border=_) {
+        border-color: @border;
+    }
+}
+
+//
+//  .gradient(@direction, @start, @stop1[, @stop2, @stop3, @min-query, @max-query]);
+//   ------------------------------------------------------
+//   @direction         :  linear|-angle-|to-top|to-bottom|to-right|to-left|radial|ellipse|circle
+//   @start            :  -color- [position]
+//   @stops            :  -color- [position]
+
+.gradient(@direction:_, @start:_, @stop1:_, @stop2:_, @stop3:_) {
+    
+    @mode: if((@direction=radial) or (@direction=ellipse) or (@direction=circle); radial; linear);
+    
+    @a0: if((@direction=_) or (@direction=linear); 180deg; @direction);
+    @a1: if((@a0=to-left);   270deg; @a0);
+    @a2: if((@a1=to-bottom); 180deg; @a1);
+    @a3: if((@a2=to-right);   90deg; @a2);
+    @angle: if((@a3=to-top);   0deg; @a3);
+    
+    @shape: if((@direction=radial); circle; ellipse);
+
+    @s1: if(not (@stop1=_); @stop1);
+    @s2: if(not (@stop2=_); @s1, @stop2; @s1);
+    @stops: if(not (@stop3=_); @s2, @stop3; @s2);
+
+    & when (iscolor(extract(@direction, 1))) and (iscolor(extract(@start, 1))) and (@stop1=_) {
+        .gradient(linear, @direction, @start);
+    }
+
+    & when not (@direction=_) and not (@mode=radial) and not (@start=_) and not (@stop1=_) {
+        background-image: -webkit-linear-gradient(@angle, @start, @stops);  // Safari 5.1+, Chrome 10+
+        background-image:    -moz-linear-gradient(@angle, @start, @stops);  // Firefox 3.6+
+        background-image:         linear-gradient(@angle, @start, @stops);  // IE10
+    }
+    
+    & when not (@direction=_) and (@mode=radial) and not (@start=_) and not (@stop1=_) {
+        background-image: -webkit-radial-gradient(center, @shape, @start, @stops);  // Safari 5.1+, Chrome 10+
+        background-image:    -moz-radial-gradient(center, @shape, @start, @stops);   // Firefox 3.6+
+        background-image:       radial-gradient(@shape at center, @start, @stops);
+    }
+}
+
+//
+//  .opacity(@level)
+//   ------------------------------------------------------
+//   opacity             :  -number-|initial|inherit
+
+.opacity(@level:_) {
+
+    & when not (@level=_) {
+        @filter: @level * 100;
+        opacity: @level;
+        filter: ~"alpha(opacity=@{filter})";
+    }
+}
+
+//
+//  .rounded(@top-left, @top-right, @bottom-right, @bottom-left);
+//   ------------------------------------------------------
+//   @top-left      :  -length-|initial|inherit
+//   @top-right     :  -length-|initial|inherit
+//   @bottom-left   :  -length-|initial|inherit
+//   @bottom-left   :  -length-|initial|inherit
+
+.rounded(@top-left:_, @top-right:_, @bottom-right:_, @bottom-left:_) {
+
+    @borders: if(
+                 (@top-left=@top-right) 
+             and (@bottom-left=@bottom-right) 
+             and (@top-left=@bottom-right); 
+                  @top-left;
+                  @top-left @top-right @bottom-right @bottom-left
+             );
+
+    & when not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) {
+        border-radius: @borders;
+    }
+    
+    & when not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) {
+        .rounded(@top-left, @top-left, @top-left, @top-left);
+    }
+
+    & when (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) {
+        border-top-right-radius: @radius;
+    }
+
+    & when (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) {
+        border-bottom-right-radius: @radius;
+    }
+
+    & when (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) {
+        border-bottom-left-radius: @radius;
+    }
+
+    & when (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) {
+        border-bottom-right-radius: @radius;
+        border-bottom-left-radius: @radius;
+    }
+
+    & when (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) {
+        border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
+    }
+
+    & when not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-top-right-radius: @radius;
+    }
+
+    & when not (@top-left=_) and (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-bottom-left-radius: @radius;
+    }
+
+    & when not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-bottom-right-radius: @radius;
+    }
+
+    & when (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-right-radius: @radius;
+        border-bottom-left-radius: @radius;
+    }
+
+    & when not (@top-left=_) and not (@top-right=_) and (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-top-right-radius: @radius;
+        border-bottom-left-radius: @radius;
+    }
+
+    & when not (@top-left=_) and (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-bottom-right-radius: @radius;
+        border-bottom-left-radius: @radius;
+    }
+
+    & when not (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and (@bottom-left=_) {
+        border-top-left-radius: @radius;
+        border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
+    }
+
+    & when (@top-left=_) and not (@top-right=_) and not (@bottom-right=_) and not (@bottom-left=_) {
+        border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
+        border-bottom-left-radius: @radius;
+    }
+}
+
+//
+//  .shadow(@offset, @color[, @alpha, @mode, @min-query, @max-query]);
+//   ------------------------------------------------------
+//   @offset     :  none|h-offset v-offset blur|inset|initial|inherit
+//   @color      :  -color-|transparent|initial|inherit
+//   @alpha      :  none|0-1|-percentage-
+//   @mode       :  inner shadow
+
+.shadow(@offset:_, @color:_, @alpha:_, @mode:_) {
+
+    & when not (@offset=_) and not (@color=_) {
+        
+        @valpha: if(isnumber(@alpha); if(ispercentage(@alpha); @alpha; @alpha*100%); 100%);
+        @rgba: fade(@color, @valpha);
+        @vcolor: if(not (@mode=_); @rgba inset; @rgba);
+
+        -webkit-box-shadow: @offset @vcolor;  // Android 2.3+, iOS 4.0.2-4.2
+                box-shadow: @offset @vcolor;  // Chrome 6+, Firefox 4+, IE 9+
+    }
+}
+
+//
+//  Helpers
+
+//  .border-box(); .content-box(); .clearfix(); .ellipsis(); .hide-text(); .hyphens(); .line-break(); 
+//  .nowrap(); .noselect(); .word-break(); .wrap();
+
+.border-box() {
+    -webkit-box-sizing: border-box;    // Safari 5
+       -moz-box-sizing: border-box;    // Firefox 19
+            box-sizing: border-box;    // IE 8+
+}
+
+.content-box() {
+    -webkit-box-sizing: content-box;    // Safari 5
+       -moz-box-sizing: content-box;    // Firefox 19
+            box-sizing: content-box;    // IE 8+
+}
+
+.clearfix() {
+    &:after { 
+        content: ''; 
+        display: table; 
+        clear: both; 
+    }
+}
+
+.ellipsis() { 
+    text-overflow: ellipsis;    // IE8 rendering issue
+    white-space: nowrap; 
+    overflow: hidden; 
+}
+
+.hide-text() { 
+    text-indent: -9999px; 
+    text-align: left;
+    overflow: hidden; 
+}
+
+.hyphens() {
+    -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+            hyphens: auto;
+}
+
+.line-break() {  
+    margin-left: 0; 
+    clear: left; 
+}
+
+.nowrap() {
+    white-space: nowrap;
+}
+
+.noselect() {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+        -ms-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.word-break() {
+    -ms-word-break: break-all;
+        word-break: break-all;
+        word-break: break-word;
+}
+
+.wrap() {
+    white-space: normal; // validate
+}
+
+//
+//  Centering
+
+//  .center(@mode, @width, @height);
+//   ------------------------------------------------------
+//   mode           :  none
+
+.center(@mode:_, @width:_, @height:_, @container-width:100%, @container-height:100%) {
+    & when (@mode=_) {
+    }
+}
+
+//
+//  .center-h(@mode, @width, @container-width);
+//   ------------------------------------------------------
+//   mode               :  none|negative|offset|absolute|flex
+//   width              :  auto|-length-|initial|inherit
+//   container-width    :  -percentage-  
+
+.center-h(@mode:_, @width:_, @container-width:100%) {
+
+    & when (@mode=_) { 
+        // Element has width: @width;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+
+    & when (@mode=negative) and not (@width=_) {
+        // Element has width: @width;
+        margin-left: @container-width / 2;
+        left: (@width / 2) * -1;
+    }
+
+    & when (@mode=offset) and not (@width=_) {
+        @padding : @width; // missing padding
+        @offset: @container-width * @padding / (@container-width - @padding);
+        margin-left: round(-@offset, 2);
+        padding-left: round(@offset, 2);
+        padding-right: round(@offset, 2);
+        .content-box();
+    }
+
+    & when (@mode=absolute) and not (@width=_) {
+        // Element has position: absolute; and width;
+        left:  @container-width / 2;
+        margin-left: (@width / 2) * -1;
+    }
+
+    & when (@mode=flex) {
+        // Element has display: flex and height;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+//  .center-v(@mode, @height, @container-height);
+//   ------------------------------------------------------
+//   mode               :  none|negative|offset|absolute|flex
+//   height             :  auto|-length-|initial|inherit
+//   container-height   :  -percentage-
+
+.center-v(@mode:_, @height:_, @container-height:100%) {
+
+    & when (@mode=negative) and not (@height=_) {
+        // Element has height: @height;
+        margin-top: @container-height / 2;
+        top: (@height / 2) * -1;
+    }
+
+    & when (@mode=offset) and not (@height=_) {
+        // not tested
+        @padding : @height; // missing padding
+        @offset:  @container-height * @padding / (@container-height - @padding);
+        margin-top: round(-@offset, 2);
+        padding-top: round(@offset, 2);
+        padding-bottom: round(@offset, 2);
+        .content-box;
+    }
+
+    & when (@mode=absolute) and not (@height=_) {
+        // Element has position: absolute; and height;
+        top: @container-height / 2;
+        margin-top: (@length / 2) * -1;
+    }
+
+    & when (@mode=flex) and not (@height=_) {
+        // Element has display: flex and height;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+//
+// Custom
+
+//
+//  .custom(property, value, [property.., value.., min-width, max-width]);
+//   ------------------------------------------------------
+//   property            :  custom property name
+//   value               :  custom value
+
+.custom(@property1:_, @value1:_, @property2:_, @value2:_, @property3:_, @value3:_) {
+    
+    @args: @property1, @value1, @property2, @value2, @property3, @value3;
+    
+    .loop(@i: 5) when (@i > 0) {
+        .loop(@i - 2);
+        @prop: extract(@args, @i);
+        @val:  extract(@args, @i+1);
+
+        & when not (@prop=_) and not (@val=_) {
+            @{prop}: @val;
+        }
+    }
+    
+    .loop();
+}
+
+//
+//  .custom(property, value, [property.., value.., min-width, max-width]);
+//   ------------------------------------------------------
+//   property            :  custom property name
+//   value               :  custom value
+
+.custom-prefixed(@property1:_, @value1:_, @property2:_, @value2:_, @property3:_, @value3:_) {
+    
+    @args: @property1, @value1, @property2, @value2, @property3, @value3;
+    
+    .loop(@i: 5) when (@i > 0) {
+        .loop(@i - 2);
+        @prop: extract(@args, @i);
+        @val:  extract(@args, @i+1);
+
+        & when not (@prop=_) and not (@val=_) {
+            -webkit-@{prop}: @val;
+               -moz-@{prop}: @val;
+                -ms-@{prop}: @val;
+                    @{prop}: @val;
+        }
+    }
+
+    .loop();
+}
+
+//
+//  Pseudo-elements
+
+//
+//  .after(@content, @width, @height);
+//   ------------------------------------------------------
+//   @content       :  none|normal|counter|attr|string|open-quote|close-quote|no-open-quote|no-close-quote|url|initial|inherit
+//   @width         :  auto|-length-|initial|inherit
+//   @heigth        :  auto|-length-|initial|inherit
+
+.after(@content:_, @width:_, @height:_) {
+    
+    @ruleset: {
+        display: inline-block;
+        content: @content;
+        width: @width;
+        & when not (@width=_) and (@height=_) {
+            height: @width;
+        }
+        & when not (@height=_) {
+            height: @height;
+        }
+    }
+
+    .pseudo(after, @ruleset);
+}
+
+//
+//  .before(@content, @width, @height);
+//   ------------------------------------------------------
+//   @content       :  none|normal|counter|attr|string|open-quote|close-quote|no-open-quote|no-close-quote|url|initial|inherit
+//   @width         :  auto|-length-|initial|inherit
+//   @heigth        :  auto|-length-|initial|inherit
+
+.before(@content:_, @width:_, @height:_) {
+    
+    @ruleset: {
+        display: inline-block;
+        content: @content;
+        width: @width;
+        & when not (@width=_) and (@height=_) {
+            height: @width;
+        }
+        & when not (@height=_) {
+            height: @height;
+        }
+    }
+
+    .pseudo(before, @ruleset);
+}
+
+//
+//  .first-letter(@content, @width, @height);
+//   ------------------------------------------------------
+
+.first-letter(@size:_, @style:_, @color:_, @text-shadow:none) {
+    
+    @ruleset: {
+        .text(@size, @style, @color);
+        & when not (@text-shadow=_) {
+            text-shadow: @text-shadow;
+        }
+    }
+
+    .pseudo(first-letter, @ruleset);
+}
+
+//
+//  .first-line(@content, @width, @height);
+//   ------------------------------------------------------
+
+.first-line(@size:_, @style:_, @color:_, @text-shadow:none) {
+    
+    @ruleset: {
+        .text(@size, @style, @color);
+        & when not (@text-shadow=_) {
+            text-shadow: @text-shadow;
+        }
+    }
+
+    .pseudo(first-line, @ruleset);
+}
+
+//
+//  .placeholder(@text-color, @background-color, @text-shadow[, @min-query, @max-query]);
+//   ------------------------------------------------------
+//   @text-color        :  -color-|initial|inherit
+//   @background-color  :  -color-|transparent|initial|inherit
+//   @border-color      :  -color-|transparent|initial|inherit
+
+.placeholder(@text-color:_, @background-color:_, @text-shadow: none, @min-query:_, @max-query:_) {
+
+    @ruleset: {
+        color: @text-color;
+        background-color: @background-color;
+        & when not (@text-shadow=_) {
+            text-shadow: @text-shadow;
+        }
+    }
+
+    // Chrome, Safari, Edge
+    &::-webkit-input-placeholder { @ruleset(); }
+
+    // Firefox 19+
+    &::-moz-placeholder          { @ruleset(); }
+
+    // IE
+    &:-ms-input-placeholder      { @ruleset(); }
+
+    // IE 10+
+    &::-ms-input-placeholder     { @ruleset(); }
+
+    &::placeholder               { @ruleset(); }
+}
+
+//
+//  .pseudo(@pseudo, @rules);
+//   ------------------------------------------------------
+//  @pseudo     :  ::after, ::before, ::first-letter, ::first-line, ::selection
+//  @rules      :  { css declarations; }
+
+.pseudo(@pseudo:_, @rules: {}) {
+    & when (@pseudo=after),  (@pseudo=before) {
+        position: relative; 
+        overflow: visible;    // overflow IE 8/9
+    }
+    @vpseudo: ~'::@{pseudo}';
+
+    &@{vpseudo} {
+        @rules();
+    }
+}
+
+//
+//  .selection(@text-color, @background-color, @text-shadow[, @min-query, @max-query]);
+//   ------------------------------------------------------
+//   @text-color        :  -color-|initial|inherit
+//   @background-color  :  -color-|transparent|initial|inherit
+//   @border-color      :  -color-|transparent|initial|inherit
+
+.selection(@text-color:_, @background-color:_, @text-shadow:_) {
+    @ruleset: {
+        color: @text-color;
+        background-color: @background-color;
+        text-shadow: @text-shadow;
+    }
+    .pseudo(selection, @ruleset);
+}
+
+//
+//  Tables
+
+//
+//  .table.padding(@padding);
+//  .table.border(@width, @style, @color);
+//  .table.color(@color, @background, @rows);
+//  .table.rounded(@weight, @line-height, @style, @family);
+//   ------------------------------------------------------
+//   @width         :  auto|-length-|initial|inherit
+//   @style         :  none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit
+//   @color         :  -color-|initial|inherit
+//   @rows          :  all|even|odd
+
+.table {
+
+    .cell-padding (@padding: 0) {
+        & tr th,
+        & tr td { 
+            padding: @padding; 
+        }
+    }
+
+    .cell-border(@width:_, @style:_, @color:_) {
+        & tr th,
+        & tr td { 
+            .border(@width, @style, @color);
+        }
+    }
+
+    .cell-color(@text-color:_, @background-color:_, @rows: all) when (@rows=all) {
+        & tr th,
+        & tr td { 
+            .color(@text-color, @background-color); 
+        }
+    }
+
+    .cell-color(@text-color:_, @background-color:_, @rows: all) when not (@rows=all) {
+        & when (@rows=odd) {
+            & tr th { 
+                .color(@text-color, @background-color); 
+            }
+        }
+        & when not (@rows=_) {
+            & tr:nth-child(@{rows}) td { 
+                .color(@text-color, @background-color); 
+            }
+        }
+    }
+    
+    .cell-rounded (@radius: none) {
+        border-collapse: separate;      //
+        border-spacing: 0;              // border radius fix
+        border: none;                   //
+        .re-rounded(@radius) {          // maximum stack call fix
+            .rounded(@radius);
+        }
+        & tr:first-child th:first-child { 
+            .rounded.top-left(@radius); 
+        }
+        & tr:first-child th:last-child  { 
+            .rounded.top-right(@radius); 
+        }
+        & tr:last-child  td:first-child { 
+            .rounded.bottom-left(@radius); 
+        }
+        & tr:last-child  td:last-child  { 
+            .rounded.bottom-right(@radius); 
+        }
+    }
+}
+
+//
+//  Triangle
+
+//
+//  .triangle.(@direction, @width, @height, @color);
+//   ------------------------------------------------------
+//   @direction      :  top|right|bottom|left|top-right|top-left|bottom-right|bottom-left
+//   @width          :  auto|-length-|initial|inherit
+//   @heigth         :  auto|-length-|initial|inherit
+//   @color          :  -color-|transparent|initial|inherit
+
+.triangle(top, @width: 0, @height: 0, @color: black) {
+    ._triangle-base();
+    border-width: 0 @width/2 @height @width/2;
+    border-color: @trn @trn @color @trn;
+}
+
+.triangle(right, @width: 0, @height: 0, @color: black) {
+    ._triangle-base();
+    border-width: @height/2 0 @height/2 @width;
+    border-color: @trn @trn @trn @color;
+}
+
+.triangle(bottom, @width: 0, @height: 0, @color: black) {
+    ._triangle-base();
+    border-width: @height @width/2 0 @width/2;
+    border-color: @color @trn @trn @trn;
+}
+    
+.triangle(left, @width: 0, @height: 0, @color: black) {
+    ._triangle-base();
+    border-width: @height/2 @width @height/2 0;
+    border-color: @trn @color @trn @trn;
+}
+
+.triangle(top-left, @width: 0, @height: 0, @color: black) {
+    ._triangle-base();
+    border-width: @height @width 0 0;
+    border-color: @color @trn @trn @trn;
+}
+
+.triangle(top-right, @width: 0, @height: 0, @color: black) {
+    ._triangle-base();
+    border-width: 0 @width @height 0;
+    border-color: @trn @trn @color @trn;
+}
+
+.triangle(bottom-left, @width: 0, @height: 0, @color: black) {
+    ._triangle-base();
+    border-width: @width 0 0 @height;
+    border-color: @trn @trn @trn @color;
+}
+
+.triangle(bottom-right, @width: 0, @height: 0, @color: black) {
+    ._triangle-base();
+    border-width: 0 0 @height @width;
+    border-color: @trn @color @trn @trn;
+}
+
+._triangle-base()  {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+//
+//  Easing
+
+@ease-in-back           : cubic-bezier(0.600, -0.280, 0.735, 0.045);
+@ease-out-back          : cubic-bezier(0.175,  0.885, 0.320, 1.275);
+@ease-in-out-back       : cubic-bezier(0.680, -0.550, 0.265, 1.550);
+
+@ease-in-cubic          : cubic-bezier(0.550, 0.055, 0.675, 0.190);
+@ease-out-cubic         : cubic-bezier(0.215, 0.610, 0.355, 1.000);
+@ease-in-out-cubic      : cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+@ease-in-circ           : cubic-bezier(0.600, 0.040, 0.980, 0.335);
+@ease-out-circ          : cubic-bezier(0.075, 0.820, 0.165, 1.000);
+@ease-in-out-circ       : cubic-bezier(0.785, 0.135, 0.150, 0.860);
+
+@ease-in-expo           : cubic-bezier(0.950, 0.050, 0.795, 0.035);
+@ease-out-expo          : cubic-bezier(0.190, 1.000, 0.220, 1.000);
+@ease-in-out-expo       : cubic-bezier(1.000, 0.000, 0.000, 1.000);
+
+@ease-in-quad           : cubic-bezier(0.550, 0.085, 0.680, 0.530);
+@ease-out-quad          : cubic-bezier(0.250, 0.460, 0.450, 0.940);
+@ease-in-out-quad       : cubic-bezier(0.455, 0.030, 0.515, 0.955);
+
+@ease-in-quart          : cubic-bezier(0.895, 0.030, 0.685, 0.220);
+@ease-out-quart         : cubic-bezier(0.165, 0.840, 0.440, 1.000);
+@ease-in-out-quart      : cubic-bezier(0.770, 0.000, 0.175, 1.000);
+
+@ease-in-quint          : cubic-bezier(0.755, 0.050, 0.855, 0.060);
+@ease-out-quint         : cubic-bezier(0.230, 1.000, 0.320, 1.000);
+@ease-in-out-quint      : cubic-bezier(0.860, 0.000, 0.070, 1.000);
+
+@ease-in-sine           : cubic-bezier(0.470, 0.000, 0.745, 0.715);
+@ease-out-sine          : cubic-bezier(0.390, 0.575, 0.565, 1.000);
+@ease-in-out-sine       : cubic-bezier(0.445, 0.050, 0.550, 0.950);
+
+//
+//  Constants 
+
+//  ie.
+//  .font(@size @s @line-height);
+
+@s  :  e('/');
+
+
+//  Transparent
+
+@trn                    :  transparent;
+//
+//  Hexadecimal grayscale
+
+@hex0                   :  #000;
+@hex1                   :  #111;
+@hex2                   :  #222;
+@hex3                   :  #333;
+@hex4                   :  #444;
+@hex5                   :  #555;
+@hex6                   :  #666;
+@hex7                   :  #777;
+@hex8                   :  #888;
+@hex9                   :  #999;
+@hexa                   :  #aaa;
+@hexb                   :  #bbb;
+@hexc                   :  #ccc;
+@hexd                   :  #ddd;
+@hexe                   :  #eee;
+@hexf                   :  #fff;
+@hexf0                  :  #f0f0f0;
+@hexf1                  :  #f1f1f1;
+@hexf2                  :  #f2f2f2;
+@hexf3                  :  #f3f3f3;
+@hexf4                  :  #f4f4f4;
+@hexf5                  :  #f5f5f5;
+@hexf6                  :  #f6f6f6;
+@hexf7                  :  #f7f7f7;
+@hexf8                  :  #f8f8f8;
+
+//
+//  Web safe font families
+
+@safe-font-monospace    :  'Menlo, Monaco, Consolas, monospace';
+@safe-font-sans-serif   :  'Helvetica Neue, Helvetica, Arial, sans-serif';
+@safe-font-script       :  'Brush Script MT', 'Comic Sans MS', cursive;
+@safe-font-serif        :  'Georgia, Times New Roman, Times, serif';
+
+//
+//  Svg filters
+
+@svg-grayscale          : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale";
+@svg-grayscale-ie10     : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale";
