@@ -44,7 +44,7 @@
       </section>
     </nav>
   </body>
-  <main style="min-height:800px" class="panel primary">
+  <main>
     <section class="max-width">
       <h2 class="title">Live-Compiler</h2>
       <div class="toggle"><a onclick="showHide()" class="no-select">Demo</a>
@@ -55,7 +55,7 @@
       <div class="grid split-2 separate">
         <div class="span">
           <h4>LESS</h4>
-          <div class="panel--primary"><code contenteditable="true" onkeyup="compileCSS()" spellcheck="false" class="code less"></code></div>
+          <div class="panel primary"><code contenteditable="true" onkeyup="compileCSS()" spellcheck="false" class="code less"></code></div>
         </div>
         <div class="span">
           <h4>CSS</h4><code class="code css"></code>
@@ -64,8 +64,8 @@
     </section>
   </main>
   <script>
-    const pre = {
-      less: `  div.box {
+  const pre = {
+    less: `  div.box {
       .display(flex, center, center);
       .font(2em, 40px, bold);
       .rounded(5px);
@@ -76,7 +76,7 @@
         .spacing(0 auto, 10px);
         .gradient(#fb292d, #470103);
       }, 800px);
-      }`,
+  }`,
       error:`Parse error: Unrecognized input`,
       typing:`...`
     };
